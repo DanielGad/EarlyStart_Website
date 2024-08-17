@@ -1,33 +1,35 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import Home from "./components/Homepage/Home";
+import Navbar from "./components/Navbar/Navbar";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import MathService from "./pages/MathService";
+import HomeworkService from "./pages/HomeWorkService";
+import LetterworkService from "./pages/LetterworkService";
+import LanguageService from "./pages/LanguageService";
+import InternationalService from "./pages/InternationalService";
+import GeneralService from "./pages/GeneralService";
+import CallUs from "./pages/CallUs";
+import Login from "./pages/Login";
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="app">
+        <BrowserRouter>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/math" element={<MathService />} />
+            <Route path="/homework" element={<HomeworkService />} />
+            <Route path="/letterwork" element={<LetterworkService />} />
+            <Route path="/language" element={<LanguageService />} />
+            <Route path="/international" element={<InternationalService />} />
+            <Route path="/general" element={<GeneralService />} />
+            <Route path="/call" element={<CallUs />} />
+            <Route path="/login" element={<Login />} />
+          </Routes>
+        </BrowserRouter>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
