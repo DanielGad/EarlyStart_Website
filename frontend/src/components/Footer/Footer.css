@@ -1,0 +1,100 @@
+.footer-container {
+  margin-top: 30px;
+  align-items: center;
+  text-align: center;
+  min-height: 50px;
+  background-color: var(--primary-color);
+  width: 100%;
+}
+
+.top-section-container {
+  width: 80%;
+  display: flex;
+  gap: 150px;
+  margin: auto;
+  padding: 30px 0;
+}
+
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 35%;
+  gap: 40px;
+  text-align: left;
+}
+
+.footer-left img {
+  width: 150px;
+}
+
+.footer-left div {
+  width: 100%;
+  color: white;
+  font-size: small;
+}
+
+.footer-middle {
+  width: 30%;
+  font-size: small;
+  font-weight: 500;
+}
+
+.footer-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  color: white;
+  word-break: keep-all;
+  text-overflow: ellipsis;
+}
+
+.footer-middle a {
+  color: white;
+}
+
+.footer-right {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 40%;
+  color: white;
+  font-weight: 500;
+  text-align: left;
+}
+
+.footer-right img {
+  width: 17px;
+  height: 15px;
+}
+
+.phone-con, .whatsapp-con, .email-con {
+  align-items: center;
+  display: flex;
+  gap: 15px;
+}
+
+.footer-hr {
+  border-top: 3px solid white;
+}
+
+.footer-lower-section {
+  width: 80%;
+  margin: auto;
+  color: white;
+  font-size: small;
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  padding: 30px 0;
+}
+
+.lower-right {
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+}
+
+.lower-right div {
+  cursor: pointer;
+}
