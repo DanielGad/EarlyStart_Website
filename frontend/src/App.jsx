@@ -2,7 +2,7 @@ import Home from "./components/Homepage/Home";
 import Navbar from "./components/Navbar/Navbar";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MathService from "./pages/MathService";
-import HomeworkService from "./pages/HomeWorkService";
+import HomeworkService from "./pages/HomeworkService";
 import LetterworkService from "./pages/LetterworkService";
 import LanguageService from "./pages/LanguageService";
 import InternationalService from "./pages/InternationalService";
