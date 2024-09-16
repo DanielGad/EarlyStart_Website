@@ -1,3 +1,4 @@
+import React from 'react';
 import './Footer.css';
 import Early_Start_Logo from '../../assets/images/Early Start Logo Light.png';
 import Email_Icon from '../../assets/images/Early Start email.png';
@@ -8,7 +9,11 @@ import { useContext } from 'react';
 import { Context } from '../../Context/Context';
 
 const Footer = () => {
-  const { setMenu } = useContext(Context);
+  const context = useContext(Context);
+  if (!context) {
+    throw new Error("Footer must be used within a Context provider");
+  }
+  const { setMenu } = context;
   return (
     <div className='footer-container'>
       <div className="top-section-container">

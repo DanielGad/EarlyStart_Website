@@ -1,6 +1,6 @@
 import './Navbar.css';
 import Early_Start_Logo from '../../assets/images/early-start-logo.png';
-import { useContext, useState,  useEffect } from 'react';
+import React, { useContext, useState,  useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 import MicIcon from '@mui/icons-material/Mic';
@@ -12,7 +12,11 @@ import PropTypes from 'prop-types';
 
 
 const Navbar = () => {
-  const { isSmallScreen, isMediumScreen, isMenuOpen, setIsMenuOpen, isScrolled, toggleMenu, menu, setMenu } = useContext(Context);
+  const context = useContext(Context);
+  if (!context) {
+    throw new Error("Must be used within a Context provider");
+  }
+  const { isSmallScreen, isMediumScreen, isMenuOpen, setIsMenuOpen, isScrolled, toggleMenu, menu, setMenu } = context;
 
   const [isServiceOpen, setIsServiceOpen] = useState(false);
 
@@ -31,22 +35,24 @@ const Navbar = () => {
       }
     };
 
-    // const handleScroll = () => {
-    //   if (window.scrollY > 20) { 
-    //     setIsMenuOpen(true);
-    //   }
-    // }
 
     window.addEventListener('resize', handleResize);
-    // window.addEventListener('scroll', handleScroll);
 
-    // Cleanup the event listener on unmount
     return () => {
       window.removeEventListener('resize', handleResize);
     };
   }, [isMenuOpen, setIsMenuOpen]);
 
-  const NavLink = ({ to, label, menuKey, setMenu, setIsMenuOpen, menu }) => (
+  interface NavLinkProps {
+    to: string,
+    label: string,
+    menuKey: string,
+    setMenu: (menu: string) => void,
+    setIsMenuOpen: (isOpen: boolean) => void,
+    menu: string
+  }
+
+  const NavLink:React.FC<NavLinkProps> = ({ to, label, menuKey, setMenu, setIsMenuOpen, menu }) => (
     <Link
       to={to}
       style={{ color: menu === menuKey ? 'rgb(124,70,164)' : '' }}
@@ -68,7 +74,13 @@ const Navbar = () => {
     menu: PropTypes.any.isRequired
   };
 
-  const DropdownLink = ({ to, label, closeDropdowns }) => (
+  interface DropdownLinkProps {
+    to: string,
+    label: string,
+    closeDropdowns: () => void
+  }
+
+  const DropdownLink:React.FC<DropdownLinkProps> = ({ to, label, closeDropdowns }) => (
     <Link
       to={to}
       style={{ textDecoration: 'none' }}

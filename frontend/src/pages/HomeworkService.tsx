@@ -1,3 +1,4 @@
+import React from "react"
 import '../assets/styles/HomeworkService.css';
 import ArrowDropRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import General_Image from '../assets/images/mother-helping.jpg';
@@ -5,8 +6,11 @@ import Footer from '../components/Footer/Footer';
 import { Link } from 'react-router-dom';
 
 const HomeworkService = () => {
+  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    window.scrollTo(0, 0)
+  }
   return (
-    <div className="homework-container" onClick={window.scrollTo(0, 0)}>
+    <div className="homework-container" onClick={handleClick}>
       <div className="homework-row-1">
         <div className="circle">00</div>
         <div className="circle-2">00</div>

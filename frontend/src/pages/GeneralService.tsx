@@ -1,3 +1,4 @@
+import React from "react"
 import '../assets/styles/GeneralService.css'
 import ArrowDropRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import General_Image from '../assets/images/mother-helping.jpg';
@@ -5,8 +6,13 @@ import Footer from '../components/Footer/Footer';
 import { Link } from 'react-router-dom';
 
 const GeneralService = () => {
+
+  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    window.scrollTo(0, 0)
+  }
+  
   return (
-    <div className="gs-container" onClick={window.scrollTo(0, 0)}>
+    <div className="gs-container" onClick={handleClick}>
       <div className="gs-row-1">
         <div className="gs-row-1-col-1">
           <div className="gs-row-1-col-1-htext">

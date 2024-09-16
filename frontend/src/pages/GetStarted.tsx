@@ -1,3 +1,4 @@
+import React from "react"
 import '../assets/styles/GetStarted.css';
 import Background from '../assets/images/image-1.jpg';
 const GetStarted = () => {

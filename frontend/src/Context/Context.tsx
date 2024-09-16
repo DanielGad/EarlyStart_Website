@@ -1,11 +1,26 @@
-import { useState, useEffect, createContext } from "react";
-import { node } from 'prop-types';
+import React, { useState, useEffect, createContext, ReactNode } from "react";
 import useMediaQuery from './useMediaQuery';
 
-export const Context = createContext();
+interface ContextProps {
+  isSmallScreen: boolean;
+  isMediumScreen: boolean;
+  isMenuOpen: boolean;
+  isScrolled: boolean;
+  isVisible: boolean;
+  menu: string;
+  setMenu: (menu: string) => void;
+  toggleMenu: () => void;
+  setIsMenuOpen: (isOpen: boolean) => void;
+}
 
-export const Provider = ({ children }) => {
-  const [menu, setMenu] = useState("home");
+export const Context = createContext<ContextProps | undefined>(undefined);
+
+interface ProviderProps {
+  children: ReactNode;
+}
+
+export const Provider: React.FC<ProviderProps> = ({ children }) => {
+  const [menu, setMenu] = useState<string>("home");
 
   // control hamburger menu and small screen
   const isSmallScreen = useMediaQuery("(max-width: 414px)");
@@ -14,37 +29,27 @@ export const Provider = ({ children }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(true);
 
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen)
-  }
+    setIsMenuOpen(!isMenuOpen);
+  };
 
-///////////////////////
-// Control the menu when scrolled
+  // Control the menu when scrolled
   const [isScrolled, setIsScrolled] = useState(false);
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollX > 30) { 
+      if (window.scrollX > 30) {
         setIsScrolled(true);
-        // setIsMenuOpen(true)
       } else {
         setIsScrolled(false);
-        // setIsMenuOpen(true)
       }
     };
 
-    const handleReload = () => {
-      window.scrollTo(0, 0);
-    }
-
     window.addEventListener('scroll', handleScroll);
-    window.addEventListener('reload', handleReload);
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('reload', handleReload);
     };
   }, []);
 
-  //////////////////////////
   // Control the slide effect
   useEffect(() => {
     const handleScroll = () => {
@@ -60,11 +65,8 @@ export const Provider = ({ children }) => {
     };
 
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
-
-
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const [isVisible, setIsVisible] = useState(false);
 
@@ -82,11 +84,5 @@ export const Provider = ({ children }) => {
     }}>
       {children}
     </Context.Provider>
-  )
+  );
 };
-
-Provider.propTypes = {
-  children: node.isRequired
-};
-
-

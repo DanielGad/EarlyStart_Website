@@ -1,50 +1,36 @@
-import '../assets/styles/Languages.css';
+import React from 'react';
+import '../assets/styles/LetterworkService.css';
 import ArrowDropRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import General_Image from '../assets/images/mother-helping.jpg';
-import Languages from '../assets/Data/Language.json';
 import Footer from '../components/Footer/Footer';
 import { Link } from 'react-router-dom';
 
-const LanguageService = () => {
-
+const LetterworkService = () => {
+  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    window.scrollTo(0, 0)
+  }
   return (
-    <div className="lg-container" onClick={window.scrollTo(0, 0)}>
-      <div className="lg-row-1-col-2">
-          <img src={General_Image} alt="" width={"50%"}/>
-        </div>
-        <div className="lg-row-1">
-        <div className="lg-row-1-col-1">
-          <div className="lg-row-1-col-1-htext">
-            Fluency in Languages Made Easy
+    <div className="lw-container" onClick={handleClick}>
+      <div className="lw-row-1">
+        <div className="lw-row-1-col-1">
+          <div className="lw-row-1-col-1-head">
+            Enhancing Literacy Skills with EarlyStart E-Tutors
           </div>
-          <div className="lg-row-1-col-1-inner">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. <br />
-            Begin Now with a quick click!
+          <div className="lw-row-1-col-1-text">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae modi officia tempora vero eos velit deserunt vel consequuntur minus.
           </div>
           <Link to={"/get-started"}>
             <div>
-          <button className="get-started">Get Started Now <ArrowDropRightIcon className='arrow-right'/></button>
-          </div>
+          <button className="get-started">Get Started Now <ArrowDropRightIcon className='arrow-right'/></button></div>
           </Link>
         </div>
-      </div>
-
-      <div className="lg-row-2">
-        <div className="lg-row-2-head">
-          Languages Category
-        </div>
-        <div className="lg-row-2-grid-1">
-        {Languages.map((data, i) => (
-          <div className="lg-grid-1-col-1" key={i}>
-            <img src={data.Image} alt="" width={"20%"}/>
-            <div className="lg-grid-1-col-1-htext">
-              {data.Language}
-            </div>
-            <div className="lg-grid-1-col-1-text">
-              {data.Description}
-            </div>
+        <div className="lw-row-1-col-2">
+          <div className='lw-row-1-col-2-image-1'>
+          <img src={General_Image} alt="" width={"50%"} />
           </div>
-          ))}
+          <div className='lw-row-1-col-2-image-2'>
+          <img src={General_Image} alt="" width={"50%"}/>
+          </div>
         </div>
       </div>
 
@@ -54,27 +40,23 @@ const LanguageService = () => {
         </div>
         <div className="lw-row-2-col-2">
           <div className="lw-row-2-col-2-htext">
-            About Our Language Support
+            About Our Literacy Skills Support
           </div>
           <div className="lw-row-2-col-2-text">
             <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga animi deleniti repudiandae voluptatem nihil explicabo magni nostrum unde! Magnam dolor adipisci explicabo nobis blanditiis minus velit error. Impedit, autem dolorem?</p>
-            <p>French
+            <p>Letter Work
               <ul><li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis architecto eum qui beatae magnam voluptates</li></ul>
               <ul><li style={{marginTop: "-10px"}}>placeat laborum voluptatem. Quos corporis quod dolores distinctio aut molestiae ipsam assumenda recusandae rem blanditiis!</li></ul>
             </p>
-            <p>English
+            <p>Word Formation
               <ul><li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis architecto eum qui beatae magnam voluptates</li></ul>
               <ul><li style={{marginTop: "-10px"}}>placeat laborum voluptatem. Quos corporis quod dolores distinctio aut molestiae ipsam assumenda recusandae rem blanditiis!</li></ul>
             </p>
-            <p>Yoruba
+            <p>Phonetics
               <ul><li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis architecto eum qui beatae magnam voluptates</li></ul>
               <ul><li style={{marginTop: "-10px"}}>placeat laborum voluptatem. Quos corporis quod dolores distinctio aut molestiae ipsam assumenda recusandae rem blanditiis!</li></ul>
             </p>
-            <p>Igbo
-              <ul><li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis architecto eum qui beatae magnam voluptates</li></ul>
-              <ul><li style={{marginTop: "-10px"}}>placeat laborum voluptatem. Quos corporis quod dolores distinctio aut molestiae ipsam assumenda recusandae rem blanditiis!</li></ul>
-            </p>
-            <p>Hausa
+            <p>Verbal Reasoning
               <ul><li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis architecto eum qui beatae magnam voluptates</li></ul>
               <ul><li style={{marginTop: "-10px"}}>placeat laborum voluptatem. Quos corporis quod dolores distinctio aut molestiae ipsam assumenda recusandae rem blanditiis!</li></ul>
             </p>
@@ -87,4 +69,4 @@ const LanguageService = () => {
   )
 }
 
-export default LanguageService
+export default LetterworkService

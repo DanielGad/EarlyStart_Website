@@ -1,3 +1,4 @@
+import React from 'react';
 import './Home.css';
 import Helping_Mother from '../../assets/images/mother-helping.jpg';
 import Lady_Pointing from '../../assets/images/woman-showing-copy-space.jpg';
@@ -11,11 +12,18 @@ import { Context } from '../../Context/Context';
 import Footer from '../Footer/Footer';
 
 const Home = () => {
-  const { setMenu } = useContext(Context);
+  const context = useContext(Context);
+  if (!context) {
+    throw new Error("Must be used within Context provider");
+  }
+  const { setMenu } = context
 
+  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    window.scrollTo(0, 0)
+  };
   return (
     <div>
-    <div className="home-container" onClick={window.scrollTo(0, 0)}>
+    <div className="home-container" onClick={handleClick}>
       <div className="home-home-1">
         <div className="home-1-left-col">
           <div className='learn'>

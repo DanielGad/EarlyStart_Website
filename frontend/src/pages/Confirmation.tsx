@@ -1,3 +1,4 @@
+import React from "react"
 import '../assets/styles/Confirmation.css';
 import Tick from '../assets/images/tick.png';
 import { Link } from 'react-router-dom';
