@@ -2,6 +2,7 @@ import '../assets/styles/HomeworkService.css';
 import ArrowDropRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import General_Image from '../assets/images/mother-helping.jpg';
 import Footer from '../components/Footer/Footer';
+import { Link } from 'react-router-dom';
 
 const HomeworkService = () => {
   return (
@@ -19,7 +20,9 @@ const HomeworkService = () => {
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nam corrupti consectetur iure officia ipsum? Quas quisquam numquam modi, nostrum necessitatibus ipsa nesciunt eveniet provident, temporibus sequi tenetur dolore vel! <br />
             Get Started Today with just a Click!
           </div>
-          <div><button className="homework-col-1-button">Get Started Now <ArrowDropRightIcon className='arrow-right'/></button></div>
+          <Link to={"/get-started"}>
+            <div><button className="homework-col-1-button">Get Started Now <ArrowDropRightIcon className='arrow-right'/></button></div>
+          </Link>
         </div>
         <div className="homework-col-2">
           <img src={General_Image} alt="" width={"50%"}/>

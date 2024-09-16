@@ -31,10 +31,16 @@ export const Provider = ({ children }) => {
       }
     };
 
+    const handleReload = () => {
+      window.scrollTo(0, 0);
+    }
+
     window.addEventListener('scroll', handleScroll);
+    window.addEventListener('reload', handleReload);
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('reload', handleReload);
     };
   }, []);
 

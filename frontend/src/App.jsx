@@ -9,6 +9,11 @@ import InternationalService from "./pages/InternationalService";
 import GeneralService from "./pages/GeneralService";
 import CallUs from "./pages/CallUs";
 import Login from "./pages/Login";
+import GetTutor from "./pages/GetTutor";
+import TeacherProfile from "./pages/TeacherProfile";
+import GetStarted from "./pages/GetStarted";
+import Confirmation from "./pages/Confirmation";
+import ContactConfirm from "./pages/ContactConfirm";
 
 function App() {
   
@@ -28,6 +33,12 @@ function App() {
             <Route path="/general" element={<GeneralService />} />
             <Route path="/call" element={<CallUs />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/get-tutor" element={<GetTutor />} />
+            <Route path="/profile/:id" element={<TeacherProfile />} />
+            <Route path="/get-started" element={<GetStarted />} />
+            <Route path="/confirm" element={<Confirmation />} />
+            <Route path="/contact-confirm" element={<ContactConfirm />} />
+
           </Routes>
         </BrowserRouter>
       </div>

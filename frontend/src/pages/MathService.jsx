@@ -2,6 +2,7 @@ import '../assets/styles/MathService.css';
 import ArrowDropRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import General_Image from '../assets/images/mother-helping.jpg';
 import Footer from '../components/Footer/Footer';
+import { Link } from 'react-router-dom';
 
 const MathService = () => {
   return (
@@ -12,8 +13,10 @@ const MathService = () => {
           <div className="head-inner-text">
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi quod saepe minus adipisci dignissimos distinctio impedit tenetur debitis a, illum cumque reiciendis culpa dolorem ut neque tempore ipsum corrupti quam. <br />Get Started Now with just a Click!
           </div>
-          <div><button className="get-started-button">Get Started Now <ArrowDropRightIcon className='arrow-right'/></button></div>
-          
+          <Link to={"/get-started"}>
+            <div><button className="get-started-button">Get Started Now <ArrowDropRightIcon className='arrow-right'/></button></div>
+          </Link>
+
         </div>
         <div className="column-1-right">
           <div className="math-image-1">

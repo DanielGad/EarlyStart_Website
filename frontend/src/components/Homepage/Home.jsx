@@ -24,7 +24,9 @@ const Home = () => {
           <div className='enhance'>
           Enhance your child&apos;s education with personalized online tutoring from EarlyStart E-Tutors. Connect with experienced tutors for your child to ensure high quality teaching-learning process from the comfort of your home.
           </div>
+          <Link to={"/get-tutor"}>
           <button className="get-tutor-button">Get Professional Tutor <ArrowDropRightIcon className='arrow-right' /></button>
+          </Link>
         </div>
 
         <div className="home-1-right-col">
@@ -126,7 +128,9 @@ const Home = () => {
             <div className="join-us-text">
               Enjoy EarlyStart E-Tutors and earn money by teaching what you love. Share your expertise and help young learners thrive.
             </div>
+            <Link to={"/get-started"}>
             <button className="join-us-button">Join Us<ArrowDropRightIcon className='arrow-right' /></button>
+            </Link>
           </div>
           <div className="home-4-image-con-2">
             <img src={Smiley_Female} alt="Smiley Female" />

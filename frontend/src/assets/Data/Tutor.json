@@ -1,0 +1,129 @@
+[
+  {
+    "id": 1,
+    "Name": "Namidi Bello",
+    "Bio": "lorem lorem lorem lorem lorem lorem lorem",
+    "Qualifications": "B Sc, B Ed, M Sc",
+    "Availablity": "Mon - Fri",
+    "Languages": "English Language",
+    "Image": "/mother-helping.jpg",
+    "Details": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore itaque minima non nisi ipsa reprehenderit quibusdam soluta aspernatur aperiam, repellat voluptatum nulla totam odio, porro veniam dolor est blanditiis? Consequatur.",
+    "Reviews": [
+      "Great Teacher - Parent A",
+      "Hard working Tutor, Keep it up - Parent B"
+    ],
+    "About": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore itaque minima non nisi ipsa reprehenderit quibusdam soluta aspernatur aperiam, repellat voluptatum nulla totam odio, porro veniam dolor est blanditiis? Consequatur.",
+    "FullQualifications": [
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit."
+    ],
+    "Style": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore itaque minima non nisi ipsa reprehenderit quibusdam soluta aspernatur aperiam, repellat voluptatum nulla totam odio, porro veniam dolor est blanditiis? Consequatur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore itaque minima non nisi ipsa reprehenderit quibusdam soluta aspernatur aperiam, repellat voluptatum nulla totam odio, porro veniam dolor est blanditiis? Consequatur."
+  },
+  {
+    "id": 2,
+    "Name": "Jane Smith",
+    "Bio": "lorem lorem lorem lorem lorem lorem lorem",
+    "Qualifications": "B Sc, B Ed, M Sc",
+    "Availablity": "Mon - Fri",
+    "Languages": "English Language",
+    "Image": "/mother-helping.jpg",
+    "Details": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore itaque minima non nisi ipsa reprehenderit quibusdam soluta aspernatur aperiam, repellat voluptatum nulla totam odio, porro veniam dolor est blanditiis? Consequatur.",
+    "Reviews": [
+      "Great to have you as a Tutor for my kid, thanks - Parent A"
+    ],
+    "About": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore itaque minima non nisi ipsa reprehenderit quibusdam soluta aspernatur aperiam, repellat voluptatum nulla totam odio, porro veniam dolor est blanditiis? Consequatur.",
+    "FullQualifications": [
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit."
+    ],
+    "Style": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore itaque minima non nisi ipsa reprehenderit quibusdam soluta aspernatur aperiam, repellat voluptatum nulla totam odio, porro veniam dolor est blanditiis? Consequatur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore itaque minima non nisi ipsa reprehenderit quibusdam soluta aspernatur aperiam, repellat voluptatum nulla totam odio, porro veniam dolor est blanditiis? Consequatur."
+  },
+  {
+    "id": 3,
+    "Name": "Daniel Supo",
+    "Bio": "lorem lorem lorem lorem lorem lorem lorem",
+    "Qualifications": "B Sc, B Ed, M Sc",
+    "Availablity": "Mon - Fri",
+    "Languages": "English Language",
+    "Image": "/mother-helping.jpg",
+    "Details": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore itaque minima non nisi ipsa reprehenderit quibusdam soluta aspernatur aperiam, repellat voluptatum nulla totam odio, porro veniam dolor est blanditiis? Consequatur.",
+    "Reviews": "",
+    "About": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore itaque minima non nisi ipsa reprehenderit quibusdam soluta aspernatur aperiam, repellat voluptatum nulla totam odio, porro veniam dolor est blanditiis? Consequatur.",
+    "FullQualifications": [
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit."
+    ],
+    "Style": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore itaque minima non nisi ipsa reprehenderit quibusdam soluta aspernatur aperiam, repellat voluptatum nulla totam odio, porro veniam dolor est blanditiis? Consequatur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore itaque minima non nisi ipsa reprehenderit quibusdam soluta aspernatur aperiam, repellat voluptatum nulla totam odio, porro veniam dolor est blanditiis? Consequatur."
+  },
+  {
+    "id": 4,
+    "Name": "Aisha Mohammed",
+    "Bio": "lorem lorem lorem lorem lorem lorem lorem",
+    "Qualifications": "B Sc, B Ed, M Sc",
+    "Availablity": "Mon - Fri",
+    "Languages": "English Language",
+    "Image": "/mother-helping.jpg",
+    "Details": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore itaque minima non nisi ipsa reprehenderit quibusdam soluta aspernatur aperiam, repellat voluptatum nulla totam odio, porro veniam dolor est blanditiis? Consequatur.",
+    "Reviews": "",
+    "About": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore itaque minima non nisi ipsa reprehenderit quibusdam soluta aspernatur aperiam, repellat voluptatum nulla totam odio, porro veniam dolor est blanditiis? Consequatur.",
+    "FullQualifications": [
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit."
+    ],
+    "Style": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore itaque minima non nisi ipsa reprehenderit quibusdam soluta aspernatur aperiam, repellat voluptatum nulla totam odio, porro veniam dolor est blanditiis? Consequatur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore itaque minima non nisi ipsa reprehenderit quibusdam soluta aspernatur aperiam, repellat voluptatum nulla totam odio, porro veniam dolor est blanditiis? Consequatur."
+  },
+  {
+    "id": 5,
+    "Name": "Chidinma Okafor",
+    "Bio": "lorem lorem lorem lorem lorem lorem lorem",
+    "Qualifications": "B Sc, B Ed, M Sc",
+    "Availablity": "Mon - Fri",
+    "Languages": "English Language",
+    "Image": "/mother-helping.jpg",
+    "Details": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore itaque minima non nisi ipsa reprehenderit quibusdam soluta aspernatur aperiam, repellat voluptatum nulla totam odio, porro veniam dolor est blanditiis? Consequatur.",
+    "Reviews": [
+      "Great to have you as a Tutor for my kid, thanks - Parent A"
+    ],
+    "About": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore itaque minima non nisi ipsa reprehenderit quibusdam soluta aspernatur aperiam, repellat voluptatum nulla totam odio, porro veniam dolor est blanditiis? Consequatur.",
+    "FullQualifications": [
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit."
+    ],
+    "Style": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore itaque minima non nisi ipsa reprehenderit quibusdam soluta aspernatur aperiam, repellat voluptatum nulla totam odio, porro veniam dolor est blanditiis? Consequatur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore itaque minima non nisi ipsa reprehenderit quibusdam soluta aspernatur aperiam, repellat voluptatum nulla totam odio, porro veniam dolor est blanditiis? Consequatur."
+  },
+  {
+    "id": 6,
+    "Name": "Ibrahim Adewale",
+    "Bio": "lorem lorem lorem lorem lorem lorem lorem",
+    "Qualifications": "B Sc, B Ed, M Sc",
+    "Availablity": "Mon - Fri",
+    "Languages": "English Language",
+    "Image": "/mother-helping.jpg",
+    "Details": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore itaque minima non nisi ipsa reprehenderit quibusdam soluta aspernatur aperiam, repellat voluptatum nulla totam odio, porro veniam dolor est blanditiis? Consequatur.",
+    "Reviews": "",
+    "About": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore itaque minima non nisi ipsa reprehenderit quibusdam soluta aspernatur aperiam, repellat voluptatum nulla totam odio, porro veniam dolor est blanditiis? Consequatur.",
+    "FullQualifications": [
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit."
+    ],
+    "Style": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore itaque minima non nisi ipsa reprehenderit quibusdam soluta aspernatur aperiam, repellat voluptatum nulla totam odio, porro veniam dolor est blanditiis? Consequatur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore itaque minima non nisi ipsa reprehenderit quibusdam soluta aspernatur aperiam, repellat voluptatum nulla totam odio, porro veniam dolor est blanditiis? Consequatur."
+  }
+]

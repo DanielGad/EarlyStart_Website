@@ -31,7 +31,14 @@ const Navbar = () => {
       }
     };
 
+    // const handleScroll = () => {
+    //   if (window.scrollY > 20) { 
+    //     setIsMenuOpen(true);
+    //   }
+    // }
+
     window.addEventListener('resize', handleResize);
+    // window.addEventListener('scroll', handleScroll);
 
     // Cleanup the event listener on unmount
     return () => {
@@ -53,13 +60,12 @@ const Navbar = () => {
 
   
   NavLink.propTypes = {
-    to: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
-    menuKey: PropTypes.string.isRequired,
-    setMenu: PropTypes.string.isRequired,
-    setIsMenuOpen: PropTypes.string.isRequired,
-    menu: PropTypes.string.isRequired
+    to: PropTypes.any.isRequired,
+    label: PropTypes.any.isRequired,
+    menuKey: PropTypes.any.isRequired,
+    setMenu: PropTypes.any.isRequired,
+    setIsMenuOpen: PropTypes.any.isRequired,
+    menu: PropTypes.any.isRequired
   };
 
   const DropdownLink = ({ to, label, closeDropdowns }) => (
@@ -73,10 +79,12 @@ const Navbar = () => {
   );
 
   DropdownLink.propTypes = {
-    to: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
-    closeDropdowns: PropTypes.string.isRequired
+    to: PropTypes.any.isRequired,
+    label: PropTypes.any.isRequired,
+    closeDropdowns: PropTypes.any.isRequired
   }
+
+  
 
 
   return (
@@ -134,14 +142,18 @@ const Navbar = () => {
   </>
 ) : (
   <div className='menu-container' onClick={toggleMenu}>
-    <FontAwesomeIcon icon={isMenuOpen ? faBars : faTimes} className='menu-icon' />
+    <FontAwesomeIcon icon={isMenuOpen ? faBars : faTimes} className='menu-icon' onClick={() => {
+      if (isServiceOpen === true) {
+        closeDropdowns();
+      }
+    }}/>
   </div>
 )}
       {/* Control Navbar when Menu is Open */}
       <div className='menu-mode-control'>
       {!isMenuOpen && (
   <div>
-    <div className="right-nav-container">
+    <div className="right-nav-container-small">
       <div className='logo-input-screen'>
         <Link to="/" onClick={() => setIsMenuOpen(true)}>
           <div className="logo-container-screen">
@@ -186,7 +198,13 @@ const Navbar = () => {
 
         <NavLink to="/call" label="Call Us" menuKey="call" setMenu={setMenu} setIsMenuOpen={setIsMenuOpen} menu={menu} />
         <NavLink to="/login" label="Login" menuKey="login" setMenu={setMenu} setIsMenuOpen={setIsMenuOpen} menu={menu} />
+        <div className="middle-nav-container-down">
+          <SearchIcon style={{cursor: 'pointer'}}/>
+          <input type="text" placeholder='What do you want to learn?' />
+          <MicIcon style={{cursor: 'pointer'}}/>
+        </div>
       </div>
+      
     </div>
   </div>
 )}

@@ -1,0 +1,77 @@
+.gt-htext {
+  width: 80%;
+  margin: auto;
+  font-size: 35px;
+  font-weight: bold;
+  color: var(--primary-color);
+  margin-top: 10px;
+}
+
+.gt-teachers {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  row-gap: 20px;
+  width: 80%;
+  margin: auto;
+  margin-top: 20px;
+  justify-content: center;
+  text-align: center;
+}
+
+.gt-image-con {
+  width: 100%;
+  height: 60%;
+}
+
+.teacher-con img {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.gt-image-htext {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 10px;
+  text-align: left;
+  padding-left: 20px;
+  color: var(--primary-color);
+}
+
+.gt-inner-text {
+  font-size: 15px;
+  width: 90%;
+  text-align: left;
+  padding-left: 20px;
+  margin-top: 10px;
+}
+
+.gt-lower {
+  width: 80%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.gt-back {
+  padding: 15px 30px;
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+  color: var(--primary-color);
+  font-weight: bold;
+  cursor: pointer;
+  background-color: white;
+}
+
+.gt-choose {
+  padding: 15px 30px;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+

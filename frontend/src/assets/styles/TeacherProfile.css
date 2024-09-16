@@ -1,0 +1,101 @@
+.tp-row-1 {
+  display: flex;
+  padding: 30px 10% 30px 10%;
+  background-color: var(--light-color);
+  gap: 20px;
+  align-items: center;
+}
+
+.tp-image-con {
+  width: 230px;
+  height: 230px;
+  background-color: antiquewhite;
+  border-radius: 20px;
+}
+
+.tp-image-con img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  border-radius: 10px;
+}
+
+.tp-details-con div {
+  margin: 5px;
+  color: var(--secondary-color);
+}
+
+.tp-name {
+  font-size: 25px;
+  font-weight: bold;
+  color: var(--primary-color);
+  margin-bottom: 15px;
+}
+
+.tp-review ul {
+  margin-top: 5px;
+}
+
+.tp-row-2 {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin: auto;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.tp-about-me {
+  width: 40%;
+}
+
+.tp-about-me-head, .tp-qua-head, .tp-teach-head {
+  font-size: 30px;
+  font-weight: bold;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+}
+
+.tp-qua {
+  width: 100%;
+}
+
+.tp-teaching {
+  width: 40%;
+}
+
+.tp-about-me p, .tp-teaching p, .tp-qua ul {
+  color: var(--secondary-color);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.tp-lower {
+  width: 80%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 20px;
+}
+
+.tp-back {
+  padding: 16px 30px;
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+  color: var(--primary-color);
+  font-weight: bold;
+  cursor: pointer;
+  background-color: white;
+}
+
+.tp-choose {
+  padding: 16px 50px;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
