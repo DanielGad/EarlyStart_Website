@@ -1,0 +1,113 @@
+.get-s-container {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background-image: url('../images/customer-care.jpg');
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+  }
+  
+  .get-s-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1;
+  }
+  
+  .contact-us {
+    font-size: 40px;
+    font-weight: 600;
+    color: white;
+    position: absolute;
+    z-index: 1;
+    bottom: 20px;
+    right: 150px;
+  }
+  
+  .get-s-container-main {
+    width: 80%;
+    margin: 0 auto;
+  }
+  
+  .get-s-tmain {
+    font-size: 35px;
+    text-align: center;
+    margin: 30px 0;
+    font-weight: 600;
+    color: var(--primary-color);
+  }
+  
+  .goal {
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--secondary-color);
+  }
+  
+  .contact-line {
+    margin-top: 70px;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--secondary-color);
+  }
+  
+  .hr-contact-line {
+    margin: 5px 0;
+    width: 100%;
+    padding: 0.5px;
+  }
+  
+  .instruction {
+    margin-top: 10px;
+    font-size: large;
+    font-weight: 500;
+  }
+  
+  .section-divide {
+    display: grid;
+    grid-template-columns: 60% 30%;
+    margin-top: 50px;
+  }
+  
+  .contact-form label {
+    font-size: 18px;
+    font-weight: 500;
+  }
+  
+  .contact-form textarea {
+    margin: 10px 0;
+    padding: 15px;
+    resize: none;
+    font-size: large;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    width: 90%;
+    border-radius: 10px;
+  }
+  
+  .contact-image {
+    width: 400px;
+    height: 350px;
+    border: 8px solid var(--primary-color);
+    border-radius: 10px;
+  }
+  
+  .contact-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+  
+  .contact-submit {
+    padding: 2% 10%;
+    font-size: large;
+    color: white;
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+  }
