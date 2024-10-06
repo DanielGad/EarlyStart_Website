@@ -5,12 +5,15 @@
 }
 
 .home-home-1 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
   gap: 20px;
+  align-items: center;
+  margin-bottom: 50px;
+  justify-content: space-between;
 }
 
 .learn {
+  width: 80%;
   font-size: 50px;
   font-weight: bold;
   margin-bottom: 30px;
@@ -18,14 +21,34 @@
 }
 
 .enhance {
-  font-weight: bold;
+  width: 80%;
   font-size: 20px;
   color: var(--secondary-color);
   margin-bottom: 30px;
 }
 
+@media screen and (max-width: 768px) {
+  .home-home-1 {
+    flex-direction: column;
+  }
+
+  .learn {
+    font-size: 40px;
+    width: 100%;
+  }
+
+  .enhance {
+    width: 100%;
+  }
+
+  .home-3 {
+    grid-template-columns: 1fr;
+  }
+
+}
+
 .get-tutor-button {
-  padding: 5% 15%;
+  padding: 5% 10%;
   border: none;
   background-color: var(--primary-color);
   color: white;
@@ -41,10 +64,10 @@
 }
 
 .home-1-image-cont {
-  border: 12px solid var(--primary-color);
+  border: 5px solid var(--primary-color);
   border-radius: 20px;
-  width: 90%;
-  height: 80%;
+  width: 60rex;
+  height: auto;
 }
 
 .home-1-image-cont img {
@@ -68,6 +91,7 @@
   justify-content: center;
   text-align: center;
   color: var(--primary-color);
+  margin-top: 10px;
 }
 
 .home-2-con {
@@ -75,12 +99,13 @@
   height: 150px;
   padding: 10px 10px;
   background-color: var(--light-color);
-  text-align: center;
-  align-items: center;
-  justify-content: center;
   border-radius: 20px;
   font-weight: 500;
-  margin: auto;
+  display: flex; 
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center; 
+  text-align: center; 
 }
 
 .home-2-texts {
@@ -91,15 +116,12 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   margin-top: 50px;
-  justify-content: center;
-  align-items: center;
-  gap: 50px;
+  justify-content: space-between;
 }
 
 .home-3-image-con {
-  width: 100%;
-  height: 100%;
-  border: 10px solid var(--primary-color);
+  width: 90%;
+  border: 5px solid var(--primary-color);
   border-radius: 20px;
 }
 
@@ -111,15 +133,15 @@
 }
 
 .who-we-are {
-  font-size: 35px;
+  font-size: 40px;
   font-weight: bold;
   color: var(--primary-color);
-  padding-left: 30px;
   padding-bottom: 20px;
 }
 
 .home-3-text-cont {
   font-weight: 500;
+  font-size: larger;
   color: var(--secondary-color);
 }
 
@@ -135,8 +157,7 @@
 
 .home-4-image-con-1 {
   width: 600px;
-  height: 400px;
-  background-color: var(--light-color);
+  height: 450px;
   border-radius: 20px;
   margin: 5px;
 }
@@ -170,7 +191,7 @@
 
 .home-4-image-con-2 {
   width: 600px;
-  height: 400px;
+  height: 450px;
   margin: 5px;
   border-radius: 20px;
   background-color: var(--light-color);
@@ -199,5 +220,13 @@
 
   .home-4 {
     flex-direction: column;
+  }
+
+  .home-4-image-con-1 {
+    width: 100%;
+  }
+
+  .home-4-image-con-2 {
+    width: 100%;
   }
 }

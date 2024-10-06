@@ -32,14 +32,14 @@ const Home = () => {
           <div className='enhance'>
           Enhance your child&apos;s education with personalized online tutoring from EarlyStart E-Tutors. Connect with experienced tutors for your child to ensure high quality teaching-learning process from the comfort of your home.
           </div>
-          <Link to={"/get-tutor"}>
+          <Link to={"/get-tutor"} className='get-tutor-buttonn'>
           <button className="get-tutor-button">Get Professional Tutor <ArrowDropRightIcon className='arrow-right' /></button>
           </Link>
         </div>
 
         <div className="home-1-right-col">
           <div className="home-1-image-cont">
-            <img src={Helping_Mother} alt="Image 1" width={'70%'}/>
+            <img src={Helping_Mother} alt="Image 1" width={'100%'}/>
           </div>
         </div>
       </div>
@@ -59,6 +59,7 @@ const Home = () => {
             </div>
             </Link>
           </div>
+          
           <div className="home-2-con" onClick={() => {setMenu("service")}}>
             <Link to={"/homework"}>
             <div className="home-2-icon">
@@ -124,6 +125,7 @@ const Home = () => {
             <div className="home-3-text-cont">
               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo laborum odit porro laboriosam pariatur delectus molestiae non, quam nobis consequatur fuga repudiandae debitis enim consectetur, velit, praesentium ipsam nesciunt cumque! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsa iste harum asperiores odio explicabo, iusto hic, deserunt, quis suscipit quam quaerat dolorem porro facere laborum sint exercitationem perspiciatis rem quasi?
             </div>
+            <div className="home-3-text-cont">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Lorem, ipsum dolor. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nulla error cumque cupiditate. Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
           </div>
         </div>
 

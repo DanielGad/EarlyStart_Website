@@ -33,7 +33,9 @@ function App() {
             <Route path="/international" element={<InternationalService />} />
             <Route path="/general" element={<GeneralService />} />
             <Route path="/call" element={<CallUs />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/login" element={<Login onLogin={function (email: string, password: string): void {
+              throw new Error('Function not implemented.');
+            } } />} />
             <Route path="/get-tutor" element={<GetTutor />} />
             <Route path="/profile/:id" element={<TeacherProfile />} />
             <Route path="/get-started" element={<GetStarted />} />
