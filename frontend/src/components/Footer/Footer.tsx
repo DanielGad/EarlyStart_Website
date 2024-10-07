@@ -21,24 +21,25 @@ const Footer = () => {
         <Link to={"/"} onClick={() => {setMenu("home")}}>
         <img src={Early_Start_Logo} alt="EarlyStart Logo" width={"10%"}/>
         </Link>
-        <div>
+        <div className='minds'>
         Empowering Young Minds. Unlocking the Benefits of Personalized Online Tutoring with EarlyStart E-Tutors.
       </div>
       </div>
       
       <div className="footer-middle">
-        <div className="footer-menu">
+        {/* <div className="footer-menu"> */}
           <Link to={"/"} onClick={() => {setMenu("home")}}>Home</Link>
-          <div>Service</div>
+          <div style={{color: "white"}}>Service</div>
           <Link to={"/call"} onClick={() => {setMenu("call")}}>Call Us</Link>
           <Link to={"/login"} onClick={() => {setMenu("login")}}>Login</Link>
-        </div>
+        {/* </div> */}
       </div>
 
       <div className="footer-right">
         <div className="footer-right-text">
           Have questions about our services?<br />Contact Us today!
         </div>
+        <div className='footer-contact'>
         <div className="phone-con">
           <img src={Phone_Icon} alt="Phoner Icon" width={"10%"} />
           <div>09131759673 09011318999</div>
@@ -50,6 +51,7 @@ const Footer = () => {
         <div className="email-con">
           <img src={Email_Icon} alt="Email Icon" width={"10%"}/>
           <div>earlystart@e-tutor.com</div>
+        </div>
         </div>
       </div>
       </div>

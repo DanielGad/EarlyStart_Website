@@ -19,7 +19,8 @@ const CallUs = () => {
         <div className="instruction">Please complete the form below with your details, and we will strive to respond to you as promptly as we can.</div>
       <div className="section-divide">
         <div className="contact-form">
-          <label>Full Name</label><br />
+          <form action="">
+            <label>Full Name</label><br />
           <textarea rows={1} required/>
           <br />
           <label>Email Address</label><br />
@@ -27,12 +28,16 @@ const CallUs = () => {
           <br />
           <label>Message</label><br />
           <textarea rows={4} required/>
+          <div className="button-controll"><button className="contact-submit">Submit</button></div>
+          
+          </form>
+          
         </div>
         <div className="contact-image">
           <img src={Background} alt="contact-image"width={"50%"} />
         </div>
       </div>
-      <div><button className="contact-submit">Submit</button></div>
+
       </div>
 
       <Footer />

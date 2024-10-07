@@ -19,9 +19,14 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   width: 35%;
   gap: 40px;
   text-align: left;
+}
+
+.minds {
+  text-align: center;
 }
 
 .footer-left img {
@@ -35,6 +40,9 @@
 }
 
 .footer-middle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
   width: 30%;
   font-size: small;
   font-weight: 500;
@@ -97,4 +105,45 @@
 
 .lower-right div {
   cursor: pointer;
+}
+
+.footer-right-text {
+  text-align: left;
+}
+
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  justify-content: center;
+  align-items: left;
+}
+
+@media screen and (max-width: 769px) {
+  .top-section-container {
+    flex-direction: column;
+    gap: 50px;
+  }
+
+  .footer-left {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+
+  .footer-middle {
+    display: flex;
+    width: 100%;
+    gap: 50px;
+    justify-content: center;
+  }
+
+  .footer-right {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr 1fr;
+    justify-content: space-between;
+  }
+
+
 }

@@ -72,6 +72,25 @@
     grid-template-columns: 60% 30%;
     margin-top: 50px;
   }
+
+  @media screen and (max-width: 769px) {
+    .section-divide {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-submit {
+      margin-bottom: 20px;
+      margin-top: 10px;
+      width: 50%;
+    }
+
+  }
+
+  .button-controll {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
   
   .contact-form label {
     font-size: 18px;
@@ -103,7 +122,8 @@
   }
   
   .contact-submit {
-    padding: 2% 10%;
+    padding: 3% 12%;
+    width: 50%;
     font-size: large;
     color: white;
     background-color: var(--primary-color);

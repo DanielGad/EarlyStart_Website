@@ -37,11 +37,10 @@ const Home = () => {
           </Link>
         </div>
 
-        <div className="home-1-right-col">
           <div className="home-1-image-cont">
-            <img src={Helping_Mother} alt="Image 1" width={'100%'}/>
+            <img src={Helping_Mother} alt="Image 1" />
           </div>
-        </div>
+
       </div>
 
       {/*Our Services */}

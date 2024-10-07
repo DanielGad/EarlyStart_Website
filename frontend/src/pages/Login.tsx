@@ -57,8 +57,10 @@ const Login: React.FC<LoginFormProps> = ({ onLogin }) => {
         />
       </div>
       {/* {error && <p style={{ color: 'red' }}>{error}</p>} */}
-
-      <button type="submit" className="login-button">Login</button>
+      <div className="button-control">
+        <button type="submit" className="login-button">Login</button>
+      </div>
+      
     </form>
       </div>
 

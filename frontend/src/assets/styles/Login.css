@@ -55,12 +55,36 @@
     text-align: center;
 }
 
+.button-control {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: auto;
+}
+
 .login-button {
-    padding: 4% 15%;
+    padding: 8% 15%;
     background-color: var(--primary-color);
     border: none;
     border-radius: 10px;
     font-size: large;
     color: white;
     cursor: pointer;
+    margin-top: 20px;
+}
+
+@media screen and (max-width: 769px) {
+    .login-container {
+        grid-template-columns: 1fr;
+    }
+
+    .login-left {
+        width: 100%;
+    }
+
+    .login-right {
+        margin-top: 30px;
+        width: 100%;
+    }
+
 }
