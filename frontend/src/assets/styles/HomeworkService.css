@@ -117,3 +117,33 @@
   font-weight: 600;
   color: var(--primary-color);
 }
+
+@media screen and (max-width: 769px) {
+  .homework-row-1 {
+    flex-direction: column;
+  }
+
+  .circle, .circle-2, .circle-3, .circle-4 {
+    display: none;
+  }
+
+  .homework-col-1 {
+    width: 100%;
+  }
+
+  .homework-col-2 {
+    width: 100%;
+  }
+
+  .homework-row-2 {
+    flex-direction: column;
+  }
+
+  .homework-col-2-image {
+    display: none;
+  }
+
+  .homework-col-2-text {
+    width: 100%;
+  }
+}

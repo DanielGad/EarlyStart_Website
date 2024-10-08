@@ -36,8 +36,6 @@
   padding: 3% 15%;
   border: 3px solid var(--primary-color);
   border-radius: 10px;
-  align-items: center;
-  justify-content: center;
   font-size: medium;
   font-weight: 600;
   color: var(--primary-color);
@@ -109,7 +107,7 @@
   height: 400px;
   text-align: center;
   border-radius: 20px;
-  border: 7px solid var(--primary-color);
+  border: 5px solid var(--primary-color);
 }
 
 .math-2-image img {
@@ -138,6 +136,77 @@
   gap: 20px;
   font-size: medium;
   color: var(--secondary-color);
+}
+
+@media screen and (max-width: 769px) {
+  .math-row-1 {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+  }
+
+  .math-image-1, .math-image-3, .math-image-4 {
+    display: none;
+  }
+
+  .column-1-left {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .gs-button-control {
+    width: 100%;
+  }
+
+  .get-started-button {
+    padding: 15px 40px;
+    margin-bottom: 30px;
+  }
+
+  .head-text {
+    width: 100%;
+  }
+
+  .head-inner-text {
+    width: 100%;
+  }
+
+  .column-1-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    width: 100%;
+  }
+
+  .math-image-2 {
+    position: relative;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: auto;
+    border: 3px solid var(--primary-color);
+    border-radius: 10px;
+  }
+
+  .math-row-2 {
+    flex-direction: column;
+    position: relative;
+  }
+
+  .math-2-image {
+    display: none;
+    position: absolute;
+    width: 100%;
+    border: 3px solid var(--primary-color);
+  }
+
+  .math-2-inner {
+    width: 100%;
+  }
 }
 
 

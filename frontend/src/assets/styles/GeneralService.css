@@ -60,3 +60,26 @@
   object-fit: fill;
   border-radius: 20px;
 }
+
+@media screen and (max-width: 769px) {
+  .gs-row-1 {
+    flex-direction: column;
+    padding: 30px;
+  }
+
+  .gs-row-1-col-1, .gs-row-1-col-1-htext, .gs-row-1-col-1-inner {
+    width: 100%;
+  }
+
+  .gs-image-2 {
+    display: none;
+  }
+
+  .gs-image-1 {
+    position: relative;
+    top: 0;
+    width: 100%;
+    height: auto;
+    margin-top: 30px;
+  }
+}

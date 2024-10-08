@@ -90,3 +90,26 @@
   margin: auto;
   margin-bottom: -100px;
 }
+
+@media screen and (max-width: 769px) {
+  .lg-row-1 {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--primary-color);
+    padding: 50px;
+    clip-path: polygon(0 0%, 100% 0, 100% 100%, 0% 100%);
+  }
+
+  .lg-row-1-col-2 {
+    display: none;
+  }
+
+  .lg-row-1-col-1, .lg-row-1-col-1-htext {
+    width: 100%;
+  }
+
+  .lg-row-2-grid-1 {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}

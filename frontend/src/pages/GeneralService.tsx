@@ -19,7 +19,7 @@ const GeneralService = () => {
             Excel in General Knowledge and Vocational Aptitude with EarlyStart E-Tutors.
           </div>
           <div className="gs-row-1-col-1-inner">
-            Master essential skills and knowledge to achieve your goals and stand out. <br />
+            Master essential skills and knowledge to achieve your goals and stand out. <br /> <br />
             Kickstart your preparation with just one Click!
           </div>
           <div>

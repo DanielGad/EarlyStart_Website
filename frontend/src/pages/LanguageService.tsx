@@ -21,7 +21,7 @@ const LanguageService = () => {
             Fluency in Languages Made Easy
           </div>
           <div className="lg-row-1-col-1-inner">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. <br />
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. <br /> <br />
             Begin Now with a quick click!
           </div>
           <Link to={"/get-started"}>

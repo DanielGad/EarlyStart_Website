@@ -17,7 +17,7 @@ const InternationalService = () => {
             Succeed in International School Enterance with EarlyStart E-Tutors 
           </div>
           <div className="is-row-1-col-1-inner">
-            Excel in International Enterance Examination and secure your spot  <br />
+            Excel in International Enterance Examination and secure your spot <br /> <br />
             Kickstart your preparation with just one Click!
           </div>
           <Link to={"/get-started"}>

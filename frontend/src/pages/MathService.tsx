@@ -15,10 +15,10 @@ const MathService = () => {
         <div className="column-1-left">
           <div className="head-text">Mastering Math Made Easy Achieve More, Learn Faster, and Excel!</div>
           <div className="head-inner-text">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi quod saepe minus adipisci dignissimos distinctio impedit tenetur debitis a, illum cumque reiciendis culpa dolorem ut neque tempore ipsum corrupti quam. <br />Get Started Now with just a Click!
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi quod saepe minus adipisci dignissimos distinctio impedit tenetur debitis a, illum cumque reiciendis culpa dolorem ut neque tempore ipsum corrupti quam. <br /> <br />Get Started Now with just a Click!
           </div>
           <Link to={"/get-started"}>
-            <div><button className="get-started-button">Get Started Now <ArrowDropRightIcon className='arrow-right'/></button></div>
+            <div className='gs-button-control'><button className="get-started-button">Get Started Now <ArrowDropRightIcon className='arrow-right'/></button></div>
           </Link>
 
         </div>

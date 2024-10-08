@@ -21,7 +21,7 @@ const HomeworkService = () => {
             Simplifying Homework Help
           </div>
           <div className="homework-col-1-inner-text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nam corrupti consectetur iure officia ipsum? Quas quisquam numquam modi, nostrum necessitatibus ipsa nesciunt eveniet provident, temporibus sequi tenetur dolore vel! <br />
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nam corrupti consectetur iure officia ipsum? Quas quisquam numquam modi, nostrum necessitatibus ipsa nesciunt eveniet provident, temporibus sequi tenetur dolore vel! <br /> <br />
             Get Started Today with just a Click!
           </div>
           <Link to={"/get-started"}>

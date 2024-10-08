@@ -47,5 +47,23 @@
   object-fit: fill;
   border-radius: 10px;
   /* transform: rotate(-45deg); */
-  
+}
+
+@media screen and (max-width: 769px) {
+  .is-row-1 {
+    flex-direction: column;
+  }
+
+  .is-row-1-col-1, .is-row-1-col-1-htext, .is-row-1-col-1-inner {
+    width: 100%;
+  }
+
+  .is-row-1-col-2 {
+    position: relative;
+    top: 0;
+    right: 0;
+    width: 100%;
+    transform: rotate(-0deg);
+    margin-top: 30px;
+  }
 }
