@@ -98,4 +98,25 @@
   cursor: pointer;
 }
 
+@media screen and (max-width: 769px) {
+  .tp-row-1 {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .tp-row-2 {
+    flex-direction: column;
+    width: 80%;
+    gap: 0;
+  }
+
+  .tp-about-me {
+    width: 100%;
+  }
+
+  .tp-teaching {
+    width: 100%;
+  }
+}
+
 

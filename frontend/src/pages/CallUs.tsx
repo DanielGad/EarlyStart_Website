@@ -34,7 +34,7 @@ const CallUs = () => {
           
         </div>
         <div className="contact-image">
-          <img src={Background} alt="contact-image"width={"50%"} />
+          <img src={Background} alt="contact-image" />
         </div>
       </div>
 

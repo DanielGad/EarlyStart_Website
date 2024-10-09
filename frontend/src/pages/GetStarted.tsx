@@ -15,6 +15,7 @@ const GetStarted = () => {
         <div className="start-2">Welcome! We're excited to help customize a personalized learning plan tailored specifically for your child's unique needs and educational goals. </div>
         <div className="start-3">Choose Your Schedule</div>
         <div className="start-4">Select Your Preferred Schedule</div>
+        <form action="">
         <div className="start-5"><input type="checkbox" /> <b>Weekdays:</b> Monday - Thursday</div>
         <div className="start-5"><input type="checkbox" /> <b>Weekends:</b> Friday - Sunday</div>
         <div className="start-5"><b>Time Slots: </b><input type="checkbox" /> Morning <input type="checkbox" /> Evening</div>
@@ -34,6 +35,7 @@ const GetStarted = () => {
         <div className="start-7">Phone Number:</div>
         <br />
         <textarea rows={1} required className="start-7-text"/>
+        </form>
 
       </div>
 
@@ -45,6 +47,7 @@ const GetStarted = () => {
         <button className="gt-choose">Submit <ArrowDropRightIcon className='arrow-right'/></button>
         </Link>
       </div>
+      
 
       <Footer />
       </>

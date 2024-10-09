@@ -19,6 +19,13 @@
   text-align: center;
 }
 
+@media screen and (max-width: 769px) {
+  .gt-teachers {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+
 .gt-image-con {
   width: 100%;
   height: 60%;
