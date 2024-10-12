@@ -39,22 +39,22 @@ const InternationalService = () => {
             About International School Enterance
           </div>
           <div className="lw-row-2-col-2-text">
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga animi deleniti repudiandae voluptatem nihil explicabo magni nostrum unde! Magnam dolor adipisci explicabo nobis blanditiis minus velit error. Impedit, autem dolorem?</p>
+            <p>At EarlyStart E-Tutors, we provide comprehensive preparation for international school entrance exams. Our specialized services cover essential languages, core subjects, and effective exam strategies, ensuring your child is well-equipped for success.</p>
             <p>Comprehensive Preparation
-              <ul><li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis architecto eum qui beatae magnam voluptates</li></ul>
-              <ul><li style={{marginTop: "-10px"}}>placeat laborum voluptatem. Quos corporis quod dolores distinctio aut molestiae ipsam assumenda recusandae rem blanditiis!</li></ul>
+              <ul><li> Core Subjects: Strengthen Math, English, and Science.</li></ul>
+              <ul><li style={{marginTop: "-10px"}}>Critical Thinking: Improve problem-solving and analytical skills. </li></ul>
             </p>
             <p>Exam Strategies
-              <ul><li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis architecto eum qui beatae magnam voluptates</li></ul>
-              <ul><li style={{marginTop: "-10px"}}>placeat laborum voluptatem. Quos corporis quod dolores distinctio aut molestiae ipsam assumenda recusandae rem blanditiis!</li></ul>
+              <ul><li>Effective Techniques: Learn strategies for various question types. </li></ul>
+              <ul><li style={{marginTop: "-10px"}}>Time Management: Master time management for exams. </li></ul>
             </p>
             <p>Personalized Tutoring
-              <ul><li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis architecto eum qui beatae magnam voluptates</li></ul>
-              <ul><li style={{marginTop: "-10px"}}>placeat laborum voluptatem. Quos corporis quod dolores distinctio aut molestiae ipsam assumenda recusandae rem blanditiis!</li></ul>
+              <ul><li> Tailored Plans: Customized study plans to meet individual needs. </li></ul>
+              <ul><li style={{marginTop: "-10px"}}>Expert Educators: Experienced tutors specialized in entrance exams. </li></ul>
             </p>
             <p>Confidence Building
-              <ul><li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis architecto eum qui beatae magnam voluptates</li></ul>
-              <ul><li style={{marginTop: "-10px"}}>placeat laborum voluptatem. Quos corporis quod dolores distinctio aut molestiae ipsam assumenda recusandae rem blanditiis!</li></ul>
+              <ul><li>Mock Exams: Simulated tests to build confidence.</li></ul>
+              <ul><li style={{marginTop: "-10px"}}>Feedback: Constructive feedback to focus on improvement</li></ul>
             </p>
           </div>
         </div>

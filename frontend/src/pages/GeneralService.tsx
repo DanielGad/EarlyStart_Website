@@ -48,14 +48,14 @@ const GeneralService = () => {
             About Our Language Support
           </div>
           <div className="lw-row-2-col-2-text">
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga animi deleniti repudiandae voluptatem nihil explicabo magni nostrum unde! Magnam dolor adipisci explicabo nobis blanditiis minus velit error. Impedit, autem dolorem?</p>
+            <p>At EarlyStart E-Tutors, we offer targeted preparation for General Knowledge and Vocational Aptitude tests. Our tailored approach helps your child build a strong foundation in essential areas, ensuring they are well-prepared to tackle various assessments with confidence. </p>
             <p>Comprehensive Knowledge Enhancement
-              <ul><li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis architecto eum qui beatae magnam voluptates</li></ul>
-              <ul><li style={{marginTop: "-10px"}}>placeat laborum voluptatem. Quos corporis quod dolores distinctio aut molestiae ipsam assumenda recusandae rem blanditiis!</li></ul>
+              <ul><li>Broad Insights: Develop a well-rounded understanding of general knowledge topics.</li></ul>
+              <ul><li style={{marginTop: "-10px"}}>Vocational Skills: Acquire practical skills and knowledge relevant to career interests. </li></ul>
             </p>
             <p>Strategies Aptitude Training
-              <ul><li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis architecto eum qui beatae magnam voluptates</li></ul>
-              <ul><li style={{marginTop: "-10px"}}>placeat laborum voluptatem. Quos corporis quod dolores distinctio aut molestiae ipsam assumenda recusandae rem blanditiis!</li></ul>
+              <ul><li>Effective Methods: Learn techniques to tackle different types of questions and problems. </li></ul>
+              <ul><li style={{marginTop: "-10px"}}>Time Efficiency: Master strategies for efficient and effective problem-solving.</li></ul>
             </p>
           </div>
         </div>

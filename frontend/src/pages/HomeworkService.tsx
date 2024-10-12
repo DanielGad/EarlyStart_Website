@@ -22,7 +22,7 @@ const HomeworkService = () => {
             Simplifying Homework Help
           </div>
           <div className="homework-col-1-inner-text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nam corrupti consectetur iure officia ipsum? Quas quisquam numquam modi, nostrum necessitatibus ipsa nesciunt eveniet provident, temporibus sequi tenetur dolore vel! <br /> <br />
+          Access round-the-clock support from EarlyStart E-Tutors. With EarlyStart E-Tutors, your child gets the help they need for school assignments. Our expert tutors ensure comprehension and success in their studies. <br /> <br />
             Get Started Today with just a Click!
           </div>
           <Link to={"/get-started"}>
@@ -43,14 +43,14 @@ const HomeworkService = () => {
             About Our Homework Support
           </div>
           <div className="homework-col-2-inner-text">
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cum, ipsum! Ipsam rem doloremque et fuga perferendis ipsa beatae, omnis ullam delectus, autem saepe quae reprehenderit aliquam eaque quis quibusdam architecto.</p>
+            <p>At EarlyStart E-Tutors, we understand that homework/school assignments can be challenging for both students and their parents. That’s why we offer comprehensive support to ensure your child not only completes their assignments but also grasps the underlying concepts. </p>
             <p>Our Homework/School Assignment Support Services includes</p>
-            <p>1. Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum vero voluptatibus dolorum aliquam ea hic voluptatum eos.</p>
-            <p>2. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, ipsa porro accusamus veniam.</p>
-            <p>3. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veritatis ex, voluptatum minus sapiente officia.</p>
-            <p>4. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veritatis ex, voluptatum minus sapiente officia.</p>
-            <p>5. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veritatis ex, voluptatum minus sapiente officia.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum ex, aliquid eaque neque, nobis natus veritatis perspiciatis doloremque voluptatibus facilis ipsa exercitationem beatae! Maiores minima aspernatur enim atque, culpa nisi.</p>
+            <p>1. Guided Assistance: Expert tutors guide your child through his/her homework, ensuring they understand each step and can apply the concepts independently. </p>
+            <p>2. Skill Reinforcement: We focus on reinforcing skills learned in school, ensuring that your child builds a strong foundation in every subject.</p>
+            <p>3. Time Management and Study Skills: We teach essential time management and study skills, helping your child become more organized and efficient in their studies. </p>
+            <p>4. Tailored Approach: Recognizing that every child learns differently, our tutors customize their approach to meet the unique needs and learning style of your child. </p>
+            <p>5. Interactive Learning: Our engaging, interactive sessions make learning enjoyable, helping your child develop a positive attitude towards their schoolwork.</p>
+            <p>Whether your child needs help with daily homework, long-term projects, or preparing for exams, EarlyStart E-Tutors is here to support him/her every step of the way. With our dedicated assistance, your child will gain confidence, improve their academic performance, and develop a love for learning.</p>
           </div>
         </div>
       </div>

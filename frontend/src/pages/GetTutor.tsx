@@ -17,7 +17,7 @@ const GetTutor = () => {
       </div>
 
       <div className="gt-teachers">
-        {Tutors.map((data: { id: React.Key | null | undefined; Image: string | undefined; Name: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; Details: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; }) => (
+        {Tutors.map((data: { id: React.Key | null | undefined; Image: string | undefined; Name: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; Bio: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; }) => (
           <div className="teacher-con" key={data.id}>
             <Link to={`/profile/${data.id}`}>
             <div className="gt-image-con">
@@ -26,10 +26,10 @@ const GetTutor = () => {
           <div className="gt-image-htext">
             {data.Name}
           </div>
-          </Link>
           <div className="gt-inner-text">
-            {data.Details}
+            {data.Bio}
           </div>
+          </Link>
         </div>
         ))}
       </div>

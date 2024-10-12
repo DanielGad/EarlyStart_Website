@@ -18,7 +18,7 @@ const LetterworkService = () => {
             Enhancing Literacy Skills with EarlyStart E-Tutors
           </div>
           <div className="lw-row-1-col-1-text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae modi officia tempora vero eos velit deserunt vel consequuntur minus.
+          Personalized Support for Letter Work, Word Formation, Phonetics, and Verbal Reasoning Join us now with a simple click!
           </div>
           <Link to={"/get-started"}>
             <div>
@@ -44,22 +44,22 @@ const LetterworkService = () => {
             About Our Literacy Skills Support
           </div>
           <div className="lw-row-2-col-2-text">
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga animi deleniti repudiandae voluptatem nihil explicabo magni nostrum unde! Magnam dolor adipisci explicabo nobis blanditiis minus velit error. Impedit, autem dolorem?</p>
-            <p>Letter Work
-              <ul><li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis architecto eum qui beatae magnam voluptates</li></ul>
-              <ul><li style={{marginTop: "-10px"}}>placeat laborum voluptatem. Quos corporis quod dolores distinctio aut molestiae ipsam assumenda recusandae rem blanditiis!</li></ul>
+            <p>Give your child the advantage he/she needs with EarlyStart E-Tutors! Our dedicated literacy programs are tailored to enhance your child's skills in letter work, word formation, phonetics, and verbal reasoning. With our expert tutors, your child will build a strong foundation and develop a love for learning.</p>
+            <p>Letter Work:
+              <ul><li>Alphabet Recognition: Helping children identify and write letters accurately. </li></ul>
+              <ul><li style={{marginTop: "-10px"}}>Handwriting Practice: Enhancing fine motor skills and legibility through engaging exercises.</li></ul>
             </p>
-            <p>Word Formation
-              <ul><li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis architecto eum qui beatae magnam voluptates</li></ul>
-              <ul><li style={{marginTop: "-10px"}}>placeat laborum voluptatem. Quos corporis quod dolores distinctio aut molestiae ipsam assumenda recusandae rem blanditiis!</li></ul>
+            <p>Word Formation:
+              <ul><li>Spelling and Vocabulary: Building a robust vocabulary and understanding of word structures.</li></ul>
+              <ul><li style={{marginTop: "-10px"}}>Word Games: Fun and interactive activities that make learning new words enjoyable.</li></ul>
             </p>
-            <p>Phonetics
-              <ul><li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis architecto eum qui beatae magnam voluptates</li></ul>
-              <ul><li style={{marginTop: "-10px"}}>placeat laborum voluptatem. Quos corporis quod dolores distinctio aut molestiae ipsam assumenda recusandae rem blanditiis!</li></ul>
+            <p>Phonetics:
+              <ul><li>Sound Recognition: Teaching children to identify and pronounce phonetic sounds correctly.</li></ul>
+              <ul><li style={{marginTop: "-10px"}}>Phonics Practice: Using phonics-based approaches to improve reading and pronunciation.</li></ul>
             </p>
-            <p>Verbal Reasoning
-              <ul><li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis architecto eum qui beatae magnam voluptates</li></ul>
-              <ul><li style={{marginTop: "-10px"}}>placeat laborum voluptatem. Quos corporis quod dolores distinctio aut molestiae ipsam assumenda recusandae rem blanditiis!</li></ul>
+            <p>Verbal Reasoning:
+              <ul><li>Critical Thinking: Developing skills in logic, pattern recognition, and problem-solving.</li></ul>
+              <ul><li style={{marginTop: "-10px"}}>Language Comprehension: Enhancing the ability to understand and analyze verbal information.</li></ul>
             </p>
           </div>
         </div>

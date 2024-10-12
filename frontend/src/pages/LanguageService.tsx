@@ -22,7 +22,7 @@ const LanguageService = () => {
             Fluency in Languages Made Easy
           </div>
           <div className="lg-row-1-col-1-inner">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. <br /> <br />
+          Achieve Proficiency, Communicate Confidently, and Excel.<br /> <br />
             Begin Now with a quick click!
           </div>
           <Link to={"/get-started"}>
@@ -61,26 +61,26 @@ const LanguageService = () => {
             About Our Language Support
           </div>
           <div className="lw-row-2-col-2-text">
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga animi deleniti repudiandae voluptatem nihil explicabo magni nostrum unde! Magnam dolor adipisci explicabo nobis blanditiis minus velit error. Impedit, autem dolorem?</p>
-            <p>French
-              <ul><li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis architecto eum qui beatae magnam voluptates</li></ul>
-              <ul><li style={{marginTop: "-10px"}}>placeat laborum voluptatem. Quos corporis quod dolores distinctio aut molestiae ipsam assumenda recusandae rem blanditiis!</li></ul>
+            <p>At EarlyStart E-Tutors, we help your child excel in French, English, Yoruba, Igbo, and Hausa. Our specialized services build a solid foundation in these essential languages.</p>
+            <p>French:
+              <ul><li>Vocabulary and Grammar: Expand vocabulary and understand grammar rules. Conversational</li></ul>
+              <ul><li style={{marginTop: "-10px"}}>Practice: Improve speaking and listening skills.</li></ul>
             </p>
-            <p>English
-              <ul><li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis architecto eum qui beatae magnam voluptates</li></ul>
-              <ul><li style={{marginTop: "-10px"}}>placeat laborum voluptatem. Quos corporis quod dolores distinctio aut molestiae ipsam assumenda recusandae rem blanditiis!</li></ul>
+            <p>English:
+              <ul><li>Reading and Writing: Enhance comprehension and writing skills.</li></ul>
+              <ul><li style={{marginTop: "-10px"}}>Pronunciation: Focus on correct pronunciation and phonetics.</li></ul>
             </p>
-            <p>Yoruba
-              <ul><li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis architecto eum qui beatae magnam voluptates</li></ul>
-              <ul><li style={{marginTop: "-10px"}}>placeat laborum voluptatem. Quos corporis quod dolores distinctio aut molestiae ipsam assumenda recusandae rem blanditiis!</li></ul>
+            <p>Yoruba:
+              <ul><li>Basics and Culture: Teach fundamental vocabulary with cultural lessons.</li></ul>
+              <ul><li style={{marginTop: "-10px"}}>Speaking Practice: Use real-life scenarios to boost fluency. </li></ul>
             </p>
-            <p>Igbo
-              <ul><li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis architecto eum qui beatae magnam voluptates</li></ul>
-              <ul><li style={{marginTop: "-10px"}}>placeat laborum voluptatem. Quos corporis quod dolores distinctio aut molestiae ipsam assumenda recusandae rem blanditiis!</li></ul>
+            <p>Igbo:
+              <ul><li>Introduction and Culture: Cover basic vocabulary and cultural elements. </li></ul>
+              <ul><li style={{marginTop: "-10px"}}>Interactive Sessions: Engage in activities to improve speaking skills. </li></ul>
             </p>
-            <p>Hausa
-              <ul><li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis architecto eum qui beatae magnam voluptates</li></ul>
-              <ul><li style={{marginTop: "-10px"}}>placeat laborum voluptatem. Quos corporis quod dolores distinctio aut molestiae ipsam assumenda recusandae rem blanditiis!</li></ul>
+            <p>Hausa:
+              <ul><li>Fundamentals and Culture: Build a strong foundation in vocabulary and grammar with cultural integration. </li></ul>
+              <ul><li style={{marginTop: "-10px"}}>Conversational Exercises: Practice speaking and listening skills.</li></ul>
             </p>
           </div>
         </div>

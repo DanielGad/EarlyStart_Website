@@ -20,6 +20,10 @@
   border-radius: 10px;
 }
 
+.tp-details-con {
+  width: 70%;
+}
+
 .tp-details-con div {
   margin: 5px;
   color: var(--secondary-color);
@@ -115,6 +119,10 @@
   }
 
   .tp-teaching {
+    width: 100%;
+  }
+
+  .tp-details-con {
     width: 100%;
   }
 }

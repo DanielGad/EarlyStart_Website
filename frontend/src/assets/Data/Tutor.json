@@ -2,35 +2,32 @@
   {
     "id": 1,
     "Name": "Namidi Bello",
-    "Bio": "lorem lorem lorem lorem lorem lorem lorem",
-    "Qualifications": "B Sc, B Ed, M Sc",
+    "Bio": "Namidi has over 10 years of experience teaching online elementary school students. throughout his career John has developed a strong passion for helping young learners achieve thier full potential.",
+    "Qualifications": "B.Ed, M.Sc",
     "Availablity": "Mon - Fri",
-    "Languages": "English Language",
+    "Languages": "English, French",
     "Image": "/mother-helping.jpg",
-    "Details": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore itaque minima non nisi ipsa reprehenderit quibusdam soluta aspernatur aperiam, repellat voluptatum nulla totam odio, porro veniam dolor est blanditiis? Consequatur.",
     "Reviews": [
       "Great Teacher - Parent A",
       "Hard working Tutor, Keep it up - Parent B"
     ],
-    "About": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore itaque minima non nisi ipsa reprehenderit quibusdam soluta aspernatur aperiam, repellat voluptatum nulla totam odio, porro veniam dolor est blanditiis? Consequatur.",
+    "About": "Hi, I'm Mr. John Doe, an educator with 10+ years of experience. I hold a B.Ed and an M.Sc in Educational Psychology. My student-centered teaching approach uses interactive activities and technology to make learning fun. Fluent in English and French, I aim to create an inclusive, supportive classroom where every student thrives. Outside of teaching, I enjoy reading, hiking, and exploring educational tech. I look forward to helping your child succeed!",
     "FullQualifications": [
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit."
+      "Bachelor of Education (B.Ed) in Elementary Education.",
+      "Master of Science (M.Sc) in Educational Psychology.",
+      "Certified in Early Childhood Education.",
+      "Specialized training in teaching students with learning disabilities."
     ],
-    "Style": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore itaque minima non nisi ipsa reprehenderit quibusdam soluta aspernatur aperiam, repellat voluptatum nulla totam odio, porro veniam dolor est blanditiis? Consequatur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore itaque minima non nisi ipsa reprehenderit quibusdam soluta aspernatur aperiam, repellat voluptatum nulla totam odio, porro veniam dolor est blanditiis? Consequatur."
+    "Style": "Namidi believes in a student-centered approach to teaching, where each child’s unique needs and learning styles are prioritized. He uses a blend of interactive activities, real-world examples, and technology to make lessons engaging and relatable. John focuses on building a strong foundation in core subjects while encouraging critical thinking and creativity. His supportive and patient demeanor creates a positive and inclusive learning environment where every student feels valued and motivated to learn."
   },
   {
     "id": 2,
     "Name": "Jane Smith",
-    "Bio": "lorem lorem lorem lorem lorem lorem lorem",
+    "Bio": "Jane has over 8 years of diverse experience to the classroom. She has been involved in curriculum development and teacher training programs. Her extensuve backgound includes working with students from various cultural and linguistic backgrounds.",
     "Qualifications": "B Sc, B Ed, M Sc",
     "Availablity": "Mon - Fri",
     "Languages": "English Language",
     "Image": "/mother-helping.jpg",
-    "Details": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore itaque minima non nisi ipsa reprehenderit quibusdam soluta aspernatur aperiam, repellat voluptatum nulla totam odio, porro veniam dolor est blanditiis? Consequatur.",
     "Reviews": [
       "Great to have you as a Tutor for my kid, thanks - Parent A"
     ],
@@ -47,12 +44,11 @@
   {
     "id": 3,
     "Name": "Daniel Supo",
-    "Bio": "lorem lorem lorem lorem lorem lorem lorem",
+    "Bio": "Samuel has over 12 years of teaching experience, specializing in mathematics and science education. He has taught in various educational settings, including international schools and online platforms.",
     "Qualifications": "B Sc, B Ed, M Sc",
     "Availablity": "Mon - Fri",
     "Languages": "English Language",
     "Image": "/mother-helping.jpg",
-    "Details": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore itaque minima non nisi ipsa reprehenderit quibusdam soluta aspernatur aperiam, repellat voluptatum nulla totam odio, porro veniam dolor est blanditiis? Consequatur.",
     "Reviews": "",
     "About": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore itaque minima non nisi ipsa reprehenderit quibusdam soluta aspernatur aperiam, repellat voluptatum nulla totam odio, porro veniam dolor est blanditiis? Consequatur.",
     "FullQualifications": [
@@ -67,12 +63,11 @@
   {
     "id": 4,
     "Name": "Aisha Mohammed",
-    "Bio": "lorem lorem lorem lorem lorem lorem lorem",
+    "Bio": "Aisha has 9 years of experience in elementary education with a focus on language arts and vocational aptitude. She has worked in both traditional and online classrooms and has a stong track record of improving student literacy and critical thinking skills.",
     "Qualifications": "B Sc, B Ed, M Sc",
     "Availablity": "Mon - Fri",
     "Languages": "English Language",
     "Image": "/mother-helping.jpg",
-    "Details": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore itaque minima non nisi ipsa reprehenderit quibusdam soluta aspernatur aperiam, repellat voluptatum nulla totam odio, porro veniam dolor est blanditiis? Consequatur.",
     "Reviews": "",
     "About": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore itaque minima non nisi ipsa reprehenderit quibusdam soluta aspernatur aperiam, repellat voluptatum nulla totam odio, porro veniam dolor est blanditiis? Consequatur.",
     "FullQualifications": [
@@ -87,12 +82,11 @@
   {
     "id": 5,
     "Name": "Chidinma Okafor",
-    "Bio": "lorem lorem lorem lorem lorem lorem lorem",
+    "Bio": "Chidinma has over 15 years of experience teaching elementary school students. She has a strong background in early childhood education and successfully prepared students for various academic milestones.",
     "Qualifications": "B Sc, B Ed, M Sc",
     "Availablity": "Mon - Fri",
     "Languages": "English Language",
     "Image": "/mother-helping.jpg",
-    "Details": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore itaque minima non nisi ipsa reprehenderit quibusdam soluta aspernatur aperiam, repellat voluptatum nulla totam odio, porro veniam dolor est blanditiis? Consequatur.",
     "Reviews": [
       "Great to have you as a Tutor for my kid, thanks - Parent A"
     ],
@@ -109,12 +103,11 @@
   {
     "id": 6,
     "Name": "Ibrahim Adewale",
-    "Bio": "lorem lorem lorem lorem lorem lorem lorem",
+    "Bio": "Ibrahim has 10 years of experience teaching elementary and middle school students, He is highly regarded for her ability to connect with young learners and insprie a lifelong love for learning.",
     "Qualifications": "B Sc, B Ed, M Sc",
     "Availablity": "Mon - Fri",
     "Languages": "English Language",
     "Image": "/mother-helping.jpg",
-    "Details": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore itaque minima non nisi ipsa reprehenderit quibusdam soluta aspernatur aperiam, repellat voluptatum nulla totam odio, porro veniam dolor est blanditiis? Consequatur.",
     "Reviews": "",
     "About": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore itaque minima non nisi ipsa reprehenderit quibusdam soluta aspernatur aperiam, repellat voluptatum nulla totam odio, porro veniam dolor est blanditiis? Consequatur.",
     "FullQualifications": [

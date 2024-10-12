@@ -16,7 +16,7 @@ const MathService = () => {
         <div className="column-1-left">
           <div className="head-text">Mastering Math Made Easy Achieve More, Learn Faster, and Excel!</div>
           <div className="head-inner-text">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi quod saepe minus adipisci dignissimos distinctio impedit tenetur debitis a, illum cumque reiciendis culpa dolorem ut neque tempore ipsum corrupti quam. <br /> <br />Get Started Now with just a Click!
+          Unlock 24/7 support from EarlyStart E-Tutors. Our expert tutors help kids excel in Number Work, Quantitative Reasoning, and Mathematics, ensuring homework is done correctly and preparing them for exams. <br /> <br />Get Started Now with just a Click!
           </div>
           <Link to={"/get-started"}>
             <div className='gs-button-control'><button className="get-started-button">Get Started Now <ArrowDropRightIcon className='arrow-right'/></button></div>
@@ -49,13 +49,13 @@ const MathService = () => {
           </div>
           <div className='math-2-inner-con'>
           <div className="math-2-inner-text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio illum assumenda eligendi! Itaque rerum rem voluptas ex labore repellat laborum quis dolor alias repudiandae consectetur sit, corrupti libero deleniti ut.
+          Give your child the focused attention they need to excel in Number Work, Quantitative Reasoning, and Mathematics with EarlyStart E-Tutors. Our specialized services ensure your child builds a solid foundation in these essential subjects. 
           </div>
           <div className="math-2-inner-text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio illum assumenda eligendi! Itaque rerum rem voluptas ex labore repellat laborum quis dolor alias repudiandae consectetur sit, corrupti libero deleniti ut.
+          If you are a busy parent, our program offers more than just academic support. We teach crucial study skills and problem-solving techniques to help your child succeed and develop interest for learning. 
           </div>
           <div className="math-2-inner-text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio illum assumenda eligendi! Itaque rerum rem voluptas ex labore repellat laborum quis dolor alias repudiandae consectetur sit, corrupti libero deleniti ut.
+          EarlyStart E-Tutors offers personalized, interactive tutoring designed specifically for primary school students, provided by expert educators in Number Work, Quantitative Reasoning, and Mathematics. Elevate your child's learning experience with EarlyStart E-Tutors.
           </div>
           </div>
         </div>
