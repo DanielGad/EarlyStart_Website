@@ -121,10 +121,9 @@ const Home = () => {
             <div className="who-we-are">
               Who We Are
             </div>
-            <div className="home-3-text-cont">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo laborum odit porro laboriosam pariatur delectus molestiae non, quam nobis consequatur fuga repudiandae debitis enim consectetur, velit, praesentium ipsam nesciunt cumque! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsa iste harum asperiores odio explicabo, iusto hic, deserunt, quis suscipit quam quaerat dolorem porro facere laborum sint exercitationem perspiciatis rem quasi?
+            <div className="home-3-text-cont">          
+              EarlyStart E-Tutors connects primary school pupils with expert tutors through personalized, interactive online learning. We specialize in matching learners with qualified educators for tailored academic support and specialized programs. Our goal is to enhance each child's educational journey and help him/her achieve their fullest potential from the comfort of homes.
             </div>
-            <div className="home-3-text-cont">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Lorem, ipsum dolor. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nulla error cumque cupiditate. Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
           </div>
         </div>
 

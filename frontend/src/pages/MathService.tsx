@@ -4,6 +4,7 @@ import ArrowDropRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import General_Image from '../assets/images/mother-helping.jpg';
 import Footer from '../components/Footer/Footer';
 import { Link } from 'react-router-dom';
+import Action from '../components/Action/Action';
 
 const MathService = () => {
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -59,6 +60,8 @@ const MathService = () => {
           </div>
         </div>
       </div>
+
+      <Action />
 
       <Footer />
     </div>

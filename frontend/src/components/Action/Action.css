@@ -1,0 +1,126 @@
+.action-container {
+  width: 80%;
+  margin: auto;
+}
+
+.action-container h2 {
+  margin-top: 30px;
+  font-size: 35px;
+  color: var(--secondary-color);
+  text-align: center;
+}
+
+.action-divide {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+@media screen and (max-width: 769px) {
+  .action-divide {
+    flex-direction: column;
+  }
+
+  .action-container h2 {
+    margin-bottom: 0;
+  }
+}
+
+.action-left {
+  width: 100%;
+}
+
+.steps {
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.steps-sub {
+  font-weight: 500;
+  color: var(--secondary-color);
+  margin-top: -20px;
+}
+
+.action-right {
+  position: relative;
+  width: 100%;
+}
+
+.step-1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  left: 100px;
+  width: fit-content;
+  background-color: blue;
+}
+
+.step-icon-1 {
+  position: absolute;
+  left: 220px;
+  cursor: pointer;
+}
+
+.step-click-1 {
+  position: absolute;
+  left: 170px;
+  top: 80px;
+  font-size: large;
+  font-weight: 600;
+  color: var(--secondary-color);
+}
+
+.step-icon-2 {
+  position: absolute;
+  right: 70px;
+  top: 180px;
+  cursor: pointer;
+}
+
+.step-click-2 {
+  position: absolute;
+  right: 0;
+  top: 260px;
+  font-size: large;
+  font-weight: 600;
+  color: var(--secondary-color);
+}
+
+.step-icon-3 {
+  position: absolute;
+  left: 220px;
+  bottom: 45px;
+  cursor: pointer;
+}
+
+.step-click-3 {
+  position: absolute;
+  left: 170px;
+  bottom: 0;
+  font-size: large;
+  font-weight: 600;
+  color: var(--secondary-color);
+}
+
+.step-icon-4 {
+  position: absolute;
+  left: 50px;
+  top: 180px;
+  cursor: pointer;
+}
+
+.step-click-4 {
+  position: absolute;
+  left: 0;
+  top: 260px;
+  font-size: large;
+  font-weight: 600;
+  color: var(--secondary-color);
+}
+
+.arrow-1 {
+  position: absolute;
+  top: 50px;
+  right: 100px;
+}

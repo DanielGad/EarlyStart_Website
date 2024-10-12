@@ -4,6 +4,7 @@ import Tutors from "../assets/Data/Tutor.json";
 import ArrowDropRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import Footer from '../components/Footer/Footer';
 import { Link } from 'react-router-dom';
+import Action from "../components/Action/Action";
 
 const GetTutor = () => {
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -40,7 +41,7 @@ const GetTutor = () => {
         <button className="gt-choose">Let Us Choose for You <ArrowDropRightIcon className='arrow-right'/></button>
         </Link>
       </div>
-
+      <Action />
       <Footer />
     </div>
   )

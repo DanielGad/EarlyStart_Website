@@ -46,7 +46,7 @@
 }
 
 .tp-about-me {
-  width: 40%;
+  width: 100%;
 }
 
 .tp-about-me-head, .tp-qua-head, .tp-teach-head {
@@ -61,7 +61,7 @@
 }
 
 .tp-teaching {
-  width: 40%;
+  width: 100%;
 }
 
 .tp-about-me p, .tp-teaching p, .tp-qua ul {

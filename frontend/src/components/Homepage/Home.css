@@ -14,15 +14,15 @@
 
 .learn {
   width: 80%;
-  font-size: 50px;
+  font-size: 4vw;
   font-weight: bold;
   margin-bottom: 30px;
   color: var(--primary-color);
 }
 
 .enhance {
-  width: 80%;
-  font-size: 20px;
+  width: 70%;
+  font-size: 1.5vw;
   color: var(--secondary-color);
   margin-bottom: 30px;
 }
@@ -33,11 +33,12 @@
   }
 
   .learn {
-    font-size: 40px;
+    font-size: 8vw;
     width: 100%;
   }
 
   .enhance {
+    font-size: 4vw;
     width: 100%;
   }
 
@@ -48,14 +49,20 @@
 }
 
 .get-tutor-button {
-  padding: 5% 10%;
+  padding: 4% 10%;
   border: none;
   background-color: var(--primary-color);
   color: white;
-  font-size: larger;
+  font-size: 1.5vw;
   font-weight: bold;
   border-radius: 10px;
   cursor: pointer;
+}
+
+@media screen and (max-width: 769px) {
+  .get-tutor-button {
+    font-size: 4vw;
+  }
 }
 
 .arrow-right {
@@ -79,7 +86,7 @@
 
 .home-services {
   text-align: center;
-  font-size: 35px;
+  font-size: 3vw;
   font-weight: bold;
   color: var(--primary-color);
 }
@@ -95,8 +102,8 @@
 }
 
 .home-2-con {
-  width: 150px;
-  height: 150px;
+  width: 15vw;
+  height: 10vw;
   padding: 10px 10px;
   background-color: var(--light-color);
   border-radius: 20px;
@@ -110,6 +117,7 @@
 
 .home-2-texts {
   text-align: center;
+  font-size: 1.2vw;
 }
 
 .home-3 {
@@ -133,7 +141,7 @@
 }
 
 .who-we-are {
-  font-size: 40px;
+  font-size: 3vw;
   font-weight: bold;
   color: var(--primary-color);
   padding-bottom: 20px;
@@ -141,7 +149,7 @@
 
 .home-3-text-cont {
   font-weight: 500;
-  font-size: larger;
+  font-size: 1.7vw;
   color: var(--secondary-color);
 }
 
@@ -172,7 +180,7 @@
 .join-us-text-con {
   width: 80%;
   text-align: center;
-  font-size: 30px;
+  font-size: 2.2vw;
   margin: auto;
   font-weight: 600;
   color: white;
@@ -228,5 +236,33 @@
 
   .home-4-image-con-2 {
     width: 100%;
+  }
+}
+
+@media screen and (max-width: 769px) {
+  .home-2-texts {
+    font-size: 3vw;
+  }
+
+  .home-services {
+    font-size: 6vw;
+  }
+
+  .home-2-con {
+    width: 30vw;
+    height: 30vw;
+  }
+
+  .who-we-are {
+    font-size: 8vw;
+    margin-top: 20px;
+  }
+
+  .home-3-text-cont {
+    font-size: 3.8vw;
+  }
+
+  .join-us-text-con {
+    font-size: 4.5vw;
   }
 }

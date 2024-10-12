@@ -5,6 +5,7 @@ import General_Image from '../assets/images/mother-helping.jpg';
 import Languages from '../assets/Data/Language.json';
 import Footer from '../components/Footer/Footer';
 import { Link } from 'react-router-dom';
+import Action from '../components/Action/Action';
 
 const LanguageService = () => {
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -84,7 +85,8 @@ const LanguageService = () => {
           </div>
         </div>
       </div>
-
+      
+      <Action />
       <Footer />
     </div>
   )
