@@ -15,6 +15,8 @@ import TeacherProfile from "./pages/TeacherProfile";
 import GetStarted from "./pages/GetStarted";
 import Confirmation from "./pages/Confirmation";
 import ContactConfirm from "./pages/ContactConfirm";
+import UserHomepage from './pages/UserHomepage';
+import SignUp from './pages/SignUp';
 
 function App() {
   useEffect(() => {
@@ -43,6 +45,15 @@ function App() {
             <Route path="/get-started" element={<GetStarted />} />
             <Route path="/confirm" element={<Confirmation />} />
             <Route path="/contact-confirm" element={<ContactConfirm />} />
+            <Route path="/signup" element={<SignUp onSignUp={function (fullName: string, username: string, email: string, password: string): void {
+              throw new Error('Function not implemented.');
+            } } />} />
+            <Route path="/success" element={<UserHomepage user={{
+              name: '',
+              email: ''
+            }} onLogout={function (): void {
+              throw new Error('Function not implemented.');
+            } } />} />
 
           </Routes>
         </BrowserRouter>

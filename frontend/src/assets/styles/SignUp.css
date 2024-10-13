@@ -1,0 +1,58 @@
+.signup-container {
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.signup-divide {
+  text-align: center;
+}
+
+.signup-head {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+}
+
+.form-control {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.form-control label {
+  display: block;
+  font-size: 1.1em;
+  margin-bottom: 8px;
+}
+
+.form-control input {
+  width: 100%;
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.button-control {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.signup-button {
+  padding: 10px 20px;
+  background-color: var(--hover-color);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+.signup-button:hover {
+  background-color: var(--secondary-color);
+}
+
+.error-message {
+  color: red;
+  font-size: 1em;
+  margin-bottom: 20px;
+}

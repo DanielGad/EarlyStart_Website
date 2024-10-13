@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import '../assets/styles/Login.css';
 import Background from '../assets/images/customer-care.jpg';
 import Footer from "../components/Footer/Footer";
+import { Link } from "react-router-dom";
 
 interface LoginFormProps {
   onLogin: (email: string, password: string) => void;
@@ -65,11 +66,20 @@ const Login: React.FC<LoginFormProps> = ({ onLogin }) => {
             </div>
 
             {error && <p className="error-text">{error}</p>}
-
-            <div className="button-control">
-              <button type="submit" className="login-button">Login</button>
-            </div>
+            <Link to="/success">
+              <div className="button-control">
+                <button type="submit" className="login-button">Login</button>
+              </div>
+            </Link>
           </form>
+
+          <div className="sign-control">
+              <div>Or</div>
+              <Link to={"/signup"}>
+              <button className="sign-up">Sign Up</button>
+              </Link>
+            <div>If you don't have an account.</div>
+            </div>
         </div>
 
         {/* Right side with image */}
