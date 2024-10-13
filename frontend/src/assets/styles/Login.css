@@ -1,6 +1,6 @@
-.login-container {
+.login-divide {
     width: 80%;
-    margin: 0 auto;
+    margin:  auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
@@ -19,8 +19,8 @@
 }
 
 .login-right {
-    width: 500px;
-    height: 500px;
+    width: 100%;
+    height: auto;
 }
 
 .login-right img {
@@ -52,7 +52,6 @@
     font-size: large;
     border-radius: 10px;
     border: 1px solid var(--secondary-color);
-    text-align: center;
 }
 
 .button-control {
@@ -73,8 +72,29 @@
     margin-top: 20px;
 }
 
+.remember-me {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    text-align: left; /* Force text-align left */
+    margin-top: 10px;
+    padding-left: 0; /* Ensure no padding is pushing it */
+    margin-left: 0;  /* Ensure no margin is pushing it */
+    gap: 10px;
+  }
+
+  
+  
+  
+
+
+
+
+
 @media screen and (max-width: 769px) {
-    .login-container {
+    .login-divide {
+        margin-top: -50px;
         grid-template-columns: 1fr;
     }
 

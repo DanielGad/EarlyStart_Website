@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Home.css';
 import Helping_Mother from '../../assets/images/mother-helping.jpg';
 import Lady_Pointing from '../../assets/images/woman-showing-copy-space.jpg';
@@ -12,6 +12,10 @@ import { Context } from '../../Context/Context';
 import Footer from '../Footer/Footer';
 
 const Home = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   const context = useContext(Context);
   if (!context) {
     throw new Error("Must be used within Context provider");

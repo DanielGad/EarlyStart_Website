@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Footer.css';
 import Early_Start_Logo from '../../assets/images/Early Start Logo Light.png';
 import Email_Icon from '../../assets/images/Early Start email.png';
@@ -9,6 +9,10 @@ import { useContext } from 'react';
 import { Context } from '../../Context/Context';
 
 const Footer = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   const context = useContext(Context);
   if (!context) {
     throw new Error("Footer must be used within a Context provider");
@@ -42,7 +46,7 @@ const Footer = () => {
         <div className='footer-contact'>
         <div className="phone-con">
           <img src={Phone_Icon} alt="Phoner Icon" width={"10%"} />
-          <div>09131759673 09011318999</div>
+          <div>09131759673, 09011318999</div>
         </div>
         <div className="whatsapp-con">
           <img src={WhatsApp_Icon} alt="WhatsApp Icon" width={"10%"}/>

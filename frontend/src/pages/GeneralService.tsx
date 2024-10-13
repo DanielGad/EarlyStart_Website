@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import '../assets/styles/GeneralService.css'
 import ArrowDropRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import General_Image from '../assets/images/mother-helping.jpg';
@@ -7,13 +7,12 @@ import { Link } from 'react-router-dom';
 import Action from "../components/Action/Action";
 
 const GeneralService = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
-  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    window.scrollTo(0, 0)
-  }
-  
   return (
-    <div className="gs-container" onClick={handleClick}>
+    <div className="gs-container">
       <div className="gs-row-1">
         <div className="gs-row-1-col-1">
           <div className="gs-row-1-col-1-htext">
@@ -40,8 +39,8 @@ const GeneralService = () => {
       </div>
 
       <div className="lw-row-2">
-        <div className="lw-row-2-col-1">
-          <img src={General_Image} alt="" width={"50%"}/>
+        <div className="lw-row-2-col-1" style={{width: '35%'}}>
+          <img src={General_Image} alt="" width={"30%"} />
         </div>
         <div className="lw-row-2-col-2">
           <div className="lw-row-2-col-2-htext">

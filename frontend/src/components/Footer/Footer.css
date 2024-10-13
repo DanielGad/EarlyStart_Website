@@ -121,15 +121,21 @@
 }
 
 @media screen and (max-width: 769px) {
+
   .top-section-container {
     flex-direction: column;
     gap: 50px;
   }
 
   .footer-left {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 40% 60%;
     width: 100%;
+    margin-bottom: -20px;
+  }
+
+  .minds {
+    font-size: 3vw;
   }
 
   .footer-middle {
@@ -138,18 +144,30 @@
     gap: 50px;
     justify-content: center;
     font-size: 3vw;
+    margin-bottom: -20px;
   }
 
   .footer-right {
     display: grid;
     width: 100%;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 30% 70%;
     justify-content: space-between;
     font-size: 2.5vw;
   }
 
   .footer-lower-section {
     font-size: 2.5vw;
+    padding: 15px 0;
   }
+
+  .footer-right-text {
+    font-size: 3vw;
+  }
+
+  .footer-contact {
+    font-size: 3.5vw;
+    gap: 10px;
+  }
+
 
 }

@@ -2,6 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: -40px;
   padding: 70px 0;
   padding-left: 10%;
   padding-right: 10%;
@@ -17,12 +18,12 @@
 }
 
 .lw-row-1-col-1-head {
-  font-size: 35px;
+  font-size: 3vw;
   font-weight: bold;
 }
 
 .lw-row-1-col-1-text {
-  font-size: 15px;
+  font-size: 1.5vw;
   width: 70%;
 }
 
@@ -41,10 +42,11 @@
 
 .lw-row-1-col-2-image-1 {
   position: absolute;
-  width: 400px;
-  height: 200px;
+  width: 25vw;
+  height: 12vw;
   border-radius: 10px;
-  top: 130px;
+  right: 190px;
+  top: 110px;
 }
 
 .lw-row-1-col-2-image-1 img {
@@ -56,11 +58,11 @@
 
 .lw-row-1-col-2-image-2 {
   position: absolute;
-  width: 300px;
-  height: 150px;
+  width: 20vw;
+  height: 10vw;
   border-radius: 10px;
-  top: 330px;
-  right: 220px;
+  top: 290px;
+  right: 230px;
 }
 
 .lw-row-1-col-2-image-2 img {
@@ -81,8 +83,8 @@
 
 .lw-row-2-col-1 {
   width: 50%;
-  height: 350px;
-  border: 10px solid var(--primary-color);
+  height: auto;
+  border: 5px solid var(--primary-color);
   border-radius: 10px;
 }
 
@@ -99,13 +101,14 @@
 }
 
 .lw-row-2-col-2-htext {
-  font-size: 30px;
+  font-size: 2.3vw;
   font-weight: bold;
   color: var(--primary-color);
 }
 
 .lw-row-2-col-2-text {
-  font-size: 15px;
+  font-size: 1.2vw;
+  font-weight: 500;
 }
 
 .lw-row-2-col-2-text p ul, li {
@@ -114,11 +117,24 @@
 
 @media screen and (max-width: 769px) {
   .lw-row-1 {
+    padding-top: 30px;
+  }
+
+  .lw-row-1 {
     flex-direction: column;
+    align-items: center;
   }
 
   .lw-row-1-col-1, .lw-row-1-col-1-head, .lw-row-1-col-1-text {
     width: 100%;
+  }
+
+  .lw-row-1-col-1-head {
+    font-size: 7.5vw;
+  }
+
+  .lw-row-1-col-1-text {
+    font-size: 4vw;
   }
 
   .lw-row-1-col-2-image-2 {
@@ -130,12 +146,11 @@
   }
 
   .lw-row-1-col-2-image-1 {
-    display: flex;
-    flex-direction: column;
     position: relative;
     width: 100%;
-    border-radius: 10px;
+    height: 100%;
     top: 0;
+    right: 0;
     margin-top: 30px; 
     margin-bottom: -30px; 
   }
@@ -150,5 +165,13 @@
 
   .lw-row-2-col-2 {
     width: 100%;
+  }
+
+  .lw-row-2-col-2-htext {
+    font-size: 6.5vw;
+  }
+
+  .lw-row-2-col-2-text {
+    font-size: 3.8vw;
   }
 }

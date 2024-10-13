@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Tutor_Data from '../assets/Data/Tutor.json';
 import ArrowDropRightIcon from '@mui/icons-material/KeyboardArrowRight';
@@ -21,14 +21,14 @@ interface Tutor {
 }
 
 const TeacherProfile: React.FC = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   const { id } = useParams<{ id: string }>();
 
   // Ensure that id exists and is a valid string before parsing it
   const tutor = id ? Tutor_Data.find((t: Tutor) => t.id === parseInt(id, 10)) : undefined;
-
-  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    window.scrollTo(0, 0);
-  };
 
   // Handle the case where tutor is not found or id is not provided
   if (!tutor) {
@@ -36,7 +36,7 @@ const TeacherProfile: React.FC = () => {
   }
 
   return (
-    <div className="tp-container" onClick={handleClick}>
+    <div className="tp-container">
       <div className="tp-row-1">
         <div className="tp-image-con">
           <img src={tutor.Image} alt={`Profile of ${tutor.Name}`} width="20%" />

@@ -4,9 +4,10 @@
 
 .lg-row-1 {
   display: flex;
+  margin-top: -40px;
   background-color: var(--primary-color);
-  padding: 80px 10% 80px 10%;
-  clip-path: polygon(0 0%, 40% 0, 60% 100%, 0% 100%);
+  padding: 60px 10% 60px 10%;
+  clip-path: polygon(0 0%, 50% 0, 70% 100%, 0% 100%);
 }
 
 .lg-row-1-col-1 {
@@ -21,14 +22,20 @@
 
 .lg-row-1-col-1-htext {
   width: 70%;
-  font-size: 35px;
+  font-size: 2.6vw;
   font-weight: bold;
+}
+
+.lg-row-1-col-1-inner {
+  font-size: 1.5vw;
+  width: 80%;
 }
 
 .lg-row-1-col-1 button {
   padding: 3% 10%;
   border: none;
   border-radius: 10px;
+  font-size: larger;
   font-weight: bold;
   color: var(--primary-color);
   cursor: pointer;
@@ -36,10 +43,10 @@
 
 .lg-row-1-col-2 {
   position: absolute;
-  width: 800px;
-  height: 403px;
+  width: 900px;
+  height: 410px;
   background-color: aqua;
-  top: 120px;
+  top: 90px;
   right: 20px;
 }
 
@@ -52,7 +59,7 @@
 
 .lg-row-2-head {
   padding: 30px 0% 30px 10%;
-  font-size: 30px;
+  font-size: 2.5vw;
   font-weight: bold;
   color: var(--primary-color);
 }
@@ -76,17 +83,16 @@
 }
 
 .lg-grid-1-col-1-htext {
-  font-size: 25px;
+  font-size: 2vw;
   font-weight: bold;
   color: var(--primary-color);
-  width: 95%;
-  margin: 10px 10px 10px 10px;
-  margin-left: 10px;
+  width: 100%;
+  margin: 10px 0;
 }
 
 .lg-grid-1-col-1-text {
-  font-size: 15px;
-  width: 90%;
+  font-size: 1.2vw;
+  width: 100%;
   margin: auto;
   margin-bottom: -100px;
 }
@@ -97,7 +103,28 @@
     flex-direction: column;
     background-color: var(--primary-color);
     padding: 50px;
+    padding-top: 10px;
     clip-path: polygon(0 0%, 100% 0, 100% 100%, 0% 100%);
+  }
+
+  .lg-row-1-col-1-htext {
+    font-size: 6.5vw;
+  }
+
+  .lg-row-1-col-1-inner {
+    font-size: 3.5vw;
+  }
+
+  .lg-row-2-head {
+    font-size: 6.5vw;
+  }
+
+  .lg-grid-1-col-1-htext {
+    font-size: 6.5vw;
+  }
+
+  .lg-grid-1-col-1-text {
+    font-size: 3.8vw;
   }
 
   .lg-row-1-col-2 {

@@ -1,9 +1,12 @@
-import React from "react"
+import React, { useEffect } from "react"
 import '../assets/styles/Confirmation.css';
 import Tick from '../assets/images/tick.png';
 import { Link } from 'react-router-dom';
 
 const Confirmation = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className='confirm-container'>
       <img src={Tick} alt="green tick" width={"200px"}/>

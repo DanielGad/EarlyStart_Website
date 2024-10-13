@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Home from "./components/Homepage/Home";
 import Navbar from "./components/Navbar/Navbar";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -17,7 +17,9 @@ import Confirmation from "./pages/Confirmation";
 import ContactConfirm from "./pages/ContactConfirm";
 
 function App() {
-  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>

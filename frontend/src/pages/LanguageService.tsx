@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../assets/styles/Languages.css';
 import ArrowDropRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import General_Image from '../assets/images/mother-helping.jpg';
@@ -8,11 +8,12 @@ import { Link } from 'react-router-dom';
 import Action from '../components/Action/Action';
 
 const LanguageService = () => {
-  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    window.scrollTo(0, 0)
-  }
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   return (
-    <div className="lg-container" onClick={handleClick}>
+    <div className="lg-container">
       <div className="lg-row-1-col-2">
           <img src={General_Image} alt="" width={"50%"}/>
         </div>

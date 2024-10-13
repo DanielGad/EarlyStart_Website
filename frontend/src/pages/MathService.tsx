@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../assets/styles/MathService.css';
 import ArrowDropRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import General_Image from '../assets/images/mother-helping.jpg';
@@ -7,11 +7,12 @@ import { Link } from 'react-router-dom';
 import Action from '../components/Action/Action';
 
 const MathService = () => {
-  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    window.scrollTo(0, 0)
-  }
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   return (
-    <div className="math-service-container" onClick={handleClick}>
+    <div className="math-service-container">
       <div className="math-row-1">
         <div className="column-1-left">
           <div className="head-text">Mastering Math Made Easy Achieve More, Learn Faster, and Excel!</div>

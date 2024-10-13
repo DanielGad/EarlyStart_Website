@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import '../assets/styles/HomeworkService.css';
 import ArrowDropRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import General_Image from '../assets/images/mother-helping.jpg';
@@ -7,11 +7,12 @@ import { Link } from 'react-router-dom';
 import Action from "../components/Action/Action";
 
 const HomeworkService = () => {
-  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    window.scrollTo(0, 0)
-  }
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   return (
-    <div className="homework-container" onClick={handleClick}>
+    <div className="homework-container">
       <div className="homework-row-1">
         <div className="circle">00</div>
         <div className="circle-2">00</div>

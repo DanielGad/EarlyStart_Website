@@ -12,6 +12,10 @@ import PropTypes from 'prop-types';
 
 
 const Navbar = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   const context = useContext(Context);
   if (!context) {
     throw new Error("Must be used within a Context provider");
@@ -53,6 +57,7 @@ const Navbar = () => {
   }
 
   const NavLink:React.FC<NavLinkProps> = ({ to, label, menuKey, setMenu, setIsMenuOpen, menu }) => (
+  
     <Link
       to={to}
       style={{ color: menu === menuKey ? 'rgb(124,70,164)' : '' }}
@@ -95,9 +100,6 @@ const Navbar = () => {
     label: PropTypes.any.isRequired,
     closeDropdowns: PropTypes.any.isRequired
   }
-
-  
-
 
   return (
     <div className="main-navbar-container">

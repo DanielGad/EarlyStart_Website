@@ -1,9 +1,14 @@
-import React from "react"
+import React, { useEffect } from "react"
 import '../assets/styles/CallUs.css';
 import Background from '../assets/images/customer-care.jpg';
 import { Label } from "@mui/icons-material";
 import Footer from "../components/Footer/Footer";
+
 const CallUs = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   return (
       <>
       <div className="get-s-container">

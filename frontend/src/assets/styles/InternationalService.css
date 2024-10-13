@@ -1,5 +1,6 @@
 .is-row-1 {
   display: flex;
+  margin-top: -40px;
   background-color: var(--primary-color);
   padding: 50px 10% 50px 10%;
   color: white;
@@ -13,13 +14,13 @@
 }
 
 .is-row-1-col-1-htext {
-  font-size: 35px;
+  font-size: 2.5vw;
   width: 80%;
   font-weight: bold;
 }
 
 .is-row-1-col-1-inner {
-  font-size: 15px;
+  font-size: 1.2vw;
   width: 70%;
 }
 
@@ -29,16 +30,17 @@
   border: none;
   color: var(--primary-color);
   font-weight: bold;
+  font-size: larger;
   cursor: pointer;
 }
 
 .is-row-1-col-2 {
   position: absolute;
-  top: 70px;
+  top: 75px;
   right: 300px;
   width: 350px;
   height: 350px;
-  transform: rotate(-25deg);
+  transform: rotate(-15deg);
 }
 
 .is-row-1-col-2 img {
@@ -65,5 +67,13 @@
     width: 100%;
     transform: rotate(-0deg);
     margin-top: 30px;
+  }
+
+  .is-row-1-col-1-htext {
+    font-size: 6.5vw;
+  }
+
+  .is-row-1-col-1-inner {
+    font-size: 3.5vw;
   }
 }

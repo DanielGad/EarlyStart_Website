@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import '../assets/styles/InternationalService.css';
 import ArrowDropRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import General_Image from '../assets/images/mother-helping.jpg';
@@ -7,11 +7,12 @@ import { Link } from 'react-router-dom';
 import Action from "../components/Action/Action";
 
 const InternationalService = () => {
-  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    window.scrollTo(0, 0)
-  }
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   return (
-    <div className="is-container" onClick={handleClick}>
+    <div className="is-container">
       <div className="is-row-1">
         <div className="is-row-1-col-1">
           <div className="is-row-1-col-1-htext">

@@ -1,5 +1,6 @@
 .gs-row-1 {
   display: flex;
+  margin-top: -40px;
   background-color: var(--primary-color);
   padding: 40px 10% 40px 10%;
   color: white;
@@ -13,13 +14,13 @@
 }
 
 .gs-row-1-col-1-htext {
-  font-size: 35px;
+  font-size: 2.5vw;
   width: 90%;
   font-weight: bold;
 }
 
 .gs-row-1-col-1-inner {
-  font-size: 15px;
+  font-size: 1.2vw;
   width: 70%;
 }
 
@@ -27,6 +28,7 @@
   padding: 3% 10%;
   border-radius: 10px;
   border: none;
+  font-size: larger;
   color: var(--primary-color);
   font-weight: bold;
   cursor: pointer;
@@ -34,7 +36,7 @@
 
 .gs-image-1 {
   position: absolute;
-  top: 140px;
+  top: 120px;
   width: 200px;
   height: 200px;
 }
@@ -48,7 +50,7 @@
 
 .gs-image-2 {
   position: absolute;
-  top: 250px;
+  top: 220px;
   right: 270px;
   width: 200px;
   height: 200px;
@@ -65,6 +67,14 @@
   .gs-row-1 {
     flex-direction: column;
     padding: 30px;
+  }
+
+  .gs-row-1-col-1-htext {
+    font-size: 7vw;
+  }
+
+  .gs-row-1-col-1-inner {
+    font-size: 3.5vw;
   }
 
   .gs-row-1-col-1, .gs-row-1-col-1-htext, .gs-row-1-col-1-inner {

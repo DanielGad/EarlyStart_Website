@@ -9,7 +9,7 @@
   position: fixed;
   top: 0;
   justify-content: space-between;
-  padding: 20px 0px;
+  padding: 5px 0px;
   padding-left: 10%;
   padding-right: 10%;
   align-items: center;
@@ -48,6 +48,7 @@
   gap: 30px;
   color: var(--secondary-color);
   font-weight: bold;
+  font-size: 1.1vw;
 }
 
 .right-nav-container div {
@@ -70,12 +71,14 @@
 
 .menu-container {
   width: 30px;
+
 }
 
 .menu-icon, .close-icon {
   color: var(--primary-color);
   font-size: 30px;
   cursor: pointer;
+  margin-top: -10px;
 }
 
 a {
@@ -151,6 +154,7 @@ hr {
     top: 0;
     left: 0;
     font-weight: 500;
+    margin-top: -15px;
   }
 
   .navbar-container {
@@ -178,26 +182,6 @@ hr {
     flex-direction: column;
     gap: 20px;
   }
-
-  /* .right-nav-container {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    width: 100%;
-    background-color: var(--light-color);
-    left: 0;
-    top: 0;
-    padding-left: 30px;
-    padding-bottom: 20px;
-    padding-top: 100px;
-  }
-
-  .logo-input-screen {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 70%;
-  }  */
 
   .middle-nav-container {
     position: absolute;
@@ -239,7 +223,7 @@ hr {
   /* Hide the middle-nav-container (search bar and mic) on smaller screens */
 }
 
-@media (max-width: 700px) {
+@media (max-width: 769px) {
   .middle-nav-container-down {
     width: 250px;
     display: flex;

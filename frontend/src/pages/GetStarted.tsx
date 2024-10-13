@@ -1,10 +1,14 @@
-import React from "react"
+import React, { useEffect } from "react"
 import '../assets/styles/GetStarted.css';
 import Footer from "../components/Footer/Footer";
 import { Link } from "react-router-dom";
 import ArrowDropRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 const GetStarted = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   return (
       <>
       <div className="background-main">

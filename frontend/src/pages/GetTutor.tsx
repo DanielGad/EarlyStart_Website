@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import '../assets/styles/GetTutor.css';
 import Tutors from "../assets/Data/Tutor.json";
 import ArrowDropRightIcon from '@mui/icons-material/KeyboardArrowRight';
@@ -7,11 +7,12 @@ import { Link } from 'react-router-dom';
 import Action from "../components/Action/Action";
 
 const GetTutor = () => {
-  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    window.scrollTo(0, 0)
-  }
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   return (
-    <div className="gt-container" onClick={handleClick}>
+    <div className="gt-container">
       <div className="gt-htext">
         Meet Our Teachers
       </div>

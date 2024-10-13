@@ -16,26 +16,19 @@
   gap: 20px;
 }
 
-@media screen and (max-width: 769px) {
-  .action-divide {
-    flex-direction: column;
-  }
 
-  .action-container h2 {
-    margin-bottom: 0;
-  }
-}
 
 .action-left {
   width: 100%;
 }
 
 .steps {
-  font-size: 26px;
+  font-size: 2vw;
   font-weight: 700;
 }
 
 .steps-sub {
+  font-size: 1.2vw;
   font-weight: 500;
   color: var(--secondary-color);
   margin-top: -20px;
@@ -123,4 +116,22 @@
   position: absolute;
   top: 50px;
   right: 100px;
+}
+
+@media screen and (max-width: 769px) {
+  .action-divide {
+    flex-direction: column;
+  }
+
+  .action-container h2 {
+    margin-bottom: 0;
+  }
+
+  .steps {
+    font-size: 5.3vw;
+  }
+
+  .steps-sub {
+    font-size: 3.5vw;
+  }
 }

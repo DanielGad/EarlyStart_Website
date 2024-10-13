@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import '../Action/Action.css'
 import Step1_Image from '../../assets/images/shape1.png'
 import Step2_Image from '../../assets/images/shape2.png'
@@ -10,6 +10,10 @@ import Arrow3 from '../../assets/images/curve3.png'
 import Steps from '../../assets/images/Early Start Steps.png'
 
 const Action = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   return (
     <div className='action-container'>
       <h2>How EarlyStart E-Tutors Works</h2>
@@ -19,11 +23,11 @@ const Action = () => {
           <h3 className='steps'>1. Get Started with a Click</h3>
           <p className='steps-sub'>Begin your journey by visiting our website and signing up. It's quick and easy</p>
           <h3 className='steps'>2. Specify Your Child's Needs</h3>
-          <p className='steps-sub'>Begin your journey by visiting our website and signing up. It's quick and easy. Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, obcaecati?</p>
+          <p className='steps-sub'>Input the area where your child requires tutoring, whether it's Number Work, Quantitative Reasoning, Mathematics, Letter Work, Word Formation, Phonetics, Languages and so on.</p>
           <h3 className='steps'>3. Choose Your Schedule</h3>
-          <p className='steps-sub'>Begin your journey by visiting our website and signing up. It's quick and easy. Lorem ipsum dolor sit amet.</p>
+          <p className='steps-sub'>Select your preferred schedule time, either weekdays or weekends, to fit your family's routine.</p>
           <h3 className='steps'>4. Get Paired with a Tutor</h3>
-          <p className='steps-sub'>Begin your journey by visiting our website and signing up. It's quick and easy. Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, mollitia!</p>
+          <p className='steps-sub'>We will match your child with a qualified tutor who specializes in the chosen subject area and fits your schedule.</p>
         </div>
 
         <div className="action-right">
