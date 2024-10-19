@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Home from "./components/Homepage/Home";
 import Navbar from "./components/Navbar/Navbar";
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';  // No need for BrowserRouter here
 import MathService from "./pages/MathService";
 import HomeworkService from "./pages/HomeworkService";
 import LetterworkService from "./pages/LetterworkService";
@@ -17,49 +17,65 @@ import Confirmation from "./pages/Confirmation";
 import ContactConfirm from "./pages/ContactConfirm";
 import UserHomepage from './pages/UserHomepage';
 import SignUp from './pages/SignUp';
+import { useNavigate } from "react-router-dom";
+import { Logout } from '@mui/icons-material';
+import AdminDashboard from './pages/AdminDashboard';
+import UserDashboard from './pages/AdminDashboard';
+import ProfilePage from './pages/ProfilePage';
+
+interface User {
+  email: string;
+  // Add any other fields if necessary, e.g., fullName: string;
+}
 
 function App() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  const [user, setUser] = useState<User | null>(null);
+  const navigate = useNavigate();
+
+  const handleLogin = (email: string, password: string) => {
+    // Update the user state with the logged-in user's information
+    setUser({ email });
+
+    // Redirect after successful login
+    navigate("/success", { state: { user: { email } } });
+  };
+
+  const handleLogout = () => {
+    setUser(null);  // Clear the user state
+  };
+
   return (
     <>
       <div className="app">
-        <BrowserRouter>
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/math" element={<MathService />} />
-            <Route path="/homework" element={<HomeworkService />} />
-            <Route path="/letterwork" element={<LetterworkService />} />
-            <Route path="/language" element={<LanguageService />} />
-            <Route path="/international" element={<InternationalService />} />
-            <Route path="/general" element={<GeneralService />} />
-            <Route path="/call" element={<CallUs />} />
-            <Route path="/login" element={<Login onLogin={function (email: string, password: string): void {
-              throw new Error('Function not implemented.');
-            } } />} />
-            <Route path="/get-tutor" element={<GetTutor />} />
-            <Route path="/profile/:id" element={<TeacherProfile />} />
-            <Route path="/get-started" element={<GetStarted />} />
-            <Route path="/confirm" element={<Confirmation />} />
-            <Route path="/contact-confirm" element={<ContactConfirm />} />
-            <Route path="/signup" element={<SignUp onSignUp={function (fullName: string, username: string, email: string, password: string): void {
-              throw new Error('Function not implemented.');
-            } } />} />
-            <Route path="/success" element={<UserHomepage user={{
-              name: '',
-              email: ''
-            }} onLogout={function (): void {
-              throw new Error('Function not implemented.');
-            } } />} />
-
-          </Routes>
-        </BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/math" element={<MathService />} />
+          <Route path="/homework" element={<HomeworkService />} />
+          <Route path="/letterwork" element={<LetterworkService />} />
+          <Route path="/language" element={<LanguageService />} />
+          <Route path="/international" element={<InternationalService />} />
+          <Route path="/general" element={<GeneralService />} />
+          <Route path="/call" element={<CallUs />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/get-tutor" element={<GetTutor />} />
+          <Route path="/profile/:id" element={<TeacherProfile />} />
+          <Route path="/get-started" element={<GetStarted />} />
+          <Route path="/confirm" element={<Confirmation />} />
+          <Route path="/contact-confirm" element={<ContactConfirm />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/success" element={<UserHomepage />} />
+          <Route path="/admin-dashboard" element={<AdminDashboard />} />
+        {/* <Route path="/user-dashboard" element={<UserDashboard />} /> */}
+        <Route path="/profile" element={<ProfilePage />} />
+        </Routes>
       </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

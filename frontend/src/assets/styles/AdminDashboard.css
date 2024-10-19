@@ -1,0 +1,91 @@
+/* AdminDashboard.css */
+
+.admin-dashboard-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.admin-navbar {
+  background-color: #f8f9fa;
+  padding: 10px 20px;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+}
+
+.nav-button,
+.logout-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.nav-button:hover,
+.logout-button:hover {
+  background-color: #0056b3;
+}
+
+.admin-dashboard {
+  margin-top: 20px;
+}
+
+.user-details {
+  background-color: #e9ecef;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.admin-actions {
+  margin-top: 20px;
+}
+
+.admin-action {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.email-input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+}
+
+.admin-button {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.admin-button:hover {
+  background-color: #218838;
+}
+
+.blog-post {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  padding: 15px;
+  margin-top: 10px;
+}
+
+.loading,
+.error-message {
+  text-align: center;
+  font-size: 1.5em;
+  margin-top: 20px;
+  color: #dc3545;
+}

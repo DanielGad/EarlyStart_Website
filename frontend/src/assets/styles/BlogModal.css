@@ -1,0 +1,73 @@
+/* Modal Title Styling */
+.modal-title {
+  margin-bottom: 15px; /* Space below the title */
+}
+
+/* Form Group Styling */
+.form-group {
+  margin-bottom: 15px; /* Space between form elements */
+}
+
+/* Input and Textarea Styling */
+.form-input,
+.form-textarea {
+  width: 100%; /* Full width */
+  padding: 10px; /* Inner padding */
+  border: 1px solid #ccc; /* Light gray border */
+  border-radius: 4px; /* Rounded corners */
+  font-size: 16px; /* Font size */
+}
+
+/* Submit Button Styling */
+.submit-button {
+  background-color: #007bff; /* Primary button color */
+  color: white; /* White text */
+  padding: 10px 15px; /* Padding for the button */
+  border: none; /* No border */
+  border-radius: 4px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor */
+  font-size: 16px; /* Font size */
+  transition: background-color 0.3s; /* Smooth transition */
+}
+
+/* Submit Button Hover Effect */
+.submit-button:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+}
+
+/* BlogModal.css */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it overlays above other elements */
+}
+
+.modal-content {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  width: 400px; /* Width of the modal */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.close-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.close-button:hover {
+  background-color: #c82333;
+}

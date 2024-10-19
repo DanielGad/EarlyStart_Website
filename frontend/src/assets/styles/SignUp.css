@@ -56,3 +56,9 @@
   font-size: 1em;
   margin-bottom: 20px;
 }
+
+.success-message {
+  color: green;
+  font-size: 1em;
+  margin-bottom: 20px;
+}
