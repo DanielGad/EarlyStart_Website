@@ -13,27 +13,36 @@ import {
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import "../assets/styles/AdminDashboard.css";
 import BlogModal from "./BlogModal";
+import AdminAction from "./AdminAction";
 
 const AdminDashboard: React.FC = () => {
   const [username, setUsername] = useState<string>("");
   const [userData, setUserData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [targetEmail, setTargetEmail] = useState<string>("");
-  const [targetEmailStatus, setTargetEmailStatus] = useState<string>("");
   const auth = getAuth();
   const db = getFirestore();
   const navigate = useNavigate();
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  // Separate state for each modal
+  const [isBlogModalOpen, setIsBlogModalOpen] = useState(false);
+  const [isAdminActionOpen, setIsAdminActionOpen] = useState(false);
   const [blogs, setBlogs] = useState<any[]>([]);
 
-  const openModal = () => {
-    setIsModalOpen(true);
+  const openBlogModal = () => {
+    setIsBlogModalOpen(true);
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
+  const closeBlogModal = () => {
+    setIsBlogModalOpen(false);
+  };
+
+  const openAdminActionModal = () => {
+    setIsAdminActionOpen(true);
+  };
+
+  const closeAdminActionModal = () => {
+    setIsAdminActionOpen(false);
   };
 
   const fetchUserData = async (uid: string) => {
@@ -77,51 +86,6 @@ const AdminDashboard: React.FC = () => {
     }
   };
 
-  const makeAdmin = async (email: string) => {
-    try {
-      const usersCollectionRef = collection(db, "EarlyStartData");
-      const userQuery = query(usersCollectionRef, where("email", "==", email));
-      const querySnapshot = await getDocs(userQuery);
-
-      if (!querySnapshot.empty) {
-        const userDoc = querySnapshot.docs[0];
-        await updateDoc(doc(db, "EarlyStartData", userDoc.id), {
-          userRole: "admin",
-        });
-        alert(`${email} has been made an admin.`);
-        setTargetEmail("");
-      } else {
-        alert("User not found.");
-        setTargetEmail("");
-      }
-    } catch (error) {
-      console.error("Error making user admin:", error);
-    }
-  };
-
-  const toggleUserStatus = async (email: string) => {
-    try {
-      const usersCollectionRef = collection(db, "EarlyStartData");
-      const userQuery = query(usersCollectionRef, where("email", "==", email));
-      const querySnapshot = await getDocs(userQuery);
-
-      if (!querySnapshot.empty) {
-        const userDoc = querySnapshot.docs[0];
-        const currentStatus = userDoc.data().status || "active";
-        const newStatus = currentStatus === "active" ? "disabled" : "active";
-
-        await updateDoc(doc(db, "EarlyStartData", userDoc.id), { status: newStatus });
-        alert(`${email} is now ${newStatus}.`);
-        setTargetEmailStatus("");
-      } else {
-        alert("User not found.");
-        setTargetEmailStatus("");
-      }
-    } catch (error) {
-      console.error("Error toggling user status:", error);
-    }
-  };
-
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
@@ -147,20 +111,45 @@ const AdminDashboard: React.FC = () => {
     return <div className="error-message">{errorMessage}</div>;
   }
 
+  const formatDateWithSuffix = (date: Date) => {
+    const day = date.getDate();
+    const month = date.toLocaleString("default", { month: "long" });
+    const year = date.getFullYear();
+  
+    // Determine the correct suffix for the day
+    const getDaySuffix = (day: number) => {
+      if (day > 3 && day < 21) return "th"; // Special case for 11th to 20th
+      switch (day % 10) {
+        case 1: return "st";
+        case 2: return "nd";
+        case 3: return "rd";
+        default: return "th";
+      }
+    };
+  
+    return `${day}${getDaySuffix(day)} ${month} ${year}`;
+  };
+
   return (
     <div className="admin-dashboard-container">
       <nav className="admin-navbar">
         <ul className="nav-links">
           <li>
-            <Link to="" onClick={openModal} className="nav-button">Create Blog</Link>
+            <Link to="" onClick={openBlogModal} className="nav-link">Create Blog</Link>
           </li>
-          <BlogModal isOpen={isModalOpen} onClose={closeModal} />
+          {/* Blog modal controlled by its own state */}
+          <BlogModal isOpen={isBlogModalOpen} onClose={closeBlogModal} />
+
+          <li>
+            <Link to="" className="nav-link" onClick={openAdminActionModal}>Admin Actions</Link>
+          </li>
+          {/* AdminAction modal controlled by its own state */}
+          <AdminAction isOpen={isAdminActionOpen} onClose={closeAdminActionModal} />
+          
           <li>
             <Link to="/send-message" className="nav-link">Send Messages</Link>
           </li>
-          <li>
-            <Link to="/make-admin" className="nav-link">Make Admin</Link>
-          </li>
+          
           <li>
             <Link to="/manage-accounts" className="nav-link">Manage Accounts</Link>
           </li>
@@ -174,7 +163,7 @@ const AdminDashboard: React.FC = () => {
       </nav>
 
       <div className="admin-dashboard">
-        <h2>Welcome Admin, {userData.username}!</h2>
+        <h2>Welcome Admin, {userData ? userData.username : "Loading..."}!</h2>
         <p>Manage users, create blogs, and send messages.</p>
 
         {userData && (
@@ -188,46 +177,18 @@ const AdminDashboard: React.FC = () => {
         )}
       </div>
 
-      <div className="admin-actions">
-        <h3>Admin Actions</h3>
-
-        {/* Make Admin Section */}
-        <div className="admin-action">
-          <input
-            type="email"
-            placeholder="Enter user email to make admin"
-            value={targetEmail}
-            onChange={(e) => setTargetEmail(e.target.value)}
-            className="email-input"
-          />
-          <button onClick={() => makeAdmin(targetEmail)} className="admin-button">Make Admin</button>
-        </div>
-
-        {/* Enable/Disable User Section */}
-        <div className="admin-action">
-          <input
-            type="email"
-            placeholder="Enter user email to enable/disable"
-            value={targetEmailStatus}
-            onChange={(e) => setTargetEmailStatus(e.target.value)}
-            className="email-input"
-          />
-          <button onClick={() => toggleUserStatus(targetEmailStatus)} className="admin-button">Toggle User Status</button>
-        </div>
-
-        <h2>Latest Blog Posts</h2>
-        {blogs.length === 0 ? (
-          <p>No blogs available.</p>
-        ) : (
-          blogs.map((blog) => (
-            <div key={blog.id} className="blog-post">
-              <h3>{blog.title}</h3>
-              <p>{blog.content}</p>
-              <span>{blog.createdAt.toDate().toLocaleDateString()}</span>
-            </div>
-          ))
-        )}
-      </div>
+      <h2>Latest Blog Posts</h2>
+      {blogs.length === 0 ? (
+        <p>No blogs available.</p>
+      ) : (
+        blogs.map((blog) => (
+          <div key={blog.id} className="blog-post">
+            <h3>{blog.title}</h3>
+            <p>{blog.content}</p>
+            <span>{formatDateWithSuffix(blog.createdAt.toDate())}</span>
+          </div>
+        ))
+      )}
     </div>
   );
 };

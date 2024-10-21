@@ -66,6 +66,7 @@ const BlogModal: React.FC<BlogModalProps> = ({ isOpen, onClose }) => {
               className="form-textarea"
               id="content"
               value={content}
+              rows={5}
               onChange={(e) => setContent(e.target.value)}
               required
             ></textarea>

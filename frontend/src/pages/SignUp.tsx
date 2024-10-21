@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../assets/styles/SignUp.css";
 import { db } from "../firebase"; // Firebase Firestore instance
 import { collection, addDoc, query, where, getDocs } from "firebase/firestore"; // Firestore methods
 import bcrypt from 'bcryptjs';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"; // Firebase auth
 import { useNavigate } from "react-router-dom";
+import Modal from "./Modal";
 
 const SignUp = () => {
   const [fullName, setFullName] = useState<string>("");
@@ -12,18 +13,27 @@ const SignUp = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
-  const [error, setError] = useState<string>("");
-  const [success, setSuccess] = useState<string>("");
   const [isOnline, setIsOnline] = useState<boolean>(navigator.onLine);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+  const [modalTitle, setModalTitle] = useState("");
+  const [buttonLabel, setButtonLabel] = useState("");
 
   const auth = getAuth();
   const navigate = useNavigate();
 
+  const handleContinue = () => {
+    setShowModal(false);
+    if (modalTitle === "Success!") {
+      navigate("/login"); // Navigate to login on success
+    }
+  };
+
   const validatePassword = (password: string) => {
-    const hasUppercase = /[A-Z]/.test(password); // Check for uppercase letter
-    const hasNumber = /\d/.test(password); // Check for number
-    const isValidLength = password.length >= 6; // Check for length of 6 or more characters
+    const hasUppercase = /[A-Z]/.test(password);
+    const hasNumber = /\d/.test(password);
+    const isValidLength = password.length >= 6;
 
     if (!isValidLength) {
       return "Password must be at least 6 characters long.";
@@ -35,13 +45,6 @@ const SignUp = () => {
       return "Password must contain at least one number.";
     }
     return "";
-  };
-
-  const clearErrorAfterDelay = () => {
-    setTimeout(() => {
-      setError("");
-      setSuccess("");
-    }, 1500);
   };
 
   const checkUserExists = async (username: string, email: string) => {
@@ -62,81 +65,105 @@ const SignUp = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
+    let errorMessage = "";
 
     const passwordError = validatePassword(password);
     if (passwordError) {
-      setError(passwordError);
-      setIsLoading(false);
-      clearErrorAfterDelay();
-      return;
+      errorMessage += passwordError + "\n";
     }
 
     if (password !== confirmPassword) {
-      setError("Passwords do not match");
-      setIsLoading(false);
-      clearErrorAfterDelay();
-      return;
+      errorMessage += "Passwords do not match.\n";
     }
 
     if (fullName === "" || username === "" || email === "" || password === "") {
-      setError("Please fill in all fields");
+      errorMessage += "Please fill in all fields.\n";
+    }
+
+    if (errorMessage) {
+      setModalTitle("Error");
+      setModalMessage(errorMessage.trim());
+      setButtonLabel("Close");
+      setShowModal(true);
       setIsLoading(false);
-      clearErrorAfterDelay();
       return;
     }
 
-    setIsLoading(true);
-
     try {
-      // Step 1: Check if username or email already exists
       const { usernameTaken, emailExists } = await checkUserExists(username, email);
-      
+
       if (usernameTaken) {
-        setError("Username already taken, please use a different username.");
+        setModalTitle("Username Taken");
+        setModalMessage("Username already taken, please use a different username.");
+        setButtonLabel("Close");
+        setShowModal(true);
         setIsLoading(false);
-        clearErrorAfterDelay();
         return;
       }
 
       if (emailExists) {
-        setError("Email already exists, kindly use a different email.");
+        setModalTitle("Email Exists");
+        setModalMessage("Email already exists, kindly use a different email.");
+        setButtonLabel("Close");
+        setShowModal(true);
         setIsLoading(false);
-        clearErrorAfterDelay();
         return;
       }
 
-      // Step 2: Authenticate the user using Firebase Authentication
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
-      // Step 3: Hash the password before saving to Firestore (optional, since password is handled by Firebase Auth)
-      const hashedPassword = bcrypt.hashSync(password, 10); // Hash the password using bcryptjs
+      const hashedPassword = bcrypt.hashSync(password, 10);
 
-      // Step 4: Save the user's details to Firestore
-      const userRef = collection(db, "EarlyStartData"); // Replace with your collection name
+      const userRef = collection(db, "EarlyStartData");
       await addDoc(userRef, {
         fullName,
         username,
         email,
-        password: hashedPassword, // Save hashed password
-        userId: user.uid, // Reference the authenticated user
-        createdAt: new Date(), // Add a timestamp
+        password: hashedPassword,
+        userId: user.uid,
+        createdAt: new Date(),
       });
 
-      setSuccess("Account created successfully!");
+      setModalTitle("Success!");
+      setModalMessage("Account created successfully!");
+      setButtonLabel("Continue");
+      setShowModal(true);
       setIsLoading(false);
-      alert("Account Created Successfully!");
-      navigate("/login");
 
     } catch (error: any) {
-      setError(error.message);
+      setModalTitle("Error");
+      setModalMessage(error.message);
+      setButtonLabel("Close");
+      setShowModal(true);
       setIsLoading(false);
-      clearErrorAfterDelay();
     }
   };
 
+  useEffect(() => {
+    const handleOnlineStatus = () => {
+      setIsOnline(navigator.onLine);
+    };
+
+    window.addEventListener("online", handleOnlineStatus);
+    window.addEventListener("offline", handleOnlineStatus);
+
+    return () => {
+      window.removeEventListener("online", handleOnlineStatus);
+      window.removeEventListener("offline", handleOnlineStatus);
+    };
+  }, []);
+
   return (
     <div className="signup-container">
+      <Modal 
+        showModal={showModal} 
+        message={modalMessage} 
+        buttonLabel={buttonLabel} 
+        onClose={handleContinue} 
+        title={modalTitle}
+      />
       <div className="signup-divide">
         <div className="signup-left">
           <h2 className="signup-head">Create Your Account</h2>
@@ -205,9 +232,6 @@ const SignUp = () => {
                 required
               />
             </div>
-
-            {error && <p className="error-message">{error}</p>}
-            {success && <p className="success-message">{success}</p>}
 
             <div className="button-control">
               <button

@@ -17,25 +17,17 @@ const UserHomepage: React.FC = () => {
   // Fetch user data from Firestore where userId field matches the authenticated user's UID
   const fetchUserData = async (uid: string) => {
     try {
-      console.log("Fetching user data for userId:", uid); // Log userId being searched for
-      
       const usersCollectionRef = collection(db, "EarlyStartData");
       const userQuery = query(usersCollectionRef, where("userId", "==", uid)); // Update query to use "userId"
       const querySnapshot = await getDocs(userQuery);
       
-      // Log the entire querySnapshot to inspect the documents
-      console.log("Query snapshot:", querySnapshot);
-      
       if (!querySnapshot.empty) {
         const userDoc = querySnapshot.docs[0]; // Get the first matching document
-        console.log("Document found:", userDoc.data()); // Log the document data to verify
         setUserData(userDoc.data()); // Set user data from Firestore
       } else {
-        console.error(`No document found for userId: ${uid}`);
         setErrorMessage("No user data found. Please check your profile.");
       }
     } catch (error) {
-      console.error("Error fetching user data:", error);
       setErrorMessage("Failed to load user data. Please try again later.");
     } finally {
       setLoading(false); // Stop loading
@@ -82,7 +74,7 @@ const UserHomepage: React.FC = () => {
     };
 
     fetchBlogs();
-  }, []);
+  }, [db]);
 
   // Render loading state
   if (loading) {
@@ -94,11 +86,30 @@ const UserHomepage: React.FC = () => {
     return <div className="error-message">{errorMessage}</div>;
   }
 
+  const formatDateWithSuffix = (date: Date) => {
+    const day = date.getDate();
+    const month = date.toLocaleString("default", { month: "long" });
+    const year = date.getFullYear();
+  
+    // Determine the correct suffix for the day
+    const getDaySuffix = (day: number) => {
+      if (day > 3 && day < 21) return "th"; // Special case for 11th to 20th
+      switch (day % 10) {
+        case 1: return "st";
+        case 2: return "nd";
+        case 3: return "rd";
+        default: return "th";
+      }
+    };
+  
+    return `${day}${getDaySuffix(day)} ${month} ${year}`;
+  };
+
   return (
     <div className="user-homepage-container">
       <div className="welcome-section">
-        <h1>Welcome, {userData.username}!</h1>
-        <p className="user-email">{userData?.email}</p>
+      <h1>Welcome, {userData ? userData.username : "User"}!</h1>
+        <p className="user-email">{userData?.email}</p> {/* Use optional chaining */}
       </div>
 
       <div className="navigation-section">
@@ -114,23 +125,23 @@ const UserHomepage: React.FC = () => {
           <div className="user-details">
             <p>Full Name: {userData.fullName}</p>
             <p>Email: {userData.email}</p>
-            <p>Joined Date: {userData.createdAt?.toDate().toLocaleString()}</p> {/* Adjust for timestamp */}
+            <p>Joined Date: {formatDateWithSuffix(userData.createdAt?.toDate())}</p> {/* Adjust for timestamp */}
             <p>Username: {userData.username}</p>
           </div>
         )}
 
-      <h2>Latest Blog Posts</h2>
-      {blogs.length === 0 ? (
-        <p>No blogs available.</p>
-      ) : (
-        blogs.map((blog) => (
-          <div key={blog.id} className="blog-post">
-            <h3>{blog.title}</h3>
-            <p>{blog.content}</p>
-            <span>{blog.createdAt.toDate().toLocaleDateString()}</span>
-          </div>
-        ))
-      )}
+        <h2>Latest Blog Posts</h2>
+        {blogs.length === 0 ? (
+          <p>No blogs available.</p>
+        ) : (
+          blogs.map((blog) => (
+            <div key={blog.id} className="blog-post">
+              <h3>{blog.title}</h3>
+              <p>{blog.content}</p>
+              <span>{formatDateWithSuffix(blog.createdAt.toDate())}</span>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );

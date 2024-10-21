@@ -3,15 +3,21 @@ import "../assets/styles/Login.css";
 import Background from "../assets/images/customer-care.jpg";
 import Footer from "../components/Footer/Footer";
 import { Link, useNavigate } from "react-router-dom";
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { collection, query, where, getDocs } from "firebase/firestore";
-import { db } from "../firebase"; // Ensure correct firebase import
+import { db } from "../firebase";
+import Modal from "../pages/Modal";
 
 const Login: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+  const [modalTitle, setModalTitle] = useState("");
+  const [buttonLabel, setButtonLabel] = useState("");
+  const [userRole, setUserRole] = useState(""); // Added to store user role
   const navigate = useNavigate();
   const auth = getAuth();
 
@@ -19,74 +25,91 @@ const Login: React.FC = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  // Clear error message after a short delay
-  const clearErrorAfterDelay = () => {
-    setTimeout(() => setError(""), 1500);
+  // Function to handle modal continue action
+  const handleContinue = () => {
+    setShowModal(false);
+
+    // Redirect based on user role after modal closes
+    if (userRole === "admin") {
+      navigate("/admin-dashboard");
+    } else {
+      navigate("/success");
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsLoading(true); // Start loading when form is submitted
-  
-    // Validate form inputs
+    setIsLoading(true);
+
     if (!email || !password) {
       setError("Please fill in all fields.");
-      setIsLoading(false); // Stop loading after validation error
-      clearErrorAfterDelay();
+      setModalMessage("Please fill in all fields.");
+      setModalTitle('Information Required!')
+      setButtonLabel("Try Again!");
+      setShowModal(true);
+      setIsLoading(false);
       return;
     }
-  
+
     try {
-      // Authenticate user using Firebase
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-  
-      // Query Firestore to get the user's role and status
+
       const userRef = collection(db, "EarlyStartData");
       const q = query(userRef, where("userId", "==", user.uid));
       const querySnapshot = await getDocs(q);
-  
+
       if (!querySnapshot.empty) {
         const userDoc = querySnapshot.docs[0];
         const userData = userDoc.data();
-        const userRole = userData?.userRole?.toLowerCase(); // Get user role
-        const userStatus = userData?.status?.toLowerCase() || "active"; // Get user status, default to "active" if undefined
-  
-        // Check if the user's account is disabled
-        if (userStatus === "disabled") {
+        const role = userData?.userRole?.toLowerCase();
+        const status = userData?.status?.toLowerCase() || "active";
+
+        setUserRole(role); // Store user role
+
+        if (status === "disabled") {
           setError("Your account is disabled. Please contact support.");
-          clearErrorAfterDelay();
+          setModalMessage("Your account is disabled. Please contact support.");
+          setModalTitle("Account Disabled!")
+          setButtonLabel("Okay");
+          setShowModal(true);
           setIsLoading(false);
           return;
         }
-  
-        // Show login success alert
-        alert("Login Success!");
-  
-        // Redirect based on user role
-        if (userRole === "admin") {
-          console.log("Redirecting to Admin Dashboard");
-          navigate("/admin-dashboard"); // Redirect to admin dashboard if user is an admin
-        } else {
-          console.log("Redirecting to User Home Page");
-          navigate("/success"); // Redirect to user homepage if not an admin
-        }
+
+        // If login is successful, show success modal
+        setModalMessage("Login Successful!");
+        setModalTitle("Success!")
+        setButtonLabel("Continue");
+        setShowModal(true);
       } else {
         setError("User data not found.");
-        clearErrorAfterDelay();
+        setModalTitle("Error!")
+        setModalMessage("User data not found.");
+        setButtonLabel("Try Again");
+        setShowModal(true);
       }
     } catch (error) {
-      // Handle authentication error
       setError("Invalid email or password");
-      clearErrorAfterDelay();
+      setModalTitle("Error!")
+      setModalMessage("Invalid email or password");
+      setButtonLabel("Try Again");
+      setShowModal(true);
     } finally {
-      setIsLoading(false); // Stop loading after completion (success or failure)
+      setIsLoading(false);
     }
-  };  
-  
+  };
 
   return (
     <div className="login-container">
+      <Modal 
+        showModal={showModal} 
+        message={modalMessage} 
+        buttonLabel={buttonLabel} 
+        onClose={handleContinue} 
+        title={modalTitle}
+      />
+
       <div className="login-divide">
         <div className="login-left">
           <p className="login-head">Welcome to EarlyStart E-Tutor</p>
@@ -119,7 +142,7 @@ const Login: React.FC = () => {
               />
             </div>
 
-            {error && <p className="error-text">{error}</p>} {/* Display error message */}
+            {/* {error && <p className="error-text">{error}</p>} */}
 
             <div className="button-control">
               <button type="submit" className="login-button">

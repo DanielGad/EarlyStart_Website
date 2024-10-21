@@ -1,0 +1,74 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /* Ensure modal is above other content */
+}
+
+.modal-container {
+  background: white;
+  width: 80%; /* Default width for smaller screens */
+  max-width: 500px; /* Maximum width to maintain readability */
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.modal-title {
+  font-size: 1.5em; /* Larger font for title */
+  margin-bottom: 10px;
+}
+
+.modal-message {
+  margin-bottom: 20px;
+  font-size: 1em; /* Adjusted font size for message */
+}
+
+.modal-button {
+  padding: 10px 20px;
+  border: none;
+  background: var(--primary-color); /* Change to desired color */
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  font-size: 1em; /* Consistent button font size */
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 768px) {
+  .modal-container {
+    width: 90%; /* Increase width for medium screens */
+  }
+
+  .modal-title {
+    font-size: 1.3em; /* Slightly smaller title font size */
+  }
+
+  .modal-message {
+    font-size: 0.9em; /* Slightly smaller message font size */
+  }
+
+  .modal-button {
+    padding: 8px 16px; /* Adjust button padding */
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-title {
+    font-size: 1.2em; /* Smaller title font size for mobile */
+  }
+
+  .modal-message {
+    font-size: 0.8em; /* Smaller message font size for mobile */
+  }
+
+  .modal-button {
+    padding: 6px 12px; /* Adjust button padding */
+  }
+}

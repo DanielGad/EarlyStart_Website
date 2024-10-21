@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Home from "./components/Homepage/Home";
 import Navbar from "./components/Navbar/Navbar";
-import { Routes, Route } from 'react-router-dom';  // No need for BrowserRouter here
+import { Routes, Route } from 'react-router-dom'; 
 import MathService from "./pages/MathService";
 import HomeworkService from "./pages/HomeworkService";
 import LetterworkService from "./pages/LetterworkService";
@@ -33,20 +33,20 @@ function App() {
     window.scrollTo(0, 0);
   }, []);
 
-  const [user, setUser] = useState<User | null>(null);
-  const navigate = useNavigate();
+  // const [user, setUser] = useState<User | null>(null);
+  // const navigate = useNavigate();
 
-  const handleLogin = (email: string, password: string) => {
-    // Update the user state with the logged-in user's information
-    setUser({ email });
+  // const handleLogin = (email: string, password: string) => {
+  //   // Update the user state with the logged-in user's information
+  //   setUser({ email });
 
-    // Redirect after successful login
-    navigate("/success", { state: { user: { email } } });
-  };
+  //   // Redirect after successful login
+  //   navigate("/success", { state: { user: { email } } });
+  // };
 
-  const handleLogout = () => {
-    setUser(null);  // Clear the user state
-  };
+  // const handleLogout = () => {
+  //   setUser(null);  // Clear the user state
+  // };
 
   return (
     <>
@@ -70,7 +70,6 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/success" element={<UserHomepage />} />
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
-        {/* <Route path="/user-dashboard" element={<UserDashboard />} /> */}
         <Route path="/profile" element={<ProfilePage />} />
         </Routes>
       </div>

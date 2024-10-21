@@ -1,91 +1,119 @@
-/* AdminDashboard.css */
+/* General styles */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f7fa;
+  margin: 0;
+}
 
+/* Dashboard container */
 .admin-dashboard-container {
   display: flex;
   flex-direction: column;
   padding: 20px;
-  font-family: Arial, sans-serif;
+  max-width: 1200px; /* Limit maximum width for larger screens */
+  margin: auto; /* Center the dashboard */
 }
 
+/* Navbar styles */
 .admin-navbar {
-  background-color: #f8f9fa;
-  padding: 10px 20px;
-  border-bottom: 1px solid #dee2e6;
+  background-color: #343a40; /* Dark background for the navbar */
+  padding: 15px 20px;
+  border-radius: 5px;
 }
 
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 15px;
+  gap: 20px;
+  align-items: center;
 }
 
+.nav-link {
+  color: #ffffff; /* White text for links */
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #f8f9fa; /* Lighter color on hover */
+}
+
+/* Button styles */
 .nav-button,
-.logout-button {
-  background-color: #007bff;
+.logout-button,
+.admin-button {
+  background-color: #007bff; /* Bootstrap primary color */
   color: #fff;
   border: none;
-  padding: 10px 15px;
+  padding: 10px 20px;
   cursor: pointer;
   border-radius: 4px;
+  transition: background-color 0.3s ease;
 }
 
 .nav-button:hover,
-.logout-button:hover {
-  background-color: #0056b3;
+.logout-button:hover,
+.admin-button:hover {
+  background-color: #0056b3; /* Darker shade on hover */
 }
 
+/* Dashboard main content */
 .admin-dashboard {
   margin-top: 20px;
 }
 
 .user-details {
-  background-color: #e9ecef;
+  background-color: #ffffff; /* White background for user details */
   padding: 15px;
   border-radius: 5px;
-}
-
-.admin-actions {
-  margin-top: 20px;
-}
-
-.admin-action {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 15px;
-}
-
-.email-input {
-  flex: 1;
-  padding: 10px;
-  border: 1px solid #ced4da;
-  border-radius: 4px;
-}
-
-.admin-button {
-  background-color: #28a745;
-  color: #fff;
-  border: none;
-  padding: 10px 15px;
-  cursor: pointer;
-  border-radius: 4px;
-}
-
-.admin-button:hover {
-  background-color: #218838;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+  margin-bottom: 20px; /* Space below user details */
 }
 
 .blog-post {
-  background-color: #f8f9fa;
+  background-color: #ffffff; /* White background for blog posts */
   border: 1px solid #dee2e6;
   border-radius: 4px;
   padding: 15px;
   margin-top: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease; /* Smooth hover effect */
 }
 
+.blog-post:hover {
+  transform: translateY(-2px); /* Lift effect on hover */
+}
+
+/* Loading and error messages */
 .loading,
 .error-message {
   text-align: center;
   font-size: 1.5em;
   margin-top: 20px;
-  color: #dc3545;
+  color: #dc3545; /* Bootstrap danger color */
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .admin-navbar {
+    padding: 10px; /* Less padding on smaller screens */
+  }
+
+  .nav-links {
+    flex-direction: column; /* Stack nav links vertically */
+    gap: 10px; /* Reduce gap */
+  }
+
+  .admin-dashboard-container {
+    padding: 10px; /* Reduce padding for mobile */
+  }
+
+  .admin-dashboard {
+    margin-top: 10px; /* Less margin on mobile */
+  }
+
+  .blog-post {
+    padding: 10px; /* Less padding for blog posts on mobile */
+  }
 }

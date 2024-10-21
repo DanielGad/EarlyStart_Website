@@ -1,0 +1,113 @@
+/* Overlay for modal background */
+.admin-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal container styling */
+.admin-modal-container {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 500px;
+  max-width: 100%;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Title styling */
+.admin-modal-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Close button styling */
+.admin-close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.admin-close-button:hover {
+  background-color: #c82333;
+}
+
+/* Input field styling */
+.admin-email-input {
+  width: 95%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+/* Action buttons styling */
+.admin-action-button {
+  display: block; /* Ensures button takes up its own block */
+  width: 40%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+  margin: 0 auto; /* Centers the button horizontally */
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.admin-action-button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+.admin-action-button:hover:not(:disabled) {
+  background-color: green;
+}
+
+/* Error message styling */
+.admin-error-message {
+  color: red;
+  font-size: 14px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* Section styling */
+.admin-action-section {
+  margin-bottom: 20px;
+}
+
+.admin-user-info-dropdown {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 10px;
+  text-align: left;
+}
+
+.admin-user-info-dropdown p {
+  margin: 5px 0;
+}
