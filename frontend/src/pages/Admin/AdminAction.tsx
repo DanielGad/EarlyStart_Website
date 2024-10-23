@@ -1,7 +1,7 @@
 import { collection, doc, getDocs, query, updateDoc, where } from 'firebase/firestore';
 import React, { useState } from 'react';
-import { db } from '../firebase';
-import '../assets/styles/AdminAction.css';
+import { db } from '../../firebase';
+import '../../assets/styles/AdminAction.css';
 
 interface AdminActionProps {
   isOpen: boolean;

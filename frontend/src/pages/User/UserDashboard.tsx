@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { getFirestore, collection, query, where, getDocs, orderBy } from "firebase/firestore";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
-import "../assets/styles/UserHomepage.css";
+import "../../assets/styles/UserDashboard.css";
 
-const UserHomepage: React.FC = () => {
+const UserDashboard: React.FC = () => {
   const [username, setUsername] = useState<string>("");
   const [userData, setUserData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -114,7 +114,7 @@ const UserHomepage: React.FC = () => {
 
       <div className="navigation-section">
         <Link to="/profile" className="nav-link">View Profile</Link>
-        <Link to="/settings" className="nav-link">Account Settings</Link>
+        <Link to="/messages" className="nav-link">Messages</Link>
         <button className="logout-button" onClick={handleLogout}>Logout</button>
       </div>
 
@@ -147,4 +147,4 @@ const UserHomepage: React.FC = () => {
   );
 };
 
-export default UserHomepage;
+export default UserDashboard;

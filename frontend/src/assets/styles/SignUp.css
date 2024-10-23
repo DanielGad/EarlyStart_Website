@@ -62,3 +62,18 @@
   font-size: 1em;
   margin-bottom: 20px;
 }
+
+.password-control {
+  text-align: left;
+  margin-bottom: 15px;
+}
+
+
+.password-control p {
+  margin: 0;
+  color: var(--secondary-color);
+}
+
+.password-control input[type="checkbox"]:checked {
+  accent-color: var(--primary-color);
+}

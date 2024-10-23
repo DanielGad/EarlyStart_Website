@@ -20,6 +20,11 @@ const SignUp = () => {
   const [modalTitle, setModalTitle] = useState("");
   const [buttonLabel, setButtonLabel] = useState("");
 
+  // Password condition states
+  const [isMinLength, setIsMinLength] = useState<boolean>(false);
+  const [hasUppercase, setHasUppercase] = useState<boolean>(false);
+  const [hasNumber, setHasNumber] = useState<boolean>(false);
+
   const auth = getAuth();
   const navigate = useNavigate();
 
@@ -31,20 +36,13 @@ const SignUp = () => {
   };
 
   const validatePassword = (password: string) => {
-    const hasUppercase = /[A-Z]/.test(password);
-    const hasNumber = /\d/.test(password);
-    const isValidLength = password.length >= 6;
+    const minLength = password.length >= 6;
+    const uppercase = /[A-Z]/.test(password);
+    const number = /\d/.test(password);
 
-    if (!isValidLength) {
-      return "Password must be at least 6 characters long.";
-    }
-    if (!hasUppercase) {
-      return "Password must contain at least one uppercase letter.";
-    }
-    if (!hasNumber) {
-      return "Password must contain at least one number.";
-    }
-    return "";
+    setIsMinLength(minLength);
+    setHasUppercase(uppercase);
+    setHasNumber(number);
   };
 
   const checkUserExists = async (username: string, email: string) => {
@@ -68,9 +66,8 @@ const SignUp = () => {
     setIsLoading(true);
     let errorMessage = "";
 
-    const passwordError = validatePassword(password);
-    if (passwordError) {
-      errorMessage += passwordError + "\n";
+    if (!isMinLength || !hasUppercase || !hasNumber) {
+      errorMessage += "Please meet all password requirements.\n";
     }
 
     if (password !== confirmPassword) {
@@ -216,9 +213,26 @@ const SignUp = () => {
                 id="password"
                 placeholder="Enter your password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  validatePassword(e.target.value);
+                }}
                 required
               />
+            </div>
+            <div className="password-control">
+              <p>
+                <input type="checkbox" checked={isMinLength} readOnly /> 
+                Password must be at least 6 characters
+              </p>
+              <p>
+                <input type="checkbox" checked={hasUppercase} readOnly /> 
+                Password must contain at least one uppercase letter
+              </p>
+              <p>
+                <input type="checkbox" checked={hasNumber} readOnly /> 
+                Password must contain at least one number
+              </p>
             </div>
 
             <div className="form-control">

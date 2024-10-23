@@ -11,7 +11,7 @@ import {
   orderBy,
 } from "firebase/firestore";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
-import "../assets/styles/AdminDashboard.css";
+import "../../assets/styles/AdminDashboard.css";
 import BlogModal from "./BlogModal";
 import AdminAction from "./AdminAction";
 

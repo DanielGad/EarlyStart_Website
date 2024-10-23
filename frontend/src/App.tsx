@@ -15,38 +15,17 @@ import TeacherProfile from "./pages/TeacherProfile";
 import GetStarted from "./pages/GetStarted";
 import Confirmation from "./pages/Confirmation";
 import ContactConfirm from "./pages/ContactConfirm";
-import UserHomepage from './pages/UserHomepage';
+import UserDashboard from './pages/User/UserDashboard';
 import SignUp from './pages/SignUp';
-import { useNavigate } from "react-router-dom";
-import { Logout } from '@mui/icons-material';
-import AdminDashboard from './pages/AdminDashboard';
-import UserDashboard from './pages/AdminDashboard';
+import AdminDashboard from './pages/Admin/AdminDashboard';
 import ProfilePage from './pages/ProfilePage';
-
-interface User {
-  email: string;
-  // Add any other fields if necessary, e.g., fullName: string;
-}
+import SendMessage from './pages/Admin/SendMessage';
+import Messages from './pages/User/Messages';
 
 function App() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  // const [user, setUser] = useState<User | null>(null);
-  // const navigate = useNavigate();
-
-  // const handleLogin = (email: string, password: string) => {
-  //   // Update the user state with the logged-in user's information
-  //   setUser({ email });
-
-  //   // Redirect after successful login
-  //   navigate("/success", { state: { user: { email } } });
-  // };
-
-  // const handleLogout = () => {
-  //   setUser(null);  // Clear the user state
-  // };
 
   return (
     <>
@@ -68,9 +47,11 @@ function App() {
           <Route path="/confirm" element={<Confirmation />} />
           <Route path="/contact-confirm" element={<ContactConfirm />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/success" element={<UserHomepage />} />
+          <Route path="/user-dashboard" element={<UserDashboard />} />
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/send-message" element={<SendMessage />} />
+        <Route path="/messages" element={<Messages />} />
         </Routes>
       </div>
     </>

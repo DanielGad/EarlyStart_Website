@@ -1,0 +1,110 @@
+/* Container for the whole component */
+.user-message-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #f7f7f7;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Titles */
+.header-title, .chat-list-title, .chat-title {
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+/* Chat List Section */
+.chat-list-container {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 20px;
+}
+
+.chat-list {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.chat-user {
+  padding: 15px;
+  cursor: pointer;
+  border-bottom: 1px solid #ddd;
+  transition: background-color 0.3s ease;
+}
+
+.chat-user.active, .chat-user:hover {
+  background-color: #e0e0e0;
+}
+
+.no-chats-message {
+  padding: 15px;
+  text-align: center;
+}
+
+/* Chat Box Section */
+.chat-box {
+  width: 100%;
+  max-width: 600px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.chat-history {
+  max-height: 400px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+}
+
+.message {
+  margin-bottom: 15px;
+}
+
+.current-user {
+  text-align: right;
+}
+
+.other-user {
+  text-align: left;
+}
+
+.timestamp {
+  font-size: 0.8rem;
+  color: #999;
+}
+
+/* Message Input */
+.message-input-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.message-input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid var(--secondary-color);
+  resize: none;
+}
+
+.send-message-button {
+  padding: 10px 15px;
+  border: none;
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.send-message-button:hover {
+  background-color: var(--secondary-color);
+}

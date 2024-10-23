@@ -1,6 +1,7 @@
 import React, { useState, useEffect, createContext, ReactNode } from "react";
 import useMediaQuery from './useMediaQuery';
 
+
 interface ContextProps {
   isSmallScreen: boolean;
   isMediumScreen: boolean;

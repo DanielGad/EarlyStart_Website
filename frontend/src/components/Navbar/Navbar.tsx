@@ -9,9 +9,12 @@ import { Context } from '../../Context/Context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
+import { auth } from '../../firebase';
 
 
 const Navbar = () => {
+  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);

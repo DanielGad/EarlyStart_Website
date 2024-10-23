@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { addDoc, collection, Timestamp } from "firebase/firestore";
-import { db } from "../firebase"; // Ensure correct firebase import
-import '../assets/styles/BlogModal.css'
+import { db } from "../../firebase"; // Ensure correct firebase import
+import '../../assets/styles/BlogModal.css'
 
 interface BlogModalProps {
   isOpen: boolean;
