@@ -225,7 +225,17 @@ const Navbar = () => {
         </div>
 
         <NavLink to="/call" label="Call Us" menuKey="call" setMenu={setMenu} setIsMenuOpen={setIsMenuOpen} menu={menu} />
-        <NavLink to="/login" label="Login" menuKey="login" setMenu={setMenu} setIsMenuOpen={setIsMenuOpen} menu={menu} />
+        <NavLink to="/login" label={isLoggedIn ? (
+            // If logged in, show 'Profile' and direct to appropriate dashboard
+            <Link to={userRole === 'admin' ? '/admin-dashboard' : '/user-dashboard'}>
+              Profile
+            </Link>
+          ) : (
+            // If not logged in, show 'Login'
+            <Link to="/login">Login</Link>
+          )} menuKey="login" setMenu={setMenu} setIsMenuOpen={setIsMenuOpen} menu={menu} />
+
+
         <div className="middle-nav-container-down">
           <SearchIcon style={{cursor: 'pointer'}}/>
           <input type="text" placeholder='What do you want to learn?' />
