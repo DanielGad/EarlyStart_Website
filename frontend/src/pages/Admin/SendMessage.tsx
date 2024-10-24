@@ -196,34 +196,34 @@ const AdminSendMessage: React.FC = () => {
   }, [selectedUser]); // Re-run when selectedUser changes
 
   return (
-    <div className="admin-message-container">
-      <h2 className="admin-message-title">Admin Send Message</h2>
-
+    <div className="admin-container">
+      <h2 className="admin-title">Admin Message Center</h2>
+  
       {/* Search User Section */}
-      <div className="search-section">
+      <div className="user-search-section">
         <input
           type="text"
-          className="search-input"
-          placeholder="Search user by email"
+          className="user-search-input"
+          placeholder="Search by email"
           value={searchEmail}
           onChange={(e) => setSearchEmail(e.target.value)}
         />
-        <button className="search-button" onClick={handleSearch}>Search</button>
+        <button className="user-search-button" onClick={handleSearch}>Search</button>
       </div>
-
-      {loading && <p className="loading-text">Loading...</p>}
-
+  
+      {loading && <p className="loading">Loading...</p>}
+  
       {/* Chat List Section */}
-      <div className="chat-list-section">
-        <h3 className="chat-list-title">Chats</h3>
+      <div className="user-chat-list-section">
+        <h3 className="chat-list-header">User Chats</h3>
         <div className="chat-list">
           {chatList.length === 0 ? (
-            <p className="no-users-text">No users to chat with.</p>
+            <p className="no-users">No chats available.</p>
           ) : (
             chatList.map((user, index) => (
               <div 
                 key={index} 
-                className={`chat-user ${selectedUser?.email === user.email ? 'active' : ''}`} 
+                className={`chat-item ${selectedUser?.email === user.email ? 'chat-active' : ''}`} 
                 onClick={() => toggleChat(user)}
               >
                 <strong>{user.fullName}</strong>
@@ -232,51 +232,52 @@ const AdminSendMessage: React.FC = () => {
           )}
         </div>
       </div>
-
+  
       {/* Display Selected User Conversation */}
       {selectedUser && (
-        <div className="conversation-section">
-          <h3 className="conversation-title">
-            Conversation with {selectedUser.fullName} ({selectedUser.email})
+        <div className="user-conversation-section">
+          <h3 className="conversation-header">
+            Chat with {selectedUser.fullName} ({selectedUser.email})
           </h3>
-
+  
           {/* Display chat history */}
-          <div className="chat-history">
+          <div className="chat-history-box">
             {messages.length === 0 ? (
-              <p className="no-messages-text">No messages yet.</p>
+              <p className="no-messages">No messages yet.</p>
             ) : (
               messages.map((msg, index) => (
                 <div 
                   key={index} 
-                  className={`message ${msg.senderEmail === auth.currentUser?.email ? 'sent' : 'received'}`} // Conditionally apply classes
+                  className={`message-box ${msg.senderEmail === auth.currentUser?.email ? 'message-sent' : 'message-received'}`}
                 >
                   <p>
                     <strong>
                       {msg.senderEmail === auth.currentUser?.email ? 'You' : msg.receiverName}:
                     </strong> {msg.messageBody}
                   </p>
-                  <p className="date-time">
+                  <p className="timestamp">
                     {new Date(msg.timestamp.seconds * 1000).toLocaleString()}
                   </p>
                 </div>
               ))
             )}
           </div>
-
+  
           {/* Input to send a message */}
-          <div className="message-input-section">
+          <div className="message-input-area">
             <textarea
-              className="message-input"
+              className="message-input-box"
               value={newMessage}
               onChange={(e) => setNewMessage(e.target.value)}
-              placeholder="Type your message here..."
+              placeholder="Type a message..."
             />
-            <button className="send-message-button" onClick={handleSendMessage}>Send Message</button>
+            <button className="send-message-btn" onClick={handleSendMessage}>Send</button>
           </div>
         </div>
       )}
     </div>
   );
+  
 };
 
 export default AdminSendMessage;

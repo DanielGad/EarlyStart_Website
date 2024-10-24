@@ -9,9 +9,6 @@ import { Context } from '../../Context/Context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
-import { useNavigate } from 'react-router-dom';
-import { auth } from '../../firebase';
-
 
 const Navbar = () => {
   
@@ -23,7 +20,11 @@ const Navbar = () => {
   if (!context) {
     throw new Error("Must be used within a Context provider");
   }
-  const { isSmallScreen, isMediumScreen, isMenuOpen, setIsMenuOpen, isScrolled, toggleMenu, menu, setMenu } = context;
+  const { isSmallScreen, isMediumScreen, isMenuOpen, setIsMenuOpen, isScrolled, toggleMenu, menu, setMenu, isLoggedIn, userRole } = context;
+
+  console.log(userRole);
+  console.log(isLoggedIn);
+  
 
   const [isServiceOpen, setIsServiceOpen] = useState(false);
 
@@ -154,7 +155,17 @@ const Navbar = () => {
       <Link to={"/call"} style={{color: menu === "call" ? 'rgb(124,70,164)' : ''}} onClick={() => {setMenu("call")}}>
           Call Us{menu === "call" ? <hr /> : <></>}</Link>
 
-          <Link to={"/login"} style={{color: menu === "login" ? 'rgb(124,70,164)' : ''}} onClick={() => {setMenu("login")}}>Login{menu === "login" ? <hr /> : <></>}</Link>
+          <Link to={"/login"} style={{color: menu === "login" ? 'rgb(124,70,164)' : ''}} onClick={() => {setMenu("login")}}>
+          {isLoggedIn ? (
+            // If logged in, show 'Profile' and direct to appropriate dashboard
+            <Link to={userRole === 'admin' ? '/admin-dashboard' : '/user-dashboard'}>
+              Profile
+            </Link>
+          ) : (
+            // If not logged in, show 'Login'
+            <Link to="/login">Login</Link>
+          )}
+          {menu === "login" ? <hr /> : <></>}</Link>
     </div>
   </>
 ) : (

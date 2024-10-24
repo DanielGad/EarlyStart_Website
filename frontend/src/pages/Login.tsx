@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../assets/styles/Login.css";
 import Background from "../assets/images/customer-care.jpg";
 import Footer from "../components/Footer/Footer";
@@ -7,6 +7,7 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 import Modal from "../pages/Modal";
+import { Context } from "../Context/Context";
 
 const Login: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -40,6 +41,14 @@ const Login: React.FC = () => {
     }
   };
 
+  const context = useContext(Context);
+
+  if (!context) {
+    throw new Error("Context has not been provided.");
+  }
+
+  const { login } = context;
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
@@ -69,6 +78,13 @@ const Login: React.FC = () => {
         const status = userData?.status?.toLowerCase() || "active";
 
         setUserRole(role);  // Store the role
+
+        const user = userData; 
+
+        if (user) {
+          const userRole = user?.userRole || 'user'; 
+          login(userRole); // Update context with the role
+        }
 
         if (status === "disabled") {
           setError("Your account is disabled. Please contact support.");
