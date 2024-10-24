@@ -5,6 +5,7 @@ import { createRoot } from 'react-dom/client';
 import App from './App';
 import './index.css';
 import { Provider } from './Context/Context';
+import { FbDataProvider } from './Context/FbData';
 
 // Place this in your main app file
 window.addEventListener('offline', () => {
@@ -41,9 +42,11 @@ const rootElement = createRoot(root);
 rootElement.render(
   <StrictMode>
     <Provider>
-    <BrowserRouter>
-      <App />
-      </BrowserRouter>,
+      <FbDataProvider>
+        <BrowserRouter> 
+        <App />
+      </BrowserRouter>
+      </FbDataProvider>
     </Provider>
   </StrictMode>
 );

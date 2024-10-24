@@ -140,6 +140,7 @@ const UserMessage: React.FC = () => {
       fetchMessages(user.email); // Fetch chat history when opening
       setIsChatOpen(true); // Open chat UI
     }
+    
   };
 
   // Fetch chat list when component mounts

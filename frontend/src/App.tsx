@@ -27,6 +27,12 @@ function App() {
     window.scrollTo(0, 0);
   }, []);
 
+  // if (error.code === "auth/network-request-failed") {
+  //   setError("Network error, please check your internet connection.");
+  //   setModalTitle("Network Error");
+  //   setModalMessage("Please check your internet connection and try again.");
+  //   setButtonLabel("Try Again");
+
   return (
     <>
       <div className="app">

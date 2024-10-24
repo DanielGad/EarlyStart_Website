@@ -130,12 +130,18 @@ const SignUp = () => {
       setIsLoading(false);
 
     } catch (error: any) {
+      if (error.code === "auth/network-request-failed") {
+        setModalTitle("Network Error");
+        setModalMessage("Please check your internet connection and try again.");
+        setButtonLabel("Try Again");
+      }
       setModalTitle("Error");
       setModalMessage(error.message);
       setButtonLabel("Close");
       setShowModal(true);
       setIsLoading(false);
     }
+    
   };
 
   useEffect(() => {
