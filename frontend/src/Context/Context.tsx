@@ -1,6 +1,8 @@
 import React, { useState, useEffect, createContext, useContext, ReactNode } from "react";
 import useMediaQuery from './useMediaQuery';
 import { getAuth, onAuthStateChanged, User } from "firebase/auth"; // Import User type from Firebase
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebase";
 
 // Define the context props
 interface ContextProps {
@@ -18,6 +20,7 @@ interface ContextProps {
   login: (role: string) => void;
   logout: () => void;
   user: User | null; // Added user to context
+  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 // Create the context with default value as undefined
@@ -89,19 +92,22 @@ export const Provider: React.FC<ProviderProps> = ({ children }) => {
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        setIsLoggedIn(true);
-        setUser(user); // Set the Firebase user object
+        setUser(user);  // Set the authenticated user
+        // Fetch userRole from Firestore
+        const userDoc = await getDoc(doc(db, "EarlyStartData", user.uid));
+        const role = userDoc.exists() ? userDoc.data().userRole : "user";  // Default to "user"
+        setUserRole(role);
       } else {
-        setIsLoggedIn(false);
+        // If no authenticated user, reset both user and userRole
         setUser(null);
+        setIsLoggedIn(false)
+        setUserRole(null);  // Explicitly clear userRole when no user is logged in
       }
     });
-
-    // Cleanup listener on unmount
     return () => unsubscribe();
-  }, [auth]);
+  }, []);
 
   return (
     <Context.Provider
@@ -116,6 +122,7 @@ export const Provider: React.FC<ProviderProps> = ({ children }) => {
         toggleMenu,
         setIsMenuOpen,
         isLoggedIn,
+        setIsLoggedIn,
         userRole,
         login,
         logout,

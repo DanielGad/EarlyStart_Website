@@ -3,12 +3,17 @@ import "../assets/styles/Login.css";
 import Background from "../assets/images/customer-care.jpg";
 import Footer from "../components/Footer/Footer";
 import { Link, useNavigate } from "react-router-dom";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { db } from "../firebase";
 import Modal from "../pages/Modal";
-import { FbDataContext } from "../Context/FbData"; // Import your FbDataContext
+import { Context } from "../Context/Context";
 
 const Login: React.FC = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const [modalTitle, setModalTitle] = useState("");
@@ -16,18 +21,17 @@ const Login: React.FC = () => {
   const [userRole, setUserRole] = useState("");
   const [isLoginSuccessful, setIsLoginSuccessful] = useState(false);
   const navigate = useNavigate();
-
-  // Get the login function, error, and loading state from context
-  const context = useContext(FbDataContext);
-  if (!context) throw new Error("FbDataContext has not been provided.");
-  const { login, messageAction, messageBody, messageTitle, isLoading } = context;
+  const auth = getAuth();
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  // Function to handle modal continue action
   const handleContinue = () => {
     setShowModal(false);
+
+    // Redirect only if login is successful
     if (isLoginSuccessful) {
       if (userRole === "admin") {
         navigate("/admin-dashboard");
@@ -37,55 +41,118 @@ const Login: React.FC = () => {
     }
   };
 
+  const context = useContext(Context);
+
+  if (!context) {
+    throw new Error("Context has not been provided.");
+  }
+
+  const { login } = context;
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    setIsLoading(true);
+  
     if (!email || !password) {
+      setError("Please fill in all fields.");
       setModalMessage("Please fill in all fields.");
       setModalTitle("Information Required!");
       setButtonLabel("Try Again!");
       setShowModal(true);
+      setIsLoading(false);
       return;
     }
-
-    const result = await login(email, password);
-
-    if (result.success) {
-      if (result.status === "disabled") {
-        setModalMessage("Your account is disabled. Please contact support.");
-        setModalTitle("Account Disabled!");
-        setButtonLabel("Okay");
-        setShowModal(true);
-        setIsLoginSuccessful(false);
-      } else {
+  
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+  
+      const userRef = collection(db, "EarlyStartData");
+      const q = query(userRef, where("userId", "==", user.uid));
+      const querySnapshot = await getDocs(q);
+  
+      if (!querySnapshot.empty) {
+        const userDoc = querySnapshot.docs[0];
+        const userData = userDoc.data();
+        const role = userData?.userRole?.toLowerCase() || "user";
+        const status = userData?.status?.toLowerCase() || "active";
+  
+        setUserRole(role);  // Store the role
+  
+        const user = userData;
+  
+        if (user) {
+          const userRole = user?.userRole || "user";
+          login(userRole); // Update context with the role
+        }
+  
+        if (status === "disabled") {
+          setError("Your account is disabled. Please contact support.");
+          setModalMessage("Your account is disabled. Please contact support.");
+          setModalTitle("Account Disabled!");
+          setButtonLabel("Okay");
+          setShowModal(true);
+          setIsLoading(false);
+          setIsLoginSuccessful(false); // Login unsuccessful, don't redirect
+          return;
+        }
+  
+        // If login is successful, set success state and show success modal
         setModalMessage("Login Successful!");
         setModalTitle("Success!");
         setButtonLabel("Continue");
         setShowModal(true);
-        setIsLoginSuccessful(true);
-        setUserRole(result.role); // Store the role for further redirection
+        setIsLoginSuccessful(true); // Mark login as successful
+      } else {
+        setError("User data not found.");
+        setModalTitle("Error!");
+        setModalMessage("User data not found.");
+        setButtonLabel("Try Again");
+        setShowModal(true);
+        setIsLoginSuccessful(false); // Login unsuccessful, don't redirect
       }
-    } else {
-      setModalTitle(messageTitle);
-      setModalMessage(messageBody);
-      setButtonLabel(messageAction);
+    } catch (error: any) {  
+      if (error.code === "auth/wrong-password" || error.code === "auth/user-not-found") {
+        setError("Invalid email or password");
+        setModalTitle("Error!");
+        setModalMessage("Invalid email or password");
+        setButtonLabel("Try Again");
+      } else if (error.code === "auth/invalid-credential") {
+        setError("Invalid credentials provided.");
+        setModalTitle("Invalid Credentials");
+        setModalMessage("The credentials provided are invalid. Please try again.");
+        setButtonLabel("Try Again");
+      } else if (error.code === "auth/network-request-failed") {
+        setError("Network error, please check your internet connection.");
+        setModalTitle("Network Error");
+        setModalMessage("Please check your internet connection and try again.");
+        setButtonLabel("Try Again");
+      } else {
+        // Handle other errors
+        setError("An unexpected error occurred.");
+        setModalTitle("Error");
+        setModalMessage("Something went wrong. Please try again.");
+        setButtonLabel("Try Again");
+      }
+  
+      // Show the modal with the error message
       setShowModal(true);
-      setTimeout(() => setShowModal(true), 0);
       setIsLoginSuccessful(false);
+    } finally {
+      setIsLoading(false);
     }
   };
+  
 
   return (
     <div className="login-container">
-      {modalTitle && modalMessage && buttonLabel && (
-        <Modal
-          showModal={showModal}
-          message={modalMessage}
-          buttonLabel={buttonLabel}
-          onClose={handleContinue}
-          title={modalTitle}
-        />
-      )}
+      <Modal 
+        showModal={showModal} 
+        message={modalMessage} 
+        buttonLabel={buttonLabel} 
+        onClose={handleContinue} 
+        title={modalTitle}
+      />
 
       <div className="login-divide">
         <div className="login-left">

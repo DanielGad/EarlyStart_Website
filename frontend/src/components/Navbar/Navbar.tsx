@@ -53,7 +53,7 @@ const Navbar = () => {
 
   interface NavLinkProps {
     to: string,
-    label: string,
+    label: React.ReactNode,
     menuKey: string,
     setMenu: (menu: string) => void,
     setIsMenuOpen: (isOpen: boolean) => void,

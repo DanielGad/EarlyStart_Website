@@ -144,20 +144,6 @@ const SignUp = () => {
     
   };
 
-  useEffect(() => {
-    const handleOnlineStatus = () => {
-      setIsOnline(navigator.onLine);
-    };
-
-    window.addEventListener("online", handleOnlineStatus);
-    window.addEventListener("offline", handleOnlineStatus);
-
-    return () => {
-      window.removeEventListener("online", handleOnlineStatus);
-      window.removeEventListener("offline", handleOnlineStatus);
-    };
-  }, []);
-
   return (
     <div className="signup-container">
       <Modal 
@@ -170,11 +156,6 @@ const SignUp = () => {
       <div className="signup-divide">
         <div className="signup-left">
           <h2 className="signup-head">Create Your Account</h2>
-          {!isOnline && (
-            <p className="error-message">
-              No internet connection. Please check your network.
-            </p>
-          )}
           <form onSubmit={handleSubmit}>
             <div className="form-control">
               <label htmlFor="fullName">Full Name:</label>
