@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   getFirestore,
@@ -6,14 +6,14 @@ import {
   query,
   where,
   getDocs,
-  updateDoc,
-  doc,
   orderBy,
 } from "firebase/firestore";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import "../../assets/styles/AdminDashboard.css";
 import BlogModal from "./BlogModal";
 import AdminAction from "./AdminAction";
+import Modal from "../Modal";
+import { Context } from "../../Context/Context";
 
 const AdminDashboard: React.FC = () => {
   const [username, setUsername] = useState<string>("");
@@ -24,10 +24,19 @@ const AdminDashboard: React.FC = () => {
   const db = getFirestore();
   const navigate = useNavigate();
 
+  const context = useContext(Context);
+  if (!context) {
+    throw new Error("Context has not been provided.");
+  }
+
+  const { isLoggedIn, setIsLoggedIn } = context;
+
   // Separate state for each modal
   const [isBlogModalOpen, setIsBlogModalOpen] = useState(false);
   const [isAdminActionOpen, setIsAdminActionOpen] = useState(false);
   const [blogs, setBlogs] = useState<any[]>([]);
+  const [showModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
 
   const openBlogModal = () => {
     setIsBlogModalOpen(true);
@@ -53,7 +62,12 @@ const AdminDashboard: React.FC = () => {
 
       if (!querySnapshot.empty) {
         const userDoc = querySnapshot.docs[0];
-        setUserData(userDoc.data());
+        const userInfo = userDoc.data();
+        setUserData(userInfo);
+        if (userInfo.userRole !== "admin") {
+          setModalMessage("Access Denied. You do not have the necessary permissions.");
+          setShowModal(true);
+        }
       } else {
         setErrorMessage("No user data found.");
       }
@@ -70,12 +84,13 @@ const AdminDashboard: React.FC = () => {
         fetchUserData(user.uid);
         setUsername(user.displayName || "Admin");
       } else {
-        navigate("/login");
+        setModalMessage("Please log in to access the Dashboard.");
+        setShowModal(true);
       }
     });
 
     return () => unsubscribe();
-  }, [auth, navigate]);
+  }, [auth]);
 
   const handleLogout = async () => {
     try {
@@ -91,7 +106,10 @@ const AdminDashboard: React.FC = () => {
       try {
         const q = query(collection(db, "blogs"), orderBy("createdAt", "desc"));
         const querySnapshot = await getDocs(q);
-        const blogsData = querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+        const blogsData = querySnapshot.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
         setBlogs(blogsData);
         setLoading(false);
       } catch (error) {
@@ -115,79 +133,104 @@ const AdminDashboard: React.FC = () => {
     const day = date.getDate();
     const month = date.toLocaleString("default", { month: "long" });
     const year = date.getFullYear();
-  
-    // Determine the correct suffix for the day
+
     const getDaySuffix = (day: number) => {
-      if (day > 3 && day < 21) return "th"; // Special case for 11th to 20th
+      if (day > 3 && day < 21) return "th";
       switch (day % 10) {
-        case 1: return "st";
-        case 2: return "nd";
-        case 3: return "rd";
-        default: return "th";
+        case 1:
+          return "st";
+        case 2:
+          return "nd";
+        case 3:
+          return "rd";
+        default:
+          return "th";
       }
     };
-  
+
     return `${day}${getDaySuffix(day)} ${month} ${year}`;
   };
 
   return (
     <div className="admin-dashboard-container">
-      <nav className="admin-navbar">
-        <ul className="nav-links">
-          <li>
-            <Link to="" onClick={openBlogModal} className="nav-link">Create Blog</Link>
-          </li>
-          {/* Blog modal controlled by its own state */}
-          <BlogModal isOpen={isBlogModalOpen} onClose={closeBlogModal} />
-
-          <li>
-            <Link to="" className="nav-link" onClick={openAdminActionModal}>Admin Actions</Link>
-          </li>
-          {/* AdminAction modal controlled by its own state */}
-          <AdminAction isOpen={isAdminActionOpen} onClose={closeAdminActionModal} />
-          
-          <li>
-            <Link to="/send-message" className="nav-link">Send Messages</Link>
-          </li>
-          
-          <li>
-            <Link to="/manage-accounts" className="nav-link">Manage Accounts</Link>
-          </li>
-          <li>
-            <Link to="/profile" className="nav-link">Profile</Link>
-          </li>
-          <li>
-            <button className="logout-button" onClick={handleLogout}>Logout</button>
-          </li>
-        </ul>
-      </nav>
-
-      <div className="admin-dashboard">
-        <h2>Welcome Admin, {userData ? userData.username : "Loading..."}!</h2>
-        <p>Manage users, create blogs, and send messages.</p>
-
-        {userData && (
-          <div className="user-details">
-            <p>Full Name: {userData.fullName}</p>
-            <p>Email: {userData.email}</p>
-            <p>Username: {userData.username}</p>
-            <p>Role: {userData.userRole || "User"}</p>
-            <p>Status: {userData.status || "active"}</p>
-          </div>
-        )}
-      </div>
-
-      <h2>Latest Blog Posts</h2>
-      {blogs.length === 0 ? (
-        <p>No blogs available.</p>
+      {showModal ? (
+        <Modal
+          showModal={true}
+          title="Access Denied"
+          message={modalMessage}
+          buttonLabel="Go to Login"
+          onClose={() => navigate("/login")}
+        />
       ) : (
-        blogs.map((blog) => (
-          <div key={blog.id} className="blog-post">
-            <h3>{blog.title}</h3>
-            <p>{blog.content}</p>
-            <span>{formatDateWithSuffix(blog.createdAt.toDate())}</span>
+        <div>
+          <nav className="admin-navbar">
+            <ul className="nav-links">
+              <li>
+                <Link to="" onClick={openBlogModal} className="nav-link">
+                  Create Blog
+                </Link>
+              </li>
+              <BlogModal isOpen={isBlogModalOpen} onClose={closeBlogModal} />
+
+              <li>
+                <Link to="" className="nav-link" onClick={openAdminActionModal}>
+                  Admin Actions
+                </Link>
+              </li>
+              <AdminAction isOpen={isAdminActionOpen} onClose={closeAdminActionModal} />
+
+              <li>
+                <Link to="/send-message" className="nav-link">
+                  Send Messages
+                </Link>
+              </li>
+
+              <li>
+                <Link to="/manage-accounts" className="nav-link">
+                  Manage Accounts
+                </Link>
+              </li>
+              <li>
+                <Link to="/profile" className="nav-link">
+                  Profile
+                </Link>
+              </li>
+              <li>
+                <button className="logout-button" onClick={handleLogout}>
+                  Logout
+                </button>
+              </li>
+            </ul>
+          </nav>
+
+          <div className="admin-dashboard">
+            <h2>Welcome Admin, {userData ? userData.username : "Loading..."}!</h2>
+            <p>Manage users, create blogs, and send messages.</p>
+
+            {userData && (
+              <div className="user-details">
+                <p>Full Name: {userData.fullName}</p>
+                <p>Email: {userData.email}</p>
+                <p>Username: {userData.username}</p>
+                <p>Role: {userData.userRole || "User"}</p>
+                <p>Status: {userData.status || "active"}</p>
+              </div>
+            )}
           </div>
-        ))
+
+          <h2>Latest Blog Posts</h2>
+          {blogs.length === 0 ? (
+            <p>No blogs available.</p>
+          ) : (
+            blogs.map((blog) => (
+              <div key={blog.id} className="blog-post">
+                <h3>{blog.title}</h3>
+                <p>{blog.content}</p>
+                <span>{formatDateWithSuffix(blog.createdAt.toDate())}</span>
+              </div>
+            ))
+          )}
+        </div>
       )}
     </div>
   );

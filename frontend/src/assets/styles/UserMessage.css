@@ -69,10 +69,12 @@
 
 .current-user {
   text-align: right;
+  width: 100%;
 }
 
 .other-user {
   text-align: left;
+  width: 60%;
 }
 
 .timestamp {

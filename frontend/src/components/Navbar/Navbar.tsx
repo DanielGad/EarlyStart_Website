@@ -20,7 +20,29 @@ const Navbar = () => {
   if (!context) {
     throw new Error("Must be used within a Context provider");
   }
-  const { isSmallScreen, isMediumScreen, isMenuOpen, setIsMenuOpen, isScrolled, toggleMenu, menu, setMenu, isLoggedIn, userRole } = context;
+  const { isSmallScreen, isMediumScreen, isMenuOpen, setIsMenuOpen, isScrolled, toggleMenu, menu, setMenu, isLoggedIn, setIsLoggedIn, setUserRole, userRole } = context;
+
+  useEffect(() => {
+    const savedIsLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    const savedUserRole = localStorage.getItem("myUserRole");
+
+    // Set defaults if nothing is in localStorage
+    setIsLoggedIn(savedIsLoggedIn || false);
+    setUserRole(savedUserRole || "user");
+
+  }, [setIsLoggedIn, setUserRole]);
+
+  // Update localStorage whenever `isLoggedIn` changes
+  useEffect(() => {
+    localStorage.setItem("isLoggedIn", isLoggedIn.toString());
+  }, [isLoggedIn]);
+
+  // Update localStorage whenever `userRole` changes
+  useEffect(() => {
+    if (userRole) {
+      localStorage.setItem("myUserRole", userRole);
+    }
+  }, [userRole]);
 
   console.log(userRole);
   console.log(isLoggedIn);
@@ -158,9 +180,10 @@ const Navbar = () => {
           <Link to={"/login"} style={{color: menu === "login" ? 'rgb(124,70,164)' : ''}} onClick={() => {setMenu("login")}}>
           {isLoggedIn ? (
             // If logged in, show 'Profile' and direct to appropriate dashboard
-            <Link to={userRole === 'admin' ? '/admin-dashboard' : '/user-dashboard'}>
+            <div><Link to={userRole === 'admin' ? '/admin-dashboard' : '/user-dashboard'}>
               Profile
             </Link>
+            </div> 
           ) : (
             // If not logged in, show 'Login'
             <Link to="/login">Login</Link>
@@ -225,7 +248,8 @@ const Navbar = () => {
         </div>
 
         <NavLink to="/call" label="Call Us" menuKey="call" setMenu={setMenu} setIsMenuOpen={setIsMenuOpen} menu={menu} />
-        <NavLink to="/login" label={isLoggedIn ? (
+        <NavLink to="/login" label=
+        {isLoggedIn ? (
             // If logged in, show 'Profile' and direct to appropriate dashboard
             <Link to={userRole === 'admin' ? '/admin-dashboard' : '/user-dashboard'}>
               Profile
@@ -233,7 +257,8 @@ const Navbar = () => {
           ) : (
             // If not logged in, show 'Login'
             <Link to="/login">Login</Link>
-          )} menuKey="login" setMenu={setMenu} setIsMenuOpen={setIsMenuOpen} menu={menu} />
+          )} 
+          menuKey="login" setMenu={setMenu} setIsMenuOpen={setIsMenuOpen} menu={menu} />
 
 
         <div className="middle-nav-container-down">

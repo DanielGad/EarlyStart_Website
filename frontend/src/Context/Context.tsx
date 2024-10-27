@@ -1,6 +1,6 @@
-import React, { useState, useEffect, createContext, useContext, ReactNode } from "react";
+import React, { useState, useEffect, createContext, useContext, ReactNode, SetStateAction } from "react";
 import useMediaQuery from './useMediaQuery';
-import { getAuth, onAuthStateChanged, User } from "firebase/auth"; // Import User type from Firebase
+import { getAuth, onAuthStateChanged, User } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 
@@ -19,8 +19,9 @@ interface ContextProps {
   userRole: string | null;
   login: (role: string) => void;
   logout: () => void;
-  user: User | null; // Added user to context
+  user: User | null;
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+  setUserRole: React.Dispatch<SetStateAction<string | null>>;
 }
 
 // Create the context with default value as undefined
@@ -76,38 +77,62 @@ export const Provider: React.FC<ProviderProps> = ({ children }) => {
   }, []);
 
   // User authentication state
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userRole, setUserRole] = useState<string | null>(null);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(
+    localStorage.getItem("isLoggedIn") === "true"
+  );
+  const [userRole, setUserRole] = useState<string | null>(
+    localStorage.getItem("userRole") || null
+  );
   const [user, setUser] = useState<User | null>(null);
   const auth = getAuth();
 
+  // Login and logout functions that update localStorage
   const login = (role: string) => {
     setIsLoggedIn(true);
     setUserRole(role);
+    localStorage.setItem("isLoggedIn", "true");
+    localStorage.setItem("userRole", role);
   };
 
   const logout = () => {
     setIsLoggedIn(false);
     setUserRole(null);
+    setUser(null);
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("userRole");
   };
 
+  // Firebase auth state change effect
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        setUser(user);  // Set the authenticated user
-        // Fetch userRole from Firestore
-        const userDoc = await getDoc(doc(db, "EarlyStartData", user.uid));
-        const role = userDoc.exists() ? userDoc.data().userRole : "user";  // Default to "user"
-        setUserRole(role);
+        setUser(user);
+        setIsLoggedIn(true);
+        localStorage.setItem("isLoggedIn", "true");
+
+        // Fetch userRole only if not already set in localStorage
+        if (!localStorage.getItem("userRole")) {
+          const userDoc = await getDoc(doc(db, "EarlyStartData", user.uid));
+          const role = userDoc.exists() ? userDoc.data().userRole : "user";
+          setUserRole(role);
+          localStorage.setItem("userRole", role);
+        } else {
+          setUserRole(localStorage.getItem("userRole"));
+        }
       } else {
-        // If no authenticated user, reset both user and userRole
-        setUser(null);
-        setIsLoggedIn(false)
-        setUserRole(null);  // Explicitly clear userRole when no user is logged in
+        logout();  // Reset state and localStorage
       }
     });
     return () => unsubscribe();
   }, []);
+
+  // Effect to synchronize localStorage with isLoggedIn and userRole
+  useEffect(() => {
+    localStorage.setItem("isLoggedIn", isLoggedIn.toString());
+    if (userRole) {
+      localStorage.setItem("userRole", userRole);
+    }
+  }, [isLoggedIn, userRole]);
 
   return (
     <Context.Provider
@@ -123,10 +148,11 @@ export const Provider: React.FC<ProviderProps> = ({ children }) => {
         setIsMenuOpen,
         isLoggedIn,
         setIsLoggedIn,
+        setUserRole,
         userRole,
         login,
         logout,
-        user, // Added user to the context provider
+        user,
       }}
     >
       {children}

@@ -120,18 +120,19 @@
   margin-bottom: 15px;
   padding: 10px;
   border-radius: 5px;
-  width: 60%;
+  width: 80%;
   position: relative;
 }
 
 .message-sent {
-  background-color: var(--light-color);
+  /* background-color: var(--light-color); */
   margin-left: auto;
   text-align: right;
   border-top-right-radius: 0;
 }
 
 .message-received {
+  width: 60%;
   background-color: #f0f0f0;
   margin-right: auto;
   text-align: left;
