@@ -20,29 +20,16 @@ const Navbar = () => {
   if (!context) {
     throw new Error("Must be used within a Context provider");
   }
-  const { isSmallScreen, isMediumScreen, isMenuOpen, setIsMenuOpen, isScrolled, toggleMenu, menu, setMenu, isLoggedIn, setIsLoggedIn, setUserRole, userRole } = context;
+  const { isSmallScreen, isMediumScreen, isMenuOpen, setIsMenuOpen, isScrolled, toggleMenu, menu, setMenu, isLoggedIn, userRole } = context;
 
-  useEffect(() => {
-    const savedIsLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-    const savedUserRole = localStorage.getItem("myUserRole");
+  // useEffect(() => {
+  //   const savedIsLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+  //   const savedUserRole = localStorage.getItem("myUserRole");
 
-    // Set defaults if nothing is in localStorage
-    setIsLoggedIn(savedIsLoggedIn || false);
-    setUserRole(savedUserRole || "user");
-
-  }, [setIsLoggedIn, setUserRole]);
-
-  // Update localStorage whenever `isLoggedIn` changes
-  useEffect(() => {
-    localStorage.setItem("isLoggedIn", isLoggedIn.toString());
-  }, [isLoggedIn]);
-
-  // Update localStorage whenever `userRole` changes
-  useEffect(() => {
-    if (userRole) {
-      localStorage.setItem("myUserRole", userRole);
-    }
-  }, [userRole]);
+  //   // Set defaults if nothing is in localStorage
+  //   setIsLoggedIn(savedIsLoggedIn || false);
+  //   setUserRole(savedUserRole || "user");
+  // }, [setIsLoggedIn, setUserRole]);
 
   console.log(userRole);
   console.log(isLoggedIn);

@@ -69,10 +69,10 @@ const AdminDashboard: React.FC = () => {
           setShowModal(true);
         }
       } else {
-        setErrorMessage("No user data found.");
+        setErrorMessage("No user data found. Please try again or Reload.");
       }
     } catch (error) {
-      setErrorMessage("Failed to load user data. Please try again later.");
+      setErrorMessage("Failed to load user data. Please try again later or Reload.");
     } finally {
       setLoading(false);
     }

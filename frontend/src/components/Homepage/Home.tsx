@@ -126,7 +126,7 @@ const Home = () => {
               Who We Are
             </div>
             <div className="home-3-text-cont">          
-              EarlyStart E-Tutors connects primary school pupils with expert tutors through personalized, interactive online learning. We specialize in matching learners with qualified educators for tailored academic support and specialized programs. Our goal is to enhance each child's educational journey and help him/her achieve their fullest potential from the comfort of homes.
+              EarlyStart E-Tutors connects primary school pupils with expert tutors through personalized, interactive online learning. We specialize in matching learners with qualified educators for tailored academic support and specialized programs. Our goal is to enhance each child's educational journey and help his/her achieve their fullest potential from the comfort of home.
             </div>
           </div>
         </div>

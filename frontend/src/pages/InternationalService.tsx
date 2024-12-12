@@ -16,7 +16,7 @@ const InternationalService = () => {
       <div className="is-row-1">
         <div className="is-row-1-col-1">
           <div className="is-row-1-col-1-htext">
-            Succeed in International School Enterance with EarlyStart E-Tutors 
+          Excel in International School Enterance with EarlyStart E-Tutors 
           </div>
           <div className="is-row-1-col-1-inner">
             Excel in International Enterance Examination and secure your spot <br /> <br />

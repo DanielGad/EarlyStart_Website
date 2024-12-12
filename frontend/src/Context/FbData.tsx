@@ -69,7 +69,6 @@ export const FbDataProvider: React.FC<{ children: ReactNode }> = ({ children }) 
       setIsLoading(false);
     }
   };
-  console.log(userData);
   
 
 

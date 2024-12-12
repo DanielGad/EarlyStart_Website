@@ -15,9 +15,9 @@ const MathService = () => {
     <div className="math-service-container">
       <div className="math-row-1">
         <div className="column-1-left">
-          <div className="head-text">Mastering Math Made Easy Achieve More, Learn Faster, and Excel!</div>
+          <div className="head-text">Mastering Mathematics Made Easy, Learn Faster, and Excel!</div>
           <div className="head-inner-text">
-          Unlock 24/7 support from EarlyStart E-Tutors. Our expert tutors help kids excel in Number Work, Quantitative Reasoning, and Mathematics, ensuring homework is done correctly and preparing them for exams. <br /> <br />Get Started Now with just a Click!
+          Unlock 24/7 support from EarlyStart E-Tutors. Our expert tutors help kids excel in Number Work, Quantitative Reasoning, and Mathematics, ensuring homework is done correctly and preparing them for examination. <br /> <br />Get Started Now with just a Click!
           </div>
           <Link to={"/get-started"}>
             <div className='gs-button-control'><button className="get-started-button">Get Started Now <ArrowDropRightIcon className='arrow-right'/></button></div>

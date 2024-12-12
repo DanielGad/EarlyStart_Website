@@ -44,7 +44,7 @@ const GeneralService = () => {
         </div>
         <div className="lw-row-2-col-2">
           <div className="lw-row-2-col-2-htext">
-            About Our Language Support
+          About general knowledge and Vocational Aptitude test 
           </div>
           <div className="lw-row-2-col-2-text">
             <p>At EarlyStart E-Tutors, we offer targeted preparation for General Knowledge and Vocational Aptitude tests. Our tailored approach helps your child build a strong foundation in essential areas, ensuring they are well-prepared to tackle various assessments with confidence. </p>

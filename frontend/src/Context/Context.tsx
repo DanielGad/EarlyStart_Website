@@ -1,6 +1,6 @@
 import React, { useState, useEffect, createContext, useContext, ReactNode, SetStateAction } from "react";
 import useMediaQuery from './useMediaQuery';
-import { getAuth, onAuthStateChanged, User } from "firebase/auth";
+import { getAuth, onAuthStateChanged, signOut, User } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 
@@ -57,11 +57,7 @@ export const Provider: React.FC<ProviderProps> = ({ children }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollX > 30) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 30);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -100,6 +96,7 @@ export const Provider: React.FC<ProviderProps> = ({ children }) => {
     setUser(null);
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("userRole");
+    signOut(auth).catch((error) => console.error("Error signing out:", error));
   };
 
   // Firebase auth state change effect
@@ -110,7 +107,6 @@ export const Provider: React.FC<ProviderProps> = ({ children }) => {
         setIsLoggedIn(true);
         localStorage.setItem("isLoggedIn", "true");
 
-        // Fetch userRole only if not already set in localStorage
         if (!localStorage.getItem("userRole")) {
           const userDoc = await getDoc(doc(db, "EarlyStartData", user.uid));
           const role = userDoc.exists() ? userDoc.data().userRole : "user";
@@ -120,19 +116,39 @@ export const Provider: React.FC<ProviderProps> = ({ children }) => {
           setUserRole(localStorage.getItem("userRole"));
         }
       } else {
-        logout();  // Reset state and localStorage
+        logout();
       }
     });
     return () => unsubscribe();
   }, []);
 
-  // Effect to synchronize localStorage with isLoggedIn and userRole
+  // Inactivity timer logic
   useEffect(() => {
-    localStorage.setItem("isLoggedIn", isLoggedIn.toString());
-    if (userRole) {
-      localStorage.setItem("userRole", userRole);
-    }
-  }, [isLoggedIn, userRole]);
+    let inactivityTimer: NodeJS.Timeout;
+    const INACTIVITY_LIMIT = 5 * 60 * 1000; // 5 minutes
+
+    const resetTimer = () => {
+      clearTimeout(inactivityTimer);
+      inactivityTimer = setTimeout(() => {
+        console.log("User inactive. Logging out...");
+        logout();
+      }, INACTIVITY_LIMIT);
+    };
+
+    const activityEvents = ["mousemove", "keypress", "click", "scroll"];
+    activityEvents.forEach((event) =>
+      window.addEventListener(event, resetTimer)
+    );
+
+    resetTimer(); // Initialize the timer
+
+    return () => {
+      clearTimeout(inactivityTimer);
+      activityEvents.forEach((event) =>
+        window.removeEventListener(event, resetTimer)
+      );
+    };
+  }, [logout]);
 
   return (
     <Context.Provider

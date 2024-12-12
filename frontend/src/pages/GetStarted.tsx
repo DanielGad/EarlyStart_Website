@@ -15,8 +15,8 @@ const GetStarted = () => {
         <div className="serve">We're Here To Serve You</div>
       </div>
       <div className="Get-Started">
-        <div className="start-1">Get Started With EarlyStart E-Tutors</div>
-        <div className="start-2">Welcome! We're excited to help customize a personalized learning plan tailored specifically for your child's unique needs and educational goals. </div>
+        <div className="start-1">Get started with EarlyStart E- Tutors</div>
+        <div className="start-2">Welcome! We're excited to help customize a personalized learning plan tailored specifically for your child's unique needs and educational needs. </div>
         <div className="start-3">Choose Your Schedule</div>
         <div className="start-4">Select Your Preferred Schedule</div>
         <form action="">
@@ -33,7 +33,7 @@ const GetStarted = () => {
         <div className="start-7">Parent/Guidance Name:</div>
         <br />
         <textarea rows={1} required className="start-7-text"/>
-        <div className="start-7">Eamil Address:</div>
+        <div className="start-7">Email Address:</div>
         <br />
         <textarea rows={1} required className="start-7-text"/>
         <div className="start-7">Phone Number:</div>
