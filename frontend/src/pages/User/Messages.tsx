@@ -3,6 +3,7 @@ import { collection, query, where, getDocs, addDoc, onSnapshot } from 'firebase/
 import { getFirestore } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import '../../assets/styles/UserMessage.css'
+import { Link, useNavigate } from 'react-router-dom';
 
 interface Message {
   senderEmail: string;
@@ -25,6 +26,12 @@ const UserMessage: React.FC = () => {
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [chatList, setChatList] = useState<User[]>([]);
   const [isChatOpen, setIsChatOpen] = useState<boolean>(false);
+  const navigate = useNavigate();
+
+  const handleGoBack = () => {
+    navigate(-1);
+  };
+  
 
   const db = getFirestore();
   const auth = getAuth();
@@ -202,6 +209,9 @@ const UserMessage: React.FC = () => {
           </div>
         </div>
       )}
+      <Link to="">
+      <b style={{fontSize: "larger"}} onClick={handleGoBack}>Go Back</b>
+      </Link>
     </div>
   );
 };

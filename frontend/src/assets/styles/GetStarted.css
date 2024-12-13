@@ -69,23 +69,49 @@
   font-weight: 500;
 }
 
-.start-6-text {
+/* .start-6-text {
   resize: none;
   width: 100%;
   font-size: large;
   padding: 10px;
   border-radius: 10px;
   margin-bottom: 10px;
+} */
+
+/* Ensure the input fields are centered */
+.start-6-text, .start-7-text {
+  width: 100%;
+  max-width: 100%; /* Limit width for better appearance */
+  font-size: large;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  text-align: left; /* Align text to the left inside input fields */
+  margin-left: auto;
+  margin-right: auto; /* Center the input field horizontally */
+  resize: none;
+  font-family: Roboto;
 }
 
-.start-7-text {
+.start-6, .start-7 {
+  width: 100%;
+  text-align: left; /* Align labels to the left */
+}
+
+/* Optional: Center the checkboxes and radio buttons if needed */
+input[type="radio"], input[type="checkbox"] {
+  margin-right: 10px;
+  display: inline-block; /* Ensures proper alignment */
+}
+
+/* .start-7-text {
   padding: 15px;
   font-size: large;
   resize: none;
   width: 100%;
   border-radius: 10px;
   margin-bottom: 10px;
-}
+} */
 
 .start-7 {
   font-size: large;

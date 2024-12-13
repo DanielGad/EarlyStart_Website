@@ -21,6 +21,7 @@ import AdminDashboard from './pages/Admin/AdminDashboard';
 import ProfilePage from './pages/ProfilePage';
 import SendMessage from './pages/Admin/SendMessage';
 import Messages from './pages/User/Messages';
+import ManageAccount from './pages/Admin/ManageAccount';
 
 function App() {
   useEffect(() => {
@@ -58,6 +59,7 @@ function App() {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/send-message" element={<SendMessage />} />
         <Route path="/messages" element={<Messages />} />
+        <Route path="/manage-accounts" element={<ManageAccount />} />
         </Routes>
       </div>
     </>

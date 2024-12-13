@@ -1,3 +1,5 @@
+// AdminDashboard.tsx
+
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -7,6 +9,9 @@ import {
   where,
   getDocs,
   orderBy,
+  doc,
+  deleteDoc,
+  onSnapshot
 } from "firebase/firestore";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import "../../assets/styles/AdminDashboard.css";
@@ -37,6 +42,9 @@ const AdminDashboard: React.FC = () => {
   const [blogs, setBlogs] = useState<any[]>([]);
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
+
+  const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] = useState(false);
+  const [selectedBlogId, setSelectedBlogId] = useState<string | null>(null);
 
   const openBlogModal = () => {
     setIsBlogModalOpen(true);
@@ -101,25 +109,49 @@ const AdminDashboard: React.FC = () => {
     }
   };
 
+  // Real-time fetching of blogs
   useEffect(() => {
-    const fetchBlogs = async () => {
-      try {
-        const q = query(collection(db, "blogs"), orderBy("createdAt", "desc"));
-        const querySnapshot = await getDocs(q);
-        const blogsData = querySnapshot.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }));
-        setBlogs(blogsData);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching blogs:", error);
-        setLoading(false);
-      }
-    };
+    const q = query(collection(db, "blogs"), orderBy("createdAt", "desc"));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const blogsData = querySnapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      setBlogs(blogsData);
+      setLoading(false);
+    });
 
-    fetchBlogs();
+    return () => unsubscribe();
   }, []);
+
+  const deleteBlog = async (blogId: string) => {
+    try {
+      const blogDocRef = doc(db, "blogs", blogId);
+      await deleteDoc(blogDocRef);
+      setBlogs(blogs.filter(blog => blog.id !== blogId));
+    } catch (error) {
+      console.error("Error deleting blog:", error);
+      setModalMessage("Failed to delete the blog. Please try again.");
+      setShowModal(true);
+    }
+  };
+
+  const openDeleteConfirmation = (blogId: string) => {
+    setSelectedBlogId(blogId);
+    setIsDeleteConfirmationOpen(true);
+  };
+
+  const closeDeleteConfirmation = () => {
+    setSelectedBlogId(null);
+    setIsDeleteConfirmationOpen(false);
+  };
+
+  const handleDeleteConfirmed = () => {
+    if (selectedBlogId) {
+      deleteBlog(selectedBlogId);
+      closeDeleteConfirmation();
+    }
+  };
 
   if (loading) {
     return <div className="loading">Loading...</div>;
@@ -227,10 +259,30 @@ const AdminDashboard: React.FC = () => {
                 <h3>{blog.title}</h3>
                 <p>{blog.content}</p>
                 <span>{formatDateWithSuffix(blog.createdAt.toDate())}</span>
+                <br />
+                {/* Delete Button */}
+                <button
+                  className="delete-button"
+                  onClick={() => openDeleteConfirmation(blog.id)} // Open confirmation modal
+                >
+                  Delete Blog
+                </button>
               </div>
             ))
           )}
         </div>
+      )}
+
+      {/* Delete Confirmation Modal */}
+      {isDeleteConfirmationOpen && (
+        <Modal
+          showModal={true}
+          title="Confirm Deletion"
+          message="Are you sure you want to delete this blog post?"
+          buttonLabel="Cancel"
+          onClose={closeDeleteConfirmation}
+          onConfirm={handleDeleteConfirmed}
+        />
       )}
     </div>
   );

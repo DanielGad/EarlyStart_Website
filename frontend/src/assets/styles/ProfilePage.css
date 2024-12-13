@@ -1,114 +1,173 @@
-.profile {
-  max-width: 700px;
-  margin: 0 auto;
+/* Main Container */
+.profile-page-container {
+  max-width: 800px;
+  margin: 40px auto;
   padding: 20px;
+  background-color: #fff;
   border-radius: 8px;
-  background: #ffffff;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.profile__title {
-  font-size: 1.8rem;
+/* Heading */
+.profile-page-container h2 {
+  text-align: center;
+  font-size: 2rem;
   color: #333;
-  margin-bottom: 1rem;
-  text-align: center;
+  margin-bottom: 20px;
 }
 
-.profile__message {
-  color: #4CAF50;
+/* Form */
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Form Groups */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 1rem;
   font-weight: 600;
-  text-align: center;
-  margin-bottom: 1rem;
-}
-
-.profile__details {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.profile__label {
-  display: flex;
-  flex-direction: column;
   color: #555;
-  font-weight: 500;
 }
 
-.profile__input {
+.form-group input,
+.form-group textarea {
   padding: 10px;
   font-size: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  transition: border-color 0.3s;
-}
-
-.profile__input:focus {
-  border-color: #4CAF50;
+  border: 1px solid #ccc;
+  border-radius: 8px;
   outline: none;
+  transition: border-color 0.3s ease;
 }
 
-.profile__input--small {
-  width: 48%;
-  margin-top: 5px;
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #0066cc;
 }
 
-.profile__add-field {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  align-items: center;
+/* Bio Section */
+.form-group textarea {
+  min-height: 120px;
 }
 
-.profile__add-title {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #333;
-}
-
-.profile__button {
-  background-color: #6C63FF;
+/* Add Custom Field Button */
+.add-field-button {
+  padding: 10px 20px;
+  background-color: #0066cc;
   color: #fff;
-  padding: 10px 15px;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+.add-field-button:hover {
+  background-color: #005bb5;
+}
+
+.edit-button {
+  padding: 10px 20px;
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+/* Update Button */
+.update-button {
+  padding: 12px 20px;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 1rem;
-  transition: background-color 0.3s;
-  align-self: flex-end;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
 }
 
-.profile__button--primary {
-  background-color: #4CAF50;
+.update-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
 }
 
-.profile__button:hover {
-  background-color: #4C52D8;
+.update-button:hover {
+  background-color: #218838;
 }
 
-.profile__button--primary:hover {
-  background-color: #45A049;
+/* Custom Fields Styling */
+.form-group input[type="text"] {
+  flex: 1;
 }
 
-/* Responsive Styles */
+.form-group input[type="text"]:not(:first-child) {
+  margin-left: 10px;
+}
+
+.form-group input[type="text"]::placeholder {
+  color: #aaa;
+}
+
+/* Loading/Errors */
+.loading {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #0066cc;
+}
+
+.error-message {
+  text-align: center;
+  font-size: 1.2rem;
+  color: red;
+  margin-top: 20px;
+}
+
+/* Custom Fields Container */
+.custom-fields-container {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.custom-fields-container .form-group {
+  flex: 1;
+  min-width: 200px;
+}
+
+/* Media Queries */
 @media (max-width: 768px) {
-  .profile {
+  .profile-page-container {
     padding: 15px;
   }
 
-  .profile__title {
-    font-size: 1.6rem;
+  .profile-form {
+    gap: 15px;
   }
 
-  .profile__add-field {
+  .form-group input,
+  .form-group textarea {
+    font-size: 0.9rem;
+  }
+
+  .add-field-button,
+  .update-button {
+    font-size: 0.9rem;
+    padding: 10px 18px;
+  }
+
+  .custom-fields-container {
     flex-direction: column;
-    align-items: stretch;
-  }
-
-  .profile__input--small {
-    width: 100%;
-  }
-
-  .profile__button {
-    width: 100%;
   }
 }

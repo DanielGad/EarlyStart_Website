@@ -20,6 +20,25 @@
   text-align: center;
 }
 
+.button-control {
+  display: grid;
+  gap: 20px;
+}
+
+.confirm-button {
+  padding: 10px 20px;
+  border: none;
+  background: red; /* Change to desired color */
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  font-size: 1em; /* Consistent button font size */
+}
+
+.confirm-button:hover {
+  background-color: rgb(99, 23, 23);
+}
+
 .modal-title {
   font-size: 1.5em; /* Larger font for title */
   margin-bottom: 10px;
@@ -38,6 +57,10 @@
   color: white;
   cursor: pointer;
   font-size: 1em; /* Consistent button font size */
+}
+
+.modal-button:hover {
+  background-color: rgb(34, 13, 59);
 }
 
 /* Media Queries for responsiveness */
