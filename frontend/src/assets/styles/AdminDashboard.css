@@ -1,22 +1,19 @@
-/* General styles */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f4f7fa;
   margin: 0;
 }
 
-/* Dashboard container */
 .admin-dashboard-container {
   display: flex;
   flex-direction: column;
   padding: 20px;
-  max-width: 1200px; /* Limit maximum width for larger screens */
-  margin: auto; /* Center the dashboard */
+  max-width: 1200px;
+  margin: auto;
 }
 
-/* Navbar styles */
 .admin-navbar {
-  background-color: #343a40; /* Dark background for the navbar */
+  background-color: #343a40;
   padding: 15px 20px;
   border-radius: 5px;
 }
@@ -29,21 +26,20 @@ body {
 }
 
 .nav-link {
-  color: #ffffff; /* White text for links */
+  color: #ffffff;
   text-decoration: none;
   font-weight: 500;
   transition: color 0.3s ease;
 }
 
 .nav-link:hover {
-  color: #f8f9fa; /* Lighter color on hover */
+  color: #f8f9fa;
 }
 
-/* Button styles */
 .nav-button,
 .logout-button,
 .admin-button {
-  background-color: #007bff; /* Bootstrap primary color */
+  background-color: #007bff;
   color: #fff;
   border: none;
   padding: 10px 20px;
@@ -55,104 +51,102 @@ body {
 .nav-button:hover,
 .logout-button:hover,
 .admin-button:hover {
-  background-color: #0056b3; /* Darker shade on hover */
+  background-color: #0056b3;
 }
 
-/* Dashboard main content */
 .admin-dashboard {
   margin-top: 20px;
 }
 
 .user-details {
-  background-color: #ffffff; /* White background for user details */
+  background-color: #ffffff;
   padding: 15px;
   border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
-  margin-bottom: 20px; /* Space below user details */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
 }
 
-/* Blog Post Styles */
 .blog-post {
-  background-color: #ffffff; /* White background for blog posts */
+  background-color: #ffffff;
   border: 1px solid #dee2e6;
-  border-radius: 8px; /* More rounded corners */
-  padding: 20px; /* Increased padding for a more spacious look */
-  margin-top: 15px; /* Adjusted margin between posts */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* More prominent shadow effect */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added transition for shadow */
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .blog-post:hover {
-  transform: translateY(-5px); /* Slightly more lift effect on hover */
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Increased shadow effect on hover */
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* Blog Post Title and Content (Optional) */
 .blog-post h3 {
   font-size: 1.5em;
-  margin-bottom: 10px; /* Space below the title */
-  color: #333; /* Dark text color */
+  margin-bottom: 10px;
+  color: #333;
 }
 
 .blog-post p {
-  color: #555; /* Slightly lighter text color for the content */
-  line-height: 1.6; /* Increased line-height for better readability */
+  color: #555;
+  line-height: 1.6;
   font-size: large;
 }
 
-/* Delete Button Style */
+.blog-date {
+  color: black;
+  font-weight: 500;
+}
+
 .delete-button {
-  background-color: #dc3545; /* Bootstrap danger color for delete */
+  background-color: #dc3545;
   color: #fff;
   border: none;
-  padding: 8px 15px; /* Padding for a more button-like appearance */
+  padding: 8px 15px;
   cursor: pointer;
   border-radius: 4px;
   transition: background-color 0.3s ease, transform 0.2s ease;
-  font-size: 1em; /* Font size for the button */
+  font-size: 1em;
   margin-top: 20px;
 }
 
 .delete-button:hover {
-  background-color: #c82333; /* Darker shade of red on hover */
-  transform: scale(1.05); /* Slight scale effect on hover */
+  background-color: #c82333;
+  transform: scale(1.05);
 }
 
 .delete-button:active {
-  background-color: #bd2130; /* Even darker red when the button is pressed */
-  transform: scale(1); /* Reset scale on active */
+  background-color: #bd2130;
+  transform: scale(1);
 }
 
-
-/* Loading and error messages */
 .loading,
 .error-message {
   text-align: center;
   font-size: 1.5em;
   margin-top: 20px;
-  color: #dc3545; /* Bootstrap danger color */
+  color: #dc3545;
 }
 
-/* Responsive styles */
 @media (max-width: 768px) {
   .admin-navbar {
-    padding: 10px; /* Less padding on smaller screens */
+    padding: 10px;
   }
 
   .nav-links {
-    flex-direction: column; /* Stack nav links vertically */
-    gap: 10px; /* Reduce gap */
+    flex-direction: column;
+    gap: 10px;
   }
 
   .admin-dashboard-container {
-    padding: 10px; /* Reduce padding for mobile */
+    padding: 10px;
   }
 
   .admin-dashboard {
-    margin-top: 10px; /* Less margin on mobile */
+    margin-top: 10px;
   }
 
   .blog-post {
-    padding: 10px; /* Less padding for blog posts on mobile */
+    padding: 10px;
   }
 }

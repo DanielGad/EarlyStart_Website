@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { addDoc, collection, Timestamp } from "firebase/firestore";
 import { db } from "../../firebase"; // Ensure correct firebase import
-import '../../assets/styles/BlogModal.css'
+import "../../assets/styles/BlogModal.css";
+import Modal from "../Modal";
 
 interface BlogModalProps {
   isOpen: boolean;
@@ -9,44 +10,86 @@ interface BlogModalProps {
 }
 
 const BlogModal: React.FC<BlogModalProps> = ({ isOpen, onClose }) => {
-  if (!isOpen) return null;
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [error, setError] = useState("");
+  const [postedBy, setPostedBy] = useState("");
 
-  // Handle form submission to create a blog post
+  const [showModal, setShowModal] = useState(false);
+  const [modalProps, setModalProps] = useState({
+    title: "",
+    message: "",
+    buttonLabel: "",
+  });
+  const [loading, setLoading] = useState(false); // Loading state
+
+  const resetForm = () => {
+    setTitle("");
+    setContent("");
+    setPostedBy("");
+  };
+
+  const handleModalClose = () => {
+    setShowModal(false);
+    resetForm();
+    onClose();
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!title || !content) {
-      setError("Please fill in all fields");
-      return;
-    }
+    // if (!title.trim() || !content.trim()) {
+    //   setModalProps({
+    //     title: "Error",
+    //     message: "All fields are required. Please fill out the form completely.",
+    //     buttonLabel: "Close",
+    //   });
+    //   setShowModal(true);
+    //   return;
+    // }
 
+    setLoading(true); // Start loading
     try {
-      // Add a new blog post to the Firestore collection "blogs"
       await addDoc(collection(db, "blogs"), {
         title,
         content,
+        postedBy,
         createdAt: Timestamp.fromDate(new Date()),
       });
 
-      alert("Blog created successfully!");
-      onClose(); // Close the modal after successful blog creation
+      setModalProps({
+        title: "Success!",
+        message: "Blog created successfully!",
+        buttonLabel: "Continue",
+      });
+      setShowModal(true);
     } catch (error) {
       console.error("Error creating blog:", error);
-      setError("Error creating blog, please try again.");
+      setModalProps({
+        title: "Error",
+        message: "An error occurred while creating the blog. Please try again.",
+        buttonLabel: "Close",
+      });
+      setShowModal(true);
+    } finally {
+      setLoading(false); // Stop loading
     }
   };
 
-  if (!isOpen) {
-    return null; // Don't render anything if modal is not open
-  }
+  if (!isOpen) return null;
 
   return (
     <div className="modal-overlay">
+      <Modal
+        showModal={showModal}
+        title={modalProps.title}
+        message={modalProps.message}
+        buttonLabel={modalProps.buttonLabel}
+        onClose={handleModalClose}
+      />
       <div className="modal-content">
-        <button className="close-button" onClick={onClose}>X</button>
+        <button className="close-button" onClick={handleModalClose}>
+          X
+        </button>
         <h2 className="modal-title">Create a New Blog Post</h2>
         <form className="blog-form" onSubmit={handleSubmit}>
           <div className="form-group">
@@ -71,8 +114,23 @@ const BlogModal: React.FC<BlogModalProps> = ({ isOpen, onClose }) => {
               required
             ></textarea>
           </div>
-          {error && <p className="error-text">{error}</p>}
-          <button className="submit-button" type="submit">Create Blog</button>
+          <div className="form-group">
+            <label htmlFor="postedBy">Posted By:</label>
+            <input
+              className="form-input"
+              type="text"
+              id="postedBy"
+              value={postedBy}
+              onChange={(e) => setPostedBy(e.target.value)}
+            />
+          </div>
+          <button
+            className="submit-button"
+            type="submit"
+            disabled={loading} // Disable button while loading
+          >
+            {loading ? "Creating..." : "Create Blog"} {/* Change text */}
+          </button>
         </form>
       </div>
     </div>

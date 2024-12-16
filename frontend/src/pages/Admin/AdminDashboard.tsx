@@ -253,23 +253,26 @@ const AdminDashboard: React.FC = () => {
           <h2>Latest Blog Posts</h2>
           {blogs.length === 0 ? (
             <p>No blogs available.</p>
-          ) : (
-            blogs.map((blog) => (
-              <div key={blog.id} className="blog-post">
-                <h3>{blog.title}</h3>
-                <p>{blog.content}</p>
-                <span>{formatDateWithSuffix(blog.createdAt.toDate())}</span>
-                <br />
-                {/* Delete Button */}
-                <button
-                  className="delete-button"
-                  onClick={() => openDeleteConfirmation(blog.id)} // Open confirmation modal
-                >
-                  Delete Blog
-                </button>
+          ) : (blogs.map((blog) => (
+            <div key={blog.id} className="blog-post">
+              <h3>{blog.title}</h3>
+              <p>{blog.content}</p>
+              <p>
+                <strong>Posted by:</strong> {blog.postedBy || "Management"}
+              </p>
+              <div className="blog-date">
+                {`${formatDateWithSuffix(blog.createdAt.toDate())}, ${blog.createdAt
+                  .toDate()
+                  .toLocaleTimeString()}`}
               </div>
-            ))
-          )}
+              <button
+                className="delete-button"
+                onClick={() => openDeleteConfirmation(blog.id)}
+              >
+                Delete Blog
+              </button>
+            </div>
+          )))}
         </div>
       )}
 

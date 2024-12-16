@@ -158,7 +158,14 @@ const UserDashboard: React.FC = () => {
                 <div key={blog.id} className="blog-post">
                   <h3>{blog.title}</h3>
                   <p>{blog.content}</p>
-                  <span>{formatDateWithSuffix(blog.createdAt.toDate())}</span>
+                  <p>
+                <strong>Posted by:</strong> {blog.postedBy || "Management"}
+              </p>
+
+                  <span>
+                {`${formatDateWithSuffix(blog.createdAt.toDate())}, ${blog.createdAt
+                  .toDate()
+                  .toLocaleTimeString()}`}</span>
                 </div>
               ))
             )}

@@ -165,9 +165,10 @@ const Login: React.FC = () => {
             <div className="form-group">
               <label htmlFor="email">Email:</label>
               <input
+              style={{padding: "15px"}}
                 type="email"
                 id="email"
-                placeholder="Enter your email address"
+                placeholder="Enter your email address:"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -177,9 +178,10 @@ const Login: React.FC = () => {
             <div className="form-group">
               <label htmlFor="password">Password:</label>
               <input
+              style={{padding: "15px"}}
                 type="password"
                 id="password"
-                placeholder="Enter your Password"
+                placeholder="Enter your Password:"
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}

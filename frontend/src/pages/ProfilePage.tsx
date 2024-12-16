@@ -1,26 +1,30 @@
-import React, { useEffect, useState, useContext } from "react";
-import { getFirestore, collection, query, where, getDocs, doc, updateDoc } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
+import {
+  getFirestore,
+  collection,
+  query,
+  where,
+  getDocs,
+  doc,
+  updateDoc,
+} from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import '../assets/styles/ProfilePage.css'
+import "../assets/styles/ProfilePage.css";
 import { Link, useNavigate } from "react-router-dom";
 
 const ProfilePage: React.FC = () => {
   const navigate = useNavigate();
   const [userData, setUserData] = useState<any>(null);
+  const [formData, setFormData] = useState<any>({});
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [formData, setFormData] = useState<any>({});
-  const [customFields, setCustomFields] = useState<any[]>([]);
   const [formLoading, setFormLoading] = useState(false);
-  const [isEditing, setIsEditing] = useState(false); // Track editing mode
+  const [isEditing, setIsEditing] = useState(false);
 
   const auth = getAuth();
   const db = getFirestore();
 
-  const handleGoBack = () => {
-    navigate(-1); 
-  };
-
+  // Fetch user data from Firestore
   const fetchUserData = async (uid: string) => {
     try {
       const usersCollectionRef = collection(db, "EarlyStartData");
@@ -29,20 +33,21 @@ const ProfilePage: React.FC = () => {
 
       if (!querySnapshot.empty) {
         const userDoc = querySnapshot.docs[0];
-        const userInfo = userDoc.data();
-        setUserData(userInfo);
-        setFormData(userInfo);
+        setUserData({ ...userDoc.data(), id: userDoc.id });
+        setFormData(userDoc.data());
       } else {
-        setErrorMessage("No user data found. Please reload or try again.");
+        setErrorMessage("No user data found. Please try again.");
       }
     } catch (error) {
+      console.error("Error fetching user data:", error);
       setErrorMessage("Failed to load user data. Please try again later.");
     } finally {
       setLoading(false);
     }
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // Handle input changes
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prevData: any) => ({
       ...prevData,
@@ -50,70 +55,14 @@ const ProfilePage: React.FC = () => {
     }));
   };
 
-  const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevData: any) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  const handleAddField = () => {
-    setCustomFields([...customFields, { name: "", value: "" }]);
-  };
-
-  const handleCustomFieldChange = (index: number, key: string, value: string) => {
-    const updatedFields = customFields.map((field, i) =>
-      i === index ? { ...field, [key]: value } : field
-    );
-    setCustomFields(updatedFields);
-  };
-
-  const renderCustomFields = () =>
-    customFields.map((field, index) => (
-      <div key={index} className="form-group">
-        <input
-          type="text"
-          placeholder="Field Name"
-          value={field.name}
-          onChange={(e) =>
-            handleCustomFieldChange(index, "name", e.target.value)
-          }
-          disabled={!isEditing}
-        />
-        <input
-          type="text"
-          placeholder="Field Value"
-          value={field.value}
-          onChange={(e) =>
-            handleCustomFieldChange(index, "value", e.target.value)
-          }
-          disabled={!isEditing}
-        />
-      </div>
-    ));
-
-  const handleFormSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!userData) return;
+  // Update user profile
+  const handleFormSubmit = async () => {
+    if (!userData || !userData.id) return;
 
     try {
       setFormLoading(true);
-
-      const updatedData = {
-        ...formData,
-        customFields: customFields.reduce((acc, field) => {
-          if (field.name && field.value) {
-            acc[field.name] = field.value;
-          }
-          return acc;
-        }, {}),
-      };
-
       const userDocRef = doc(db, "EarlyStartData", userData.id);
-      await updateDoc(userDocRef, updatedData);
-
-      // Lock the form inputs and update the button text to "Edit Profile"
+      await updateDoc(userDocRef, formData);
       setIsEditing(false);
       alert("Profile updated successfully!");
     } catch (error) {
@@ -124,10 +73,12 @@ const ProfilePage: React.FC = () => {
     }
   };
 
+  // Toggle editing mode
   const toggleEditMode = () => {
-    setIsEditing((prevState) => !prevState); // Toggle edit mode
+    setIsEditing((prevState) => !prevState);
   };
 
+  // Fetch data on component mount
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -153,7 +104,7 @@ const ProfilePage: React.FC = () => {
       <h2>Your Profile</h2>
 
       {userData && (
-        <form onSubmit={handleFormSubmit} className="profile-form">
+        <form className="profile-form">
           <div className="form-group">
             <label htmlFor="fullName">Full Name:</label>
             <input
@@ -173,7 +124,6 @@ const ProfilePage: React.FC = () => {
               id="email"
               name="email"
               value={formData.email || ""}
-              onChange={handleInputChange}
               disabled
             />
           </div>
@@ -196,7 +146,7 @@ const ProfilePage: React.FC = () => {
               id="bio"
               name="bio"
               value={formData.bio || ""}
-              onChange={handleTextareaChange}
+              onChange={handleInputChange}
               placeholder="Tell us about yourself"
               disabled={!isEditing}
             />
@@ -227,26 +177,26 @@ const ProfilePage: React.FC = () => {
             />
           </div>
 
-          {renderCustomFields()}
-
           <button
             type="button"
             onClick={isEditing ? handleFormSubmit : toggleEditMode}
             className="edit-button"
             disabled={formLoading}
           >
-            {isEditing ? (formLoading ? "Updating..." : "Update Profile") : "Edit Profile"}
+            {isEditing ? (formLoading ? "Updating..." : "Save Changes") : "Edit Profile"}
           </button>
+          <Link to={""}>
+          <b className="back-button" 
+          style={{fontSize: "larger", marginTop: "30px"}}
+          onClick={() => navigate(-1)}>
+            Go Back
+          </b>
+      </Link>
         </form>
       )}
-      <br />
-
-      <Link to="">
-      <b style={{fontSize: "larger", paddingTop: "20px"}} onClick={handleGoBack}>Go Back</b>
-      </Link>
+      
     </div>
   );
 };
-
 
 export default ProfilePage;
