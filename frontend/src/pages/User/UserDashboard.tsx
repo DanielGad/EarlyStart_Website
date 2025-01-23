@@ -19,7 +19,7 @@ const UserDashboard: React.FC = () => {
   const navigate = useNavigate();
 
   const context = useContext(Context);
-  
+
   if (!context) {
     throw new Error("Context has not been provided.");
   }
@@ -38,10 +38,16 @@ const UserDashboard: React.FC = () => {
       const usersCollectionRef = collection(db, "EarlyStartData");
       const userQuery = query(usersCollectionRef, where("userId", "==", uid));
       const querySnapshot = await getDocs(userQuery);
-      
+
       if (!querySnapshot.empty) {
         const userDoc = querySnapshot.docs[0];
-        setUserData(userDoc.data());
+        const userDocData = userDoc.data();
+        setUserData(userDocData);
+
+        // Check if the 'getstarted' object exists in the user's document
+        if (!userDocData.getstarted) {
+          setShowModal(true); // Show the modal if 'getstarted' is missing
+        }
       } else {
         setErrorMessage("No user data found. Please check your profile.");
       }
@@ -90,7 +96,7 @@ const UserDashboard: React.FC = () => {
   }, [db]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="loading-screen">Loading...</div>;
   }
 
   if (errorMessage) {
@@ -115,57 +121,67 @@ const UserDashboard: React.FC = () => {
 
   const handleLoginRedirect = () => {
     setShowModal(false);
-    navigate("/login");
+    navigate("");
+  };
+
+  const handleModalConfirm = () => {
+    setShowModal(false);
+    navigate("/get-started"); // Redirecting to a profile or any other page on confirmation
   };
 
   return (
-    <div className="user-homepage-container">
+    <div className="dashboard-container">
+      {/* Modal for 'Get Started' */}
       <Modal
         showModal={showModal}
-        title="Access Denied!"
-        message="Please log in to access the Dashboard"
-        buttonLabel="Log In"
+        title={`Welcome ${userData ? userData.username : "User"}!`}
+        message="Get Started to Schedule Right Away."
+        buttonLabel="Later"
         onClose={handleLoginRedirect} // Redirect on button click
+        onConfirm={handleModalConfirm} // Handle confirmation (redirect to profile)
       />
       
       {isLoggedIn && (
         <>
-          <div className="welcome-section">
+          <div className="dashboard-header">
             <h1>Welcome, {userData ? userData.username : "User"}!</h1>
             <p className="user-email">{userData?.email}</p>
           </div>
-          <div className="navigation-section">
+
+          <div className="navigation-bar">
             <Link to="/profile" className="nav-link">View Profile</Link>
             <Link to="/messages" className="nav-link">Messages</Link>
-            <button className="logout-button" onClick={handleLogout}>Logout</button>
+            <Link to="/login" className="nav-link" onClick={handleLogout}>Logout</Link>
           </div>
-          <div className="user-dashboard">
+
+          <div className="user-details-section">
             <h2>Your Dashboard</h2>
             <p>Here you can see your recent activities, updates, and more.</p>
             {userData && (
-              <div className="user-details">
-                <p>Full Name: {userData.fullName}</p>
-                <p>Email: {userData.email}</p>
-                <p>Joined Date: {formatDateWithSuffix(userData.createdAt?.toDate())}</p>
-                <p>Username: {userData.username}</p>
+              <div className="user-details-card">
+                <p><strong>Full Name:</strong> {userData.fullName}</p>
+                <p><strong>Email:</strong> {userData.email}</p>
+                <p><strong>Joined Date:</strong> {formatDateWithSuffix(userData.createdAt?.toDate())}</p>
+                <p><strong>Username:</strong> {userData.username}</p>
               </div>
             )}
+          </div>
+
+          <div className="blog-section">
             <h2>Latest Blog Posts</h2>
             {blogs.length === 0 ? (
               <p>No blogs available.</p>
             ) : (
               blogs.map((blog) => (
-                <div key={blog.id} className="blog-post">
+                <div key={blog.id} className="blog-post-card">
                   <h3>{blog.title}</h3>
                   <p>{blog.content}</p>
-                  <p>
-                <strong>Posted by:</strong> {blog.postedBy || "Management"}
-              </p>
-
-                  <span>
-                {`${formatDateWithSuffix(blog.createdAt.toDate())}, ${blog.createdAt
-                  .toDate()
-                  .toLocaleTimeString()}`}</span>
+                  <p><strong>Posted by:</strong> {blog.postedBy || "Management"}</p>
+                  <p className="blog-date">
+                    {`${formatDateWithSuffix(blog.createdAt.toDate())}, ${blog.createdAt
+                      .toDate()
+                      .toLocaleTimeString()}`}
+                  </p>
                 </div>
               ))
             )}

@@ -1,15 +1,31 @@
-import React, { useEffect } from "react"
+import React, { useContext, useEffect } from "react"
 import '../assets/styles/GetTutor.css';
 import Tutors from "../assets/Data/Tutor.json";
 import ArrowDropRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import Footer from '../components/Footer/Footer';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Action from "../components/Action/Action";
+import { Context } from "../Context/Context";
 
 const GetTutor = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  const navigate = useNavigate();
+
+    const context = useContext(Context);
+    if (!context) {
+      throw new Error("Must be used within a Context provider");
+    }
+
+    const { isLoggedIn } = context;
+
+     const handleLetHelpYouChoose = () => {
+    // if (isLoggedIn === false) {
+      navigate("/get-started")
+    // }
+    }
+    
   
   return (
     <div className="gt-container">
@@ -38,9 +54,9 @@ const GetTutor = () => {
         <Link to={"/"}>
         <button className="gt-back">Back</button>
         </Link>
-        <Link to={"/"}>
-        <button className="gt-choose">Let Us Choose for You <ArrowDropRightIcon className='arrow-right'/></button>
-        </Link>
+        {/* <Link to={""}> */}
+        <button className="gt-choose" onClick={handleLetHelpYouChoose}>Let Us Choose for You <ArrowDropRightIcon className='arrow-right'/></button>
+        {/* </Link> */}
       </div>
       <Action />
       <Footer />

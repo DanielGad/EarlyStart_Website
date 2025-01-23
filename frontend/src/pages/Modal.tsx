@@ -5,8 +5,8 @@ interface CustomModalProps {
   showModal: boolean;
   title: string; // New title property
   message: string;
-  buttonLabel: string;
-  onClose: () => void;
+  buttonLabel?: string;
+  onClose?: () => void;
   onConfirm?: () => void;
 }
 
@@ -21,7 +21,7 @@ const Modal: React.FC<CustomModalProps> = ({ showModal, title, message, buttonLa
         <div className="button-control">
         {onConfirm && (
             <button onClick={onConfirm} className="confirm-button">
-              Confirm
+              Continue
             </button>
           )}
         <button className="modal-button" onClick={onClose}>
