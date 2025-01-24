@@ -166,9 +166,9 @@ const Navbar = () => {
 
           <Link to={"/login"} style={{color: menu === "login" ? 'rgb(124,70,164)' : ''}} onClick={() => {setMenu("login")}}>
           {isLoggedIn ? (
-            // If logged in, show 'Profile' and direct to appropriate dashboard
+            // If logged in, show 'Dashboard' and direct to appropriate dashboard
             <div><Link to={userRole === 'admin' ? '/admin-dashboard' : '/user-dashboard'}>
-              Profile
+              Dashboard
             </Link>
             </div> 
           ) : (
@@ -237,9 +237,9 @@ const Navbar = () => {
         <NavLink to="/call" label="Call Us" menuKey="call" setMenu={setMenu} setIsMenuOpen={setIsMenuOpen} menu={menu} />
         <NavLink to="/login" label=
         {isLoggedIn ? (
-            // If logged in, show 'Profile' and direct to appropriate dashboard
+            // If logged in, show 'Dashboard' and direct to appropriate dashboard
             <Link to={userRole === 'admin' ? '/admin-dashboard' : '/user-dashboard'}>
-              Profile
+              Dashboard
             </Link>
           ) : (
             // If not logged in, show 'Login'

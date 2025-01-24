@@ -1,9 +1,11 @@
 import React, { useEffect } from "react"
 import '../assets/styles/Confirmation.css';
 import Tick from '../assets/images/tick.png';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const ContactConfirm = () => {
+  const navigate = useNavigate();
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -17,7 +19,16 @@ const ContactConfirm = () => {
       <p className='p-message'>We appreciate your patience and look forward to helping your child achieve their academic goals.</p>
       <p className='p-message'>Best regards, <br />
       The Early Start Tutors Team</p>
-      <Link to={"/"} className='backhome' style={{marginBottom: "100px"}}>Back to homepage</Link>
+      <button onClick={() => navigate("/")} className='backhome' 
+      style={{
+        marginBottom: "100px", 
+        border: "none", 
+        borderRadius: "5px",
+        cursor: "pointer", 
+        padding: "10px 30px", 
+        backgroundColor: "#443655",
+        color: "white",
+        }}>Return</button>
     </div>
   )
 }

@@ -51,10 +51,9 @@ const GetTutor = () => {
         ))}
       </div>
       <div className="gt-lower">
-        <Link to={"/"}>
-        <button className="gt-back">Back</button>
+        <Link to="#">
+        <button className="gt-back" onClick={() => navigate(-1)}>Back</button>
         </Link>
-        {/* <Link to={""}> */}
         <button className="gt-choose" onClick={handleLetHelpYouChoose}>Let Us Choose for You <ArrowDropRightIcon className='arrow-right'/></button>
         {/* </Link> */}
       </div>

@@ -4,7 +4,7 @@ import Footer from "../components/Footer/Footer";
 import { Link, useNavigate } from "react-router-dom";
 import ArrowDropRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { getAuth } from "firebase/auth";
-import { db } from "../firebase"; // Import your Firebase configuration
+import { db } from "../firebase"; 
 import { collection, doc, getDoc, getDocs, query, setDoc, updateDoc, where } from "firebase/firestore";
 
 const GetStarted = () => {
@@ -16,6 +16,7 @@ const GetStarted = () => {
   const [email, setEmail] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
   const [childName, setChildName] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   const navigate = useNavigate();
   const auth = getAuth();
@@ -54,6 +55,8 @@ const GetStarted = () => {
       alert("All fields are required.");
       return;
     }
+
+    setLoading(true);
   
     try {
       // Query Firestore for the document with the matching user.uid
@@ -65,15 +68,17 @@ const GetStarted = () => {
       if (!querySnapshot.empty) {
         // If we find the document with the user's uid, check if 'getstarted' field exists
         querySnapshot.forEach(async (docSnap: { id: any; data: () => any }) => {
-          const docId = docSnap.id; // Get the document ID
+          const docId = docSnap.id; 
           const userDocRef = doc(db, "EarlyStartData", docId);
   
           // Check if the 'getstarted' field exists
           const docData = docSnap.data();
           if (docData.getstarted) {
             alert("Information has already been provided!");
+            navigate(-1);
+            setLoading(false);
           } else {
-            // Prepare the data to be saved inside the 'getstarted' field
+            // If 'getstarted' field does not exist, update the document with the new data
             const updatedData = {
               getstarted: {
                 childName,
@@ -89,31 +94,12 @@ const GetStarted = () => {
   
             // Update the document with 'getstarted' field
             await updateDoc(userDocRef, updatedData);
-            alert("Information updated successfully!");
-            navigate("/"); // Navigate to homepage or other page after successful submission
+            console.log("Information updated successfully!", updatedData);
+            ("Information updated successfully!");
+            navigate('/confirm');
+            setLoading(false);
           }
         });
-      } else {
-        // If no document is found, create a new one with the user's UID
-        const newDocRef = doc(db, "EarlyStartData", user.uid); // Use user.uid as the document ID
-        const newData = {
-          userId: user.uid,
-          getstarted: {
-            childName,
-            preferredDays: selectedDays,
-            preferredTimeSlot: selectedTimeSlot,
-            childInfo,
-            specificFocus,
-            parentName,
-            email,
-            phone,
-          }
-        };
-  
-        // Save new data with the 'getstarted' field
-        await setDoc(newDocRef, newData);
-        alert("Information saved successfully!");
-        navigate(-1); // Navigate to homepage or other page after successful submission
       }
     } catch (error: any) {
       console.error("Error updating Firestore:", error);
@@ -244,11 +230,10 @@ const GetStarted = () => {
       </div>
 
       <div className="gt-lower">
-        <Link to={"/"}>
+        <Link to={"#"} onClick={() => navigate(-1)}>
           <button className="gt-back">Back</button>
         </Link>
-        <button className="gt-choose" onClick={handleSubmit}>
-          Submit <ArrowDropRightIcon className="arrow-right" />
+        <button className="gt-choose" onClick={handleSubmit} disabled={loading}>{loading ? "Submitting..." : "Submit"}<ArrowDropRightIcon className="arrow-right" />
         </button>
       </div>
 

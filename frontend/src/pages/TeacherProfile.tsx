@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import Tutor_Data from '../assets/Data/Tutor.json';
 import ArrowDropRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import Footer from '../components/Footer/Footer';
@@ -21,6 +21,8 @@ interface Tutor {
 }
 
 const TeacherProfile: React.FC = () => {
+  const navigate = useNavigate();
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -80,10 +82,10 @@ const TeacherProfile: React.FC = () => {
       </div>
 
       <div className="tp-lower">
-        <Link to="/get-tutor">
+        <Link to="#" onClick={() => navigate(-1)}>
           <button className="tp-back">Back</button>
         </Link>
-        <Link to="/">
+        <Link to="#">
           <button className="tp-choose">Book Now <ArrowDropRightIcon className='arrow-right'/></button>
         </Link>
       </div>

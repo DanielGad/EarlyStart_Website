@@ -34,8 +34,6 @@ const AdminDashboard: React.FC = () => {
     throw new Error("Context has not been provided.");
   }
 
-  const { isLoggedIn, setIsLoggedIn } = context;
-
   // Separate state for each modal
   const [isBlogModalOpen, setIsBlogModalOpen] = useState(false);
   const [isAdminActionOpen, setIsAdminActionOpen] = useState(false);
@@ -241,11 +239,11 @@ const AdminDashboard: React.FC = () => {
 
             {userData && (
               <div className="user-details">
-                <p>Full Name: {userData.fullName}</p>
-                <p>Email: {userData.email}</p>
-                <p>Username: {userData.username}</p>
-                <p>Role: {userData.userRole || "User"}</p>
-                <p>Status: {userData.status || "active"}</p>
+                <p><b>Full Name:</b> {userData.fullName}</p>
+                <p><b>Email:</b> {userData.email}</p>
+                <p><b>Username:</b> {userData.username}</p>
+                <p><b>Role:</b> {userData.userRole || "User"}</p>
+                <p><b>Status:</b> {userData.status || "active"}</p>
               </div>
             )}
           </div>
