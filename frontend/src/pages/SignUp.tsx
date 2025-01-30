@@ -31,7 +31,7 @@ const SignUp = () => {
   const handleContinue = () => {
     setShowModal(false);
     if (modalTitle === "Success!") {
-      navigate("/login"); // Navigate to login on success
+      navigate("/user-dashboard"); // Navigate to login on success
     }
   };
 

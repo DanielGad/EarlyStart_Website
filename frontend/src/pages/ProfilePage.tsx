@@ -99,6 +99,21 @@ const ProfilePage: React.FC = () => {
     return <div className="error-message">{errorMessage}</div>;
   }
 
+  const formatDateWithSuffix = (date: Date): string => {
+    const day = date.getDate();
+    const suffix = (day % 10 === 1 && day !== 11) ? 'st' :
+                   (day % 10 === 2 && day !== 12) ? 'nd' :
+                   (day % 10 === 3 && day !== 13) ? 'rd' : 'th';
+    const month = date.toLocaleString('default', { month: 'long' });
+    const year = date.getFullYear();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    const formattedHours = hours % 12 || 12; // Convert to 12-hour format
+    const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes; // Add leading zero if needed
+    return `${day}${suffix} of ${month} ${year} at ${formattedHours}:${formattedMinutes}${ampm}`;
+  };
+
   return (
     <div className="profile-page-container">
       <h2>Your Profile</h2>
@@ -127,6 +142,28 @@ const ProfilePage: React.FC = () => {
               disabled
             />
           </div>
+
+            <div className="form-group">
+            <label htmlFor="joined">Joined on:</label>
+            <input
+              type="text"
+              id="joined"
+              name="joined"
+              value={formatDateWithSuffix(formData.createdAt.toDate()) || ""}
+              disabled
+            />
+            </div>
+
+            <div className="form-group">
+            <label htmlFor="role">Role:</label>
+            <input
+              type="text"
+              id="role"
+              name="role"
+              value={formData.userRole || ""}
+              disabled
+            />
+            </div>
 
           <div className="form-group">
             <label htmlFor="username">Username:</label>

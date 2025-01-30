@@ -3,11 +3,12 @@ import "../assets/styles/Login.css";
 import Background from "../assets/images/customer-care.jpg";
 import Footer from "../components/Footer/Footer";
 import { Link, useNavigate } from "react-router-dom";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { collection, query, where, getDocs, doc, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import Modal from "../pages/Modal";
 import { Context } from "../Context/Context";
+import { FaGoogle } from "react-icons/fa";
 
 const Login: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -22,16 +23,14 @@ const Login: React.FC = () => {
   const [isLoginSuccessful, setIsLoginSuccessful] = useState(false);
   const navigate = useNavigate();
   const auth = getAuth();
+  const provider = new GoogleAuthProvider();
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  // Function to handle modal continue action
   const handleContinue = () => {
     setShowModal(false);
-
-    // Redirect only if login is successful
     if (isLoginSuccessful) {
       if (userRole === "admin") {
         navigate("/admin-dashboard");
@@ -42,19 +41,17 @@ const Login: React.FC = () => {
   };
 
   const context = useContext(Context);
-
   if (!context) {
     throw new Error("Context has not been provided.");
   }
-
   const { login } = context;
 
+  // Regular email/password login
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
-  
+
     if (!email || !password) {
-      setError("Please fill in all fields.");
       setModalMessage("Please fill in all fields.");
       setModalTitle("Information Required!");
       setButtonLabel("Try Again!");
@@ -62,87 +59,107 @@ const Login: React.FC = () => {
       setIsLoading(false);
       return;
     }
-  
+
     try {
+      // Check if the user exists in Firestore before signing in
+      const userRef = collection(db, "EarlyStartData");
+      const q = query(userRef, where("email", "==", email));
+      const querySnapshot = await getDocs(q);
+
+      if (querySnapshot.empty) {
+        setModalMessage("User does not exist. Please sign up.");
+        setModalTitle("Error!");
+        setButtonLabel("Sign Up");
+        setShowModal(true);
+        setIsLoading(false);
+        return;
+      }
+
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-  
-      const userRef = collection(db, "EarlyStartData");
-      const q = query(userRef, where("userId", "==", user.uid));
-      const querySnapshot = await getDocs(q);
-  
-      if (!querySnapshot.empty) {
-        const userDoc = querySnapshot.docs[0];
-        const userData = userDoc.data();
-        const role = userData?.userRole?.toLowerCase() || "user";
-        const status = userData?.status?.toLowerCase() || "active";
-  
-        setUserRole(role);  // Store the role
-  
-        const user = userData;
-  
-        if (user) {
-          const userRole = user?.userRole || "user";
-          login(userRole); // Update context with the role
-        }
-  
-        if (status === "disabled") {
-          setError("Your account is disabled. Please contact support.");
-          setModalMessage("Your account is disabled. Please contact support.");
-          setModalTitle("Account Disabled!");
-          setButtonLabel("Okay");
-          setShowModal(true);
-          setIsLoading(false);
-          setIsLoginSuccessful(false); // Login unsuccessful, don't redirect
-          return;
-        }
-  
-        // If login is successful, set success state and show success modal
-        setModalMessage("Login Successful!");
-        setModalTitle("Success!");
-        setButtonLabel("Continue");
-        setShowModal(true);
-        setIsLoginSuccessful(true); // Mark login as successful
-      } else {
-        setError("User data not found.");
-        setModalTitle("Error!");
-        setModalMessage("User data not found.");
-        setButtonLabel("Try Again");
-        setShowModal(true);
-        setIsLoginSuccessful(false); // Login unsuccessful, don't redirect
+
+      if (!user) {
+        throw new Error("User authentication failed.");
       }
-    } catch (error: any) {  
-      if (error.code === "auth/wrong-password" || error.code === "auth/user-not-found") {
-        setError("Invalid email or password");
-        setModalTitle("Error!");
-        setModalMessage("Invalid email or password");
-        setButtonLabel("Try Again");
-      } else if (error.code === "auth/invalid-credential") {
-        setError("Invalid credentials provided.");
-        setModalTitle("Invalid Credentials");
-        setModalMessage("The credentials provided are invalid. Please try again.");
-        setButtonLabel("Try Again");
-      } else if (error.code === "auth/network-request-failed") {
-        setError("Network error, please check your internet connection.");
-        setModalTitle("Network Error");
-        setModalMessage("Please check your internet connection and try again.");
-        setButtonLabel("Try Again");
-      } else {
-        // Handle other errors
-        setError("An unexpected error occurred.");
-        setModalTitle("Error");
-        setModalMessage("Something went wrong. Please try again.");
-        setButtonLabel("Try Again");
+
+      const userData = querySnapshot.docs[0].data();
+      const role = userData?.userRole?.toLowerCase() || "user";
+      const status = userData?.status?.toLowerCase() || "active";
+      setUserRole(role);
+
+      if (status === "disabled") {
+        setModalMessage("Your account is disabled. Please contact support.");
+        setModalTitle("Account Disabled!");
+        setButtonLabel("Okay");
+        setShowModal(true);
+        setIsLoading(false);
+        return;
       }
-  
-      // Show the modal with the error message
+
+      login(role);
+      setModalMessage("Login Successful!");
+      setModalTitle("Success!");
+      setButtonLabel("Continue");
       setShowModal(true);
-      setIsLoginSuccessful(false);
+      setIsLoginSuccessful(true);
+    } catch (error: any) {
+      setModalMessage("Incorrect email or password.");
+      setModalTitle("Error!");
+      setButtonLabel("Try Again");
+      setShowModal(true);
     } finally {
       setIsLoading(false);
     }
   };
-  
+
+  // Google Sign-In
+  const handleGoogleSignIn = async () => {
+    setIsLoading(true);
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+
+      if (!user || !user.email) {
+        throw new Error("Google authentication failed.");
+      }
+
+      const userRef = collection(db, "EarlyStartData");
+      const q = query(userRef, where("email", "==", user.email));
+      const querySnapshot = await getDocs(q);
+
+      if (querySnapshot.empty) {
+        // If user does not exist in Firestore, create a new record
+        const newUser = {
+          userId: user.uid,
+          email: user.email,
+          displayName: user.displayName,
+          photoURL: user.photoURL,
+          userRole: "user",
+          status: "active",
+        };
+        await setDoc(doc(db, "EarlyStartData", user.uid), newUser);
+      }
+
+      // Fetch the user's role if they already exist
+      const existingUserData = querySnapshot.docs[0]?.data();
+      const role = existingUserData?.userRole?.toLowerCase() || "user";
+      setUserRole(role);
+
+      login(role);
+      setModalMessage("Sign-In Successful!");
+      setModalTitle("Success!");
+      setButtonLabel("Continue");
+      setShowModal(true);
+      setIsLoginSuccessful(true);
+    } catch (error) {
+      setModalMessage("Sign-In Failed. Please try again.");
+      setModalTitle("Error!");
+      setButtonLabel("Try Again");
+      setShowModal(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className="login-container">
@@ -165,7 +182,7 @@ const Login: React.FC = () => {
             <div className="form-group">
               <label htmlFor="email">Email:</label>
               <input
-              style={{padding: "15px"}}
+                style={{ padding: "15px" }}
                 type="email"
                 id="email"
                 placeholder="Enter your email address:"
@@ -178,7 +195,7 @@ const Login: React.FC = () => {
             <div className="form-group">
               <label htmlFor="password">Password:</label>
               <input
-              style={{padding: "15px"}}
+                style={{ padding: "15px" }}
                 type="password"
                 id="password"
                 placeholder="Enter your Password:"
@@ -194,6 +211,13 @@ const Login: React.FC = () => {
               </button>
             </div>
           </form>
+
+          <div className="google-signin">
+            <button onClick={handleGoogleSignIn} className="google-button">
+              <FaGoogle style={{ width: "20px" }} />
+              Sign in with Google
+            </button>
+          </div>
 
           <div className="sign-control">
             <div>Or</div>

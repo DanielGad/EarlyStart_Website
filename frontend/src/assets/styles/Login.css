@@ -53,17 +53,8 @@
     margin: 10px 0;
     font-size: large;
     border-radius: 10px;
-    border: 1px solid var(--secondary-color);
-}
-
-/* Input Fields */
-.login-left input {
-    width: 90%;
-    padding: 20px;
-    margin: 10px 0;
-    font-size: large;
-    border-radius: 10px;
-    border: 1px solid var(--secondary-color);
+    border: 2px solid var(--secondary-color);
+    border-width: 2px;
 }
 
 /* Buttons */
@@ -120,6 +111,37 @@
 .sign-up:hover {
     background-color: darkgreen;
 }
+
+.google-signin {
+    text-align: center;
+    margin-top: 15px;
+  }
+  
+  .google-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: #4285f4;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .google-button:hover {
+    background-color: var(--secondary-color);
+  }
+  
+  .google-icon {
+    font-size: 20px;
+  }
+  
 
 /* Responsive Design */
 @media screen and (max-width: 769px) {
