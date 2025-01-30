@@ -5,7 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 import ArrowDropRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { getAuth } from "firebase/auth";
 import { db } from "../firebase"; 
-import { collection, doc, getDoc, getDocs, query, setDoc, updateDoc, where } from "firebase/firestore";
+import { collection, doc, getDocs, query, updateDoc, where } from "firebase/firestore";
+import Modal from "../pages/Modal"; // Importing the Modal component
 
 const GetStarted = () => {
   const [selectedDays, setSelectedDays] = useState<string>("");
@@ -17,6 +18,14 @@ const GetStarted = () => {
   const [phone, setPhone] = useState<string>("");
   const [childName, setChildName] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
+  const [modalData, setModalData] = useState({
+    showModal: false,
+    title: "",
+    message: "",
+    buttonLabel: "Close",
+    onClose: () => setModalData((prev) => ({ ...prev, showModal: false })),
+    onConfirm: undefined as (() => void) | undefined,
+  });
 
   const navigate = useNavigate();
   const auth = getAuth();
@@ -37,8 +46,14 @@ const GetStarted = () => {
     const user = auth.currentUser;
   
     if (!user) {
-      alert("You must be logged in to submit this form.");
-      navigate("/login");
+      setModalData({
+        showModal: true,
+        title: "Login Required",
+        message: "You must be logged in to submit this form.",
+        buttonLabel: "Go to Login",
+        onClose: () => navigate("/login"),
+        onConfirm: undefined
+      });
       return;
     }
   
@@ -52,33 +67,41 @@ const GetStarted = () => {
       !email ||
       !phone
     ) {
-      alert("All fields are required.");
+      setModalData({
+        showModal: true,
+        title: "Missing Information",
+        message: "All fields are required.",
+        buttonLabel: "OK",
+        onClose: () => setModalData((prev) => ({ ...prev, showModal: false })),
+        onConfirm: undefined
+      });
       return;
     }
 
     setLoading(true);
   
     try {
-      // Query Firestore for the document with the matching user.uid
       const userRef = collection(db, "EarlyStartData");
-      const q = query(userRef, where("userId", "==", user.uid)); // Assuming you store the user.uid as a field
-  
+      const q = query(userRef, where("userId", "==", user.uid));
       const querySnapshot = await getDocs(q);
   
       if (!querySnapshot.empty) {
-        // If we find the document with the user's uid, check if 'getstarted' field exists
-        querySnapshot.forEach(async (docSnap: { id: any; data: () => any }) => {
+        querySnapshot.forEach(async (docSnap) => {
           const docId = docSnap.id; 
           const userDocRef = doc(db, "EarlyStartData", docId);
-  
-          // Check if the 'getstarted' field exists
           const docData = docSnap.data();
+
           if (docData.getstarted) {
-            alert("Information has already been provided!");
-            navigate(-1);
+            setModalData({
+              showModal: true,
+              title: "Already Submitted",
+              message: "Information has already been provided!",
+              buttonLabel: "Go Back",
+              onClose: () => navigate(-1),
+              onConfirm: undefined
+            });
             setLoading(false);
           } else {
-            // If 'getstarted' field does not exist, update the document with the new data
             const updatedData = {
               getstarted: {
                 childName,
@@ -89,25 +112,34 @@ const GetStarted = () => {
                 parentName,
                 email,
                 phone,
-              }
+              },
             };
-  
-            // Update the document with 'getstarted' field
+
             await updateDoc(userDocRef, updatedData);
-            console.log("Information updated successfully!", updatedData);
-            ("Information updated successfully!");
-            navigate('/confirm');
+            setModalData({
+              showModal: true,
+              title: "Success!",
+              message: "Information updated successfully!",
+              buttonLabel: "Continue",
+              onClose: () => navigate("/confirm"),
+              onConfirm: undefined
+            });
             setLoading(false);
           }
         });
       }
     } catch (error: any) {
-      console.error("Error updating Firestore:", error);
-      alert(`Failed to save data: ${error.message}`);
+      setModalData({
+        showModal: true,
+        title: "Submission Failed",
+        message: `Failed to save data: ${error.message}`,
+        buttonLabel: "Try Again",
+        onClose: () => setModalData((prev) => ({ ...prev, showModal: false })),
+        onConfirm: undefined
+      });
+      setLoading(false);
     }
   };
-  
-  
 
   return (
     <>
@@ -115,7 +147,7 @@ const GetStarted = () => {
         <div className="serve">We're Here To Serve You</div>
       </div>
       <div className="Get-Started">
-        <div className="start-1">Get started with EarlyStart E- Tutors</div>
+        <div className="start-1">Get started with EarlyStart E-Tutors</div>
         <div className="start-2">
           Welcome! We're excited to help customize a personalized learning plan
           tailored specifically for your child's unique needs and educational
@@ -127,7 +159,6 @@ const GetStarted = () => {
           <div className="start-5">
             <input
               type="radio"
-              id="weekdays"
               name="days"
               value="Weekdays"
               checked={selectedDays === "Weekdays"}
@@ -138,7 +169,6 @@ const GetStarted = () => {
           <div className="start-5">
             <input
               type="radio"
-              id="weekends"
               name="days"
               value="Weekends"
               checked={selectedDays === "Weekends"}
@@ -150,7 +180,6 @@ const GetStarted = () => {
             <b>Time Slots: </b>
             <input
               type="radio"
-              id="morning"
               name="timeSlot"
               value="Morning"
               checked={selectedTimeSlot === "Morning"}
@@ -159,7 +188,6 @@ const GetStarted = () => {
             Morning
             <input
               type="radio"
-              id="evening"
               name="timeSlot"
               value="Evening"
               checked={selectedTimeSlot === "Evening"}
@@ -167,65 +195,18 @@ const GetStarted = () => {
             />
             Evening
           </div>
-          <div className="start-6" style={{ marginBottom: "20px" }}>
-            Child's Name:
-          </div>
-          <input
-            type="text"
-            required
-            className="start-7-text"
-            value={childName}
-            onChange={(e) => setChildName(e.target.value)}
-          />
+          <div className="start-6">Child's Name:</div>
+          <input type="text" className="start-7-text" value={childName} onChange={(e) => setChildName(e.target.value)} />
           <div className="start-6">Tell Us About Your Child:</div>
-          <br />
-          <textarea
-            rows={3}
-            className="start-6-text"
-            value={childInfo}
-            onChange={(e) => setChildInfo(e.target.value)}
-          />
-          <div className="start-6">
-            Please describe any specific area of focus or challenges your child
-            is facing.
-          </div>
-          <br />
-          <textarea
-            rows={3}
-            className="start-6-text"
-            value={specificFocus}
-            onChange={(e) => setSpecificFocus(e.target.value)}
-          />
-          <div className="start-6" style={{ marginBottom: "20px" }}>
-            Contact Information:
-          </div>
-          <div className="start-7">Parent/Guidance Name:</div>
-          <br />
-          <input
-            type="text"
-            required
-            className="start-7-text"
-            value={parentName}
-            onChange={(e) => setParentName(e.target.value)}
-          />
+          <textarea rows={3} className="start-6-text" value={childInfo} onChange={(e) => setChildInfo(e.target.value)} />
+          <div className="start-6">Specific Areas of Focus:</div>
+          <textarea rows={3} className="start-6-text" value={specificFocus} onChange={(e) => setSpecificFocus(e.target.value)} />
+          <div className="start-6">Parent/Guardian Name:</div>
+          <input type="text" className="start-7-text" value={parentName} onChange={(e) => setParentName(e.target.value)} />
           <div className="start-7">Email Address:</div>
-          <br />
-          <input
-            type="email"
-            required
-            className="start-7-text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+          <input type="email" className="start-7-text" value={email} onChange={(e) => setEmail(e.target.value)} />
           <div className="start-7">Phone Number:</div>
-          <br />
-          <input
-            type="tel"
-            required
-            className="start-7-text"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-          />
+          <input type="tel" className="start-7-text" value={phone} onChange={(e) => setPhone(e.target.value)} />
         </form>
       </div>
 
@@ -233,11 +214,13 @@ const GetStarted = () => {
         <Link to={"#"} onClick={() => navigate(-1)}>
           <button className="gt-back">Back</button>
         </Link>
-        <button className="gt-choose" onClick={handleSubmit} disabled={loading}>{loading ? "Submitting..." : "Submit"}<ArrowDropRightIcon className="arrow-right" />
-        </button>
+        <button className="gt-choose" onClick={handleSubmit} disabled={loading}>{loading ? "Submitting..." : "Submit"}<ArrowDropRightIcon className="arrow-right" /></button>
       </div>
 
       <Footer />
+
+      {/* Modal Component */}
+      <Modal {...modalData} />
     </>
   );
 };
