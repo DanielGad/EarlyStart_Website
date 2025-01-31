@@ -8,6 +8,7 @@ import {
   doc,
   updateDoc,
 } from "firebase/firestore";
+import bcrypt from 'bcryptjs';
 import "../../assets/styles/ManageAccount.css";
 import { useNavigate } from "react-router-dom";
 
@@ -17,7 +18,27 @@ const ManageAccount: React.FC = () => {
 
   const [searchEmail, setsearchEmail] = useState("");
   const [userData, setUserData] = useState<any>(null);
-  const [formData, setFormData] = useState<any>({});
+  const [formData, setFormData] = useState<any>({
+    password: '',
+    fullName: '',
+    email: '',
+    userRole: '',
+    dob: '',
+    username: '',
+    phoneNumber: '',
+    bio: '',
+    createdAt: new Date(),
+    getstarted: {
+      childName: '',
+      preferredDays: '',
+      preferredTimeSlot: '',
+      childInfo: '',
+      specificFocus: '',
+      parentName: '',
+      email: '',
+      phone: '',
+    },
+  });
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -36,7 +57,27 @@ const ManageAccount: React.FC = () => {
       if (!querySnapshot.empty) {
         const userDoc = querySnapshot.docs[0];
         setUserData({ ...userDoc.data(), id: userDoc.id });
-        setFormData(userDoc.data());
+        setFormData({
+          password: userDoc.data().password || '',
+          fullName: userDoc.data().fullName || '',
+          email: userDoc.data().email || '',
+          userRole: userDoc.data().userRole || '',
+          dob: userDoc.data().dob || '',
+          username: userDoc.data().username || '',
+          phoneNumber: userDoc.data().phoneNumber || '',
+          bio: userDoc.data().bio || '',
+          createdAt: userDoc.data().createdAt || new Date(),
+          getstarted: {
+            childName: userDoc.data().getstarted?.childName || '',
+            preferredDays: userDoc.data().getstarted?.preferredDays || '',
+            preferredTimeSlot: userDoc.data().getstarted?.preferredTimeSlot || '',
+            childInfo: userDoc.data().getstarted?.childInfo || '',
+            specificFocus: userDoc.data().getstarted?.specificFocus || '',
+            parentName: userDoc.data().getstarted?.parentName || '',
+            email: userDoc.data().getstarted?.email || '',
+            phone: userDoc.data().getstarted?.phone || '',
+          },
+        });
       } else {
         setErrorMessage("User not found. Please check the email.");
         setUserData(null);
@@ -52,10 +93,22 @@ const ManageAccount: React.FC = () => {
   // Handle input changes
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData((prevData: any) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    const [parent, child] = name.split('.');
+
+    if (child) {
+      setFormData((prevData: any) => ({
+        ...prevData,
+        [parent]: {
+          ...prevData[parent],
+          [child]: value,
+        },
+      }));
+    } else {
+      setFormData((prevData: any) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
   };
 
   // Update user profile
@@ -64,8 +117,18 @@ const ManageAccount: React.FC = () => {
 
     try {
       setFormLoading(true);
+
+      // Hash the new password before saving
+      const hashedPassword = bcrypt.hashSync(formData.password, 10);
+
+      // Update the formData with the hashed password
+      const updatedFormData = {
+        ...formData,
+        password: hashedPassword,
+      };
+
       const userDocRef = doc(db, "EarlyStartData", userData.id);
-      await updateDoc(userDocRef, formData);
+      await updateDoc(userDocRef, updatedFormData);
       setIsEditing(false);
       alert("Profile updated successfully!");
     } catch (error) {
@@ -91,22 +154,27 @@ const ManageAccount: React.FC = () => {
     return `${day}${suffix} of ${month} ${year} at ${formattedHours}:${formattedMinutes}${ampm}`;
   };
 
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    fetchUserData();
+  };
+
   return (
     <div className="manage-account-container">
       <h2>Manage User Account</h2>
 
       {/* Search Bar */}
-      <div className="search-bar">
+      <form className="search-bar" onSubmit={handleSearchSubmit}>
         <input
           type="text"
           placeholder="Enter user email..."
           value={searchEmail}
           onChange={(e) => setsearchEmail(e.target.value)}
         />
-        <button onClick={fetchUserData} disabled={loading}>
+        <button type="submit" disabled={loading}>
           {loading ? "Searching..." : "Search"}
         </button>
-      </div>
+      </form>
 
       {errorMessage && <div className="error-message">{errorMessage}</div>}
 
@@ -131,7 +199,7 @@ const ManageAccount: React.FC = () => {
 
           <div className="form-group">
             <label>Joined on:</label>
-            <input type="email" value={formatDateWithSuffix(formData.createdAt.toDate()) || ""} disabled />
+            <input type="text" value={formatDateWithSuffix(formData.createdAt.toDate()) || ""} disabled />
           </div>
 
           <div className="form-group">
@@ -158,12 +226,24 @@ const ManageAccount: React.FC = () => {
 
           <div className="form-group">
             <label>Username:</label>
-            <input type="text" value={formData.username || ""} disabled={!isEditing} />
+            <input
+              type="text"
+              name="username"
+              value={formData.username || ""}
+              onChange={handleInputChange}
+              disabled={!isEditing}
+            />
           </div>
 
           <div className="form-group">
             <label>Bio:</label>
-            <textarea value={formData.bio || ""} style={{ resize: 'none' }} disabled={!isEditing} />
+            <textarea
+              name="bio"
+              value={formData.bio || ""}
+              onChange={handleInputChange}
+              style={{ resize: 'none' }}
+              disabled={!isEditing}
+            />
           </div>
 
           <div className="form-group">
@@ -173,14 +253,20 @@ const ManageAccount: React.FC = () => {
 
           <div className="form-group">
             <label>Child's Name:</label>
-            <input type="text" value={formData.getstarted.childName || ""} disabled={!isEditing} />
+            <input
+              type="text"
+              name="getstarted.childName"
+              value={formData.getstarted.childName || ""}
+              onChange={handleInputChange}
+              disabled={!isEditing}
+            />
           </div>
 
           <div className="form-group">
             <label>Preferred Days for learning:</label>
             <input
               type="text"
-              name="preferredDays"
+              name="getstarted.preferredDays"
               value={formData.getstarted.preferredDays || ""}
               onChange={handleInputChange}
               disabled={!isEditing}
@@ -191,7 +277,7 @@ const ManageAccount: React.FC = () => {
             <label>Preferred Time for learning:</label>
             <input
               type="text"
-              name="preferredDays"
+              name="getstarted.preferredTimeSlot"
               value={formData.getstarted.preferredTimeSlot || ""}
               onChange={handleInputChange}
               disabled={!isEditing}
@@ -201,7 +287,7 @@ const ManageAccount: React.FC = () => {
           <div className="form-group">
             <label>Tell us about your child:</label>
             <textarea
-              name="specificFocus"
+              name="getstarted.childInfo"
               value={formData.getstarted.childInfo || ""}
               onChange={handleInputChange}
               disabled={!isEditing}
@@ -212,7 +298,7 @@ const ManageAccount: React.FC = () => {
           <div className="form-group">
             <label>Specific Focus:</label>
             <textarea
-              name="specificFocus"
+              name="getstarted.specificFocus"
               value={formData.getstarted.specificFocus || ""}
               onChange={handleInputChange}
               disabled={!isEditing}
@@ -224,7 +310,7 @@ const ManageAccount: React.FC = () => {
             <label>Parent's Name:</label>
             <input
               type="text"
-              name="preferredDays"
+              name="getstarted.parentName"
               value={formData.getstarted.parentName || ""}
               onChange={handleInputChange}
               disabled={!isEditing}
@@ -235,7 +321,7 @@ const ManageAccount: React.FC = () => {
             <label>Parent's Email:</label>
             <input
               type="text"
-              name="preferredDays"
+              name="getstarted.email"
               value={formData.getstarted.email || ""}
               onChange={handleInputChange}
               disabled={!isEditing}
@@ -246,7 +332,7 @@ const ManageAccount: React.FC = () => {
             <label>Parent's Phone:</label>
             <input
               type="text"
-              name="preferredDays"
+              name="getstarted.phone"
               value={formData.getstarted.phone || ""}
               onChange={handleInputChange}
               disabled={!isEditing}
@@ -256,14 +342,13 @@ const ManageAccount: React.FC = () => {
           <div className="form-group">
             <label>Password:</label>
             <input
-              type="text"
+              type="password"
               name="password"
               value={formData.password || ""}
               onChange={handleInputChange}
               disabled={!isEditing}
             />
           </div>
-
 
           <button
             type="button"

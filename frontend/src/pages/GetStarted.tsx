@@ -91,7 +91,7 @@ const GetStarted = () => {
           const userDocRef = doc(db, "EarlyStartData", docId);
           const docData = docSnap.data();
 
-          if (docData.getstarted) {
+          if (docData.getstarted.preferredDays && docData.getstarted.preferredTimeSlot) {
             setModalData({
               showModal: true,
               title: "Already Submitted",

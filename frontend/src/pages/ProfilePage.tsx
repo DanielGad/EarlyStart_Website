@@ -160,7 +160,7 @@ const ProfilePage: React.FC = () => {
               type="text"
               id="role"
               name="role"
-              value={formData.userRole || ""}
+              value={formData.userRole || "User"}
               disabled
             />
             </div>
