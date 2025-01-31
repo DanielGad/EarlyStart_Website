@@ -123,6 +123,7 @@ const Login: React.FC = () => {
           createdAt: new Date(),
         };
         await setDoc(doc(db, "EarlyStartData", googleUser.uid), newUser);
+        navigate("/profile");
       } else {
         // If user exists, fetch the role
         const existingUserData = querySnapshot.docs[0].data();
