@@ -44,7 +44,7 @@ const GetStarted = () => {
 
   const handleSubmit = async () => {
     const user = auth.currentUser;
-  
+
     if (!user) {
       setModalData({
         showModal: true,
@@ -56,7 +56,7 @@ const GetStarted = () => {
       });
       return;
     }
-  
+
     if (
       !selectedDays ||
       !selectedTimeSlot ||
@@ -79,19 +79,19 @@ const GetStarted = () => {
     }
 
     setLoading(true);
-  
+
     try {
       const userRef = collection(db, "EarlyStartData");
       const q = query(userRef, where("userId", "==", user.uid));
       const querySnapshot = await getDocs(q);
-  
+
       if (!querySnapshot.empty) {
         querySnapshot.forEach(async (docSnap) => {
-          const docId = docSnap.id; 
+          const docId = docSnap.id;
           const userDocRef = doc(db, "EarlyStartData", docId);
           const docData = docSnap.data();
 
-          if (docData.getstarted.preferredDays && docData.getstarted.preferredTimeSlot) {
+          if (docData.getstarted && docData.getstarted.preferredDays && docData.getstarted.preferredTimeSlot) {
             setModalData({
               showModal: true,
               title: "Already Submitted",

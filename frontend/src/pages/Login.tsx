@@ -14,7 +14,6 @@ const Login: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const [modalTitle, setModalTitle] = useState("");
@@ -32,11 +31,7 @@ const Login: React.FC = () => {
   const handleContinue = () => {
     setShowModal(false);
     if (isLoginSuccessful) {
-      if (userRole === "admin") {
-        navigate("/admin-dashboard");
-      } else {
-        navigate("/user-dashboard");
-      }
+      navigate(userRole === "admin" ? "/admin-dashboard" : "/user-dashboard");
     }
   };
 
@@ -61,47 +56,35 @@ const Login: React.FC = () => {
     }
 
     try {
-      // Check if the user exists in Firestore before signing in
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
       const userRef = collection(db, "EarlyStartData");
       const q = query(userRef, where("email", "==", email));
       const querySnapshot = await getDocs(q);
 
-      if (querySnapshot.empty) {
-        setModalMessage("User does not exist. Please sign up.");
-        setModalTitle("Error!");
-        setButtonLabel("Sign Up");
+      if (!querySnapshot.empty) {
+        const userData = querySnapshot.docs[0].data();
+        const role = userData?.userRole?.toLowerCase() || "user";
+        const status = userData?.status?.toLowerCase() || "active";
+        setUserRole(role);
+
+        if (status === "disabled") {
+          setModalMessage("Your account is disabled. Please contact support.");
+          setModalTitle("Account Disabled!");
+          setButtonLabel("Okay");
+          setShowModal(true);
+          setIsLoading(false);
+          return;
+        }
+
+        login(role);
+        setModalMessage("Login Successful!");
+        setModalTitle("Success!");
+        setButtonLabel("Continue");
         setShowModal(true);
-        setIsLoading(false);
-        return;
+        setIsLoginSuccessful(true);
       }
-
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user;
-
-      if (!user) {
-        throw new Error("User authentication failed.");
-      }
-
-      const userData = querySnapshot.docs[0].data();
-      const role = userData?.userRole?.toLowerCase() || "user";
-      const status = userData?.status?.toLowerCase() || "active";
-      setUserRole(role);
-
-      if (status === "disabled") {
-        setModalMessage("Your account is disabled. Please contact support.");
-        setModalTitle("Account Disabled!");
-        setButtonLabel("Okay");
-        setShowModal(true);
-        setIsLoading(false);
-        return;
-      }
-
-      login(role);
-      setModalMessage("Login Successful!");
-      setModalTitle("Success!");
-      setButtonLabel("Continue");
-      setShowModal(true);
-      setIsLoginSuccessful(true);
     } catch (error: any) {
       setModalMessage("Incorrect email or password.");
       setModalTitle("Error!");
@@ -117,35 +100,37 @@ const Login: React.FC = () => {
     setIsLoading(true);
     try {
       const result = await signInWithPopup(auth, provider);
-      const user = result.user;
+      const googleUser = result.user;
 
-      if (!user || !user.email) {
+      if (!googleUser || !googleUser.email) {
         throw new Error("Google authentication failed.");
       }
 
       const userRef = collection(db, "EarlyStartData");
-      const q = query(userRef, where("email", "==", user.email));
+      const q = query(userRef, where("email", "==", googleUser.email));
       const querySnapshot = await getDocs(q);
 
       if (querySnapshot.empty) {
-        // If user does not exist in Firestore, create a new record
+        // If user does not exist, create a new record
         const newUser = {
-          userId: user.uid,
-          email: user.email,
-          displayName: user.displayName,
-          photoURL: user.photoURL,
-          userRole: "user",
+          userId: googleUser.uid,
+          Id: googleUser.uid,
+          email: googleUser.email,
+          fullName: googleUser.displayName,
+          photoURL: googleUser.photoURL,
           status: "active",
+          username: googleUser.email,
+          createdAt: new Date(),
         };
-        await setDoc(doc(db, "EarlyStartData", user.uid), newUser);
+        await setDoc(doc(db, "EarlyStartData", googleUser.uid), newUser);
+      } else {
+        // If user exists, fetch the role
+        const existingUserData = querySnapshot.docs[0].data();
+        const role = existingUserData?.userRole?.toLowerCase() || "user";
+        setUserRole(role);
       }
 
-      // Fetch the user's role if they already exist
-      const existingUserData = querySnapshot.docs[0]?.data();
-      const role = existingUserData?.userRole?.toLowerCase() || "user";
-      setUserRole(role);
-
-      login(role);
+      login(userRole);
       setModalMessage("Sign-In Successful!");
       setModalTitle("Success!");
       setButtonLabel("Continue");

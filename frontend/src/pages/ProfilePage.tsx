@@ -8,7 +8,8 @@ import {
   doc,
   updateDoc,
 } from "firebase/firestore";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth, onAuthStateChanged, updatePassword } from "firebase/auth";
+import bcrypt from "bcryptjs"; // Import bcrypt for password hashing
 import "../assets/styles/ProfilePage.css";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -20,6 +21,7 @@ const ProfilePage: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [formLoading, setFormLoading] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  const [showPassword, setShowPassword] = useState(false); // State for toggling password visibility
 
   const auth = getAuth();
   const db = getFirestore();
@@ -33,8 +35,21 @@ const ProfilePage: React.FC = () => {
 
       if (!querySnapshot.empty) {
         const userDoc = querySnapshot.docs[0];
-        setUserData({ ...userDoc.data(), id: userDoc.id });
-        setFormData(userDoc.data());
+        const userData = userDoc.data();
+        setUserData({ ...userData, id: userDoc.id });
+
+        // Ensure missing fields are set as empty strings
+        setFormData({
+          fullName: userData.fullName || "",
+          email: userData.email || "",
+          createdAt: userData.createdAt || "",
+          userRole: userData.userRole || "User",
+          username: userData.username || "",
+          bio: userData.bio || "",
+          dob: userData.dob || "",
+          phoneNumber: userData.phoneNumber || "",
+          password: "", // Password field is empty for security reasons
+        });
       } else {
         setErrorMessage("No user data found. Please try again.");
       }
@@ -55,14 +70,36 @@ const ProfilePage: React.FC = () => {
     }));
   };
 
+  // Hash password before updating Firestore
+  const hashPassword = async (password: string) => {
+    const salt = await bcrypt.genSalt(10);
+    return await bcrypt.hash(password, salt);
+  };
+
   // Update user profile
   const handleFormSubmit = async () => {
     if (!userData || !userData.id) return;
-
+  
     try {
       setFormLoading(true);
       const userDocRef = doc(db, "EarlyStartData", userData.id);
-      await updateDoc(userDocRef, formData);
+      const updatedData = { ...formData };
+  
+      // Update password in Firebase Authentication if a new one is provided
+      if (formData.password) {
+        const user = auth.currentUser;
+        if (user) {
+          await updatePassword(user, formData.password); // Update Firebase Authentication password
+          updatedData.password = await hashPassword(formData.password); // Still hash & store in Firestore (optional)
+        } else {
+          alert("User session expired. Please log in again.");
+          return;
+        }
+      } else {
+        delete updatedData.password; // Remove password field if empty
+      }
+  
+      await updateDoc(userDocRef, updatedData);
       setIsEditing(false);
       alert("Profile updated successfully!");
     } catch (error) {
@@ -76,6 +113,11 @@ const ProfilePage: React.FC = () => {
   // Toggle editing mode
   const toggleEditMode = () => {
     setIsEditing((prevState) => !prevState);
+  };
+
+  // Toggle password visibility
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevState) => !prevState);
   };
 
   // Fetch data on component mount
@@ -99,21 +141,6 @@ const ProfilePage: React.FC = () => {
     return <div className="error-message">{errorMessage}</div>;
   }
 
-  const formatDateWithSuffix = (date: Date): string => {
-    const day = date.getDate();
-    const suffix = (day % 10 === 1 && day !== 11) ? 'st' :
-                   (day % 10 === 2 && day !== 12) ? 'nd' :
-                   (day % 10 === 3 && day !== 13) ? 'rd' : 'th';
-    const month = date.toLocaleString('default', { month: 'long' });
-    const year = date.getFullYear();
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
-    const ampm = hours >= 12 ? 'PM' : 'AM';
-    const formattedHours = hours % 12 || 12; // Convert to 12-hour format
-    const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes; // Add leading zero if needed
-    return `${day}${suffix} of ${month} ${year} at ${formattedHours}:${formattedMinutes}${ampm}`;
-  };
-
   return (
     <div className="profile-page-container">
       <h2>Your Profile</h2>
@@ -126,7 +153,7 @@ const ProfilePage: React.FC = () => {
               type="text"
               id="fullName"
               name="fullName"
-              value={formData.fullName || ""}
+              value={formData.fullName}
               onChange={handleInputChange}
               disabled={!isEditing}
             />
@@ -134,36 +161,8 @@ const ProfilePage: React.FC = () => {
 
           <div className="form-group">
             <label htmlFor="email">Email:</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email || ""}
-              disabled
-            />
+            <input type="email" id="email" name="email" value={formData.email} disabled />
           </div>
-
-            <div className="form-group">
-            <label htmlFor="joined">Joined on:</label>
-            <input
-              type="text"
-              id="joined"
-              name="joined"
-              value={formatDateWithSuffix(formData.createdAt.toDate()) || ""}
-              disabled
-            />
-            </div>
-
-            <div className="form-group">
-            <label htmlFor="role">Role:</label>
-            <input
-              type="text"
-              id="role"
-              name="role"
-              value={formData.userRole || "User"}
-              disabled
-            />
-            </div>
 
           <div className="form-group">
             <label htmlFor="username">Username:</label>
@@ -171,7 +170,7 @@ const ProfilePage: React.FC = () => {
               type="text"
               id="username"
               name="username"
-              value={formData.username || ""}
+              value={formData.username}
               onChange={handleInputChange}
               disabled={!isEditing}
             />
@@ -182,7 +181,7 @@ const ProfilePage: React.FC = () => {
             <textarea
               id="bio"
               name="bio"
-              value={formData.bio || ""}
+              value={formData.bio}
               onChange={handleInputChange}
               placeholder="Tell us about yourself"
               disabled={!isEditing}
@@ -195,7 +194,7 @@ const ProfilePage: React.FC = () => {
               type="date"
               id="dob"
               name="dob"
-              value={formData.dob || ""}
+              value={formData.dob}
               onChange={handleInputChange}
               disabled={!isEditing}
             />
@@ -207,31 +206,42 @@ const ProfilePage: React.FC = () => {
               type="tel"
               id="phoneNumber"
               name="phoneNumber"
-              value={formData.phoneNumber || ""}
+              value={formData.phoneNumber}
               onChange={handleInputChange}
-              placeholder="Enter your phone number"
               disabled={!isEditing}
             />
           </div>
 
-          <button
-            type="button"
-            onClick={isEditing ? handleFormSubmit : toggleEditMode}
-            className="edit-button"
-            disabled={formLoading}
-          >
+          {/* Password with show toggle */}
+          <div className="form-group">
+            <label htmlFor="password">Change Password:</label>
+            <div className="password-wrapper">
+              <input
+                type={showPassword ? "text" : "password"}
+                id="password"
+                name="password"
+                value={formData.password}
+                onChange={handleInputChange}
+                disabled={!isEditing}
+                placeholder="Enter new password"
+              />
+              <button type="button" className="toggle-password" onClick={togglePasswordVisibility}>
+                {showPassword ? "Hide" : "Show"}
+              </button>
+            </div>
+          </div>
+
+          <button type="button" onClick={isEditing ? handleFormSubmit : toggleEditMode} className="edit-button" disabled={formLoading}>
             {isEditing ? (formLoading ? "Updating..." : "Save Changes") : "Edit Profile"}
           </button>
+
           <Link to={""}>
-          <b className="back-button" 
-          style={{fontSize: "larger", marginTop: "30px"}}
-          onClick={() => navigate(-1)}>
-            Go Back
-          </b>
-      </Link>
+            <b className="back-button" style={{ fontSize: "larger", marginTop: "30px" }} onClick={() => navigate(-1)}>
+              Go Back
+            </b>
+          </Link>
         </form>
       )}
-      
     </div>
   );
 };

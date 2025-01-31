@@ -11,72 +11,61 @@ import {
 import bcrypt from 'bcryptjs';
 import "../../assets/styles/ManageAccount.css";
 import { useNavigate } from "react-router-dom";
+import { getAuth } from "firebase/auth";
+import { updatePassword } from "firebase/auth";
 
 const ManageAccount: React.FC = () => {
   const navigate = useNavigate();
   const db = getFirestore();
-
+  
   const [searchEmail, setsearchEmail] = useState("");
   const [userData, setUserData] = useState<any>(null);
   const [formData, setFormData] = useState<any>({
-    password: '',
-    fullName: '',
-    email: '',
-    userRole: '',
-    dob: '',
-    username: '',
-    phoneNumber: '',
-    bio: '',
+    password: "",
+    fullName: "",
+    email: "",
+    userRole: "",
+    dob: "",
+    username: "",
+    phoneNumber: "",
+    bio: "",
     createdAt: new Date(),
     getstarted: {
-      childName: '',
-      preferredDays: '',
-      preferredTimeSlot: '',
-      childInfo: '',
-      specificFocus: '',
-      parentName: '',
-      email: '',
-      phone: '',
+      childName: "",
+      preferredDays: "",
+      preferredTimeSlot: "",
+      childInfo: "",
+      specificFocus: "",
+      parentName: "",
+      email: "",
+      phone: "",
     },
   });
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [formLoading, setFormLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+  
   // Fetch user data by email
   const fetchUserData = async () => {
     setLoading(true);
     setErrorMessage(null);
-
     try {
       const usersCollectionRef = collection(db, "EarlyStartData");
       const userQuery = query(usersCollectionRef, where("email", "==", searchEmail));
       const querySnapshot = await getDocs(userQuery);
-
+  
       if (!querySnapshot.empty) {
         const userDoc = querySnapshot.docs[0];
         setUserData({ ...userDoc.data(), id: userDoc.id });
         setFormData({
-          password: userDoc.data().password || '',
-          fullName: userDoc.data().fullName || '',
-          email: userDoc.data().email || '',
-          userRole: userDoc.data().userRole || '',
-          dob: userDoc.data().dob || '',
-          username: userDoc.data().username || '',
-          phoneNumber: userDoc.data().phoneNumber || '',
-          bio: userDoc.data().bio || '',
-          createdAt: userDoc.data().createdAt || new Date(),
-          getstarted: {
-            childName: userDoc.data().getstarted?.childName || '',
-            preferredDays: userDoc.data().getstarted?.preferredDays || '',
-            preferredTimeSlot: userDoc.data().getstarted?.preferredTimeSlot || '',
-            childInfo: userDoc.data().getstarted?.childInfo || '',
-            specificFocus: userDoc.data().getstarted?.specificFocus || '',
-            parentName: userDoc.data().getstarted?.parentName || '',
-            email: userDoc.data().getstarted?.email || '',
-            phone: userDoc.data().getstarted?.phone || '',
-          },
+          ...userDoc.data(),
+          password: "", // Clear password field for security
         });
       } else {
         setErrorMessage("User not found. Please check the email.");
@@ -89,12 +78,12 @@ const ManageAccount: React.FC = () => {
       setLoading(false);
     }
   };
-
+  
   // Handle input changes
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    const [parent, child] = name.split('.');
-
+    const [parent, child] = name.split(".");
+  
     if (child) {
       setFormData((prevData: any) => ({
         ...prevData,
@@ -110,25 +99,34 @@ const ManageAccount: React.FC = () => {
       }));
     }
   };
-
-  // Update user profile
+  
+  // Update user profile and password
   const handleFormSubmit = async () => {
     if (!userData || !userData.id) return;
-
     try {
       setFormLoading(true);
-
-      // Hash the new password before saving
+      
+      // Update password in Firebase Authentication
+      if (formData.password) {
+        const auth = getAuth();
+        if (!auth.currentUser) {
+          alert("No authenticated user found.");
+          return;
+        }
+        await updatePassword(auth.currentUser, formData.password);
+      }
+  
+      // Hash the new password before saving in Firestore
       const hashedPassword = bcrypt.hashSync(formData.password, 10);
-
-      // Update the formData with the hashed password
       const updatedFormData = {
         ...formData,
         password: hashedPassword,
       };
-
+  
+      // Update Firestore database
       const userDocRef = doc(db, "EarlyStartData", userData.id);
       await updateDoc(userDocRef, updatedFormData);
+  
       setIsEditing(false);
       alert("Profile updated successfully!");
     } catch (error) {
@@ -138,7 +136,7 @@ const ManageAccount: React.FC = () => {
       setFormLoading(false);
     }
   };
-
+  
   const formatDateWithSuffix = (date: Date): string => {
     const day = date.getDate();
     const suffix = (day % 10 === 1 && day !== 11) ? 'st' :
@@ -340,15 +338,18 @@ const ManageAccount: React.FC = () => {
           </div>
 
           <div className="form-group">
-            <label>Password:</label>
+            <label>Change Password:</label>
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               name="password"
               value={formData.password || ""}
               onChange={handleInputChange}
               disabled={!isEditing}
             />
           </div>
+          <button type="button" className="toggle-password1" onClick={togglePasswordVisibility}>
+                {showPassword ? "Hide" : "Show"}
+              </button>
 
           <button
             type="button"

@@ -48,13 +48,6 @@ const UserDashboard: React.FC = () => {
         if (!userDocData.getstarted) {
           setShowModal(true); // Show the modal if 'getstarted' is missing
         }
-
-        // if (
-        //   userDocData.getstarted &&
-        //   (userDocData.getstarted.preferredDays === "" || userDocData.getstarted.preferredTime === "" || userDocData.getstarted.childInfo === "" || userDocData.getstarted.specificFocus === "" || userDocData.getstarted.parentName === "" || userDocData.getstarted.email === "" || userDocData.getstarted.phone === "" || userDocData.getstarted.childName === "")
-        // ) {
-        //   setShowModal(true);
-        // }
       } else {
         setErrorMessage("No user data found. Please check your profile.");
       }
