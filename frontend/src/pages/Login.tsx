@@ -135,11 +135,18 @@ const Login: React.FC = () => {
           fullName: googleUser.displayName,
           photoURL: googleUser.photoURL,
           status: "active",
-          username: googleUser.email,
+          username: "user",
           createdAt: new Date(),
+          userRole: "user",
         };
         await setDoc(doc(db, "EarlyStartData", googleUser.uid), newUser);
-        navigate("/profile");
+        login(userRole);
+        setModalMessage("Sign-In Successful!");
+        setModalTitle("Success!");
+        setButtonLabel("Continue");
+        setShowModal(true);
+        setIsLoginSuccessful(true);
+        navigate("/set-password");
       } else {
         // If user exists, fetch the role
         const existingUserData = querySnapshot.docs[0].data();

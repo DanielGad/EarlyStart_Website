@@ -121,6 +121,7 @@ const SignUp = () => {
         password: hashedPassword,
         userId: user.uid,
         createdAt: new Date(),
+        userRole: "user",
       });
 
       setModalTitle("Success!");

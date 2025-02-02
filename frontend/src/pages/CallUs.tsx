@@ -78,6 +78,7 @@ const CallUs = () => {
           rows={1} 
           required
           id="name"
+          typeof="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
           />
@@ -86,6 +87,7 @@ const CallUs = () => {
           <textarea 
           rows={1} 
           required
+          typeof="email"
           id="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -95,6 +97,7 @@ const CallUs = () => {
           <textarea 
           rows={4} 
           required
+          typeof="text"
           id="message"
           value={message}
           onChange={(e) => setMessage(e.target.value)}

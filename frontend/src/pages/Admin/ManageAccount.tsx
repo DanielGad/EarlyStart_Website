@@ -13,6 +13,7 @@ import "../../assets/styles/ManageAccount.css";
 import { useNavigate } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 import { updatePassword } from "firebase/auth";
+import Modal from "../Modal";
 
 const ManageAccount: React.FC = () => {
   const navigate = useNavigate();
@@ -46,6 +47,14 @@ const ManageAccount: React.FC = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [formLoading, setFormLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [modalData, setModalData] = useState({
+      showModal: false,
+      title: "",
+      message: "",
+      buttonLabel: "Close",
+      onClose: () => setModalData((prev) => ({ ...prev, showModal: false })),
+      onConfirm: undefined as (() => void) | undefined,
+    });
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -66,6 +75,16 @@ const ManageAccount: React.FC = () => {
         setFormData({
           ...userDoc.data(),
           password: "", // Clear password field for security
+          getstarted: {
+            childName: userDoc.data().getstarted?.childName || "",
+            preferredDays: userDoc.data().getstarted?.preferredDays || "",
+            preferredTimeSlot: userDoc.data().getstarted?.preferredTimeSlot || "",
+            childInfo: userDoc.data().getstarted?.childInfo || "",
+            specificFocus: userDoc.data().getstarted?.specificFocus || "",
+            parentName: userDoc.data().getstarted?.parentName || "",
+            email: userDoc.data().getstarted?.email || "",
+            phone: userDoc.data().getstarted?.phone || "",
+          },
         });
       } else {
         setErrorMessage("User not found. Please check the email.");
@@ -128,10 +147,24 @@ const ManageAccount: React.FC = () => {
       await updateDoc(userDocRef, updatedFormData);
   
       setIsEditing(false);
-      alert("Profile updated successfully!");
+      setModalData({
+        showModal: true,
+        title: "Success!",
+        message: "Profile Updated Successfully!",
+        buttonLabel: "Okay",
+        onClose: () => setModalData((prev) => ({ ...prev, showModal: false })),
+        onConfirm: undefined
+      });
     } catch (error) {
       console.error("Error updating profile:", error);
-      alert("Failed to update profile. Please try again.");
+      setModalData({
+        showModal: true,
+        title: "Error!",
+        message: "Failed to update profile. Please try again.",
+        buttonLabel: "Okay",
+        onClose: () => setModalData((prev) => ({ ...prev, showModal: false })),
+        onConfirm: undefined
+      });
     } finally {
       setFormLoading(false);
     }
@@ -159,12 +192,13 @@ const ManageAccount: React.FC = () => {
 
   return (
     <div className="manage-account-container">
+      <Modal {...modalData}/>
       <h2>Manage User Account</h2>
 
       {/* Search Bar */}
       <form className="search-bar" onSubmit={handleSearchSubmit}>
         <input
-          type="text"
+          type="email"
           placeholder="Enter user email..."
           value={searchEmail}
           onChange={(e) => setsearchEmail(e.target.value)}
@@ -197,7 +231,7 @@ const ManageAccount: React.FC = () => {
 
           <div className="form-group">
             <label>Joined on:</label>
-            <input type="text" value={formatDateWithSuffix(formData.createdAt.toDate()) || ""} disabled />
+            <input type="text" value={formatDateWithSuffix(new Date(formData.createdAt)) || ""} disabled />
           </div>
 
           <div className="form-group">
@@ -286,6 +320,7 @@ const ManageAccount: React.FC = () => {
             <label>Tell us about your child:</label>
             <textarea
               name="getstarted.childInfo"
+              typeof="text"
               value={formData.getstarted.childInfo || ""}
               onChange={handleInputChange}
               disabled={!isEditing}
@@ -297,6 +332,7 @@ const ManageAccount: React.FC = () => {
             <label>Specific Focus:</label>
             <textarea
               name="getstarted.specificFocus"
+              typeof="text"
               value={formData.getstarted.specificFocus || ""}
               onChange={handleInputChange}
               disabled={!isEditing}
@@ -318,7 +354,7 @@ const ManageAccount: React.FC = () => {
           <div className="form-group">
             <label>Parent's Email:</label>
             <input
-              type="text"
+              type="email"
               name="getstarted.email"
               value={formData.getstarted.email || ""}
               onChange={handleInputChange}
@@ -329,7 +365,7 @@ const ManageAccount: React.FC = () => {
           <div className="form-group">
             <label>Parent's Phone:</label>
             <input
-              type="text"
+              type="tel"
               name="getstarted.phone"
               value={formData.getstarted.phone || ""}
               onChange={handleInputChange}

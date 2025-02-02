@@ -22,17 +22,14 @@ import ProfilePage from './pages/ProfilePage';
 import SendMessage from './pages/Admin/SendMessage';
 import Messages from './pages/User/Messages';
 import ManageAccount from './pages/Admin/ManageAccount';
+import SetPassword from './pages/SetPassword';
+import ProtectedRoute from './hooks/ProtectedRoute';
+import AdminRole from './hooks/AdminRole';
 
 function App() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  // if (error.code === "auth/network-request-failed") {
-  //   setError("Network error, please check your internet connection.");
-  //   setModalTitle("Network Error");
-  //   setModalMessage("Please check your internet connection and try again.");
-  //   setButtonLabel("Try Again");
 
   return (
     <>
@@ -47,19 +44,24 @@ function App() {
           <Route path="/international" element={<InternationalService />} />
           <Route path="/general" element={<GeneralService />} />
           <Route path="/call" element={<CallUs />} />
-          <Route path="/login" element={<Login />} />
           <Route path="/get-tutor" element={<GetTutor />} />
           <Route path="/profile/:id" element={<TeacherProfile />} />
           <Route path="/get-started" element={<GetStarted />} />
-          <Route path="/confirm" element={<Confirmation />} />
-          <Route path="/contact-confirm" element={<ContactConfirm />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/user-dashboard" element={<UserDashboard />} />
-          <Route path="/admin-dashboard" element={<AdminDashboard />} />
-        <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/send-message" element={<SendMessage />} />
-        <Route path="/messages" element={<Messages />} />
-        <Route path="/manage-accounts" element={<ManageAccount />} />
+          <Route path="/login" element={<Login />} />
+
+            
+            <Route path="/confirm" element={<ProtectedRoute><Confirmation /></ProtectedRoute>} />
+            <Route path="/contact-confirm" element={<ProtectedRoute><ContactConfirm /></ProtectedRoute>} />
+            <Route path="/user-dashboard" element={<ProtectedRoute><UserDashboard /></ProtectedRoute>} />
+            <Route path="/admin-dashboard" element={<ProtectedRoute><AdminRole><AdminDashboard /></AdminRole></ProtectedRoute>} />
+            <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
+            <Route path="/send-message" element={<ProtectedRoute><AdminRole><SendMessage /></AdminRole></ProtectedRoute>} />
+            <Route path="/messages" element={<ProtectedRoute><Messages /></ProtectedRoute>} />
+            <Route path="/manage-accounts" element={<ProtectedRoute><AdminRole><ManageAccount /></AdminRole></ProtectedRoute>} />
+            <Route path="/set-password" element={<ProtectedRoute><SetPassword /></ProtectedRoute>} />
+
+
         </Routes>
       </div>
     </>

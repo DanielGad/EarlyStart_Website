@@ -180,6 +180,7 @@ const ProfilePage: React.FC = () => {
             <label htmlFor="bio">Bio:</label>
             <textarea
               id="bio"
+              typeof="text"
               name="bio"
               value={formData.bio}
               onChange={handleInputChange}

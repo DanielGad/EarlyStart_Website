@@ -28,6 +28,7 @@ const AdminSendMessage: React.FC = () => {
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [chatList, setChatList] = useState<User[]>([]);
   const [adminFullName, setAdminFullName] = useState('Admin');
+  
   const navigate = useNavigate();
 
   const handleGoBack = () => {
@@ -201,6 +202,12 @@ const AdminSendMessage: React.FC = () => {
     }
   }, [selectedUser]); // Re-run when selectedUser changes
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
+
   return (
     <div className="admin-container">
       <h2 className="admin-title">Admin Message Center</h2>
@@ -208,11 +215,12 @@ const AdminSendMessage: React.FC = () => {
       {/* Search User Section */}
       <div className="user-search-section">
         <input
-          type="text"
+          type="email"
           className="user-search-input"
           placeholder="Search by email"
           value={searchEmail}
           onChange={(e) => setSearchEmail(e.target.value)}
+          onKeyDown={handleKeyDown}
         />
         <button className="user-search-button" onClick={handleSearch}>Search</button>
       </div>
