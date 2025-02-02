@@ -12,6 +12,7 @@ import { getAuth, onAuthStateChanged, updatePassword } from "firebase/auth";
 import bcrypt from "bcryptjs"; // Import bcrypt for password hashing
 import "../assets/styles/ProfilePage.css";
 import { Link, useNavigate } from "react-router-dom";
+import Modal from "./Modal";
 
 const ProfilePage: React.FC = () => {
   const navigate = useNavigate();
@@ -21,7 +22,11 @@ const ProfilePage: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [formLoading, setFormLoading] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [showPassword, setShowPassword] = useState(false); // State for toggling password visibility
+  const [showPassword, setShowPassword] = useState(false); 
+  const [showModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
+  const [buttonLabel, setButtonLabel] = useState('');
+  const [modalTitle, setModalTitle] = useState('');
 
   const auth = getAuth();
   const db = getFirestore();
@@ -101,10 +106,16 @@ const ProfilePage: React.FC = () => {
   
       await updateDoc(userDocRef, updatedData);
       setIsEditing(false);
-      alert("Profile updated successfully!");
+      setModalMessage("Profile updated successfully!");
+      setButtonLabel("Continue");
+      setModalTitle("Success!");
+      setShowModal(true);
     } catch (error) {
       console.error("Error updating profile:", error);
-      alert("Failed to update profile. Please try again.");
+      setModalMessage("Failed to update profile. Please try again.");
+      setButtonLabel("Close");
+      setModalTitle("Error");
+      setShowModal(true);
     } finally {
       setFormLoading(false);
     }
@@ -141,9 +152,21 @@ const ProfilePage: React.FC = () => {
     return <div className="error-message">{errorMessage}</div>;
   }
 
+  const handleContinue = () => {
+    setShowModal(false);
+    navigate(-1);
+  };
+
   return (
     <div className="profile-page-container">
       <h2>Your Profile</h2>
+      <Modal 
+        showModal={showModal} 
+        message={modalMessage} 
+        buttonLabel={buttonLabel} 
+        onClose={handleContinue} 
+        title={modalTitle}
+      />
 
       {userData && (
         <form className="profile-form">
@@ -243,6 +266,8 @@ const ProfilePage: React.FC = () => {
           </Link>
         </form>
       )}
+
+
     </div>
   );
 };

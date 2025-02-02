@@ -47,14 +47,13 @@
     font-weight: 300;
 } */
 
-.form-group input {
+.form-group-login input {
     width: 90%;
     padding: 20px;
     margin: 10px 0;
     font-size: large;
     border-radius: 10px;
-    border: 2px solid var(--secondary-color);
-    border-width: 2px;
+    border: 1px solid var(--secondary-color);
 }
 
 /* Buttons */

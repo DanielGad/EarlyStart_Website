@@ -30,7 +30,7 @@ const ManageAccount: React.FC = () => {
     username: "",
     phoneNumber: "",
     bio: "",
-    createdAt: new Date(),
+    createdAt: "", // Initialize as an empty string
     getstarted: {
       childName: "",
       preferredDays: "",
@@ -72,18 +72,20 @@ const ManageAccount: React.FC = () => {
       if (!querySnapshot.empty) {
         const userDoc = querySnapshot.docs[0];
         setUserData({ ...userDoc.data(), id: userDoc.id });
+        const userData = userDoc.data();
         setFormData({
-          ...userDoc.data(),
+          ...userData,
+          createdAt: userData.createdAt ? new Date(userData.createdAt.seconds * 1000).toISOString() : "", // Convert Firestore timestamp to ISO string
           password: "", // Clear password field for security
           getstarted: {
-            childName: userDoc.data().getstarted?.childName || "",
-            preferredDays: userDoc.data().getstarted?.preferredDays || "",
-            preferredTimeSlot: userDoc.data().getstarted?.preferredTimeSlot || "",
-            childInfo: userDoc.data().getstarted?.childInfo || "",
-            specificFocus: userDoc.data().getstarted?.specificFocus || "",
-            parentName: userDoc.data().getstarted?.parentName || "",
-            email: userDoc.data().getstarted?.email || "",
-            phone: userDoc.data().getstarted?.phone || "",
+            childName: userData.getstarted?.childName || "",
+            preferredDays: userData.getstarted?.preferredDays || "",
+            preferredTimeSlot: userData.getstarted?.preferredTimeSlot || "",
+            childInfo: userData.getstarted?.childInfo || "",
+            specificFocus: userData.getstarted?.specificFocus || "",
+            parentName: userData.getstarted?.parentName || "",
+            email: userData.getstarted?.email || "",
+            phone: userData.getstarted?.phone || "",
           },
         });
       } else {

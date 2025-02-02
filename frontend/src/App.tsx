@@ -25,6 +25,8 @@ import ManageAccount from './pages/Admin/ManageAccount';
 import SetPassword from './pages/SetPassword';
 import ProtectedRoute from './hooks/ProtectedRoute';
 import AdminRole from './hooks/AdminRole';
+import AdminAction from './pages/Admin/AdminAction';
+import ForgottenPassword from './pages/ForgottenPassword';
 
 function App() {
   useEffect(() => {
@@ -52,6 +54,7 @@ function App() {
 
             
             <Route path="/confirm" element={<ProtectedRoute><Confirmation /></ProtectedRoute>} />
+            <Route path="/reset-password" element={<ForgottenPassword />} />
             <Route path="/contact-confirm" element={<ProtectedRoute><ContactConfirm /></ProtectedRoute>} />
             <Route path="/user-dashboard" element={<ProtectedRoute><UserDashboard /></ProtectedRoute>} />
             <Route path="/admin-dashboard" element={<ProtectedRoute><AdminRole><AdminDashboard /></AdminRole></ProtectedRoute>} />
@@ -60,6 +63,7 @@ function App() {
             <Route path="/messages" element={<ProtectedRoute><Messages /></ProtectedRoute>} />
             <Route path="/manage-accounts" element={<ProtectedRoute><AdminRole><ManageAccount /></AdminRole></ProtectedRoute>} />
             <Route path="/set-password" element={<ProtectedRoute><SetPassword /></ProtectedRoute>} />
+            {/* <Route path="/actions" element={<ProtectedRoute><AdminAction /></ProtectedRoute>} /> */}
 
 
         </Routes>

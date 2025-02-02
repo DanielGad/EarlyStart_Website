@@ -64,30 +64,15 @@ const AdminAction: React.FC<AdminActionProps> = ({ isOpen, onClose }) => {
     }
   };
 
-  const makeAdmin = async (email: string) => {
-    setLoadingAdmin(true);
-    setErrorAdmin(null);
+  const changeUserRole = async (newRole: string) => {
+    if (!userInfo || !userInfo.docId) return;
     try {
-      const usersCollectionRef = collection(db, 'EarlyStartData');
-      const userQuery = query(usersCollectionRef, where('email', '==', email));
-      const querySnapshot = await getDocs(userQuery);
-
-      if (!querySnapshot.empty) {
-        const userDoc = querySnapshot.docs[0];
-        await updateDoc(doc(db, 'EarlyStartData', userDoc.id), {
-          userRole: 'admin',
-        });
-        alert(`${email} has been made an admin.`);
-        setTargetEmail(''); // Clear input after success
-      } else {
-        alert('User not found.');
-        setTargetEmail(''); // Clear input even if not found
-      }
+      const userDocRef = doc(db, 'EarlyStartData', userInfo.docId);
+      await updateDoc(userDocRef, { userRole: newRole });
+      alert(`User role changed to ${newRole}.`);
+      setUserInfo((prevInfo: any) => ({ ...prevInfo, userRole: newRole }));
     } catch (error) {
-      setErrorAdmin('Error making user admin. Please try again.');
-      console.error('Error making user admin:', error);
-    } finally {
-      setLoadingAdmin(false);
+      console.error('Error changing user role:', error);
     }
   };
 
@@ -98,6 +83,29 @@ const AdminAction: React.FC<AdminActionProps> = ({ isOpen, onClose }) => {
     setUserInfo(null);
     setErrorStatusToggle(null);
     setErrorAdmin(null);
+  };
+
+  const makeAdmin = async (email: string) => {
+    setLoadingAdmin(true);
+    setErrorAdmin(null);
+    try {
+      const usersCollectionRef = collection(db, 'EarlyStartData');
+      const userQuery = query(usersCollectionRef, where('email', '==', email));
+      const querySnapshot = await getDocs(userQuery);
+
+      if (!querySnapshot.empty) {
+        const userDoc = querySnapshot.docs[0];
+        await updateDoc(doc(db, 'EarlyStartData', userDoc.id), { userRole: 'admin' });
+        alert('User is now an admin.');
+      } else {
+        alert('User not found.');
+      }
+    } catch (error) {
+      setErrorAdmin('Error making user admin. Please try again.');
+      console.error('Error making user admin:', error);
+    } finally {
+      setLoadingAdmin(false);
+    }
   };
 
   return (
@@ -115,10 +123,11 @@ const AdminAction: React.FC<AdminActionProps> = ({ isOpen, onClose }) => {
           {/* Enable/Disable User Section */}
           <input
             type="email"
-            placeholder="Enter user email to view info"
+            placeholder="Enter user email to take action"
             value={targetEmailStatus}
             onChange={(e) => setTargetEmailStatus(e.target.value)}
             className="admin-email-input"
+            onKeyDown={(e) => e.key === 'Enter' && toggleUserStatus(targetEmailStatus)}
             required
           />
           <button
@@ -126,7 +135,7 @@ const AdminAction: React.FC<AdminActionProps> = ({ isOpen, onClose }) => {
             className="admin-action-button"
             disabled={loadingStatusToggle}
           >
-            {loadingStatusToggle ? 'Fetching info...' : 'Fetch User Info'}
+            {loadingStatusToggle ? 'Fetching info...' : 'Take Action'}
           </button>
         </div>
 
@@ -136,7 +145,9 @@ const AdminAction: React.FC<AdminActionProps> = ({ isOpen, onClose }) => {
             <h4>User Information</h4>
             <p><strong>Full Name:</strong> {userInfo.fullName || 'N/A'}</p>
             <p><strong>Email:</strong> {userInfo.email}</p>
+            <p><strong>Joined on:</strong> {userInfo.createdAt ? new Date(userInfo.createdAt.seconds * 1000).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : 'N/A'}</p>
             <p><strong>Status:</strong> {userInfo.status}</p>
+            <p><strong>Role:</strong> {userInfo.userRole}</p>
 
             {/* Show Enable/Disable Button */}
             <button
@@ -152,30 +163,22 @@ const AdminAction: React.FC<AdminActionProps> = ({ isOpen, onClose }) => {
                   ? 'Disable User'
                   : 'Enable User'}
             </button>
+
+            {/* Show Change Role Button */}
+            <button
+              onClick={() => changeUserRole(userInfo.userRole === 'admin' ? 'user' : 'admin')}
+              className="admin-action-button"
+            >
+              {userInfo.userRole === 'admin' ? 'Change to User' : 'Make Admin'}
+            </button>
           </div>
         )}
 
         {/* Admin Error */}
         {errorAdmin && <p className="admin-error-message">{errorAdmin}</p>}
 
-        <div className="admin-action-section">
-          {/* Make Admin Section */}
-          <input
-            type="email"
-            placeholder="Enter user email to make admin"
-            value={targetEmail}
-            onChange={(e) => setTargetEmail(e.target.value)}
-            className="admin-email-input"
-            required
-          />
-          <button
-            onClick={() => makeAdmin(targetEmail)}
-            className="admin-action-button"
-            disabled={loadingAdmin}
-          >
-            {loadingAdmin ? 'Processing...' : 'Make Admin'}
-          </button>
-        </div>
+
+        
       </div>
     </div>
   );

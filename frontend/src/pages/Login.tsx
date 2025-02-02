@@ -188,7 +188,7 @@ const Login: React.FC = () => {
           <form onSubmit={handleSubmit}>
             <h2 className="login-title">Login</h2>
 
-            <div className="form-group">
+            <div className="form-group-login">
               <label htmlFor="email">Email:</label>
               <input
                 style={{ padding: "15px" }}
@@ -201,7 +201,7 @@ const Login: React.FC = () => {
               />
             </div>
 
-            <div className="form-group">
+            <div className="form-group-login">
               <label htmlFor="password">Password:</label>
               <input
                 style={{ padding: "15px" }}
@@ -213,6 +213,16 @@ const Login: React.FC = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
+            <Link to={"/reset-password"} style={{
+              color: "#7C46A4",
+              fontWeight: "bold",
+              textDecoration: "underline",
+              fontSize: "14px",
+              textAlign: "right",
+              display: "block",
+              margin: "10px 0",
+              marginRight: "25px",
+            }}>Forgotten Password</Link>
 
             <div className="button-control">
               <button type="submit" className="login-button">

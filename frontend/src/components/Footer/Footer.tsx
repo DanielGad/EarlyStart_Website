@@ -7,6 +7,7 @@ import Phone_Icon from '../../assets/images/Early Start phone.png';
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { Context } from '../../Context/Context';
+import { useUserRole } from '../../hooks/AdminRole';
 
 const Footer = () => {
   useEffect(() => {
@@ -17,7 +18,9 @@ const Footer = () => {
   if (!context) {
     throw new Error("Footer must be used within a Context provider");
   }
-  const { setMenu } = context;
+  const { setMenu, menu, isLoggedIn } = context;
+  const { userRole } = useUserRole();
+  
   return (
     <div className='footer-container'>
       <div className="top-section-container">
@@ -35,7 +38,18 @@ const Footer = () => {
           <Link to={"/"} onClick={() => {setMenu("home")}}>Home</Link>
           <div style={{color: "white"}}>Service</div>
           <Link to={"/call"} onClick={() => {setMenu("call")}}>Call Us</Link>
-          <Link to={"/login"} onClick={() => {setMenu("login")}}>Login</Link>
+          <Link to={"/login"} style={{color: menu === "login" ? 'rgb(124,70,164)' : ''}} onClick={() => {setMenu("login")}}>
+                    {isLoggedIn ? (
+                      // If logged in, show 'Dashboard' and direct to appropriate dashboard
+                      <div><Link to={userRole === 'admin' ? '/admin-dashboard' : '/user-dashboard'}>
+                        Dashboard
+                      </Link>
+                      </div> 
+                    ) : (
+                      // If not logged in, show 'Login'
+                      <Link to="/login">Login</Link>
+                    )}
+                    {menu === "login" ? <hr /> : <></>}</Link>
         {/* </div> */}
       </div>
 
