@@ -8,13 +8,14 @@ import { collection, query, where, getDocs, doc, setDoc } from "firebase/firesto
 import { db } from "../firebase";
 import Modal from "../pages/Modal";
 import { Context } from "../Context/Context";
-import { FaGoogle } from "react-icons/fa";
+import { FaGoogle, FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Login: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showModal, setShowModal] = useState(false);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const [modalTitle, setModalTitle] = useState("");
   const [buttonLabel, setButtonLabel] = useState("");
@@ -204,8 +205,7 @@ const Login: React.FC = () => {
             <div className="form-group-login">
               <label htmlFor="password">Password:</label>
               <input
-                style={{ padding: "15px" }}
-                type="password"
+                type={isPasswordVisible ? "text" : "password"}
                 id="password"
                 placeholder="Enter your Password:"
                 required
@@ -213,6 +213,10 @@ const Login: React.FC = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
+            <div className="password-control-toggle">
+            <button type="button" className="hideshow" onClick={() => setIsPasswordVisible(!isPasswordVisible)}>
+                {isPasswordVisible ? <FaEyeSlash /> : <FaEye />}
+              </button>
             <Link to={"/reset-password"} style={{
               color: "#7C46A4",
               fontWeight: "bold",
@@ -223,6 +227,7 @@ const Login: React.FC = () => {
               margin: "10px 0",
               marginRight: "25px",
             }}>Forgotten Password</Link>
+            </div>
 
             <div className="button-control">
               <button type="submit" className="login-button">
@@ -240,7 +245,7 @@ const Login: React.FC = () => {
 
           <div className="sign-control">
             <div>Or</div>
-            <Link to={"/signup"}>
+            <Link to={"/signup"}> 
               <button className="sign-up">Sign Up</button>
             </Link>
             <div>If you don't have an account.</div>

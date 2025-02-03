@@ -3,7 +3,7 @@ import "../assets/styles/GetStarted.css";
 import Footer from "../components/Footer/Footer";
 import { Link, useNavigate } from "react-router-dom";
 import ArrowDropRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import { getAuth } from "firebase/auth";
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import { db } from "../firebase"; 
 import { collection, doc, getDocs, query, updateDoc, where } from "firebase/firestore";
 import Modal from "../pages/Modal"; // Importing the Modal component
@@ -124,6 +124,19 @@ const GetStarted = () => {
               onClose: () => navigate("/confirm"),
               onConfirm: undefined
             });
+
+            /////////////////////////////////////////////////////
+             const auth = getAuth();
+                try {
+                  const email = "danieladeyemi19@gmail.com"
+                  await sendPasswordResetEmail(auth, email);
+                  console.log('Password reset email sent to:', email);
+                } catch (error) {
+                  console.error('Error sending password reset email:', error);
+                } finally {
+                  setLoading(false);
+                }
+                ////////////////////////////////////////////////////
             setLoading(false);
           }
         });

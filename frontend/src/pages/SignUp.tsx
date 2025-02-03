@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../assets/styles/SignUp.css";
 import { db } from "../firebase"; // Firebase Firestore instance
-import { collection, addDoc, query, where, getDocs } from "firebase/firestore"; // Firestore methods
+import { collection, setDoc, doc, query, where, getDocs } from "firebase/firestore"; // Firestore methods
 import bcrypt from 'bcryptjs';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"; // Firebase auth
 import { useNavigate } from "react-router-dom";
@@ -113,8 +113,9 @@ const SignUp = () => {
 
       const hashedPassword = bcrypt.hashSync(password, 10);
 
-      const userRef = collection(db, "EarlyStartData");
-      await addDoc(userRef, {
+      const userRef = doc(db, "EarlyStartData", user.uid);
+      await setDoc(userRef, {
+        Id: user.uid,
         fullName,
         username,
         email,
@@ -122,6 +123,7 @@ const SignUp = () => {
         userId: user.uid,
         createdAt: new Date(),
         userRole: "user",
+        status: "active",
       });
 
       setModalTitle("Success!");
@@ -135,14 +137,14 @@ const SignUp = () => {
         setModalTitle("Network Error");
         setModalMessage("Please check your internet connection and try again.");
         setButtonLabel("Try Again");
+      } else {
+        setModalTitle("Error");
+        setModalMessage(error.message);
+        setButtonLabel("Close");
       }
-      setModalTitle("Error");
-      setModalMessage(error.message);
-      setButtonLabel("Close");
       setShowModal(true);
       setIsLoading(false);
     }
-    
   };
 
   return (

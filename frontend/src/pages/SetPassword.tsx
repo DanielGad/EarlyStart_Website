@@ -7,6 +7,7 @@ import { db } from "../firebase";
 import Modal from "../pages/Modal";
 import "../assets/styles/SetPassword.css";
 import { Button } from "@mui/material";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const SetPassword: React.FC = () => {
   const [password, setPassword] = useState("");
@@ -120,7 +121,7 @@ const SetPassword: React.FC = () => {
               className="toggle-password-button"
               onClick={() => setShowPassword(!showPassword)}
             >
-              {showPassword ? "Hide" : "Show"}
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
             </button>
           </div>
         </div>
@@ -139,7 +140,7 @@ const SetPassword: React.FC = () => {
               className="toggle-password-button"
               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
             >
-              {showConfirmPassword ? "Hide" : "Show"}
+                {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
             </button>
           </div>
         </div>

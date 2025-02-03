@@ -8,11 +8,12 @@ import {
   doc,
   updateDoc,
 } from "firebase/firestore";
-import { getAuth, onAuthStateChanged, updatePassword } from "firebase/auth";
+import { getAuth, onAuthStateChanged, updatePassword, signInWithEmailAndPassword } from "firebase/auth";
 import bcrypt from "bcryptjs"; // Import bcrypt for password hashing
 import "../assets/styles/ProfilePage.css";
 import { Link, useNavigate } from "react-router-dom";
 import Modal from "./Modal";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const ProfilePage: React.FC = () => {
   const navigate = useNavigate();
@@ -23,10 +24,21 @@ const ProfilePage: React.FC = () => {
   const [formLoading, setFormLoading] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [showPassword, setShowPassword] = useState(false); 
-  const [showModal, setShowModal] = useState(false);
-  const [modalMessage, setModalMessage] = useState('');
-  const [buttonLabel, setButtonLabel] = useState('');
-  const [modalTitle, setModalTitle] = useState('');
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [passwordCriteria, setPasswordCriteria] = useState({
+    length: false,
+    uppercase: false,
+    number: false,
+  });
+  const [modalData, setModalData] = useState({
+        showModal: false,
+        title: "",
+        message: "",
+        buttonLabel: "Close",
+        onClose: () => setModalData((prev) => ({ ...prev, showModal: false })),
+        onConfirm: undefined as (() => void) | undefined,
+      });
 
   const auth = getAuth();
   const db = getFirestore();
@@ -75,6 +87,32 @@ const ProfilePage: React.FC = () => {
     }));
   };
 
+  // Handle password input changes
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setNewPassword(value);
+    setPasswordCriteria({
+      length: value.length >= 6,
+      uppercase: /[A-Z]/.test(value),
+      number: /[0-9]/.test(value),
+    });
+  };
+  // Check password criteria and show alert modal if not met
+  // useEffect(() => {
+  //   if (isEditing && newPassword) {
+  //     if (!passwordCriteria.length || !passwordCriteria.uppercase || !passwordCriteria.number) {
+  //       setModalData({
+  //         showModal: true,
+  //         title: "Password Criteria Not Met",
+  //         message: "Please ensure your new password meets all the criteria.",
+  //         buttonLabel: "Close",
+  //         onClose: () => setModalData((prev) => ({ ...prev, showModal: false })),
+  //         onConfirm: undefined
+  //       });
+  //     }
+  //   }
+  // }, [isEditing, newPassword, passwordCriteria]);
+
   // Hash password before updating Firestore
   const hashPassword = async (password: string) => {
     const salt = await bcrypt.genSalt(10);
@@ -90,12 +128,26 @@ const ProfilePage: React.FC = () => {
       const userDocRef = doc(db, "EarlyStartData", userData.id);
       const updatedData = { ...formData };
   
-      // Update password in Firebase Authentication if a new one is provided
-      if (formData.password) {
+      // Verify current password and update new password in Firebase Authentication if provided
+      if (newPassword) {
         const user = auth.currentUser;
-        if (user) {
-          await updatePassword(user, formData.password); // Update Firebase Authentication password
-          updatedData.password = await hashPassword(formData.password); // Still hash & store in Firestore (optional)
+        if (user && currentPassword) {
+          try {
+            await signInWithEmailAndPassword(auth, user.email!, currentPassword);
+            await updatePassword(user, newPassword); // Update Firebase Authentication password
+            updatedData.password = await hashPassword(newPassword); // Still hash & store in Firestore (optional)
+          } catch (error) {
+            setModalData({
+              showModal: true,
+              title: "Error!",
+              message: "Current password is incorrect.",
+              buttonLabel: "Close",
+              onClose: () => setModalData((prev) => ({ ...prev, showModal: false })),
+              onConfirm: undefined
+            });
+            setFormLoading(false);
+            return;
+          }
         } else {
           alert("User session expired. Please log in again.");
           return;
@@ -106,16 +158,24 @@ const ProfilePage: React.FC = () => {
   
       await updateDoc(userDocRef, updatedData);
       setIsEditing(false);
-      setModalMessage("Profile updated successfully!");
-      setButtonLabel("Continue");
-      setModalTitle("Success!");
-      setShowModal(true);
+      setModalData({
+        showModal: true,
+        title: "Success!",
+        message: "Profile Updated Successfully!",
+        buttonLabel: "Continue",
+        onClose: () => handleContinue(),
+        onConfirm: undefined
+      });
     } catch (error) {
       console.error("Error updating profile:", error);
-      setModalMessage("Failed to update profile. Please try again.");
-      setButtonLabel("Close");
-      setModalTitle("Error");
-      setShowModal(true);
+      setModalData({
+        showModal: true,
+        title: "Error!",
+        message: "Failed to update profile. Please try again.",
+        buttonLabel: "Close",
+        onClose: () => setModalData((prev) => ({ ...prev, showModal: false })),
+        onConfirm: undefined
+      });
     } finally {
       setFormLoading(false);
     }
@@ -153,20 +213,14 @@ const ProfilePage: React.FC = () => {
   }
 
   const handleContinue = () => {
-    setShowModal(false);
+    setModalData((prev) => ({ ...prev, showModal: false }));
     navigate(-1);
   };
 
   return (
     <div className="profile-page-container">
       <h2>Your Profile</h2>
-      <Modal 
-        showModal={showModal} 
-        message={modalMessage} 
-        buttonLabel={buttonLabel} 
-        onClose={handleContinue} 
-        title={modalTitle}
-      />
+      <Modal {...modalData}/>
 
       {userData && (
         <form className="profile-form">
@@ -236,7 +290,23 @@ const ProfilePage: React.FC = () => {
             />
           </div>
 
-          {/* Password with show toggle */}
+          {/* Current Password */}
+          {isEditing && (
+            <div className="form-group">
+              <label htmlFor="currentPassword">Current Password:</label>
+              <input
+                type="password"
+                id="currentPassword"
+                name="currentPassword"
+                value={currentPassword}
+                onChange={(e) => setCurrentPassword(e.target.value)}
+                placeholder="Enter current password"
+                required
+              />
+            </div>
+          )}
+
+          {/* New Password with show toggle */}
           <div className="form-group">
             <label htmlFor="password">Change Password:</label>
             <div className="password-wrapper">
@@ -244,14 +314,37 @@ const ProfilePage: React.FC = () => {
                 type={showPassword ? "text" : "password"}
                 id="password"
                 name="password"
-                value={formData.password}
-                onChange={handleInputChange}
+                value={newPassword}
+                onChange={handlePasswordChange}
                 disabled={!isEditing}
                 placeholder="Enter new password"
               />
               <button type="button" className="toggle-password" onClick={togglePasswordVisibility}>
-                {showPassword ? "Hide" : "Show"}
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
               </button>
+            </div>
+            
+            <div className="password-control-n">
+            {isEditing && newPassword && (!passwordCriteria.length) && (
+              <div className="password-alert">
+              <p className="password-criteria-check">
+              Password must be at least 6 characters!
+              </p>
+              </div>
+            )}
+              {isEditing && newPassword && (!passwordCriteria.length) && (
+              <div className="password-alert">
+              <p className="password-criteria-check">Password must contain at least one uppercase letter!</p>
+              </div>
+            )}
+             {isEditing && newPassword && (!passwordCriteria.number) && (
+              <div className="password-alert">
+              <p className="password-criteria-check">
+              Password must contain at least one number
+              </p>
+              </div>
+            )}
+              
             </div>
           </div>
 
@@ -266,8 +359,6 @@ const ProfilePage: React.FC = () => {
           </Link>
         </form>
       )}
-
-
     </div>
   );
 };

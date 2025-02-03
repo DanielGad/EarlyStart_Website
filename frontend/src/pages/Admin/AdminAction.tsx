@@ -2,6 +2,7 @@ import { collection, doc, getDocs, query, updateDoc, where } from 'firebase/fire
 import React, { useState } from 'react';
 import { db } from '../../firebase';
 import '../../assets/styles/AdminAction.css';
+import Modal from '../Modal';
 
 interface AdminActionProps {
   isOpen: boolean;
@@ -17,6 +18,14 @@ const AdminAction: React.FC<AdminActionProps> = ({ isOpen, onClose }) => {
   const [loadingStatusUpdate, setLoadingStatusUpdate] = useState<boolean>(false); // New state for enabling/disabling
   const [errorStatusToggle, setErrorStatusToggle] = useState<string | null>(null);
   const [errorAdmin, setErrorAdmin] = useState<string | null>(null);
+  const [modalData, setModalData] = useState({
+    showModal: false,
+    title: "",
+    message: "",
+    buttonLabel: "",
+    onClose: () => {},
+    onConfirm: undefined
+  });
 
   if (!isOpen) return null;
 
@@ -36,7 +45,14 @@ const AdminAction: React.FC<AdminActionProps> = ({ isOpen, onClose }) => {
 
         // Now the status toggle buttons will appear based on current status.
       } else {
-        alert('User not found.');
+        setModalData({
+          showModal: true,
+          title: "Error!",
+          message: `User not found!.`,
+          buttonLabel: "Continue",
+          onClose: () => setModalData((prev) => ({ ...prev, showModal: false })),
+          onConfirm: undefined
+        });
         setTargetEmailStatus(''); // Clear input if not found
         setUserInfo(null); // Clear user info
       }
@@ -54,7 +70,14 @@ const AdminAction: React.FC<AdminActionProps> = ({ isOpen, onClose }) => {
     try {
       const newStatus = userInfo.status === 'active' ? 'disabled' : 'active';
       await updateDoc(doc(db, 'EarlyStartData', userInfo.docId), { status: newStatus });
-      alert(`User is now ${newStatus}.`);
+      setModalData({
+        showModal: true,
+        title: "Success!",
+        message: `User is now ${newStatus}.`,
+        buttonLabel: "Continue",
+        onClose: () => setModalData((prev) => ({ ...prev, showModal: false })),
+        onConfirm: undefined
+      });
       setUserInfo({ ...userInfo, status: newStatus }); // Update user info locally
     } catch (error) {
       setErrorStatusToggle('Error toggling user status. Please try again.');
@@ -69,7 +92,14 @@ const AdminAction: React.FC<AdminActionProps> = ({ isOpen, onClose }) => {
     try {
       const userDocRef = doc(db, 'EarlyStartData', userInfo.docId);
       await updateDoc(userDocRef, { userRole: newRole });
-      alert(`User role changed to ${newRole}.`);
+      setModalData({
+        showModal: true,
+        title: "Success!",
+        message: `User role changed to ${newRole}.`,
+        buttonLabel: "Continue",
+        onClose: () => setModalData((prev) => ({ ...prev, showModal: false })),
+        onConfirm: undefined
+      });
       setUserInfo((prevInfo: any) => ({ ...prevInfo, userRole: newRole }));
     } catch (error) {
       console.error('Error changing user role:', error);
@@ -85,31 +115,32 @@ const AdminAction: React.FC<AdminActionProps> = ({ isOpen, onClose }) => {
     setErrorAdmin(null);
   };
 
-  const makeAdmin = async (email: string) => {
-    setLoadingAdmin(true);
-    setErrorAdmin(null);
-    try {
-      const usersCollectionRef = collection(db, 'EarlyStartData');
-      const userQuery = query(usersCollectionRef, where('email', '==', email));
-      const querySnapshot = await getDocs(userQuery);
+  // const makeAdmin = async (email: string) => {
+  //   setLoadingAdmin(true);
+  //   setErrorAdmin(null);
+  //   try {
+  //     const usersCollectionRef = collection(db, 'EarlyStartData');
+  //     const userQuery = query(usersCollectionRef, where('email', '==', email));
+  //     const querySnapshot = await getDocs(userQuery);
 
-      if (!querySnapshot.empty) {
-        const userDoc = querySnapshot.docs[0];
-        await updateDoc(doc(db, 'EarlyStartData', userDoc.id), { userRole: 'admin' });
-        alert('User is now an admin.');
-      } else {
-        alert('User not found.');
-      }
-    } catch (error) {
-      setErrorAdmin('Error making user admin. Please try again.');
-      console.error('Error making user admin:', error);
-    } finally {
-      setLoadingAdmin(false);
-    }
-  };
+  //     if (!querySnapshot.empty) {
+  //       const userDoc = querySnapshot.docs[0];
+  //       await updateDoc(doc(db, 'EarlyStartData', userDoc.id), { userRole: 'admin' });
+  //       alert('User is now an admin.');
+  //     } else {
+  //       alert('User not found.');
+  //     }
+  //   } catch (error) {
+  //     setErrorAdmin('Error making user admin. Please try again.');
+  //     console.error('Error making user admin:', error);
+  //   } finally {
+  //     setLoadingAdmin(false);
+  //   }
+  // };
 
   return (
     <div className="admin-modal-overlay">
+      <Modal {...modalData} />
       <div className="admin-modal-container">
         <h3 className="admin-modal-title">Admin Actions</h3>
         <button className="admin-close-button" onClick={handleClose}>

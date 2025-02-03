@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   getFirestore,
   collection,
@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 import { updatePassword } from "firebase/auth";
 import Modal from "../Modal";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const ManageAccount: React.FC = () => {
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ const ManageAccount: React.FC = () => {
     username: "",
     phoneNumber: "",
     bio: "",
-    createdAt: "", // Initialize as an empty string
+    createdAt: "", 
     getstarted: {
       childName: "",
       preferredDays: "",
@@ -127,7 +128,9 @@ const ManageAccount: React.FC = () => {
     try {
       setFormLoading(true);
       
-      // Update password in Firebase Authentication
+      const updatedFormData: any = { ...formData };
+      
+      // Update password in Firebase Authentication if provided
       if (formData.password) {
         const auth = getAuth();
         if (!auth.currentUser) {
@@ -135,14 +138,11 @@ const ManageAccount: React.FC = () => {
           return;
         }
         await updatePassword(auth.currentUser, formData.password);
+        // Hash the new password before saving in Firestore
+        updatedFormData.password = bcrypt.hashSync(formData.password, 10);
+      } else {
+        delete updatedFormData.password; // Remove password field if empty
       }
-  
-      // Hash the new password before saving in Firestore
-      const hashedPassword = bcrypt.hashSync(formData.password, 10);
-      const updatedFormData = {
-        ...formData,
-        password: hashedPassword,
-      };
   
       // Update Firestore database
       const userDocRef = doc(db, "EarlyStartData", userData.id);
@@ -233,7 +233,7 @@ const ManageAccount: React.FC = () => {
 
           <div className="form-group">
             <label>Joined on:</label>
-            <input type="text" value={formatDateWithSuffix(new Date(formData.createdAt)) || ""} disabled />
+            <input type="text" value={formData.createdAt ? formatDateWithSuffix(new Date(formData.createdAt)) : ""} disabled />
           </div>
 
           <div className="form-group">
@@ -386,7 +386,7 @@ const ManageAccount: React.FC = () => {
             />
           </div>
           <button type="button" className="toggle-password1" onClick={togglePasswordVisibility}>
-                {showPassword ? "Hide" : "Show"}
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
               </button>
 
           <button

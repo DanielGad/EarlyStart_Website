@@ -1,10 +1,11 @@
 /* Main Container */
 .profile-page-container {
-  max-width: 800px;
+  max-width: 600px;
   margin: 40px auto;
   padding: 20px;
+  padding-right: 50px;
   background-color: #fff;
-  border-radius: 8px;
+  border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
@@ -146,13 +147,22 @@
   min-width: 200px;
 }
 
+/* Password control container */
+.password-control-n {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  font-size: 14px;
+  color: var(--hover-color);
+}
+
 .toggle-password {
-  display: flex;
-  align-items: center;
-  gap: 5px;
+  margin-top: 5px;
   cursor: pointer;
+  padding: 3px 15px;
   background-color: var(--primary-color);
-  border: 2px solid var(--primary-color);
+  border: none;
   border-radius: 5px;
   color: white;
 }
