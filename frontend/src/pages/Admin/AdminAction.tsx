@@ -15,7 +15,7 @@ const AdminAction: React.FC<AdminActionProps> = ({ isOpen, onClose }) => {
   const [targetEmail, setTargetEmail] = useState<string>('');
   const [loadingStatusToggle, setLoadingStatusToggle] = useState<boolean>(false);
   const [loadingAdmin, setLoadingAdmin] = useState<boolean>(false);
-  const [loadingStatusUpdate, setLoadingStatusUpdate] = useState<boolean>(false); // New state for enabling/disabling
+  const [loadingStatusUpdate, setLoadingStatusUpdate] = useState<boolean>(false); 
   const [errorStatusToggle, setErrorStatusToggle] = useState<string | null>(null);
   const [errorAdmin, setErrorAdmin] = useState<string | null>(null);
   const [modalData, setModalData] = useState({
@@ -42,8 +42,7 @@ const AdminAction: React.FC<AdminActionProps> = ({ isOpen, onClose }) => {
         const userData = userDoc.data();
         const currentStatus = userData.status || 'active';
         setUserInfo({ ...userData, docId: userDoc.id });
-
-        // Now the status toggle buttons will appear based on current status.
+        setTargetEmailStatus('');
       } else {
         setModalData({
           showModal: true,
@@ -115,28 +114,21 @@ const AdminAction: React.FC<AdminActionProps> = ({ isOpen, onClose }) => {
     setErrorAdmin(null);
   };
 
-  // const makeAdmin = async (email: string) => {
-  //   setLoadingAdmin(true);
-  //   setErrorAdmin(null);
-  //   try {
-  //     const usersCollectionRef = collection(db, 'EarlyStartData');
-  //     const userQuery = query(usersCollectionRef, where('email', '==', email));
-  //     const querySnapshot = await getDocs(userQuery);
-
-  //     if (!querySnapshot.empty) {
-  //       const userDoc = querySnapshot.docs[0];
-  //       await updateDoc(doc(db, 'EarlyStartData', userDoc.id), { userRole: 'admin' });
-  //       alert('User is now an admin.');
-  //     } else {
-  //       alert('User not found.');
-  //     }
-  //   } catch (error) {
-  //     setErrorAdmin('Error making user admin. Please try again.');
-  //     console.error('Error making user admin:', error);
-  //   } finally {
-  //     setLoadingAdmin(false);
-  //   }
-  // };
+  const formatDateWithSuffix = (date: Date) => {
+    const day = date.getDate();
+    const month = date.toLocaleString("default", { month: "long" });
+    const year = date.getFullYear();
+    const getDaySuffix = (day: number) => {
+      if (day > 3 && day < 21) return "th";
+      switch (day % 10) {
+        case 1: return "st";
+        case 2: return "nd";
+        case 3: return "rd";
+        default: return "th";
+      }
+    };
+    return `${day}${getDaySuffix(day)} ${month} ${year}`;
+  };
 
   return (
     <div className="admin-modal-overlay">
@@ -146,9 +138,6 @@ const AdminAction: React.FC<AdminActionProps> = ({ isOpen, onClose }) => {
         <button className="admin-close-button" onClick={handleClose}>
           X
         </button>
-
-        {/* Status Toggle Error */}
-        {errorStatusToggle && <p className="admin-error-message">{errorStatusToggle}</p>}
 
         <div className="admin-action-section">
           {/* Enable/Disable User Section */}
@@ -176,7 +165,7 @@ const AdminAction: React.FC<AdminActionProps> = ({ isOpen, onClose }) => {
             <h4>User Information</h4>
             <p><strong>Full Name:</strong> {userInfo.fullName || 'N/A'}</p>
             <p><strong>Email:</strong> {userInfo.email}</p>
-            <p><strong>Joined on:</strong> {userInfo.createdAt ? new Date(userInfo.createdAt.seconds * 1000).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : 'N/A'}</p>
+            <p><strong>Joined on:</strong> {formatDateWithSuffix(new Date(userInfo.createdAt))}</p>
             <p><strong>Status:</strong> {userInfo.status}</p>
             <p><strong>Role:</strong> {userInfo.userRole}</p>
 
@@ -204,12 +193,6 @@ const AdminAction: React.FC<AdminActionProps> = ({ isOpen, onClose }) => {
             </button>
           </div>
         )}
-
-        {/* Admin Error */}
-        {errorAdmin && <p className="admin-error-message">{errorAdmin}</p>}
-
-
-        
       </div>
     </div>
   );
