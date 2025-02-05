@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
 import '../assets/styles/MathService.css';
 import ArrowDropRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import General_Image from '../assets/images/mother-helping.jpg';
+import Child1 from '../assets/images/m-boy-1.png';
+import Child2 from '../assets/images/m-lady-1.png';
+import Child3 from '../assets/images/m-girl-1.png';
+import Child4 from '../assets/images/m-boy-2.png';
+import Child5 from '../assets/images/m-girl-2.png';
 import Footer from '../components/Footer/Footer';
 import { Link } from 'react-router-dom';
 import Action from '../components/Action/Action';
@@ -26,23 +30,23 @@ const MathService = () => {
         </div>
         <div className="column-1-right">
           <div className="math-image-1">
-            <img src={General_Image} alt="" width={"20%"} />
+            <img src={Child1} alt="" width={"20%"} />
           </div>
           <div className="math-image-2">
-          <img src={General_Image} alt="" width={"20%"} />
+          <img src={Child2} alt="" width={"20%"} />
           </div>
           <div className="math-image-3">
-          <img src={General_Image} alt="" width={"20%"} />
+          <img src={Child3} alt="" width={"20%"} />
           </div>
           <div className="math-image-4">
-          <img src={General_Image} alt="" width={"20%"} />
+          <img src={Child4} alt="" width={"20%"} />
           </div>
         </div>
       </div>
 
       <div className="math-row-2">
         <div className="math-2-image">
-          <img src={General_Image} alt="" width={"50%"}/>
+          <img src={Child5} alt="" width={"50%"}/>
         </div>
         <div className="math-2-inner">
           <div className="math-2-head-text">

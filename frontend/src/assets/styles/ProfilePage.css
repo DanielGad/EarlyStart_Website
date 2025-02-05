@@ -39,6 +39,7 @@
 
 .form-group input,
 .form-group textarea {
+  resize: none;
   padding: 10px;
   font-size: 1rem;
   border: 1px solid #ccc;
@@ -84,6 +85,10 @@
   transition: background-color 0.3s ease;
   font-size: 1rem;
   margin-top: 10px;
+}
+
+.edit-button:hover {
+  background-color: var(--hover-color);
 }
 
 /* Update Button */

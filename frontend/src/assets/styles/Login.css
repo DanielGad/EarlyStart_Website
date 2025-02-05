@@ -1,10 +1,3 @@
-
-/* body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-} */
-
 /* Login Container */
 .login-divide {
     width: 80%;
@@ -18,7 +11,7 @@
 .login-head {
     font-size: 36px;
     font-weight: 600;
-    margin-top: 50px;
+    margin-top: 30px;
     color: var(--secondary-color);
 }
 
@@ -31,7 +24,7 @@
 /* Right Section */
 .login-right {
     width: 100%;
-    height: auto;
+    height: 85%;
 }
 
 .login-right img {
@@ -49,7 +42,7 @@
 
 .form-group-login input {
     width: 90%;
-    padding: 20px;
+    padding: 15px;
     margin: 10px 0;
     font-size: large;
     border-radius: 10px;
@@ -93,7 +86,12 @@
 }
 
 .login-button:hover {
-    background-color: rgb(1, 1, 77);
+    background-color: var(--hover-color);
+}
+
+.form-table {
+    padding-bottom: 40px;
+    border-bottom: 1px dotted var(--secondary-color);
 }
 
 /* Remember Me Section */
@@ -113,32 +111,17 @@
     font-weight: 500;
 }
 
-.sign-up {
-    padding: 3% 10%;
-    background-color: green;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 10px;
-    margin: 5px 0;
-    transition: background-color 0.3s ease;
-}
-
-.sign-up:hover {
-    background-color: darkgreen;
-}
-
 .google-signin {
     text-align: center;
-    margin-top: 15px;
+    margin-top: 40px;
   }
-  
+
   .google-button {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
-    background-color: #4285f4;
+    background-color: #f33900;
     color: white;
     border: none;
     padding: 10px 15px;
@@ -158,6 +141,22 @@
     font-size: 20px;
   }
   
+ 
+
+.sign-up {
+    padding: 10px 40px;
+    background-color: green;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    margin: 5px 0;
+    transition: background-color 0.3s ease;
+}
+
+.sign-up:hover {
+    background-color: var(--secondary-color);
+}
 
 /* Responsive Design */
 @media screen and (max-width: 769px) {

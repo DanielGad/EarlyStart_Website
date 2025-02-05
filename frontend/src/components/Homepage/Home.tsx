@@ -1,11 +1,16 @@
 import React, { useEffect } from 'react';
 import './Home.css';
-import Helping_Mother from '../../assets/images/mother-helping.jpg';
-import Lady_Pointing from '../../assets/images/woman-showing-copy-space.jpg';
-import Smiley_Male from '../../assets/images/smiley-male.jpg';
-import Smiley_Female from '../../assets/images/smiley-female.png'
+import Helping_Mother from '../../assets/images/hp-mother-helping.png';
+import Lady_Pointing from '../../assets/images/hp-woman-pointing.png';
+import Smiley_Male from '../../assets/images/hp-smiley-male.jpg';
+import Smiley_Female from '../../assets/images/hp-smiley-female.png'
 import ArrowDropRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import document_icon from '../../assets/images/text_snippet.png';
+import NumberWork from '../../assets/images/hp-numberwork.png';
+import HomeWork from '../../assets/images/hp-homework.png';
+import LetterWork from '../../assets/images/hp-letterwork.png';
+import Language from '../../assets/images/hp-language.png';
+import International from '../../assets/images/hp-international.png';
+import General from '../../assets/images/hp-general.png';
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { Context } from '../../Context/Context';
@@ -55,7 +60,7 @@ const Home = () => {
           <div className="home-2-con" onClick={() => {setMenu("service")}}>
             <Link to={"/math"}>
             <div className="home-2-icon">
-              <img src={document_icon} alt="text icon" width={"50px"}/>
+              <img src={NumberWork} alt="text icon" width={"50px"}/>
             </div>
             <div className="home-2-texts">
               Number Work/ Quantitative Reasoning/ Mathematics
@@ -66,7 +71,7 @@ const Home = () => {
           <div className="home-2-con" onClick={() => {setMenu("service")}}>
             <Link to={"/homework"}>
             <div className="home-2-icon">
-              <img src={document_icon} alt="text icon" width={"50px"}/>
+              <img src={HomeWork} alt="text icon" width={"50px"}/>
             </div>
             <div className="home-2-texts">
               Home Work/ School Assignment
@@ -76,7 +81,7 @@ const Home = () => {
           <div className="home-2-con" onClick={() => {setMenu("service")}}>
             <Link to={"/letterwork"}>
             <div className="home-2-icon">
-              <img src={document_icon} alt="text icon" width={"50px"}/>
+              <img src={LetterWork} alt="text icon" width={"50px"}/>
             </div>
             <div className="home-2-texts">
               Letter Work/ Word Formation/ Phonetics/ Verbal Reasoning
@@ -86,7 +91,7 @@ const Home = () => {
           <div className="home-2-con" onClick={() => {setMenu("service")}}>
             <Link to={"/language"}>
             <div className="home-2-icon">
-              <img src={document_icon} alt="text icon" width={"50px"}/>
+              <img src={Language} alt="text icon" width={"50px"}/>
             </div>
             <div className="home-2-texts">
               Languages/ French/ English/ Yoruba/ Igbo/ Hausa
@@ -96,7 +101,7 @@ const Home = () => {
           <div className="home-2-con" onClick={() => {setMenu("service")}}>
             <Link to={"/international"}>
             <div className="home-2-icon">
-              <img src={document_icon} alt="text icon" width={"50px"}/>
+              <img src={International} alt="text icon" width={"50px"}/>
             </div>
             <div className="home-2-texts">
               International School Enterance Preparation
@@ -107,7 +112,7 @@ const Home = () => {
             <Link to={"/general"}>
             <div className="home-2-icon">
               
-              <img src={document_icon} alt="text icon" width={"50px"}/>
+              <img src={General} alt="text icon" width={"50px"}/>
             </div>
             <div className="home-2-texts">
               General Knowledge/ Vocational Aptitude

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react"
 import '../assets/styles/CallUs.css';
 import Background from '../assets/images/customer-care.jpg';
-import { Label } from "@mui/icons-material";
 import Footer from "../components/Footer/Footer";
 import { addDoc, collection } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";

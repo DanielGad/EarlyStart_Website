@@ -12,7 +12,6 @@ import bcrypt from 'bcryptjs';
 import "../../assets/styles/ManageAccount.css";
 import { useNavigate } from "react-router-dom";
 import { getAuth } from "firebase/auth";
-import { updatePassword } from "firebase/auth";
 import Modal from "../Modal";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
@@ -74,9 +73,17 @@ const ManageAccount: React.FC = () => {
         const userDoc = querySnapshot.docs[0];
         setUserData({ ...userDoc.data(), id: userDoc.id });
         const userData = userDoc.data();
+        
         setFormData({
           ...userData,
-          createdAt: userData.createdAt ? new Date(userData.createdAt.seconds * 1000).toISOString() : "", // Convert Firestore timestamp to ISO string
+          fullName: userData.fullName || "",
+          email: userData.email || "",
+          createdAt: userData.createdAt || "",
+          userRole: userData.userRole || "User",
+          username: userData.username || "",
+          bio: userData.bio || "",
+          dob: userData.dob || "",
+          phoneNumber: userData.phoneNumber || "",
           password: "", // Clear password field for security
           getstarted: {
             childName: userData.getstarted?.childName || "",
@@ -89,13 +96,29 @@ const ManageAccount: React.FC = () => {
             phone: userData.getstarted?.phone || "",
           },
         });
+        setsearchEmail("");
       } else {
-        setErrorMessage("User not found. Please check the email.");
+        setModalData({
+          showModal: true,
+          title: "Error!",
+          message: "User not found. Please check the email.",
+          buttonLabel: "Okay",
+          onClose: () => setModalData((prev) => ({ ...prev, showModal: false })),
+          onConfirm: undefined
+        });
         setUserData(null);
       }
     } catch (error) {
       console.error("Error fetching user:", error);
-      setErrorMessage("Failed to fetch user. Please try again.");
+      setModalData({
+        showModal: true,
+        title: "Error!",
+        message: "Failed to fetch user. Please try again.",
+        buttonLabel: "Okay",
+        onClose: () => setModalData((prev) => ({ ...prev, showModal: false })),
+        onConfirm: undefined
+      });
+      setUserData(null)
     } finally {
       setLoading(false);
     }
@@ -130,23 +153,23 @@ const ManageAccount: React.FC = () => {
       
       const updatedFormData: any = { ...formData };
       
-      // Update password in Firebase Authentication if provided
-      if (formData.password) {
-        const auth = getAuth();
-        if (!auth.currentUser) {
-          alert("No authenticated user found.");
-          return;
+      // Remove empty fields from updatedFormData
+      Object.keys(updatedFormData).forEach(key => {
+        if (updatedFormData[key] === "" || (typeof updatedFormData[key] === 'object' && Object.keys(updatedFormData[key]).length === 0)) {
+          delete updatedFormData[key];
         }
-        await updatePassword(auth.currentUser, formData.password);
-        // Hash the new password before saving in Firestore
-        updatedFormData.password = bcrypt.hashSync(formData.password, 10);
-      } else {
-        delete updatedFormData.password; // Remove password field if empty
-      }
-  
+      });
+
       // Update Firestore database
       const userDocRef = doc(db, "EarlyStartData", userData.id);
       await updateDoc(userDocRef, updatedFormData);
+
+      // Update password in Firestore if provided
+      if (formData.password) {
+        // Hash the new password before saving in Firestore
+        const hashedPassword = bcrypt.hashSync(formData.password, 10);
+        await updateDoc(userDocRef, { password: hashedPassword });
+      }
   
       setIsEditing(false);
       setModalData({
@@ -210,7 +233,13 @@ const ManageAccount: React.FC = () => {
         </button>
       </form>
 
-      {errorMessage && <div className="error-message">{errorMessage}</div>}
+      {!userData ? (
+        <div>
+          <button className="back-button" onClick={() => navigate('/admin-dashboard')}>
+            Go Back
+          </button>
+        </div>
+      ) : ""}
 
       {/* User Profile Display */}
       {userData && (
@@ -398,7 +427,7 @@ const ManageAccount: React.FC = () => {
             {isEditing ? (formLoading ? "Updating..." : "Save Changes") : "Edit Profile"}
           </button>
 
-          <button className="back-button" onClick={() => navigate('/admin-dashboard')}>
+          <button className="back-button" onClick={() => navigate('/admin-dashboard')} style={{marginRight: 'auto', marginLeft: 'auto', display: 'block'}}>
             Go Back
           </button>
         </form>

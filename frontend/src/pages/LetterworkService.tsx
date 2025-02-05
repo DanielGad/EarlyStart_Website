@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import '../assets/styles/LetterworkService.css';
 import ArrowDropRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import General_Image from '../assets/images/mother-helping.jpg';
+import LadyTeaching from '../assets/images/lw-lady.png';
+import HappyGirl from '../assets/images/lw-girl.png';
+import Chart from '../assets/images/lw-image.png';
 import Footer from '../components/Footer/Footer';
 import { Link } from 'react-router-dom';
 import Action from '../components/Action/Action';
@@ -28,17 +30,17 @@ const LetterworkService = () => {
         </div>
         <div className="lw-row-1-col-2">
           <div className='lw-row-1-col-2-image-1'>
-          <img src={General_Image} alt="" width={"50%"} />
+          <img src={LadyTeaching} alt="" width={"50%"} />
           </div>
           <div className='lw-row-1-col-2-image-2'>
-          <img src={General_Image} alt="" width={"50%"}/>
+          <img src={HappyGirl} alt="" width={"50%"}/>
           </div>
         </div>
       </div>
 
       <div className="lw-row-2">
         <div className="lw-row-2-col-1">
-          <img src={General_Image} alt="" width={"50%"}/>
+          <img src={Chart} alt="" width={"50%"}/>
         </div>
         <div className="lw-row-2-col-2">
           <div className="lw-row-2-col-2-htext">

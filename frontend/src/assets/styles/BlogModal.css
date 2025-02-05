@@ -17,6 +17,7 @@
   background-color: white;
   border-radius: 8px;
   padding: 20px;
+  padding-right: 50px;
   width: 100%; /* Full width on smaller screens */
   max-width: 500px; /* Limit max width */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -69,7 +70,7 @@
 }
 
 .form-textarea {
-  width: 93%;
+  width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;

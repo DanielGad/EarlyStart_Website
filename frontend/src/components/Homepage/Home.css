@@ -6,7 +6,6 @@
 
 .home-home-1 {
   display: flex;
-  gap: 20px;
   align-items: center;
   margin-bottom: 50px;
   justify-content: space-between;
@@ -14,9 +13,9 @@
 
 .learn {
   width: 80%;
-  font-size: 4vw;
+  font-size: 3.5vw;
   font-weight: bold;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   color: var(--primary-color);
 }
 
@@ -73,8 +72,9 @@
 .home-1-image-cont {
   border: 5px solid var(--primary-color);
   border-radius: 20px;
-  width: 100%;
-  height: auto;
+  width: 150%;
+  margin-top: 30px;
+
 }
 
 .home-1-image-cont img {
@@ -215,6 +215,10 @@
 @media screen and (max-width: 1024px) {
   .home-home-1 {
     grid-template-columns: 1fr;
+  }
+
+  .home-1-image-cont {
+    width: 100%;
   }
 
   .home-2 {

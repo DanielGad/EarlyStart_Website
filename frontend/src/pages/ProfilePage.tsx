@@ -14,6 +14,7 @@ import "../assets/styles/ProfilePage.css";
 import { Link, useNavigate } from "react-router-dom";
 import Modal from "./Modal";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useUserRole } from "../hooks/AdminRole";
 
 const ProfilePage: React.FC = () => {
   const navigate = useNavigate();
@@ -42,6 +43,16 @@ const ProfilePage: React.FC = () => {
 
   const auth = getAuth();
   const db = getFirestore();
+
+  const { userRole } = useUserRole();
+
+  const handleContinue = () => {
+    if (userRole === "admin") {
+      navigate("/admin-dashboard");
+    } else {
+      navigate("/user-dashboard");
+    }
+  };
 
   // Fetch user data from Firestore
   const fetchUserData = async (uid: string) => {
@@ -97,21 +108,6 @@ const ProfilePage: React.FC = () => {
       number: /[0-9]/.test(value),
     });
   };
-  // Check password criteria and show alert modal if not met
-  // useEffect(() => {
-  //   if (isEditing && newPassword) {
-  //     if (!passwordCriteria.length || !passwordCriteria.uppercase || !passwordCriteria.number) {
-  //       setModalData({
-  //         showModal: true,
-  //         title: "Password Criteria Not Met",
-  //         message: "Please ensure your new password meets all the criteria.",
-  //         buttonLabel: "Close",
-  //         onClose: () => setModalData((prev) => ({ ...prev, showModal: false })),
-  //         onConfirm: undefined
-  //       });
-  //     }
-  //   }
-  // }, [isEditing, newPassword, passwordCriteria]);
 
   // Hash password before updating Firestore
   const hashPassword = async (password: string) => {
@@ -163,7 +159,7 @@ const ProfilePage: React.FC = () => {
         title: "Success!",
         message: "Profile Updated Successfully!",
         buttonLabel: "Continue",
-        onClose: () => handleContinue(),
+        onClose: () => setModalData((prev) => ({ ...prev, showModal: false })),
         onConfirm: undefined
       });
     } catch (error) {
@@ -212,10 +208,7 @@ const ProfilePage: React.FC = () => {
     return <div className="error-message">{errorMessage}</div>;
   }
 
-  const handleContinue = () => {
-    setModalData((prev) => ({ ...prev, showModal: false }));
-    navigate(-1);
-  };
+
 
   return (
     <div className="profile-page-container">
@@ -352,11 +345,9 @@ const ProfilePage: React.FC = () => {
             {isEditing ? (formLoading ? "Updating..." : "Save Changes") : "Edit Profile"}
           </button>
 
-          <Link to={""}>
-            <b className="back-button" style={{ fontSize: "larger", marginTop: "30px" }} onClick={() => navigate(-1)}>
-              Go Back
-            </b>
-          </Link>
+          <button className="back-button" onClick={() => handleContinue()} style={{ textAlign: 'center', marginRight: 'auto', marginLeft: 'auto', display: 'block' }}>
+            Go Back
+          </button>
         </form>
       )}
     </div>

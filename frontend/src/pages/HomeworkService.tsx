@@ -1,7 +1,8 @@
 import React, { useEffect } from "react"
 import '../assets/styles/HomeworkService.css';
 import ArrowDropRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import General_Image from '../assets/images/mother-helping.jpg';
+import BoyDad from '../assets/images/hw-boy-1.png';
+import GirlDad from '../assets/images/hw-girl.png';
 import Footer from '../components/Footer/Footer';
 import { Link } from 'react-router-dom';
 import Action from "../components/Action/Action";
@@ -31,13 +32,13 @@ const HomeworkService = () => {
           </Link>
         </div>
         <div className="homework-col-2">
-          <img src={General_Image} alt="" width={"50%"}/>
+          <img src={BoyDad} alt="" width={"50%"}/>
         </div>
       </div>
 
       <div className="homework-row-2">
         <div className="homework-col-2-image">
-          <img src={General_Image} alt="" width={"50%"} />
+          <img src={GirlDad} alt="" width={"50%"} />
         </div>
         <div className="homework-col-2-text">
           <div className="homework-col-2-head-text">

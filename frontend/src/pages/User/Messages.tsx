@@ -209,9 +209,9 @@ const UserMessage: React.FC = () => {
           </div>
         </div>
       )}
-      <Link to="">
-      <b style={{fontSize: "larger"}} onClick={handleGoBack}>Go Back</b>
-      </Link>
+      <button className="back-button" onClick={() => navigate(-1)} style={{marginRight: 'auto', marginLeft: 'auto', display: 'block'}}>
+            Go Back
+          </button>
     </div>
   );
 };

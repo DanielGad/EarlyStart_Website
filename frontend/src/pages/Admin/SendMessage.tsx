@@ -31,10 +31,6 @@ const AdminSendMessage: React.FC = () => {
   
   const navigate = useNavigate();
 
-  const handleGoBack = () => {
-    navigate(-1);
-  };
-
   const db = getFirestore();
   const auth = getAuth();
 
@@ -289,9 +285,9 @@ const AdminSendMessage: React.FC = () => {
           </div>
         </div>
       )}
-      <Link to="">
-      <b style={{fontSize: "larger"}} onClick={handleGoBack}>Go Back</b>
-      </Link>
+      <button className="back-button" onClick={() => navigate('/admin-dashboard')} style={{ textAlign: 'center', marginRight: 'auto', marginLeft: 'auto', display: 'block' }}>
+            Go Back
+          </button>
     </div>
   );
   

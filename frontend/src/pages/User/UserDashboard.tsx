@@ -150,9 +150,9 @@ const UserDashboard: React.FC = () => {
           </div>
 
           <div className="navigation-bar">
-            <Link to="/profile" className="nav-link">View Profile</Link>
-            <Link to="/messages" className="nav-link">Messages</Link>
-            <Link to="/login" className="nav-link" onClick={handleLogout}>Logout</Link>
+            <Link to="/profile" className="nav-link1">View Profile</Link>
+            <Link to="/messages" className="nav-link1">Messages</Link>
+            <Link to="/login" className="nav-link1" onClick={handleLogout}>Logout</Link>
           </div>
 
           <div className="user-details-section">
@@ -162,7 +162,7 @@ const UserDashboard: React.FC = () => {
               <div className="user-details-card">
                 <p><strong>Full Name:</strong> {userData.fullName}</p>
                 <p><strong>Email:</strong> {userData.email}</p>
-                <p><strong>Joined Date:</strong> {formatDateWithSuffix(userData.createdAt?.toDate())}</p>
+                <p><strong>Joined Date:</strong> {formatDateWithSuffix(new Date(userData.createdAt))}</p>
                 <p><strong>Username:</strong> {userData.username}</p>
               </div>
             )}

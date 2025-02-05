@@ -76,9 +76,10 @@
   text-align: left;
 }
 
-.lg-grid-1-col-1 img {
+
+.lg-grid-1-col-1-image img {
   width: 100%;
-  height: 50%;
+  height: 60%;
   border-radius: 10px;
 }
 
@@ -94,7 +95,7 @@
   font-size: 1.2vw;
   width: 100%;
   margin: auto;
-  margin-bottom: -100px;
+  margin-bottom: 30px;
 }
 
 @media screen and (max-width: 769px) {

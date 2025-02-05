@@ -1,7 +1,9 @@
 import React, { useEffect } from "react"
 import '../assets/styles/GeneralService.css'
 import ArrowDropRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import General_Image from '../assets/images/mother-helping.jpg';
+import General_Image1 from '../assets/images/g-children.png';
+import General_Image2 from '../assets/images/g-child.png';
+import General_Image3 from '../assets/images/g-happy-child.png';
 import Footer from '../components/Footer/Footer';
 import { Link } from 'react-router-dom';
 import Action from "../components/Action/Action";
@@ -30,17 +32,17 @@ const GeneralService = () => {
         </div>
         <div className="gs-row-1-col-2">
           <div className="gs-image-1">
-            <img src={General_Image} alt="" width={"50%"}/>
+            <img src={General_Image1} alt="" width={"50%"}/>
           </div>
           <div className="gs-image-2">
-            <img src={General_Image} alt="" width={"50%"}/>
+            <img src={General_Image2} alt="" width={"50%"}/>
           </div>
         </div>
       </div>
 
       <div className="lw-row-2">
         <div className="lw-row-2-col-1" style={{width: '35%'}}>
-          <img src={General_Image} alt="" width={"30%"} />
+          <img src={General_Image3} alt="" width={"30%"} />
         </div>
         <div className="lw-row-2-col-2">
           <div className="lw-row-2-col-2-htext">

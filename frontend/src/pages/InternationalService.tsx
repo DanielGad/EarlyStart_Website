@@ -1,7 +1,8 @@
 import React, { useEffect } from "react"
 import '../assets/styles/InternationalService.css';
 import ArrowDropRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import General_Image from '../assets/images/mother-helping.jpg';
+import General_Image from '../assets/images/i-children.jpeg';
+import General_Imaged from '../assets/images/i-image.png';
 import Footer from '../components/Footer/Footer';
 import { Link } from 'react-router-dom';
 import Action from "../components/Action/Action";
@@ -33,7 +34,7 @@ const InternationalService = () => {
       
       <div className="lw-row-2">
         <div className="lw-row-2-col-1">
-          <img src={General_Image} alt="" width={"50%"}/>
+          <img src={General_Imaged} alt="" width={"50%"}/>
         </div>
         <div className="lw-row-2-col-2">
           <div className="lw-row-2-col-2-htext">

@@ -195,41 +195,41 @@ const AdminDashboard: React.FC = () => {
         <div>
           <nav className="admin-navbar">
             <ul className="nav-links">
-              <li>
+              <div>
                 <Link to="" onClick={openBlogModal} className="nav-link">
                   Create Blog
                 </Link>
-              </li>
+              </div>
               <BlogModal isOpen={isBlogModalOpen} onClose={closeBlogModal} />
 
-              <li>
+              <div>
                 <Link to="" className="nav-link" onClick={openAdminActionModal}>
                   Admin Actions
                 </Link>
-              </li>
+              </div>
               <AdminAction isOpen={isAdminActionOpen} onClose={closeAdminActionModal} />
 
-              <li>
+              <div>
                 <Link to="/send-message" className="nav-link">
                   Send Messages
                 </Link>
-              </li>
+              </div>
 
-              <li>
+              <div>
                 <Link to="/manage-accounts" className="nav-link">
                   Manage Accounts
                 </Link>
-              </li>
-              <li>
+              </div>
+              <div>
                 <Link to="/profile" className="nav-link">
                   Profile
                 </Link>
-              </li>
-              <li>
-                <button className="logout-button" onClick={handleLogout}>
+              </div>
+              <div>
+                <button className="nav-link" onClick={handleLogout} style={ { border: "none", cursor: "pointer" } }>
                   Logout
                 </button>
-              </li>
+              </div>
             </ul>
           </nav>
 

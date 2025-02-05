@@ -8,21 +8,21 @@ body {
   display: flex;
   flex-direction: column;
   padding: 20px;
-  max-width: 1200px;
+  max-width: 90%;
   margin: auto;
-}
-
-.admin-navbar {
-  background-color: var(--primary-color);
-  padding: 15px 20px;
-  border-radius: 5px;
+  background-color: rgb(239, 235, 243);
+  border-radius: 10px;
 }
 
 .nav-links {
-  list-style: none;
   display: flex;
-  gap: 20px;
+  justify-content: space-between;
   align-items: center;
+  background-color: var(--primary-color);
+  margin-left: auto;
+  margin-right: auto;
+  padding: 50px 30px;
+  border-radius: 10px;
 }
 
 .nav-link {
@@ -30,6 +30,8 @@ body {
   text-decoration: none;
   font-weight: 500;
   transition: color 0.3s ease;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .nav-link:hover {
@@ -37,7 +39,6 @@ body {
 }
 
 .nav-button,
-.logout-button,
 .admin-button {
   background-color: var(--hover-color);
   color: #fff;
@@ -49,7 +50,6 @@ body {
 }
 
 .nav-button:hover,
-.logout-button:hover,
 .admin-button:hover {
   background-color: var(--secondary-color);
 }
@@ -137,6 +137,7 @@ body {
   .nav-links {
     flex-direction: column;
     gap: 10px;
+    padding: 15px 30px;
   }
 
   .admin-dashboard-container {

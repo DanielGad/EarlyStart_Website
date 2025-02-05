@@ -65,8 +65,13 @@
     top: 0;
     right: 0;
     width: 100%;
+    height: 200px;
     transform: rotate(-0deg);
     margin-top: 30px;
+  }
+
+  .is-row-1-col-2 img {
+    height: auto;
   }
 
   .is-row-1-col-1-htext {

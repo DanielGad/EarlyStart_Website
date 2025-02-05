@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import "../assets/styles/Login.css";
-import Background from "../assets/images/customer-care.jpg";
+import Background from "../assets/images/login.png";
 import Footer from "../components/Footer/Footer";
 import { Link, useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
@@ -186,7 +186,7 @@ const Login: React.FC = () => {
           <p className="login-head">Welcome to EarlyStart E-Tutor</p>
           <p className="login-sub">Unlocking Knowledge, One Click at a Time</p>
 
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="form-table">
             <h2 className="login-title">Login</h2>
 
             <div className="form-group-login">
@@ -235,6 +235,8 @@ const Login: React.FC = () => {
               </button>
             </div>
           </form>
+
+          {/* <div><Hr /></div> */}
 
           <div className="google-signin">
             <button onClick={handleGoogleSignIn} className="google-button">

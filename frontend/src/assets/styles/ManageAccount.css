@@ -32,6 +32,10 @@
   cursor: pointer;
 }
 
+.search-bar button:hover {
+  background-color: var(--hover-color);
+}
+
 .search-bar button:disabled {
   background-color: #ccc;
 }
@@ -107,7 +111,7 @@
 
 .back-button {
   padding: 10px 20px;
-  background-color: var(--hover-color);
+  background-color: var(--primary-color);
   color: white;
   border: none;
   border-radius: 5px;
@@ -115,4 +119,17 @@
   margin-top: 5px;
   width: 20%;
   font-weight: bold;
+}
+
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: var(--hover-color);
 }

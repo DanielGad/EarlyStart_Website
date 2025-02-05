@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import '../assets/styles/Languages.css';
 import ArrowDropRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import General_Image from '../assets/images/mother-helping.jpg';
+import Image from '../assets/images/l-mother-child.png';
+import Image2 from '../assets/images/l-cooperation.png';
 import Languages from '../assets/Data/Language.json';
 import Footer from '../components/Footer/Footer';
 import { Link } from 'react-router-dom';
@@ -15,7 +16,7 @@ const LanguageService = () => {
   return (
     <div className="lg-container">
       <div className="lg-row-1-col-2">
-          <img src={General_Image} alt="" width={"50%"}/>
+          <img src={Image} alt="" width={"50%"}/>
         </div>
         <div className="lg-row-1">
         <div className="lg-row-1-col-1">
@@ -40,7 +41,7 @@ const LanguageService = () => {
         </div>
         <div className="lg-row-2-grid-1">
         {Languages.map((data: { Image: string | undefined; Language: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; Description: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; }, i: React.Key | null | undefined) => (
-          <div className="lg-grid-1-col-1" key={i}>
+          <div className="lg-grid-1-col-1-image" key={i}>
             <img src={data.Image} alt="" width={"20%"}/>
             <div className="lg-grid-1-col-1-htext">
               {data.Language}
@@ -55,7 +56,7 @@ const LanguageService = () => {
 
       <div className="lw-row-2">
         <div className="lw-row-2-col-1">
-          <img src={General_Image} alt="" width={"50%"}/>
+          <img src={Image2} alt="" width={"50%"}/>
         </div>
         <div className="lw-row-2-col-2">
           <div className="lw-row-2-col-2-htext">
