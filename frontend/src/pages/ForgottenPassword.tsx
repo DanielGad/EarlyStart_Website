@@ -1,12 +1,22 @@
 import React, { useState } from 'react';
 import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
+import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore';
 import '../assets/styles/ForgottenPassword.css';
+import Modal from './Modal';
 
 const ForgottenPassword: React.FC = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [modalData, setModalData] = useState({
+        showModal: false,
+        title: "",
+        message: "",
+        buttonLabel: "Close",
+        onClose: () => setModalData((prev) => ({ ...prev, showModal: false })),
+        onConfirm: undefined as (() => void) | undefined,
+      });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -14,12 +24,45 @@ const ForgottenPassword: React.FC = () => {
     setMessage('');
     setError('');
 
+    const db = getFirestore();
     const auth = getAuth();
+    const usersCollectionRef = collection(db, "EarlyStartData");
+
     try {
-      await sendPasswordResetEmail(auth, email);
-      setMessage('Password reset email sent. Please check your inbox.');
+      // Check if the email exists in the Firestore collection
+      const userQuery = query(usersCollectionRef, where("email", "==", email));
+      const querySnapshot = await getDocs(userQuery);
+
+      if (!querySnapshot.empty) {
+        // Email exists, send password reset email
+        await sendPasswordResetEmail(auth, email);
+        setModalData({
+          showModal: true,
+          title: "Success!",
+          message: "Password reset email sent. Please check your inbox.",
+          buttonLabel: "Okay",
+          onClose: () => setModalData((prev) => ({ ...prev, showModal: false })),
+          onConfirm: undefined
+        });
+      } else {
+        setModalData({
+          showModal: true,
+          title: "Error!",
+          message: "Email address not found. Please check the email entered.",
+          buttonLabel: "Okay",
+          onClose: () => setModalData((prev) => ({ ...prev, showModal: false })),
+          onConfirm: undefined
+        });
+      }
     } catch (error) {
-      setError('Failed to send password reset email. Please try again.');
+      setModalData({
+        showModal: true,
+        title: "Error!",
+        message: "Failed to send password reset email. Please try again.",
+        buttonLabel: "Okay",
+        onClose: () => setModalData((prev) => ({ ...prev, showModal: false })),
+        onConfirm: undefined
+      });
       console.error('Error sending password reset email:', error);
     } finally {
       setLoading(false);
@@ -28,6 +71,7 @@ const ForgottenPassword: React.FC = () => {
 
   return (
     <div className="forgotten-password-container">
+      <Modal {...modalData}/>
       <h2>Forgotten Password</h2>
       <form onSubmit={handleSubmit} className="forgotten-password-form">
         <div className="form-group1">
@@ -46,8 +90,6 @@ const ForgottenPassword: React.FC = () => {
           {loading ? 'Sending...' : 'Send Password Reset Email'}
         </button>
       </form>
-      {message && <p className="success-message">{message}</p>}
-      {error && <p className="error-message">{error}</p>}
     </div>
   );
 };
