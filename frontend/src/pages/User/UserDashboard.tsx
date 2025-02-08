@@ -5,6 +5,7 @@ import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import "../../assets/styles/UserDashboard.css";
 import Modal from "../Modal";
 import { Context } from "../../Context/Context";
+import Footer from "../../components/Footer/Footer";
 
 const UserDashboard: React.FC = () => {
   const [username, setUsername] = useState<string>("");
@@ -189,6 +190,7 @@ const UserDashboard: React.FC = () => {
           </div>
         </>
       )}
+      <Footer />
     </div>
   );
 };

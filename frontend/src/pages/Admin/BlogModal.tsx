@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { addDoc, collection, Timestamp } from "firebase/firestore";
-import { db } from "../../firebase"; // Ensure correct firebase import
+import { db } from "../../firebase";
 import "../../assets/styles/BlogModal.css";
 import Modal from "../Modal";
 
@@ -20,7 +20,7 @@ const BlogModal: React.FC<BlogModalProps> = ({ isOpen, onClose }) => {
     message: "",
     buttonLabel: "",
   });
-  const [loading, setLoading] = useState(false); // Loading state
+  const [loading, setLoading] = useState(false);
 
   const resetForm = () => {
     setTitle("");
@@ -37,17 +37,7 @@ const BlogModal: React.FC<BlogModalProps> = ({ isOpen, onClose }) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // if (!title.trim() || !content.trim()) {
-    //   setModalProps({
-    //     title: "Error",
-    //     message: "All fields are required. Please fill out the form completely.",
-    //     buttonLabel: "Close",
-    //   });
-    //   setShowModal(true);
-    //   return;
-    // }
-
-    setLoading(true); // Start loading
+    setLoading(true);
     try {
       await addDoc(collection(db, "blogs"), {
         title,
@@ -71,7 +61,7 @@ const BlogModal: React.FC<BlogModalProps> = ({ isOpen, onClose }) => {
       });
       setShowModal(true);
     } finally {
-      setLoading(false); // Stop loading
+      setLoading(false); 
     }
   };
 
@@ -127,9 +117,9 @@ const BlogModal: React.FC<BlogModalProps> = ({ isOpen, onClose }) => {
           <button
             className="submit-button"
             type="submit"
-            disabled={loading} // Disable button while loading
+            disabled={loading}
           >
-            {loading ? "Creating..." : "Create Blog"} {/* Change text */}
+            {loading ? "Creating..." : "Create Blog"} 
           </button>
         </form>
       </div>

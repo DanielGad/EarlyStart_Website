@@ -19,9 +19,9 @@ import BlogModal from "./BlogModal";
 import AdminAction from "./AdminAction";
 import Modal from "../Modal";
 import { Context } from "../../Context/Context";
+import Footer from "../../components/Footer/Footer";
 
 const AdminDashboard: React.FC = () => {
-  const [username, setUsername] = useState<string>("");
   const [userData, setUserData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -88,7 +88,6 @@ const AdminDashboard: React.FC = () => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         fetchUserData(user.uid);
-        setUsername(user.displayName || "Admin");
       } else {
         setModalMessage("Please log in to access the Dashboard.");
         setShowModal(true);
@@ -285,6 +284,7 @@ const AdminDashboard: React.FC = () => {
           onConfirm={handleDeleteConfirmed}
         />
       )}
+        <Footer />
     </div>
   );
 };

@@ -12,12 +12,8 @@ interface AdminActionProps {
 const AdminAction: React.FC<AdminActionProps> = ({ isOpen, onClose }) => {
   const [targetEmailStatus, setTargetEmailStatus] = useState<string>('');
   const [userInfo, setUserInfo] = useState<any | null>(null);
-  const [targetEmail, setTargetEmail] = useState<string>('');
   const [loadingStatusToggle, setLoadingStatusToggle] = useState<boolean>(false);
-  const [loadingAdmin, setLoadingAdmin] = useState<boolean>(false);
   const [loadingStatusUpdate, setLoadingStatusUpdate] = useState<boolean>(false); 
-  const [errorStatusToggle, setErrorStatusToggle] = useState<string | null>(null);
-  const [errorAdmin, setErrorAdmin] = useState<string | null>(null);
   const [modalData, setModalData] = useState({
     showModal: false,
     title: "",
@@ -31,7 +27,6 @@ const AdminAction: React.FC<AdminActionProps> = ({ isOpen, onClose }) => {
 
   const toggleUserStatus = async (email: string) => {
     setLoadingStatusToggle(true);
-    setErrorStatusToggle(null);
     try {
       const usersCollectionRef = collection(db, 'EarlyStartData');
       const userQuery = query(usersCollectionRef, where('email', '==', email));
@@ -40,7 +35,6 @@ const AdminAction: React.FC<AdminActionProps> = ({ isOpen, onClose }) => {
       if (!querySnapshot.empty) {
         const userDoc = querySnapshot.docs[0];
         const userData = userDoc.data();
-        const currentStatus = userData.status || 'active';
         setUserInfo({ ...userData, docId: userDoc.id });
         setTargetEmailStatus('');
       } else {
@@ -56,7 +50,14 @@ const AdminAction: React.FC<AdminActionProps> = ({ isOpen, onClose }) => {
         setUserInfo(null); // Clear user info
       }
     } catch (error) {
-      setErrorStatusToggle('Error fetching user info. Please try again.');
+      setModalData({ 
+        showModal: true,
+        title: "Error!",
+        message: "Error fetching user info. Please try again.",
+        buttonLabel: "Continue",
+        onClose: () => setModalData((prev) => ({ ...prev, showModal: false })),
+        onConfirm: undefined
+      });
       console.error('Error fetching user info:', error);
     } finally {
       setLoadingStatusToggle(false);
@@ -79,7 +80,14 @@ const AdminAction: React.FC<AdminActionProps> = ({ isOpen, onClose }) => {
       });
       setUserInfo({ ...userInfo, status: newStatus }); // Update user info locally
     } catch (error) {
-      setErrorStatusToggle('Error toggling user status. Please try again.');
+      setModalData({
+        showModal: true,
+        title: "Error!",
+        message: "Error toggling user status. Please try again.",
+        buttonLabel: "Continue",
+        onClose: () => setModalData((prev) => ({ ...prev, showModal: false })),
+        onConfirm: undefined
+      });
       console.error('Error toggling user status:', error);
     } finally {
       setLoadingStatusUpdate(false); // End loading after status update
@@ -107,11 +115,8 @@ const AdminAction: React.FC<AdminActionProps> = ({ isOpen, onClose }) => {
 
   const handleClose = () => {
     onClose();
-    setTargetEmail('');
     setTargetEmailStatus('');
     setUserInfo(null);
-    setErrorStatusToggle(null);
-    setErrorAdmin(null);
   };
 
   const formatDateWithSuffix = (date: Date) => {

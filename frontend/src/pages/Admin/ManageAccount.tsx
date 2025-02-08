@@ -11,7 +11,6 @@ import {
 import bcrypt from 'bcryptjs';
 import "../../assets/styles/ManageAccount.css";
 import { useNavigate } from "react-router-dom";
-import { getAuth } from "firebase/auth";
 import Modal from "../Modal";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
@@ -43,7 +42,6 @@ const ManageAccount: React.FC = () => {
     },
   });
   const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [formLoading, setFormLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -63,7 +61,6 @@ const ManageAccount: React.FC = () => {
   // Fetch user data by email
   const fetchUserData = async () => {
     setLoading(true);
-    setErrorMessage(null);
     try {
       const usersCollectionRef = collection(db, "EarlyStartData");
       const userQuery = query(usersCollectionRef, where("email", "==", searchEmail));
@@ -84,7 +81,7 @@ const ManageAccount: React.FC = () => {
           bio: userData.bio || "",
           dob: userData.dob || "",
           phoneNumber: userData.phoneNumber || "",
-          password: "", // Clear password field for security
+          password: "",
           getstarted: {
             childName: userData.getstarted?.childName || "",
             preferredDays: userData.getstarted?.preferredDays || "",
