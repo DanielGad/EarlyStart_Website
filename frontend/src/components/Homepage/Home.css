@@ -128,9 +128,18 @@
 }
 
 .home-3-image-con {
+  background-color: var(--primary-color);
   width: 90%;
   border: 5px solid var(--primary-color);
   border-radius: 20px;
+}
+
+.ceo {
+  color: white;
+  text-align: center;
+  font-size: larger;
+  font-weight: 600;
+  padding: 10px;
 }
 
 .home-3-image-con img {
@@ -145,6 +154,13 @@
   font-weight: bold;
   color: var(--primary-color);
   padding-bottom: 20px;
+}
+
+.home-3-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
 }
 
 .home-3-text-cont {

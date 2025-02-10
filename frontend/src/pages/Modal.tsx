@@ -3,7 +3,7 @@ import "../assets/styles/Modal.css";
 
 interface CustomModalProps {
   showModal: boolean;
-  title: string; // New title property
+  title: string; 
   message: string;
   buttonLabel?: string;
   onClose?: () => void;
@@ -16,7 +16,7 @@ const Modal: React.FC<CustomModalProps> = ({ showModal, title, message, buttonLa
   return (
     <div className="modal-overlay">
       <div className="modal-container">
-        <h3 className="modal-title">{title}</h3> {/* Added title rendering */}
+        <h3 className="modal-title">{title}</h3> 
         <p className="modal-message">{message}</p>
         <div className="button-control">
         {onConfirm && (

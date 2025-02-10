@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "../assets/styles/SignUp.css";
 import { db } from "../firebase"; // Firebase Firestore instance
 import { collection, setDoc, doc, query, where, getDocs } from "firebase/firestore"; // Firestore methods
@@ -13,7 +13,6 @@ const SignUp = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
-  const [isOnline, setIsOnline] = useState<boolean>(navigator.onLine);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
@@ -31,7 +30,7 @@ const SignUp = () => {
   const handleContinue = () => {
     setShowModal(false);
     if (modalTitle === "Success!") {
-      navigate("/user-dashboard"); // Navigate to login on success
+      navigate("/login"); 
     }
   };
 
@@ -241,7 +240,7 @@ const SignUp = () => {
               <button
                 type="submit"
                 className="signup-button"
-                disabled={!isOnline || isLoading}
+                disabled={isLoading}
               >
                 {isLoading ? "Creating..." : "Sign Up"}
               </button>

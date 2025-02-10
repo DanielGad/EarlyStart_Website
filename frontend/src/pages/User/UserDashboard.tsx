@@ -8,7 +8,6 @@ import { Context } from "../../Context/Context";
 import Footer from "../../components/Footer/Footer";
 
 const UserDashboard: React.FC = () => {
-  const [username, setUsername] = useState<string>("");
   const [userData, setUserData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [blogs, setBlogs] = useState<any[]>([]);
@@ -25,7 +24,7 @@ const UserDashboard: React.FC = () => {
     throw new Error("Context has not been provided.");
   }
 
-  const { isLoggedIn, setIsLoggedIn } = context;
+  const { isLoggedIn } = context;
 
   // Display modal if not logged in when component mounts
   useEffect(() => {
@@ -64,7 +63,6 @@ const UserDashboard: React.FC = () => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         fetchUserData(user.uid);
-        setUsername(user.displayName || "User");
       }
     });
 
@@ -128,7 +126,7 @@ const UserDashboard: React.FC = () => {
 
   const handleModalConfirm = () => {
     setShowModal(false);
-    navigate("/get-started"); // Redirecting to a profile or any other page on confirmation
+    navigate("/get-started");
   };
 
   return (
@@ -139,8 +137,8 @@ const UserDashboard: React.FC = () => {
         title={`Welcome ${userData ? userData.username : "User"}!`}
         message="Get Started to Schedule Right Away."
         buttonLabel="Later"
-        onClose={handleLoginRedirect} // Redirect on button click
-        onConfirm={handleModalConfirm} // Handle confirmation (redirect to profile)
+        onClose={handleLoginRedirect} 
+        onConfirm={handleModalConfirm} 
       />
       
       {isLoggedIn && (

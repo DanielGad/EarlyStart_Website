@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import './Home.css';
 import Helping_Mother from '../../assets/images/hp-mother-helping.png';
-import Lady_Pointing from '../../assets/images/hp-woman-pointing.png';
+import CEO from '../../assets/images/CEO.jpeg';
 import Smiley_Male from '../../assets/images/hp-smiley-male.jpg';
 import Smiley_Female from '../../assets/images/hp-smiley-female.png'
 import ArrowDropRightIcon from '@mui/icons-material/KeyboardArrowRight';
@@ -39,10 +39,10 @@ const Home = () => {
             Learn Anywhere, Anytime with EarlyStart E-Tutors
           </div>
           <div className='enhance'>
-          Enhance your child&apos;s education with personalized online tutoring from EarlyStart E-Tutors. Connect with experienced tutors for your child to ensure high quality teaching-learning process from the comfort of your home.
+          Enhance your child&apos;s education with personalized online tutoring from EarlyStart E-Tutors. Connect with experienced tutors for your child to ensure high quality teaching-learning process from the comfort of home.
           </div>
-          <Link to={"/get-tutor"} className='get-tutor-buttonn'>
-          <button className="get-tutor-button">Get Professional Tutor <ArrowDropRightIcon className='arrow-right' /></button>
+          <Link to={"/get-started"} className='get-tutor-buttonn'>
+          <button className="get-tutor-button">Get Started Now! <ArrowDropRightIcon className='arrow-right' /></button>
           </Link>
         </div>
 
@@ -84,7 +84,7 @@ const Home = () => {
               <img src={LetterWork} alt="text icon" width={"50px"}/>
             </div>
             <div className="home-2-texts">
-              Letter Work/ Word Formation/ Phonetics/ Verbal Reasoning
+              Letter Work/ Word Formation/ Alphabet Sounds/ Phonetics/ Verbal Reasoning
             </div>
             </Link>
           </div>
@@ -124,7 +124,8 @@ const Home = () => {
         {/* Who we are */}
         <div className="home-3">
           <div className="home-3-image-con">
-            <img src={Lady_Pointing} alt="Lady Pointing"  />
+            <img src={CEO} alt="Lady Pointing" style={{height: "auto"}} />
+            <div className='ceo'>Proprietor - Christianah Yemisi Awe</div>
           </div>
           <div className="home-3-text">
             <div className="who-we-are">
@@ -133,6 +134,9 @@ const Home = () => {
             <div className="home-3-text-cont">          
               EarlyStart E-Tutors connects primary school pupils with expert tutors through personalized, interactive online learning. We specialize in matching learners with qualified educators for tailored academic support and specialized programs. Our goal is to enhance each child's educational journey and help his/her achieve their fullest potential from the comfort of home.
             </div>
+            <Link to={"/get-tutor"} className='get-tutor-buttonn'>
+          <button className="get-tutor-button" style={{padding: "20px", marginTop: "20px"}}>Get Professional Tutor <ArrowDropRightIcon className='arrow-right' /></button>
+          </Link>
           </div>
         </div>
 
@@ -145,7 +149,7 @@ const Home = () => {
             <div className="join-us-text">
               Enjoy EarlyStart E-Tutors and earn money by teaching what you love. Share your expertise and help young learners thrive.
             </div>
-            <Link to={"/get-started"}>
+            <Link to={"#"}>
             <button className="join-us-button">Join Us<ArrowDropRightIcon className='arrow-right' /></button>
             </Link>
           </div>

@@ -3,7 +3,7 @@ import { collection, query, where, getDocs, addDoc, onSnapshot } from 'firebase/
 import { getFirestore } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import '../../assets/styles/AdminSendMessage.css'
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 interface Message {
   senderEmail: string;
@@ -57,7 +57,7 @@ const AdminSendMessage: React.FC = () => {
   const fetchMessages = (userEmail: string) => {
     const adminEmail = auth.currentUser?.email;
 
-    if (!adminEmail) return; // Early return if adminEmail is undefined
+    if (!adminEmail) return;
 
     const q = query(
       collection(db, 'messages'),
@@ -69,19 +69,19 @@ const AdminSendMessage: React.FC = () => {
       const fetchedMessages = snapshot.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id,
-      } as unknown as Message)).sort((a, b) => a.timestamp.seconds - b.timestamp.seconds); // Sort by timestamp in ascending order
+      } as unknown as Message)).sort((a, b) => a.timestamp.seconds - b.timestamp.seconds); 
 
       setMessages(fetchedMessages);
     });
 
-    return unsubscribe; // Cleanup function
+    return unsubscribe;
   };
 
   // Fetch chat list of users
   const fetchChatList = () => {
     const adminEmail = auth.currentUser?.email;
 
-    if (!adminEmail) return; // Early return if adminEmail is undefined
+    if (!adminEmail) return;
 
     const q = query(
       collection(db, 'messages'),
@@ -113,13 +113,13 @@ const AdminSendMessage: React.FC = () => {
                 fullName: '',
               });
             }
-            setChatList(users); // Update chat list here
+            setChatList(users);
           });
         }
       });
     });
 
-    return unsubscribe; // Cleanup function
+    return unsubscribe;
   };
 
   // Handle searching for a user
@@ -140,7 +140,6 @@ const AdminSendMessage: React.FC = () => {
 
         fetchMessages(userDoc.email);
         setSearchEmail('')
-         // Fetch messages for the selected user
       } else {
         alert('User not found.');
       }
@@ -180,23 +179,23 @@ const AdminSendMessage: React.FC = () => {
   // Toggle chat with the selected user
   const toggleChat = (user: User) => {
     if (selectedUser?.email === user.email) {
-      setSelectedUser(null); // Close chat if it's already selected
-      setMessages([]); // Clear messages when closing chat
+      setSelectedUser(null); 
+      setMessages([]); 
     } else {
       setSelectedUser(user);
-      fetchMessages(user.email); // Fetch chat history when opening
+      fetchMessages(user.email); 
     }
   };
 
   useEffect(() => {
-    fetchAdminFullName(); // Fetch admin's full name on mount
-    fetchChatList(); // Fetch chat list on mount
+    fetchAdminFullName();
+    fetchChatList();
 
     // Fetch messages for the previously selected user if exists
     if (selectedUser) {
       fetchMessages(selectedUser.email);
     }
-  }, [selectedUser]); // Re-run when selectedUser changes
+  }, [selectedUser]); 
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {

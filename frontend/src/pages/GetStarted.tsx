@@ -6,7 +6,7 @@ import ArrowDropRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import { db } from "../firebase"; 
 import { collection, doc, getDocs, query, updateDoc, where } from "firebase/firestore";
-import Modal from "../pages/Modal"; // Importing the Modal component
+import Modal from "../pages/Modal";
 
 const GetStarted = () => {
   const [selectedDays, setSelectedDays] = useState<string>("");

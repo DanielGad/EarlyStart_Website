@@ -9,9 +9,9 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { getAuth, onAuthStateChanged, updatePassword, signInWithEmailAndPassword } from "firebase/auth";
-import bcrypt from "bcryptjs"; // Import bcrypt for password hashing
+import bcrypt from "bcryptjs";
 import "../assets/styles/ProfilePage.css";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Modal from "./Modal";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useUserRole } from "../hooks/AdminRole";

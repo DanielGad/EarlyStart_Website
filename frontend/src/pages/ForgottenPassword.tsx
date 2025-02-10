@@ -6,8 +6,6 @@ import Modal from './Modal';
 
 const ForgottenPassword: React.FC = () => {
   const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
-  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [modalData, setModalData] = useState({
         showModal: false,
@@ -21,8 +19,6 @@ const ForgottenPassword: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setMessage('');
-    setError('');
 
     const db = getFirestore();
     const auth = getAuth();

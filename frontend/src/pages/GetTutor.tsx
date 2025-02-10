@@ -13,17 +13,8 @@ const GetTutor = () => {
   }, []);
   const navigate = useNavigate();
 
-    const context = useContext(Context);
-    if (!context) {
-      throw new Error("Must be used within a Context provider");
-    }
-
-    const { isLoggedIn } = context;
-
      const handleLetHelpYouChoose = () => {
-    // if (isLoggedIn === false) {
       navigate("/get-started")
-    // }
     }
     
   

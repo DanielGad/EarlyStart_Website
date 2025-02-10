@@ -6,13 +6,11 @@ import bcrypt from 'bcryptjs';
 import { db } from "../firebase";
 import Modal from "../pages/Modal";
 import "../assets/styles/SetPassword.css";
-import { Button } from "@mui/material";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const SetPassword: React.FC = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isMinLength, setIsMinLength] = useState(false);
   const [hasUppercase, setHasUppercase] = useState(false);
@@ -70,14 +68,10 @@ const SetPassword: React.FC = () => {
       if (!user) {
         throw new Error("No authenticated user found.");
       }
-
-      // Update the user's password in Firebase Authentication
       await updatePassword(user, password);
 
-      // Hash the password before saving it to Firestore
       const hashedPassword = bcrypt.hashSync(password, 10);
 
-      // Update the user's password in Firestore
       const userDocRef = doc(db, "EarlyStartData", user.uid);
       await updateDoc(userDocRef, { password: hashedPassword });
     } catch (error: any) {

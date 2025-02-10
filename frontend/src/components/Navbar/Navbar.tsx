@@ -141,12 +141,13 @@ const Navbar = () => {
         {isServiceOpen && (
           <div className="dropdown-content" onClick={() => setMenu("service")}>
             {[
-              { to: "/math", label: "Math" },
-              { to: "/homework", label: "Home Work" },
+              { to: "/math", label: "Mathematics" },
               { to: "/letterwork", label: "Letter Work" },
-              { to: "/language", label: "Language" },
-              { to: "/international", label: "International" },
-              { to: "/general", label: "General" },
+              { to: "/language", label: "Languages" },
+              { to: "/homework", label: "Home Work" },
+              { to: "/general", label: "General Knowledge" },
+              { to: "/international", label: "Enterance Examination" },
+
             ].map(({ to, label }) => (
               <DropdownLink key={to} to={to} label={label} closeDropdowns={closeDropdowns} />
             ))}

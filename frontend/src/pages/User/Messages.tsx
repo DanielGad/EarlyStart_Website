@@ -3,21 +3,21 @@ import { collection, query, where, getDocs, addDoc, onSnapshot } from 'firebase/
 import { getFirestore } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import '../../assets/styles/UserMessage.css'
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 interface Message {
   senderEmail: string;
-  senderName: string; // Sender's full name
+  senderName: string; 
   receiverEmail: string;
   receiverName: string;
   messageBody: string;
-  timestamp: any; // Firebase timestamp
+  timestamp: any; 
 }
 
 interface User {
   email: string;
   displayName: string;
-  fullName: string; // Assuming fullName is needed elsewhere
+  fullName: string; 
 }
 
 const UserMessage: React.FC = () => {
@@ -56,7 +56,6 @@ const UserMessage: React.FC = () => {
         ...doc.data(),
         id: doc.id,
       } as unknown as Message));
-      // Sort messages by timestamp (earliest first)
       const sortedMessages = fetchedMessages.sort((a, b) => a.timestamp.seconds - b.timestamp.seconds);
       setMessages(sortedMessages);
     });
@@ -122,7 +121,7 @@ const UserMessage: React.FC = () => {
 
     const messageData: Message = {
       senderEmail: userEmail!,
-      senderName: userName, // Store sender's full name
+      senderName: userName, 
       receiverEmail: selectedUser.email,
       receiverName: selectedUser.displayName,
       messageBody: newMessage,
@@ -131,7 +130,7 @@ const UserMessage: React.FC = () => {
 
     try {
       await addDoc(collection(db, 'messages'), messageData);
-      setNewMessage(''); // Clear input
+      setNewMessage(''); 
     } catch (error) {
       console.error('Error sending message:', error);
     }
@@ -140,12 +139,12 @@ const UserMessage: React.FC = () => {
   // Toggle the selected chat (open/close)
   const toggleChat = (user: User) => {
     if (selectedUser?.email === user.email) {
-      setSelectedUser(null); // Close chat if it's already selected
-      setIsChatOpen(false); // Close chat UI
+      setSelectedUser(null); 
+      setIsChatOpen(false); 
     } else {
       setSelectedUser(user);
-      fetchMessages(user.email); // Fetch chat history when opening
-      setIsChatOpen(true); // Open chat UI
+      fetchMessages(user.email); 
+      setIsChatOpen(true);
     }
     
   };

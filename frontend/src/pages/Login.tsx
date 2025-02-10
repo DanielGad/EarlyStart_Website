@@ -21,25 +21,10 @@ const Login: React.FC = () => {
   const [buttonLabel, setButtonLabel] = useState("");
   const [userRole, setUserRole] = useState("");
   const [isLoginSuccessful, setIsLoginSuccessful] = useState(false);
-  const [isMobileOrTablet, setIsMobileOrTablet] = useState(false);
   const navigate = useNavigate();
   const auth = getAuth();
   const provider = new GoogleAuthProvider();
 
-  // Detect screen size
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth <= 1024) { // Consider <= 1024px as mobile/tablet size
-        setIsMobileOrTablet(true);
-      } else {
-        setIsMobileOrTablet(false);
-      }
-    };
-
-    handleResize(); // initial check
-    window.addEventListener("resize", handleResize); // add listener to handle resizing
-    return () => window.removeEventListener("resize", handleResize); // clean up listener
-  }, []);
 
   useEffect(() => {
     window.scrollTo(0, 0);
