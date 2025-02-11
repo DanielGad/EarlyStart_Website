@@ -47,7 +47,7 @@ const Home = () => {
         </div>
 
           <div className="home-1-image-cont">
-            <img src={Helping_Mother} alt="Image 1" />
+            <img src={Helping_Mother} alt="Helping Mother" />
           </div>
 
       </div>
@@ -58,7 +58,7 @@ const Home = () => {
       </div>
       <div className="home-2">
           <div className="home-2-con" onClick={() => {setMenu("service")}}>
-            <Link to={"/math"}>
+            <Link to={"/mathematics"}>
             <div className="home-2-icon">
               <img src={NumberWork} alt="text icon" width={"50px"}/>
             </div>
@@ -67,17 +67,7 @@ const Home = () => {
             </div>
             </Link>
           </div>
-          
-          <div className="home-2-con" onClick={() => {setMenu("service")}}>
-            <Link to={"/homework"}>
-            <div className="home-2-icon">
-              <img src={HomeWork} alt="text icon" width={"50px"}/>
-            </div>
-            <div className="home-2-texts">
-              Home Work/ School Assignment
-            </div>
-            </Link>
-          </div>
+
           <div className="home-2-con" onClick={() => {setMenu("service")}}>
             <Link to={"/letterwork"}>
             <div className="home-2-icon">
@@ -88,6 +78,7 @@ const Home = () => {
             </div>
             </Link>
           </div>
+          
           <div className="home-2-con" onClick={() => {setMenu("service")}}>
             <Link to={"/language"}>
             <div className="home-2-icon">
@@ -98,16 +89,18 @@ const Home = () => {
             </div>
             </Link>
           </div>
+
           <div className="home-2-con" onClick={() => {setMenu("service")}}>
-            <Link to={"/international"}>
+            <Link to={"/homework"}>
             <div className="home-2-icon">
-              <img src={International} alt="text icon" width={"50px"}/>
+              <img src={HomeWork} alt="text icon" width={"50px"}/>
             </div>
             <div className="home-2-texts">
-              International School Enterance Preparation
+              Home Work/ School Assignment
             </div>
             </Link>
           </div>
+
           <div className="home-2-con" onClick={() => {setMenu("service")}}>
             <Link to={"/general"}>
             <div className="home-2-icon">
@@ -119,12 +112,24 @@ const Home = () => {
             </div>
             </Link>
           </div>
+
+          <div className="home-2-con" onClick={() => {setMenu("service")}}>
+            <Link to={"/international"}>
+            <div className="home-2-icon">
+              <img src={International} alt="text icon" width={"50px"}/>
+            </div>
+            <div className="home-2-texts">
+              International School Enterance Preparation
+            </div>
+            </Link>
+          </div>
+         
         </div>
 
         {/* Who we are */}
         <div className="home-3">
           <div className="home-3-image-con">
-            <img src={CEO} alt="Lady Pointing" style={{height: "auto"}} />
+            <img src={CEO} alt="CEO" style={{height: "auto"}} />
             <div className='ceo'>Proprietor - Christianah Yemisi Awe</div>
           </div>
           <div className="home-3-text">
@@ -132,7 +137,7 @@ const Home = () => {
               Who We Are
             </div>
             <div className="home-3-text-cont">          
-              EarlyStart E-Tutors connects primary school pupils with expert tutors through personalized, interactive online learning. We specialize in matching learners with qualified educators for tailored academic support and specialized programs. Our goal is to enhance each child's educational journey and help his/her achieve their fullest potential from the comfort of home.
+              EarlyStart E-Tutors connects elementary school pupils with expert tutors through personalized, interactive online learning. We specialize in matching learners with qualified educators for tailored academic support and specialized programs. Our goals is to enhance each child educational ability and learning skills from the comfort of home.
             </div>
             <Link to={"/get-tutor"} className='get-tutor-buttonn'>
           <button className="get-tutor-button" style={{padding: "20px", marginTop: "20px"}}>Get Professional Tutor <ArrowDropRightIcon className='arrow-right' /></button>
@@ -147,11 +152,14 @@ const Home = () => {
           </div>
           <div className="join-us-text-con">
             <div className="join-us-text">
-              Enjoy EarlyStart E-Tutors and earn money by teaching what you love. Share your expertise and help young learners thrive.
+              Join EarlyStart E-Tutors and earn money by teaching what you love. Share your expertise and help young learners thrive.
             </div>
-            <Link to={"#"}>
-            <button className="join-us-button">Join Us<ArrowDropRightIcon className='arrow-right' /></button>
-            </Link>
+            <div style={{marginTop: "20px", fontSize: "1.4rem"}}>
+              To Join? 
+            </div>
+            <div style={{marginTop: "20px", fontSize: "1.2rem"}}>
+              Kindly send your Curriculum Vitae (CV) and a passport photograph attached to <a href="mailto:earlystartetutors@gmail.com" style={{ color: "white", textDecoration: "underline"}}>this email account - earlystartetutors@gmail.com</a>
+            </div>
           </div>
           <div className="home-4-image-con-2">
             <img src={Smiley_Female} alt="Smiley Female" />

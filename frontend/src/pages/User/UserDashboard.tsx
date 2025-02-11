@@ -116,7 +116,7 @@ const UserDashboard: React.FC = () => {
         default: return "th";
       }
     };
-    return `${day}${getDaySuffix(day)} ${month} ${year}`;
+    return `${day}${getDaySuffix(day)} of ${month} ${year}`;
   };
 
   const handleLoginRedirect = () => {

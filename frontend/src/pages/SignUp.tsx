@@ -100,7 +100,7 @@ const SignUp = () => {
 
       if (emailExists) {
         setModalTitle("Email Exists");
-        setModalMessage("Email already exists, kindly use a different email.");
+        setModalMessage("Email already exists, kindly use a different email. If you have an account, please login.");
         setButtonLabel("Close");
         setShowModal(true);
         setIsLoading(false);
@@ -120,13 +120,13 @@ const SignUp = () => {
         email,
         password: hashedPassword,
         userId: user.uid,
-        createdAt: new Date(),
+        createdAt: new Date().toISOString(),
         userRole: "user",
         status: "active",
       });
 
       setModalTitle("Success!");
-      setModalMessage("Account created successfully!");
+      setModalMessage("Account created successfully! You can now login.");
       setButtonLabel("Continue");
       setShowModal(true);
       setIsLoading(false);

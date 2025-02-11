@@ -7,6 +7,7 @@ import {
   getDocs,
   doc,
   updateDoc,
+  count,
 } from "firebase/firestore";
 import bcrypt from 'bcryptjs';
 import "../../assets/styles/ManageAccount.css";
@@ -39,6 +40,8 @@ const ManageAccount: React.FC = () => {
       parentName: "",
       email: "",
       phone: "",
+      country: "",
+      state: "",
     },
   });
   const [loading, setLoading] = useState(false);
@@ -91,6 +94,8 @@ const ManageAccount: React.FC = () => {
             parentName: userData.getstarted?.parentName || "",
             email: userData.getstarted?.email || "",
             phone: userData.getstarted?.phone || "",
+            country: userData.getstarted?.country || "",
+            state: userData.getstarted?.state || "",
           },
         });
         setsearchEmail("");
@@ -385,6 +390,28 @@ const ManageAccount: React.FC = () => {
               type="email"
               name="getstarted.email"
               value={formData.getstarted.email || ""}
+              onChange={handleInputChange}
+              disabled={!isEditing}
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Country:</label>
+            <input
+              type="country"
+              name="getstarted.country"
+              value={formData.getstarted.country || ""}
+              onChange={handleInputChange}
+              disabled={!isEditing}
+            />
+          </div>
+
+          <div className="form-group">
+            <label>State:</label>
+            <input
+              type="state"
+              name="getstarted.state"
+              value={formData.getstarted.state || ""}
               onChange={handleInputChange}
               disabled={!isEditing}
             />

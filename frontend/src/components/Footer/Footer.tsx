@@ -60,15 +60,15 @@ const Footer = () => {
         <div className='footer-contact'>
         <div className="phone-con">
           <img src={Phone_Icon} alt="Phoner Icon" width={"10%"} />
-          <div>09131759673, 09011318999</div>
+          <div>08062204348, 09131759673</div>
         </div>
         <div className="whatsapp-con">
           <img src={WhatsApp_Icon} alt="WhatsApp Icon" width={"10%"}/>
-          <div>08062204348</div>
+          <div>09011318999</div>
         </div>
         <div className="email-con">
           <img src={Email_Icon} alt="Email Icon" width={"10%"}/>
-          <div>earlystart@e-tutor.com</div>
+          <div>earlystartetutors@gmail.com</div>
         </div>
         </div>
       </div>

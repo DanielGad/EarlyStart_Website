@@ -18,6 +18,9 @@ const GetStarted = () => {
   const [phone, setPhone] = useState<string>("");
   const [childName, setChildName] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
+  const [country, setCountry] = useState<string>("");
+  const [state, setState] = useState<string>("");
+  const [countries, setCountries] = useState<string[]>([]);
   const [modalData, setModalData] = useState({
     showModal: false,
     title: "",
@@ -33,6 +36,23 @@ const GetStarted = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  useEffect(() => {
+    const fetchCountries = async () => {
+      try {
+        const response = await fetch("https://restcountries.com/v3.1/all");
+        const data = await response.json();
+        setCountries(data.map((country: any) => country.name.common).sort());
+      } catch (error) {
+        console.error("Error fetching countries:", error);
+      }
+    };
+    fetchCountries();
+  }, []);
+
+  const handleCountryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setCountry(e.target.value);
+  };
 
   const handleDayChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedDays(e.target.value);
@@ -65,7 +85,9 @@ const GetStarted = () => {
       !specificFocus ||
       !parentName ||
       !email ||
-      !phone
+      !phone ||
+      !state ||
+      !country
     ) {
       setModalData({
         showModal: true,
@@ -112,6 +134,8 @@ const GetStarted = () => {
                 parentName,
                 email,
                 phone,
+                state,
+                country,
               },
             };
 
@@ -166,7 +190,7 @@ const GetStarted = () => {
         <div className="start-1">Get started with EarlyStart E-Tutors</div>
         <div className="start-2">
           Welcome! We're excited to help customize a personalized learning plan
-          tailored specifically for your child's unique needs and educational
+          tailored specifically for your child's unique and educational
           needs.
         </div>
         <div className="start-3">Choose Your Schedule</div>
@@ -193,7 +217,7 @@ const GetStarted = () => {
             <b>Weekends:</b> Friday - Sunday
           </div>
           <div className="start-5">
-            <b>Time Slots: </b>
+            <b>Time Schedule: </b>
             <input
               type="radio"
               name="timeSlot"
@@ -219,6 +243,20 @@ const GetStarted = () => {
           <textarea rows={3} className="start-6-text" value={specificFocus} onChange={(e) => setSpecificFocus(e.target.value)} />
           <div className="start-6">Parent/Guardian Name:</div>
           <input type="text" className="start-7-text" value={parentName} onChange={(e) => setParentName(e.target.value)} />
+
+          <div className="start-6">Location:</div>
+          <div className="country-div">
+            <div className="set-location" style={{fontSize: "18px"}}>Select Your Country:</div>
+          <select className="set-country" value={country} onChange={handleCountryChange}>
+          <option value="">Select a country</option>
+          {countries.map((c) => (
+            <option key={c} value={c}>{c}</option>
+          ))}
+          </select>
+        <div className="set-location" style={{fontSize: "18px"}}>State:</div>
+          <input type="text" className="set-state" value={state} onChange={(e) => setState(e.target.value)} />
+          </div>
+
           <div className="start-7">Email Address:</div>
           <input type="email" className="start-7-text" value={email} onChange={(e) => setEmail(e.target.value)} />
           <div className="start-7">Phone Number:</div>

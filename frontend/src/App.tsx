@@ -39,7 +39,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/math" element={<MathService />} />
+          <Route path="/mathematics" element={<MathService />} />
           <Route path="/homework" element={<HomeworkService />} />
           <Route path="/letterwork" element={<LetterworkService />} />
           <Route path="/language" element={<LanguageService />} />
