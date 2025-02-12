@@ -21,7 +21,7 @@ const LetterworkService = () => {
             Enhancing Literacy Skills with EarlyStart E-Tutors
           </div>
           <div className="lw-row-1-col-1-text">
-          Personalized Support for Letter Work, Word Formation, Phonetics, and Verbal Reasoning Join us now with a simple click!
+          Personalized Support for Letter Work, Word Formation, Alphabets Sound, Phonetics, and Verbal Reasoning Join us now with a simple click!
           </div>
           <Link to={"/get-started"}>
             <div>
@@ -47,7 +47,7 @@ const LetterworkService = () => {
             About Our Literacy Skills Support
           </div>
           <div className="lw-row-2-col-2-text">
-            <p>Give your child the advantage he/she needs with EarlyStart E-Tutors. Our dedicated literacy program is designed to enhance your child's skills in letter work, word formation, phonetics, and verbal reasoning. With our expert tutors, your child will build a strong foundation and develop learning skills and interest.</p>
+            <p>Give your child the advantage he/she needs with EarlyStart E-Tutors. Our dedicated literacy program is designed to enhance your child's skills in letter work, word formation, alphabets sound phonetics, and verbal reasoning. With our expert tutors, your child will build a strong foundation and develop learning skills and interest.</p>
             <p>Letter Work:
               <ul><li>Alphabet Recognition: Helping children identify and write letters accurately. </li></ul>
               <ul><li style={{marginTop: "-10px"}}>Handwriting Practice: Enhancing fine motor skills and legibility through engaging exercises.</li></ul>

@@ -62,8 +62,8 @@ const CallUs = () => {
         <div className="contact-us">Contact Us</div>
       </div>
       <div className="get-s-container-main">
-        <div className="get-s-tmain">Feel free to contact us for Inquiries and Updates.</div>
-        <div className="goal">Our goal is to respond to all inquiries within 48 hours. For details information about our program, please explore the full app directory using our sitemap. </div>
+        <div className="get-s-tmain">Feel free to contact us for Enquiries and Updates.</div>
+        <div className="goal">Our goal is to respond to all enquiries within 48 hours. For details information about our program, please explore the full app directory using our sitemap. </div>
 
         <div className="contact-line">Contact us by email</div>
         <hr className="hr-contact-line"/>

@@ -17,10 +17,10 @@ const InternationalService = () => {
       <div className="is-row-1">
         <div className="is-row-1-col-1">
           <div className="is-row-1-col-1-htext">
-          Excel in International School Enterance with EarlyStart E-Tutors 
+          Excel in School Enterance Examination with EarlyStart E-Tutors 
           </div>
           <div className="is-row-1-col-1-inner">
-            Excel in International Enterance Examination and secure your spot <br /> <br />
+            Excel in School Enterance Examination and secure your spot <br /> <br />
             Kickstart your preparation with just one Click!
           </div>
           <Link to={"/get-started"}>
@@ -38,24 +38,24 @@ const InternationalService = () => {
         </div>
         <div className="lw-row-2-col-2">
           <div className="lw-row-2-col-2-htext">
-            About International School Enterance
+            Preparation for Entrance Examinations
           </div>
           <div className="lw-row-2-col-2-text">
-            <p>At EarlyStart E-Tutors, we provide comprehensive preparation for international school entrance exams. Our specialized services cover essential languages, core subjects, and effective exam strategies, ensuring your child is well-equipped for success.</p>
+            <p>At EarlyStart E-Tutors, we provide comprehensive preparation for international school entrance examination. Our specialized services cover essential languages, core subjects, and effective examination strategies, ensuring your child is well-equipped for success.</p>
             <p>Comprehensive Preparation
               <ul><li> Core Subjects: Strengthen Math, English, and Science.</li></ul>
               <ul><li style={{marginTop: "-10px"}}>Critical Thinking: Improve problem-solving and analytical skills. </li></ul>
             </p>
-            <p>Exam Strategies
+            <p>Examination Strategies
               <ul><li>Effective Techniques: Learn strategies for various question types. </li></ul>
-              <ul><li style={{marginTop: "-10px"}}>Time Management: Master time management for exams. </li></ul>
+              <ul><li style={{marginTop: "-10px"}}>Time Management: Master time management for examination. </li></ul>
             </p>
             <p>Personalized Tutoring
               <ul><li> Tailored Plans: Customized study plans to meet individual needs. </li></ul>
-              <ul><li style={{marginTop: "-10px"}}>Expert Educators: Experienced tutors specialized in entrance exams. </li></ul>
+              <ul><li style={{marginTop: "-10px"}}>Expert Educators: Experienced tutors specialized in entrance examination. </li></ul>
             </p>
             <p>Confidence Building
-              <ul><li>Mock Exams: Simulated tests to build confidence.</li></ul>
+              <ul><li>Continuous Assessment: Simulated tests to build confidence.</li></ul>
               <ul><li style={{marginTop: "-10px"}}>Feedback: Constructive feedback to focus on improvement</li></ul>
             </p>
           </div>

@@ -5,7 +5,7 @@ import Child1 from '../assets/images/m-boy-1.png';
 import Child2 from '../assets/images/m-lady-1.png';
 import Child3 from '../assets/images/m-girl-1.png';
 import Child4 from '../assets/images/m-boy-2.png';
-import Child5 from '../assets/images/m-girl-2.png';
+import Child5 from '../assets/images/img6.jpg';
 import Footer from '../components/Footer/Footer';
 import { Link } from 'react-router-dom';
 import Action from '../components/Action/Action';
@@ -54,13 +54,13 @@ const MathService = () => {
           </div>
           <div className='math-2-inner-con'>
           <div className="math-2-inner-text">
-          Give your child the focused attention they need to excel in Number Work, Quantitative Reasoning, and Mathematics with EarlyStart E-Tutors. Our specialized services ensure your child builds a solid foundation in these essential subjects. 
+          Give your child the focused attention they need to excel in Number Work, Quantitative Reasoning, and Mathematics with EarlyStart E-Tutors. Our specialized services ensure your child builds a solid foundation in these essential subject(s). 
           </div>
           <div className="math-2-inner-text">
           If you are a busy parent, our program offers more than just academic support. We teach crucial study skills and problem-solving techniques to help your child succeed and develop interest for learning. 
           </div>
           <div className="math-2-inner-text">
-          EarlyStart E-Tutors offers personalized, interactive tutoring designed specifically for primary school students, provided by expert educators in Number Work, Quantitative Reasoning, and Mathematics. Elevate your child's learning experience with EarlyStart E-Tutors.
+          EarlyStart E-Tutors offers personalized, interactive tutoring designed specifically for beginners and elementary school pupils, provided by expert educators in Number Work, Quantitative Reasoning, and Mathematics. Improve your child's learning experience with EarlyStart E-Tutors.
           </div>
           </div>
         </div>

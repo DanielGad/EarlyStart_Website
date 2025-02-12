@@ -3,7 +3,7 @@
     "id": 1,
     "Language": "English Language",
     "Image": "/l-english.png",
-    "Description": "Enhance your child's understanding and achieve your goals with our expert English tutors. Our dedicated professionals specialize in improving reading, writing, and pronunciation skills for primary/elementary school (pupils)."
+    "Description": "Enhance your child's understanding and achieve your goals with our expert English tutors. Our dedicated professionals specialize in improving reading, writing, and pronunciation skills for primary/elementary school pupils."
   },
   {
     "id": 2,
@@ -15,13 +15,13 @@
     "id": 3,
     "Language": "Yoruba Language",
     "Image": "/l-yoruba.png",
-    "Description": "Our professional tutors will teach your child the rudiments of Yoruba Language and help your child to learn the language fast and start communicating with it."
+    "Description": "Our Yoruba tutors will teach your child the rudiments of Yoruba Language and help your child learn the language fast and start communicating with it."
   },
   {
     "id": 4,
     "Language": "Igbo Language",
     "Image": "/l-igbo.png",
-    "Description": "Our professional tutors will teach your child the basics of the Igbo Language with skills that will help him/her speak Igbo fluently within a short time."
+    "Description": "Our Igbo tutors will teach your child the basics of the Igbo Language with skills that will help him/her speak Igbo fluently within a short time."
   },
   {
     "id": 5,

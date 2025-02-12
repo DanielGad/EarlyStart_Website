@@ -5,7 +5,6 @@ import ArrowDropRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import Footer from '../components/Footer/Footer';
 import { Link, useNavigate } from 'react-router-dom';
 import Action from "../components/Action/Action";
-import { Context } from "../Context/Context";
 
 const GetTutor = () => {
   useEffect(() => {

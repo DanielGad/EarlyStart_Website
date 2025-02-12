@@ -34,12 +34,6 @@
     border-radius: 10px;
 }
 
-/* Labels */
-/* label {
-    font-size: large;
-    font-weight: 300;
-} */
-
 .form-group-login input {
     width: 90%;
     padding: 15px;
@@ -160,6 +154,10 @@
 
 /* Responsive Design */
 @media screen and (max-width: 769px) {
+    .login-head {
+        font-size: 30px;
+    }
+    
     .login-divide {
         margin-top: -50px;
         grid-template-columns: 1fr;

@@ -35,7 +35,7 @@
   }
   
   .get-s-tmain {
-    font-size: 35px;
+    font-size: 40px;
     text-align: center;
     margin: 30px 0;
     font-weight: 600;
@@ -43,7 +43,7 @@
   }
   
   .goal {
-    font-size: 22px;
+    font-size: 24px;
     font-weight: 500;
     color: var(--secondary-color);
   }
@@ -120,6 +120,15 @@
   }
 
   @media screen and (max-width: 769px) {
+
+    .get-s-tmain {
+      font-size: 25px;
+    }
+
+    .goal {
+      font-size: 20px;
+    }
+
     .section-divide {
       display: flex;
       flex-direction: column;

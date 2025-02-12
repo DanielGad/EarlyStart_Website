@@ -49,9 +49,9 @@ const GeneralService = () => {
           About general knowledge and Vocational Aptitude test 
           </div>
           <div className="lw-row-2-col-2-text">
-            <p>At EarlyStart E-Tutors, we offer targeted preparation for General Knowledge and Vocational Aptitude tests. Our tailored approach helps your child build a strong foundation in essential areas, ensuring they are well-prepared to tackle various assessments with confidence. </p>
+            <p>At EarlyStart E-Tutors, we offer targeted preparation for General Knowledge and Vocational Aptitude tests. Our approach helps your child build a strong foundation in essential areas, ensuring he/she is well-prepared to tackle various assessments with confidence. </p>
             <p>Comprehensive Knowledge Enhancement
-              <ul><li>Broad Insights: Develop a well-rounded understanding of general knowledge topics.</li></ul>
+              <ul><li>Broad Insights: Develop learning skills and understanding of general knowledge.</li></ul>
               <ul><li style={{marginTop: "-10px"}}>Vocational Skills: Acquire practical skills and knowledge relevant to career interests. </li></ul>
             </p>
             <p>Strategies Aptitude Training

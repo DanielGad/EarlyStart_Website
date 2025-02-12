@@ -65,7 +65,7 @@ const LanguageService = () => {
           <div className="lw-row-2-col-2-text">
             <p>At EarlyStart E-Tutors, we help your child excel in French, English, Yoruba, Igbo, and Hausa. Our specialized services build a solid foundation in these essential languages.</p>
             <p>French:
-              <ul><li>Vocabulary and Grammar: Expand vocabulary and understand grammar rules. Conversational</li></ul>
+              <ul><li>Vocabulary and Grammar: Expand vocabulary and understand grammar rules.</li></ul>
               <ul><li style={{marginTop: "-10px"}}>Practice: Improve speaking and listening skills.</li></ul>
             </p>
             <p>English:
