@@ -27,12 +27,9 @@ const Home = () => {
   }
   const { setMenu } = context
 
-  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    window.scrollTo(0, 0)
-  };
   return (
     <div>
-    <div className="home-container" onClick={handleClick}>
+    <div className="home-container">
       <div className="home-home-1">
         <div className="home-1-left-col">
           <div className='learn'>
@@ -41,7 +38,7 @@ const Home = () => {
           <div className='enhance'>
           Enhance your child&apos;s education with personalized online tutoring from EarlyStart E-Tutors. Connect with experienced tutors for your child to ensure high quality teaching-learning process from the comfort of home.
           </div>
-          <Link to={"/get-started"} className='get-tutor-buttonn'>
+          <Link to={"/get-started"}>
           <button className="get-tutor-button">Get Started Now! <ArrowDropRightIcon className='arrow-right' /></button>
           </Link>
         </div>
@@ -139,7 +136,7 @@ const Home = () => {
             <div className="home-3-text-cont">          
               EarlyStart E-Tutors connects elementary school pupils with expert tutors through personalized, interactive online learning. We specialize in matching learners with qualified educators for tailored academic support and specialized programs. Our goals is to enhance each child educational ability and learning skills from the comfort of home.
             </div>
-            <Link to={"/get-tutor"} className='get-tutor-buttonn'>
+            <Link to={"/get-tutor"}>
           <button className="get-tutor-button" style={{padding: "20px", marginTop: "20px"}}>Get Professional Tutor <ArrowDropRightIcon className='arrow-right' /></button>
           </Link>
           </div>
