@@ -3,7 +3,7 @@ import '../assets/styles/GeneralService.css'
 import ArrowDropRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import General_Image1 from '../assets/images/g-children.png';
 import General_Image2 from '../assets/images/g-child.png';
-import General_Image3 from '../assets/images/g-happy-child.png';
+import General_Image3 from '../assets/images/img14.jpg';
 import Footer from '../components/Footer/Footer';
 import { Link } from 'react-router-dom';
 import Action from "../components/Action/Action";

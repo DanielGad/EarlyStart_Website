@@ -76,9 +76,27 @@
   .button-controll {
     display: flex;
     flex-direction: row;
+    gap: 30px;
     justify-content: center;
   }
-  
+
+  .whatsapp {
+    width: 40%;
+    border-radius: 10px;
+    background-color: #25D366;
+    padding: 15px 10px;
+    font-weight: bold;
+    gap: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 10px;
+  }
+
   .contact-form label {
     font-size: 18px;
     font-weight: 500;
@@ -120,6 +138,14 @@
   }
 
   @media screen and (max-width: 769px) {
+    .button-controll {
+      padding-right: 0;
+    }
+
+    .whatsapp {
+      width: 60%;
+      margin-bottom: 20px;
+    }
 
     .get-s-tmain {
       font-size: 25px;

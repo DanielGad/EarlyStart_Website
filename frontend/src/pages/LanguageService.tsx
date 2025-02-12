@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import '../assets/styles/Languages.css';
 import ArrowDropRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import Image from '../assets/images/l-mother-child.png';
-import Image2 from '../assets/images/l-cooperation.png';
+import Image2 from '../assets/images/img15.jpg';
 import Languages from '../assets/Data/Language.json';
 import Footer from '../components/Footer/Footer';
 import { Link } from 'react-router-dom';

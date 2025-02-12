@@ -3,8 +3,9 @@ import '../assets/styles/CallUs.css';
 import Background from '../assets/images/customer-care.jpg';
 import Footer from "../components/Footer/Footer";
 import { addDoc, collection } from "firebase/firestore";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { db } from "../firebase";
+import { FaWhatsapp } from "react-icons/fa";
 
 const CallUs = () => {
   useEffect(() => {
@@ -68,7 +69,7 @@ const CallUs = () => {
         <div className="contact-line">Contact us by email</div>
         <hr className="hr-contact-line"/>
 
-        <div className="instruction">Please complete the form below with your details, and we will strive to respond to you as promptly as we can.</div>
+        <div className="instruction">Please complete the form below with your details, and we will strive to respond to you as promptly as we can. </div>
       <div className="section-divide">
         <div className="contact-form">
           <form onSubmit={handleSubmit}>
@@ -105,8 +106,22 @@ const CallUs = () => {
           <button className="contact-submit" disabled={loading}>
                 {loading ? "Submitting..." : "Submit"}
               </button>
+              
           </div>
           </form>
+
+          <div style={{
+            textAlign: "center",
+            fontWeight: "bold",
+            fontSize: "1.2rem",
+            marginTop: "20px",
+          }}>Or Send a Direct Message to us through WhatsApp.</div>
+          <Link to={"https://wa.me/2349011318999"} target="_blank">
+          <div className="whatsapp">
+                  <FaWhatsapp style={{fontSize: "24px"}}/>
+                WhatsApp Us
+          </div>
+          </Link>
           
         </div>
         <div className="contact-image">

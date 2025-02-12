@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import '../assets/styles/LetterworkService.css';
 import ArrowDropRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import LadyTeaching from '../assets/images/lw-lady.png';
-import HappyGirl from '../assets/images/lw-girl.png';
+import HappyGirl from '../assets/images/img7.jpg';
 import Chart from '../assets/images/lw-image.png';
 import Footer from '../components/Footer/Footer';
 import { Link } from 'react-router-dom';

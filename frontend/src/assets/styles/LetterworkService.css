@@ -59,7 +59,7 @@
 .lw-row-1-col-2-image-2 {
   position: absolute;
   width: 20vw;
-  height: 10vw;
+  height: 12vw;
   border-radius: 10px;
   top: 290px;
   right: 230px;
@@ -76,9 +76,10 @@
   width: 80%;
   margin: auto;
   display: flex;
+  justify-content: space-between;
   margin-top: 40px;
   align-items: center;
-  gap: 20px;
+  gap: 30px;
 }
 
 .lw-row-2-col-1 {

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import '../assets/styles/MathService.css';
 import ArrowDropRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import Child1 from '../assets/images/m-boy-1.png';
+import Child1 from '../assets/images/img2.jpg';
 import Child2 from '../assets/images/m-lady-1.png';
 import Child3 from '../assets/images/m-girl-1.png';
 import Child4 from '../assets/images/m-boy-2.png';
@@ -30,7 +30,9 @@ const MathService = () => {
         </div>
         <div className="column-1-right">
           <div className="math-image-1">
-            <img src={Child1} alt="" width={"20%"} />
+            <img src={Child1} alt="" width={"20%"} style={{
+              border: "3px solid #443655",
+            }} />
           </div>
           <div className="math-image-2">
           <img src={Child2} alt="" width={"20%"} />

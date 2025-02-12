@@ -1,8 +1,8 @@
 import React, { useEffect } from "react"
 import '../assets/styles/HomeworkService.css';
 import ArrowDropRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import BoyDad from '../assets/images/hw-boy-1.png';
-import GirlDad from '../assets/images/hw-girl.png';
+import BoyDad from '../assets/images/img8.jpg';
+import GirlDad from '../assets/images/img17.jpg';
 import Footer from '../components/Footer/Footer';
 import { Link } from 'react-router-dom';
 import Action from "../components/Action/Action";
