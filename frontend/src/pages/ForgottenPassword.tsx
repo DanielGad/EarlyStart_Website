@@ -20,6 +20,19 @@ const ForgottenPassword: React.FC = () => {
     e.preventDefault();
     setLoading(true);
 
+    if (!navigator.onLine) {
+      setModalData({
+        showModal: true,
+        title: "Network Error!",
+        message: "No Internet, Please check your internet connection and try again",
+        buttonLabel: "Try Again",
+        onClose: () => setModalData((prev) => ({ ...prev, showModal: false })),
+        onConfirm: undefined
+      });
+      setLoading(false);
+      return;
+    }
+
     const db = getFirestore();
     const auth = getAuth();
     const usersCollectionRef = collection(db, "EarlyStartData");
@@ -50,7 +63,17 @@ const ForgottenPassword: React.FC = () => {
           onConfirm: undefined
         });
       }
-    } catch (error) {
+    } catch (error: any) {
+      if (error.code === "auth/network-request-failed") {
+        setModalData({
+          showModal: true,
+          title: "Network Error!",
+          message: "No Internet, Please check your internet connection and try again",
+          buttonLabel: "Try Again",
+          onClose: () => setModalData((prev) => ({ ...prev, showModal: false })),
+          onConfirm: undefined
+        });
+    } else {
       setModalData({
         showModal: true,
         title: "Error!",
@@ -59,6 +82,7 @@ const ForgottenPassword: React.FC = () => {
         onClose: () => setModalData((prev) => ({ ...prev, showModal: false })),
         onConfirm: undefined
       });
+    }
       console.error('Error sending password reset email:', error);
     } finally {
       setLoading(false);
@@ -74,6 +98,7 @@ const ForgottenPassword: React.FC = () => {
           <label htmlFor="email">Email Address:</label>
           <input
             type="email"
+            placeholder='Enter your email address'
             id="email"
             name="email"
             value={email}

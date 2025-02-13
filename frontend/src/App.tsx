@@ -55,7 +55,7 @@ function App() {
             
             <Route path="/confirm" element={<ProtectedRoute><Confirmation /></ProtectedRoute>} />
             <Route path="/reset-password" element={<ForgottenPassword />} />
-            <Route path="/contact-confirm" element={<ProtectedRoute><ContactConfirm /></ProtectedRoute>} />
+            <Route path="/contact-confirm" element={<ContactConfirm />} />
             <Route path="/user-dashboard" element={<ProtectedRoute><UserDashboard /></ProtectedRoute>} />
             <Route path="/admin-dashboard" element={<ProtectedRoute><AdminRole><AdminDashboard /></AdminRole></ProtectedRoute>} />
             <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />

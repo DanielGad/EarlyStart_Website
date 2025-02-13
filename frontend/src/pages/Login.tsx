@@ -88,9 +88,15 @@ const Login: React.FC = () => {
         setIsLoginSuccessful(true);
       }
     } catch (error: any) {
-      setModalMessage("Incorrect email or password.");
-      setModalTitle("Error!");
-      setButtonLabel("Try Again");
+      if (error.code === "auth/network-request-failed") {
+        setModalTitle("Network Error");
+        setModalMessage("No Internet, Please check your internet connection and try again.");
+        setButtonLabel("Try Again");
+      } else {
+        setModalMessage("Incorrect email or password.");
+        setModalTitle("Invalid Error!");
+        setButtonLabel("Try Again");
+      }
       setShowModal(true);
     } finally {
       setIsLoading(false);
@@ -100,6 +106,7 @@ const Login: React.FC = () => {
   // Google Sign-In
   const handleGoogleSignIn = async () => {
     setIsLoading(true);
+    
     try {
       const result = await signInWithPopup(auth, provider);
       const googleUser = result.user;
@@ -146,10 +153,16 @@ const Login: React.FC = () => {
       setButtonLabel("Continue");
       setShowModal(true);
       setIsLoginSuccessful(true);
-    } catch (error) {
-      setModalMessage("Sign-In Failed. Please try again.");
-      setModalTitle("Error!");
-      setButtonLabel("Try Again");
+    } catch (error: any) {
+      if (error.code === "auth/network-request-failed") {
+        setModalTitle("Network Error");
+        setModalMessage("No Internet, Please check your internet connection and try again.");
+        setButtonLabel("Try Again");
+      } else {
+        setModalMessage("Sign-In Failed. Please try again.");
+        setModalTitle("Error!");
+        setButtonLabel("Try Again");
+      }
       setShowModal(true);
     } finally {
       setIsLoading(false);

@@ -116,7 +116,7 @@ const CallUs = () => {
             fontSize: "1.2rem",
             marginTop: "20px",
           }}>Or Send a Direct Message to us through WhatsApp.</div>
-          <Link to={"https://wa.me/2349011318999?text=Hello,%20I'm%20reaching%20out%20to%20you%20concerning%20EarlyStart%20E-Tutors.%20My%20name%20is"} target="_blank">
+          <Link to={"https://wa.me/2349011318999?text=Hello,%20I'm%20reaching%20out%20to%20you%from%20EarlyStart%20E-Tutors%20Website.%20My%20name%20is%20"} target="_blank">
           <div className="whatsapp">
                   <FaWhatsapp style={{fontSize: "24px"}}/>
                 WhatsApp Us

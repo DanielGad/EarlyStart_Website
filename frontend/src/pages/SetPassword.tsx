@@ -75,10 +75,16 @@ const SetPassword: React.FC = () => {
       const userDocRef = doc(db, "EarlyStartData", user.uid);
       await updateDoc(userDocRef, { password: hashedPassword });
     } catch (error: any) {
-      setModalTitle("Error");
-      setModalMessage(error.message);
+      if (error.code === "auth/network-request-failed") {
+        setModalTitle("Network Error");
+        setModalMessage("No Internet, Please check your internet connection and try again.");
+        setButtonLabel("Try Again");
+      } else {
+        setModalTitle("Error");
+        setModalMessage(error.message);
+        setButtonLabel("Close");
+      }
       setShowModal(true);
-      setButtonLabel("Close");
     } finally {
       setIsLoading(false);
     }

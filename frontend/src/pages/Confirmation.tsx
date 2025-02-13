@@ -13,7 +13,7 @@ const Confirmation = () => {
     <div className='confirm-container'>
       <img src={Tick} alt="green tick" width={"200px"}/>
       <p className='p-head'>Thank You!</p>
-      <p className='p-message'>Thank You for getting started with our tutoring program! If you haven't heard from us within 24 hours, please don't hesitate to send a follow-up email to support@earlystartetutors.com. We appreciate your patience and look forward to helping your child succeed.</p>
+      <p className='p-message'>Thank You for getting started with our tutoring program! If you haven't heard from us within 24 hours, please don't hesitate to send a follow-up email to earlystartetutors@gmail.com. We appreciate your patience and look forward to helping your child succeed.</p>
       <button onClick={() => navigate('/user-dashboard')} className='backhome' 
       style={{
         marginBottom: "100px", 
@@ -23,7 +23,7 @@ const Confirmation = () => {
         padding: "10px 30px", 
         backgroundColor: "#443655",
         color: "white",
-        }}>Return to Dashboard</button>
+        }}>Continue</button>
     </div>
   )
 }

@@ -134,7 +134,7 @@ const SignUp = () => {
     } catch (error: any) {
       if (error.code === "auth/network-request-failed") {
         setModalTitle("Network Error");
-        setModalMessage("Please check your internet connection and try again.");
+        setModalMessage("No Internet, Please check your internet connection and try again.");
         setButtonLabel("Try Again");
       } else {
         setModalTitle("Error");
