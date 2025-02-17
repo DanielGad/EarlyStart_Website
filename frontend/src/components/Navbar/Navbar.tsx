@@ -15,7 +15,7 @@ const pages = [
   { name: "Homepage", path: "/", keywords: ["welcome", "homepage", "start", "index", "hello"] },
   { name: "Mathematics", path: "/mathematics", keywords: ["Math work", "mathematics", "number", "quantitative", "reasoning" ] },
   { name: "Homework", path: "/homework", keywords: ["home work", "homework", "assignment", "help"] },
-  { name: "LetterWork", path: "/letterwork", keywords: ["letter work", "letterwork", "help", "word formation", "alphabet sounds", "phonetics", "verbal reasoning"] },
+  { name: "LetterWork", path: "/letterwork", keywords: ["letter work", "letterwork", "help", "word formation", "alphabet sounds", "phonetics", "verbal reasoning", "english"] },
   { name: "Examination", path: "/international", keywords: ["exam work", "examination", "help"] },
   { name: "General Knowledge", path: "/general", keywords: ["general work", "letterwork", "vocational", "knowledge"] },
   { name: "Language", path: "/language", keywords: ["language work", "yoruba", "igbo", "hausa", "French", "English"] },
@@ -203,7 +203,7 @@ const Navbar = () => {
             </ul>
           ) : (
             <ul className="search-results">
-              <li className="no-match">No match found</li>
+              <li className="no-match">No Search Found! Try another Keyword.</li>
             </ul>
           )
         )}
