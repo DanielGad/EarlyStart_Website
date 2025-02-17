@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Navigate } from "react-router-dom";
-import { useEffect } from "react";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import Modal from "../pages/Modal";
 
 const useAuth = () => {
@@ -25,6 +24,40 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
   const { user, loading } = useAuth();
   const [showModal, setShowModal] = useState(false);
   const [redirect, setRedirect] = useState(false);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const auth = getAuth();
+
+  // Logout function
+  const handleLogout = () => {
+    signOut(auth).then(() => {
+      console.log("User logged out due to inactivity.");
+      setRedirect(false);
+    });
+  };
+
+  // Reset inactivity timer
+  const resetTimer = () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(handleLogout, 5 * 60 * 1000); // 5 minutes
+  };
+
+  useEffect(() => {
+    if (!loading && user) {
+      resetTimer();
+      window.addEventListener("mousemove", resetTimer);
+      window.addEventListener("keypress", resetTimer);
+      window.addEventListener("scroll", resetTimer);
+      window.addEventListener("click", resetTimer);
+    }
+
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      window.removeEventListener("mousemove", resetTimer);
+      window.removeEventListener("keypress", resetTimer);
+      window.removeEventListener("scroll", resetTimer);
+      window.removeEventListener("click", resetTimer);
+    };
+  }, [user, loading]);
 
   useEffect(() => {
     if (!loading && !user) {
