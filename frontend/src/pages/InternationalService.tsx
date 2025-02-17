@@ -43,7 +43,7 @@ const InternationalService = () => {
           <div className="lw-row-2-col-2-text">
             <p>At EarlyStart E-Tutors, we provide comprehensive preparation for international school entrance examination. Our specialized services cover essential languages, core subjects, and effective examination strategies, ensuring your child is well-equipped for success.</p>
             <p>Comprehensive Preparation
-              <ul><li> Core Subjects: Strengthen Math, English, and Science.</li></ul>
+              <ul><li> Core Subjects: Mathematics, English, and Science.</li></ul>
               <ul><li style={{marginTop: "-10px"}}>Critical Thinking: Improve problem-solving and analytical skills. </li></ul>
             </p>
             <p>Examination Strategies
@@ -56,7 +56,6 @@ const InternationalService = () => {
             </p>
             <p>Confidence Building
               <ul><li>Continuous Assessment: Simulated tests to build confidence.</li></ul>
-              <ul><li style={{marginTop: "-10px"}}>Feedback: Constructive feedback to focus on improvement</li></ul>
             </p>
           </div>
         </div>

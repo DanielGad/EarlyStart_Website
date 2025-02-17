@@ -1,7 +1,7 @@
 import './Navbar.css';
 import Early_Start_Logo from '../../assets/images/early-start-logo.png';
 import React, { useContext, useState,  useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 import MicIcon from '@mui/icons-material/Mic';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
@@ -10,6 +10,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
 import { useUserRole } from '../../hooks/AdminRole';
+
+const pages = [
+  { name: "Homepage", path: "/", keywords: ["welcome", "homepage", "start", "index", "hello"] },
+  { name: "Mathematics", path: "/mathematics", keywords: ["Math work", "mathematics", "number", "quantitative", "reasoning" ] },
+  { name: "Homework", path: "/homework", keywords: ["home work", "homework", "assignment", "help"] },
+  { name: "LetterWork", path: "/letterwork", keywords: ["letter work", "letterwork", "help", "word formation", "alphabet sounds", "phonetics", "verbal reasoning"] },
+  { name: "Examination", path: "/international", keywords: ["exam work", "examination", "help"] },
+  { name: "General Knowledge", path: "/general", keywords: ["general work", "letterwork", "vocational", "knowledge"] },
+  { name: "Language", path: "/language", keywords: ["language work", "yoruba", "igbo", "hausa", "French", "English"] },
+  { name: "Contact", path: "/call", keywords: ["contact", "support", "help", "call"] },
+  { name: "Get Started", path: "/get-started", keywords: ["start", "support", "form", "register"] },
+  { name: "Login", path: "/login", keywords: ["login"] },
+  { name: "Sign Up", path: "/signup", keywords: ["register", "account", "create"] },
+  { name: "Tutor", path: "/get-tutor", keywords: ["tutors", "teachers"] },
+];
 
 const Navbar = () => {
   const { userRole } = useUserRole();
@@ -32,11 +47,51 @@ const Navbar = () => {
 
   const handleServiceClick = () => {
     setIsServiceOpen(!isServiceOpen);
+    setSearchQuery("");
+    setFilteredResults([]);
   }
 
   const closeDropdowns = () => {
     setIsServiceOpen(false);
   }
+
+  /////////////////////////////////////////////
+  //Handle search bar
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredResults, setFilteredResults] = useState<typeof pages>([]);
+  const navigate = useNavigate();
+
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
+
+    if (query.trim() === "") {
+      setFilteredResults([]);
+      return;
+    }
+
+    const results = pages.filter((page) =>
+      page.keywords.some((keyword) =>
+        keyword.toLowerCase().includes(query.toLowerCase())
+      )
+    );
+
+    setFilteredResults(results);
+  };
+
+  const handleSelectPage = (path: string) => {
+    navigate(path);
+    setSearchQuery("");
+    setFilteredResults([]);
+  };
+
+  /////////////////////////////////////////////////////
+
+  useEffect(() => {
+    // Extracts the pathname and updates the active menu state
+    const path = location.pathname.substring(1); // Removes the leading "/"
+    setMenu(path || "home"); // Default to "home" if path is empty
+  }, [location.pathname]); // Runs when the route changes
   
   useEffect(() => {
     const handleResize = () => {
@@ -120,18 +175,55 @@ const Navbar = () => {
         </div>
       </Link>
 
-          <div className="middle-nav-container">
+          <div className="middle-nav-container" 
+          onBlur={() => setTimeout(() => {
+            setSearchQuery("");
+            setFilteredResults([]);
+          }, 200)}
+          tabIndex={0}
+          >
           <SearchIcon style={{cursor: 'pointer'}}/>
-          <input type="text" placeholder='What do you want to learn?' />
+          <input type="text"
+           placeholder='What do you want to learn?' 
+           value={searchQuery}
+           onChange={(e) => handleSearch(e.target.value)}
+           onFocus={(e) => e.stopPropagation()}
+           />
           <MicIcon style={{cursor: 'pointer'}}/>
         </div>
+        {/* Dropdown search results */}
+        {searchQuery && ( // Only show results if searchQuery has an entry
+          filteredResults.length > 0 ? (
+            <ul className="search-results">
+              {filteredResults.map((page) => (
+                <li key={page.path} onClick={() => handleSelectPage(page.path)}>
+                  {page.name}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <ul className="search-results">
+              <li className="no-match">No match found</li>
+            </ul>
+          )
+        )}
+
 
         {/* Control the screen size at small screen and medium screen */}
         {!isSmallScreen && !isMediumScreen ? (
   <>
     <div className="right-nav-container">
-    <Link to={"/"} style={{ textDecoration: 'none', color: menu === "home" ? 'rgb(124,70,164)' : '' }} onClick={() => {setMenu("home")}}>Home{menu === "home" ? <hr /> : <></>}  
-    </Link>
+    <Link
+        to="/"
+        style={{
+          textDecoration: "none",
+          color: menu === "home" ? "rgb(124,70,164)" : "",
+        }}
+        onClick={() => setMenu("home")}
+      >
+        Home
+        {menu === "home" && <hr />}
+      </Link>
 
       <div className="dropdown" onClick={handleServiceClick} onMouseLeave={() => setIsServiceOpen(false)}>
         <div className="menus" style={{ color: menu === "service" ? 'rgb(124,70,164)' : '' }}>
@@ -181,6 +273,8 @@ const Navbar = () => {
     }}/>
   </div>
 )}
+
+
       {/* Control Navbar when Menu is Open */}
       <div className='menu-mode-control'>
       {!isMenuOpen && (
@@ -193,11 +287,39 @@ const Navbar = () => {
           </div>
         </Link>
 
-        <div className="middle-nav-container">
-          <SearchIcon style={{ cursor: 'pointer' }} className='search-bar' />
-          <input type="text" placeholder='What do you want to learn?' />
-          <MicIcon style={{ cursor: 'pointer' }} className='mic-bar'/>
+        <div className="middle-nav-container" 
+          onBlur={() => setTimeout(() => {
+            setSearchQuery("");
+            setFilteredResults([]);
+          }, 200)} // Delay clearing to allow click
+          tabIndex={0}
+          >
+          <SearchIcon style={{cursor: 'pointer'}}/>
+          <input type="text"
+           placeholder='What do you want to learn?' 
+           value={searchQuery}
+           onChange={(e) => handleSearch(e.target.value)}
+           onFocus={(e) => e.stopPropagation()}
+           />
+          <MicIcon style={{cursor: 'pointer'}}/>
         </div>
+        {/* Dropdown search results */}
+
+        {searchQuery && ( // Only show results if searchQuery has an entry
+          filteredResults.length > 0 ? (
+            <ul className="search-results">
+              {filteredResults.map((page) => (
+                <li key={page.path} onClick={() => handleSelectPage(page.path)}>
+                  {page.name}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <ul className="search-results">
+              <li className="no-match">No match found</li>
+            </ul>
+          )
+        )}
       </div>
 
       <div className="content-right-navbar">

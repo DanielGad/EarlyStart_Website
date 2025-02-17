@@ -36,7 +36,7 @@ const Home = () => {
             Learn Anywhere, Anytime with EarlyStart E-Tutors
           </div>
           <div className='enhance'>
-          Enhance your child&apos;s education with personalized online tutoring from EarlyStart E-Tutors. Connect with experienced tutors for your child to ensure high quality teaching-learning process from the comfort of home.
+          Enhance your child&apos;s education with personalized online tutoring from EarlyStart E-Tutors. Connect with experienced teachers for your child to ensure high quality teaching-learning process from the comfort of your home.
           </div>
           <Link to={"/get-started"}>
           <button className="get-tutor-button">Get Started Now! <ArrowDropRightIcon className='arrow-right' /></button>
@@ -134,7 +134,7 @@ const Home = () => {
               Who We Are
             </div>
             <div className="home-3-text-cont">          
-              EarlyStart E-Tutors connects elementary school pupils with expert tutors through personalized, interactive online learning. We specialize in matching learners with qualified educators for tailored academic support and specialized programs. Our goals is to enhance each child educational ability and learning skills from the comfort of home.
+              EarlyStart E-Tutors connects elementary school pupils with expert tutors through personalized, interactive online learning. We specialize in matching learners with qualified educators for tailored academic support and specialized programs. Our goal is to enhance each child educational ability and learning skills from the comfort of home.
             </div>
             <Link to={"/get-tutor"}>
           <button className="get-tutor-button" style={{padding: "20px", marginTop: "20px"}}>Get Professional Tutor <ArrowDropRightIcon className='arrow-right' /></button>

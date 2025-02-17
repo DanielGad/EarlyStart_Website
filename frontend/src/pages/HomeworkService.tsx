@@ -47,12 +47,12 @@ const HomeworkService = () => {
           <div className="homework-col-2-inner-text">
             <p>At EarlyStart E-Tutors, we understand that homework/school assignments can be challenging for both children and their parents. That’s why we offer comprehensive support to ensure your child not only completes his/her assignments but also understand the underlying concepts. </p>
             <p>Our Homework/School Assignment Support Service include</p>
-            <p>1. Guided Assistance: Expert tutors guide your child through his/her homework, ensuring they understand each step and can apply the concepts independently. </p>
+            <p>1. Guided Assistance: Expert tutors guide your child through his/her homework, ensuring he/she understand each step and can apply the concepts independently. </p>
             <p>2. Skill Reinforcement: We focus on reinforcing skills learned in school, ensuring that your child builds a strong foundation in every subject(s).</p>
             <p>3. Time Management and Study Skills: We teach essential time management and study skills, helping your child become more organized and efficient in his/her studies. </p>
-            <p>4. Tailored Approach: Recognizing that every child learns differently, our tutors customize their approach to meet the unique needs and learning ability of your child. </p>
-            <p>5. Interactive Learning: Our engaging, interactive sessions make learning enjoyable, helping your child develop a positive attitude towards his/her schoolwork.</p>
-            <p>Whether your child needs help with daily homework, take home projects, or preparing for specific examination, EarlyStart E-Tutors is here to support him/her. With our dedicated tutors, your child will gain confidence, improve his/her academic performance, and develop a interest for learning.</p>
+            <p>4. Individual Approach: Recognizing that every child learns differently, our tutors customize their approach to meet the unique needs and learning ability of your child. </p>
+            <p>5. Interactive Learning: We engage in interactive sessions, which make learning enjoyable, helping your child develop a positive attitude towards his/her schoolwork.</p>
+            <p>Whether your child needs help with daily homework, take home projects, or preparing for specific examination, EarlyStart E-Tutors is here to support him/her. With our dedicated tutors, your child will gain confidence and improve his/her academic performance, and develop interest for learning.</p>
           </div>
         </div>
       </div>

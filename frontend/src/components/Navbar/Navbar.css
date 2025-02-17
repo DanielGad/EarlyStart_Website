@@ -20,6 +20,7 @@
 .middle-nav-container input {
   background-color: rgb(234, 234, 234);
   border: none;
+  font-size: large;
   outline: none;
   padding: 5px;
 }
@@ -40,6 +41,39 @@
   padding: 10px;
   border-radius: 10px;
   color: var(--secondary-color);
+}
+
+.search-results {
+  position: absolute;
+  top: 100%; /* Ensures it appears below the navbar */
+  left: 0;
+  width: 100%;
+  background: white;
+  border-radius: 0px 25px 0px 25px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  list-style: none;
+  padding-left: 150px;
+  margin: 5px;
+  z-index: 1000;
+  max-height: 200px; /* Limits height to prevent overflow */
+  overflow-y: auto; /* Adds scroll if results are too many */
+}
+
+.search-results li {
+  padding: 12px;
+  cursor: pointer;
+  transition: background 0.3s;
+  font-size: 16px;
+  border-bottom: 1px solid #eee;
+}
+
+.search-results li:hover {
+  background: var(--light-color);
+}
+
+/* Prevents last item from having a border */
+.search-results li:last-child {
+  border-bottom: none;
 }
 
 .right-nav-container {
@@ -145,6 +179,12 @@ hr {
 
 /* Full-width menu styling for screens smaller than 1024px */
 @media screen and (max-width: 1024px) {
+
+  .search-results {
+    z-index: 10000;
+    top: 400%
+  }
+
   .right-nav-container-small {
     background-color: var(--light-color);
     display: flex;
