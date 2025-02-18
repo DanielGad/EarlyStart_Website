@@ -28,5 +28,11 @@
     "Language": "Hausa Language",
     "Image": "/l-hausa.png",
     "Description": "Enhance your child's understanding of Hausa Language. We have experienced Hausa Language tutors who specialize in improving reading , writing and pronunciation skills for beginners."
+  },
+  {
+    "id": 6,
+    "Language": "German Language",
+    "Image": "/l-french.png",
+    "Description": "Enhance your child's understanding of German Language with our German tutors who will guide your child to improve his/ her reading, writing and pronunciation skills."
   }
 ]

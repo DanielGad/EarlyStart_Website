@@ -127,7 +127,8 @@ const Home = () => {
         <div className="home-3">
           <div className="home-3-image-con">
             <img src={CEO} alt="CEO" style={{height: "auto"}} />
-            <div className='ceo'>Proprietor - Christianah Yemisi Awe</div>
+            <div className='ceo'>Christianah Yemisi Awe</div>
+            <div className='ceo' style={{marginTop: "-20px"}}>Proprietor</div>
           </div>
           <div className="home-3-text">
             <div className="who-we-are">
