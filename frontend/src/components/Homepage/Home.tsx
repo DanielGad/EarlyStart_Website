@@ -134,10 +134,10 @@ const Home = () => {
               Who We Are
             </div>
             <div className="home-3-text-cont">          
-              EarlyStart E-Tutors connects elementary school pupils with expert tutors through personalized, interactive online learning. We specialize in matching learners with qualified educators for tailored academic support and specialized programs. Our goal is to enhance each child educational ability and learning skills from the comfort of home.
+              EarlyStart E-Tutors connects elementary school pupils with expert tutors through personalized, interactive online learning. We specialize in matching learners with qualified educators for individual academic support and specialized programs. Our goal is to enhance each child educational ability and learning skills from the comfort of home.
             </div>
-            <Link to={"/get-tutor"}>
-          <button className="get-tutor-button" style={{padding: "20px", marginTop: "20px"}}>Get Professional Tutor <ArrowDropRightIcon className='arrow-right' /></button>
+            <Link to={"/get-started"}>
+          <button className="get-tutor-button" style={{padding: "20px", marginTop: "20px"}}>Get Started Now! <ArrowDropRightIcon className='arrow-right' /></button>
           </Link>
           </div>
         </div>

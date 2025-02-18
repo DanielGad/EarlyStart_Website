@@ -46,7 +46,7 @@ function App() {
           <Route path="/international" element={<InternationalService />} />
           <Route path="/general" element={<GeneralService />} />
           <Route path="/call" element={<CallUs />} />
-          <Route path="/get-tutor" element={<GetTutor />} />
+          {/* <Route path="/get-tutor" element={<GetTutor />} /> */}
           <Route path="/profile/:id" element={<TeacherProfile />} />
           <Route path="/get-started" element={<GetStarted />} />
           <Route path="/signup" element={<SignUp />} />

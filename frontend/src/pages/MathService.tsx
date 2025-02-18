@@ -22,7 +22,7 @@ const MathService = () => {
           <div className="head-text">
             Mathematics Made Easy, Learn Faster, and Excel!</div>
           <div className="head-inner-text">
-            Unlock 24/7 support from EarlyStart E-Tutors. Our expert tutors help kids excel in Number Work, Quantitative Reasoning, Mental and Mathematics, ensuring homework is done correctly and preparing them for examination. 
+            Unlock 24/7 support from EarlyStart E-Tutors. Our expert tutors help kids excel in Number Work, Quantitative Reasoning and Mathematics, ensuring homework is done correctly and preparing them for examination. 
             <br /> <br />
               Get Started Now with just a Click!
           </div>
@@ -55,7 +55,7 @@ const MathService = () => {
         </div>
         <div className="math-2-inner">
           <div className="math-2-head-text">
-            About Our Math Support
+            About Our Mathematics Support
           </div>
           <div className='math-2-inner-con'>
           <div className="math-2-inner-text">
