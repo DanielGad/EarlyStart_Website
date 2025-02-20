@@ -26,24 +26,32 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
   const [redirect, setRedirect] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const auth = getAuth();
+  const inactivityLimit = 5 * 60 * 1000; // 5 minutes
 
   // Logout function
   const handleLogout = () => {
     signOut(auth).then(() => {
       console.log("User logged out due to inactivity.");
-      setRedirect(false);
+      setRedirect(true);
     });
   };
 
   // Reset inactivity timer
   const resetTimer = () => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    timeoutRef.current = setTimeout(handleLogout, 5 * 60 * 1000); // 5 minutes
+    timeoutRef.current = setTimeout(handleLogout, inactivityLimit);
+    localStorage.setItem("lastActivity", Date.now().toString());
   };
 
   useEffect(() => {
-    if (!loading && user) {
+    const lastActivity = localStorage.getItem("lastActivity");
+    if (lastActivity && Date.now() - parseInt(lastActivity) > inactivityLimit) {
+      handleLogout();
+    } else {
       resetTimer();
+    }
+
+    if (!loading && user) {
       window.addEventListener("mousemove", resetTimer);
       window.addEventListener("keypress", resetTimer);
       window.addEventListener("scroll", resetTimer);
