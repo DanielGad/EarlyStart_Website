@@ -121,6 +121,35 @@ input[type="radio"], input[type="checkbox"] {
   margin: 0 10px;
 }
 
+.gt-lower {
+  width: 80%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  align-items: center;
+}
+
+.gt-back {
+  padding: 15px 30px;
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+  color: var(--primary-color);
+  font-weight: bold;
+  cursor: pointer;
+  background-color: white;
+}
+
+.gt-choose {
+  padding: 15px 30px;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
 @media screen and (max-width: 769px) {
   .country-div {
     flex-direction: column;

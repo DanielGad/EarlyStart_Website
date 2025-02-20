@@ -286,7 +286,10 @@ const ManageAccount: React.FC = () => {
             <h3>All Users</h3>
             {documents.map((doc) => (
               <div key={doc.id} className="document-item" onClick={() => handleDocumentClick(doc.email)}>
-                {doc.email}
+                {doc.email} 
+                <br />as <br />
+                <b>{doc.fullName}</b> <br />
+                ({formatDateWithSuffix(new Date(doc.createdAt))})
               </div>
             ))}
                       <button className="back-button" onClick={handleBackClickSec}>
