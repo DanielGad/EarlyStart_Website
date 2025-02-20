@@ -32,7 +32,7 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
   const handleLogout = () => {
     signOut(auth).then(() => {
       console.log("User logged out due to inactivity.");
-      setRedirect(true);
+      setShowModal(true)
     });
   };
 
