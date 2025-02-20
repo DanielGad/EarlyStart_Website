@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   getFirestore,
   collection,
@@ -7,7 +7,7 @@ import {
   getDocs,
   doc,
   updateDoc,
-  count,
+  orderBy // Import orderBy
 } from "firebase/firestore";
 import bcrypt from 'bcryptjs';
 import "../../assets/styles/ManageAccount.css";
@@ -56,17 +56,47 @@ const ManageAccount: React.FC = () => {
       onClose: () => setModalData((prev) => ({ ...prev, showModal: false })),
       onConfirm: undefined as (() => void) | undefined,
     });
+  const [documents, setDocuments] = useState<any[]>([]);
+  const [showList, setShowList] = useState(true);
+
+  useEffect(() => {
+    // Fetch all documents when the component mounts
+    const fetchAllDocuments = async () => {
+      setLoading(true);
+      try {
+        const usersCollectionRef = collection(db, "EarlyStartData");
+        const q = query(usersCollectionRef, orderBy("createdAt", "desc")); // Order by createdAt field
+        const querySnapshot = await getDocs(q);
+        const docs = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        setDocuments(docs);
+      } catch (error) {
+        console.error("Error fetching documents:", error);
+        setModalData({
+          showModal: true,
+          title: "Error!",
+          message: "Failed to fetch documents. Please try again.",
+          buttonLabel: "Okay",
+          onClose: () => setModalData((prev) => ({ ...prev, showModal: false })),
+          onConfirm: undefined
+        });
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAllDocuments();
+  }, [db]);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
   
   // Fetch user data by email
-  const fetchUserData = async () => {
+  const fetchUserData = async (email: string) => {
     setLoading(true);
     try {
       const usersCollectionRef = collection(db, "EarlyStartData");
-      const userQuery = query(usersCollectionRef, where("email", "==", searchEmail));
+      const userQuery = query(usersCollectionRef, where("email", "==", email));
       const querySnapshot = await getDocs(userQuery);
   
       if (!querySnapshot.empty) {
@@ -99,6 +129,7 @@ const ManageAccount: React.FC = () => {
           },
         });
         setsearchEmail("");
+        setShowList(false);
       } else {
         setModalData({
           showModal: true,
@@ -214,7 +245,20 @@ const ManageAccount: React.FC = () => {
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    fetchUserData();
+    fetchUserData(searchEmail);
+  };
+
+  const handleDocumentClick = (email: string) => {
+    fetchUserData(email);
+  };
+
+  const handleBackClick = () => {
+    setUserData(null);
+    setShowList(true);
+  };
+
+  const handleBackClickSec = () => {
+    navigate(-1);
   };
 
   return (
@@ -222,26 +266,41 @@ const ManageAccount: React.FC = () => {
       <Modal {...modalData}/>
       <h2>Manage User Account</h2>
 
-      {/* Search Bar */}
-      <form className="search-bar" onSubmit={handleSearchSubmit}>
-        <input
-          type="email"
-          placeholder="Enter user email..."
-          value={searchEmail}
-          onChange={(e) => setsearchEmail(e.target.value)}
-        />
-        <button type="submit" disabled={loading}>
-          {loading ? "Searching..." : "Search"}
-        </button>
-      </form>
+      {showList && (
+        <>
+          {/* Search Bar */}
+          {/* <form className="search-bar" onSubmit={handleSearchSubmit}>
+            <input
+              type="email"
+              placeholder="Enter user email..."
+              value={searchEmail}
+              onChange={(e) => setsearchEmail(e.target.value)}
+            />
+            <button type="submit" disabled={loading}>
+              {loading ? "Searching..." : "Search"}
+            </button>
+          </form> */}
 
-      {!userData ? (
-        <div>
-          <button className="back-button" onClick={() => navigate('/admin-dashboard')}>
+          {/* List of Documents */}
+          <div className="documents-list">
+            <h3>All Users</h3>
+            {documents.map((doc) => (
+              <div key={doc.id} className="document-item" onClick={() => handleDocumentClick(doc.email)}>
+                {doc.email}
+              </div>
+            ))}
+                      <button className="back-button" onClick={handleBackClickSec}>
             Go Back
           </button>
+          </div>
+        </>
+      )}
+
+      {!showList && (
+        <div>
+
         </div>
-      ) : ""}
+      )}
 
       {/* User Profile Display */}
       {userData && (
@@ -451,7 +510,7 @@ const ManageAccount: React.FC = () => {
             {isEditing ? (formLoading ? "Updating..." : "Save Changes") : "Edit Profile"}
           </button>
 
-          <button className="back-button" onClick={() => navigate('/admin-dashboard')} style={{marginRight: 'auto', marginLeft: 'auto', display: 'block'}}>
+          <button className="back-button" onClick={handleBackClick} style={{marginRight: 'auto', marginLeft: 'auto', display: 'block'}}>
             Go Back
           </button>
         </form>
