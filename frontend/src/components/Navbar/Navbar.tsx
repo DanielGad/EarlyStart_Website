@@ -18,7 +18,7 @@ const pages = [
   { name: "LetterWork", path: "/letterwork", keywords: ["letter work", "letterwork", "help", "word formation", "alphabet sounds", "phonetics", "verbal reasoning", "english"] },
   { name: "Examination", path: "/international", keywords: ["exam work", "examination", "help"] },
   { name: "General Knowledge", path: "/general", keywords: ["general work", "letterwork", "vocational", "knowledge"] },
-  { name: "Language", path: "/language", keywords: ["language work", "yoruba", "igbo", "hausa", "French", "English"] },
+  { name: "Language", path: "/language", keywords: ["language work", "yoruba", "igbo", "hausa", "French", "English", "German"] },
   { name: "Contact", path: "/call", keywords: ["contact", "support", "help", "call"] },
   { name: "Get Started", path: "/get-started", keywords: ["start", "support", "form", "register"] },
   { name: "Login", path: "/login", keywords: ["login"] },
@@ -238,6 +238,7 @@ const Navbar = () => {
               { to: "/homework", label: "Home Work" },
               { to: "/general", label: "General Knowledge" },
               { to: "/international", label: "Enterance Examination" },
+              { to: "/coding", label: "Coding for Children" },
 
             ].map(({ to, label }) => (
               <DropdownLink key={to} to={to} label={label} closeDropdowns={closeDropdowns} />
@@ -342,6 +343,7 @@ const Navbar = () => {
               { to: "/homework", service: "Home Work" },
               { to: "/general", service: "General Knowledge" },
               { to: "/international", service: "Enterance Examination" },
+              { to: "/coding", service: "Coding for Children" },
               ].map(({ to, service }) => (
               <Link
                   key={to}

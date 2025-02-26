@@ -27,6 +27,7 @@ import ProtectedRoute from './hooks/ProtectedRoute';
 import AdminRole from './hooks/AdminRole';
 import Payment from "./pages/User/Payment";
 import ForgottenPassword from './pages/ForgottenPassword';
+import CodingService from './pages/CodingService';
 
 function App() {
   useEffect(() => {
@@ -45,6 +46,7 @@ function App() {
           <Route path="/language" element={<LanguageService />} />
           <Route path="/international" element={<InternationalService />} />
           <Route path="/general" element={<GeneralService />} />
+          <Route path="/coding" element={<CodingService />} />
           <Route path="/call" element={<CallUs />} />
           {/* <Route path="/get-tutor" element={<GetTutor />} /> */}
           <Route path="/profile/:id" element={<TeacherProfile />} />

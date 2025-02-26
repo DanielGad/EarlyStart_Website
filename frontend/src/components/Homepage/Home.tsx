@@ -70,7 +70,7 @@ const Home = () => {
               <div className="home-2-icon">
                 <img src={NumberWork} alt="text icon" width={"50px"} />
               </div>
-              <div className="home-2-texts">
+              <div className="home-2-texts" style={{fontSize: "14px"}}>
                 Number Work/ Quantitative Reasoning/ Mathematics
               </div>
             </Link>
@@ -81,8 +81,8 @@ const Home = () => {
               <div className="home-2-icon">
                 <img src={LetterWork} alt="text icon" width={"50px"} />
               </div>
-              <div className="home-2-texts">
-                Letter Work/ Word Formation/ Alphabet Sounds/ Phonetics/ Verbal Reasoning
+              <div className="home-2-texts" style={{fontSize: "14px"}}>
+                Letter Work/ Word Formation/ Alphabet Sounds
               </div>
             </Link>
           </div>
@@ -92,7 +92,7 @@ const Home = () => {
               <div className="home-2-icon">
                 <img src={Language} alt="text icon" width={"50px"} />
               </div>
-              <div className="home-2-texts">
+              <div className="home-2-texts" style={{fontSize: "14px"}}>
                 Languages/ French/ English/ Yoruba/ Igbo/ Hausa
               </div>
             </Link>
@@ -103,7 +103,7 @@ const Home = () => {
               <div className="home-2-icon">
                 <img src={HomeWork} alt="text icon" width={"50px"} />
               </div>
-              <div className="home-2-texts">
+              <div className="home-2-texts" style={{fontSize: "14px"}}>
                 Home Work/ School Assignment
               </div>
             </Link>
@@ -114,7 +114,7 @@ const Home = () => {
               <div className="home-2-icon">
                 <img src={General} alt="text icon" width={"50px"} />
               </div>
-              <div className="home-2-texts">
+              <div className="home-2-texts" style={{fontSize: "14px"}}>
                 General Knowledge/ Vocational Aptitude
               </div>
             </Link>
@@ -125,8 +125,22 @@ const Home = () => {
               <div className="home-2-icon">
                 <img src={International} alt="text icon" width={"50px"} />
               </div>
-              <div className="home-2-texts">
+              <div className="home-2-texts" style={{fontSize: "14px"}}>
                 International School Entrance Preparation
+              </div>
+            </Link>
+          </div>
+
+          <div className="home-2-con" onClick={() => { setMenu("service") }}>
+            <Link to={"/coding"}>
+              <div className="home-2-icon">
+              <svg width="50" height="50" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M16 18l5-6-5-6M8 6L3 12l5 6M14.5 4l-5 16" stroke="#493A59" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+
+              </div>
+              <div className="home-2-texts" style={{fontSize: "14px"}}>
+                Basic Coding for Children
               </div>
             </Link>
           </div>
@@ -188,7 +202,7 @@ const Home = () => {
           <div className="home-4-image-con-1">
             <img src={Smiley_Male} alt="Smiley Male" />
           </div>
-          <div className="join-us-text-con" style={{ marginLeft: "20px" }}>
+          <div className="join-us-text-con">
             <div className="join-us-text">
               Join EarlyStart E-Tutors and earn money by teaching what you love. Share your expertise and help young learners thrive.
             </div>

@@ -104,7 +104,7 @@
 }
 
 .home-2-con {
-  width: 15vw;
+  width: 25vw;
   height: 10vw;
   padding: 10px 10px;
   background-color: var(--light-color);
@@ -200,6 +200,7 @@
   font-size: 24px;
   margin: auto;
   font-weight: 600;
+  padding-left: 30px;
   color: white;
 }
 
@@ -287,8 +288,8 @@
   }
 
   .home-2-con {
-    width: 30vw;
-    height: 30vw;
+    width: 35vw;
+    height: 35vw;
   }
 
   .who-we-are {
@@ -301,7 +302,8 @@
   }
 
   .join-us-text-con {
-    font-size: 20px;
+    padding-left: 0;
+    font-size: 18px;
   }
 
   .home-4-image-con-1 {
