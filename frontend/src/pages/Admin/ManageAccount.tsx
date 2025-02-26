@@ -469,7 +469,7 @@ const ManageAccount: React.FC = () => {
           </div>
 
           <div className="form-group">
-            <label>State:</label>
+            <label>City:</label>
             <input
               type="state"
               name="getstarted.state"

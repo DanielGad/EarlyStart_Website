@@ -137,6 +137,31 @@
     cursor: pointer;
   }
 
+  .faq-container {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+  }
+
+  .faq-item {
+    align-items: center;
+    gap: 20px;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .faq-item h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--primary-color);
+  }
+
+  .faq-item p {
+    font-size: 16px;
+    font-weight: 500;
+  }
+
   @media screen and (max-width: 769px) {
     .button-controll {
       padding-right: 0;

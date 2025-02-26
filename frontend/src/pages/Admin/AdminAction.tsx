@@ -13,7 +13,8 @@ const AdminAction: React.FC<AdminActionProps> = ({ isOpen, onClose }) => {
   const [targetEmailStatus, setTargetEmailStatus] = useState<string>('');
   const [userInfo, setUserInfo] = useState<any | null>(null);
   const [loadingStatusToggle, setLoadingStatusToggle] = useState<boolean>(false);
-  const [loadingStatusUpdate, setLoadingStatusUpdate] = useState<boolean>(false); 
+  const [loadingStatusUpdate, setLoadingStatusUpdate] = useState<boolean>(false);
+  const [generatedCode, setGeneratedCode] = useState<string>('');
   const [modalData, setModalData] = useState({
     showModal: false,
     title: "",
@@ -22,6 +23,12 @@ const AdminAction: React.FC<AdminActionProps> = ({ isOpen, onClose }) => {
     onClose: () => {},
     onConfirm: undefined
   });
+
+  const [buttonText, setButtonText] = useState("Copy Code");
+
+  const handleClick = () => {
+    setButtonText((prevText) => (prevText === "Copy Code" ? "Copied!" : "Copy Code"));
+  };
 
   if (!isOpen) return null;
 
@@ -50,7 +57,7 @@ const AdminAction: React.FC<AdminActionProps> = ({ isOpen, onClose }) => {
         setUserInfo(null); // Clear user info
       }
     } catch (error) {
-      setModalData({ 
+      setModalData({
         showModal: true,
         title: "Error!",
         message: "Error fetching user info. Please try again.",
@@ -113,10 +120,61 @@ const AdminAction: React.FC<AdminActionProps> = ({ isOpen, onClose }) => {
     }
   };
 
+  const generateAccessCode = () => {
+    const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const numbers = '0123456789';
+    let code = '';
+    for (let i = 0; i < 4; i++) {
+      code += letters.charAt(Math.floor(Math.random() * letters.length));
+      code += numbers.charAt(Math.floor(Math.random() * numbers.length));
+    }
+    setGeneratedCode(code);
+    return code;
+  };
+
+  const saveGeneratedCode = async () => {
+    if (!userInfo || !userInfo.docId) return;
+    if (userInfo.generated) {
+      setModalData({
+        showModal: true,
+        title: "Error!",
+        message: "Access code already generated for this user.",
+        buttonLabel: "Continue",
+        onClose: () => setModalData((prev) => ({ ...prev, showModal: false })),
+        onConfirm: undefined
+      });
+      return;
+    }
+    const code = generateAccessCode();
+    try {
+      const userDocRef = doc(db, 'EarlyStartData', userInfo.docId);
+      await updateDoc(userDocRef, { generated: code });
+      setModalData({
+        showModal: true,
+        title: "Success!",
+        message: `Access code generated and saved successfully.`,
+        buttonLabel: "Continue",
+        onClose: () => setModalData((prev) => ({ ...prev, showModal: false })),
+        onConfirm: undefined
+      });
+    } catch (error) {
+      setModalData({
+        showModal: true,
+        title: "Error!",
+        message: "Error generating access code. Please try again.",
+        buttonLabel: "Continue",
+        onClose: () => setModalData((prev) => ({ ...prev, showModal: false })),
+        onConfirm: undefined
+      });
+      console.error('Error generating access code:', error);
+    }
+  };
+
   const handleClose = () => {
     onClose();
     setTargetEmailStatus('');
     setUserInfo(null);
+    setGeneratedCode('');
   };
 
   const formatDateWithSuffix = (date: Date) => {
@@ -133,6 +191,7 @@ const AdminAction: React.FC<AdminActionProps> = ({ isOpen, onClose }) => {
       }
     };
     return `${day}${getDaySuffix(day)} ${month} ${year}`;
+
   };
 
   return (
@@ -146,22 +205,26 @@ const AdminAction: React.FC<AdminActionProps> = ({ isOpen, onClose }) => {
 
         <div className="admin-action-section">
           {/* Enable/Disable User Section */}
-          <input
-            type="email"
-            placeholder="Enter user email to take action"
-            value={targetEmailStatus}
-            onChange={(e) => setTargetEmailStatus(e.target.value)}
-            className="admin-email-input"
-            onKeyDown={(e) => e.key === 'Enter' && toggleUserStatus(targetEmailStatus)}
-            required
-          />
-          <button
-            onClick={() => toggleUserStatus(targetEmailStatus)}
-            className="admin-action-button"
-            disabled={loadingStatusToggle}
-          >
-            {loadingStatusToggle ? 'Fetching info...' : 'Take Action'}
-          </button>
+          {!userInfo && (
+            <>
+              <input
+                type="email"
+                placeholder="Enter user email to take action"
+                value={targetEmailStatus}
+                onChange={(e) => setTargetEmailStatus(e.target.value)}
+                className="admin-email-input"
+                onKeyDown={(e) => e.key === 'Enter' && toggleUserStatus(targetEmailStatus)}
+                required
+              />
+              <button
+                onClick={() => toggleUserStatus(targetEmailStatus)}
+                className="admin-action-button"
+                disabled={loadingStatusToggle}
+              >
+                {loadingStatusToggle ? 'Fetching info...' : 'Take Action'}
+              </button>
+            </>
+          )}
         </div>
 
         {/* Display User Info */}
@@ -173,6 +236,13 @@ const AdminAction: React.FC<AdminActionProps> = ({ isOpen, onClose }) => {
             <p><strong>Joined on:</strong> {formatDateWithSuffix(new Date(userInfo.createdAt))}</p>
             <p><strong>Status:</strong> {userInfo.status}</p>
             <p><strong>Role:</strong> {userInfo.userRole}</p>
+            {userInfo.generated !== "" ? <><p><strong>Access Code:</strong> {userInfo.generated}</p>
+            <button
+              onClick={() => {navigator.clipboard.writeText(userInfo.generated); handleClick()}}
+              className="copy-button"
+            >
+              {buttonText}
+            </button></> : null}
 
             {/* Show Enable/Disable Button */}
             <button
@@ -196,6 +266,27 @@ const AdminAction: React.FC<AdminActionProps> = ({ isOpen, onClose }) => {
             >
               {userInfo.userRole === 'admin' ? 'Change to User' : 'Make Admin'}
             </button>
+
+            {/* Generate Access Code Button */}
+            <button
+              onClick={saveGeneratedCode}
+              className="admin-action-button"
+            >
+              Generate Access Code
+            </button>
+
+            {/* Display Generated Code */}
+            {generatedCode && (
+              <div className="generated-code">
+                <p><strong>Generated Code:</strong> {generatedCode}</p>
+                <button
+                  onClick={() => {navigator.clipboard.writeText(generatedCode); handleClick()}}
+                  className="copy-button"
+                >
+                  {buttonText}
+                </button>
+              </div>
+            )}
           </div>
         )}
       </div>

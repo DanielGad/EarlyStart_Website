@@ -111,3 +111,22 @@
 .admin-user-info-dropdown p {
   margin: 5px 0;
 }
+
+.generated-code {
+  margin-top: 20px;
+}
+
+.copy-button {
+  padding: 5px 10px;
+  font-size: 14px;
+  color: #fff;
+  background-color: #28a745;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.copy-button:hover {
+  background-color: #218838;
+}

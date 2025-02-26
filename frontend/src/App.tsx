@@ -25,7 +25,7 @@ import ManageAccount from './pages/Admin/ManageAccount';
 import SetPassword from './pages/SetPassword';
 import ProtectedRoute from './hooks/ProtectedRoute';
 import AdminRole from './hooks/AdminRole';
-import AdminAction from './pages/Admin/AdminAction';
+import Payment from "./pages/User/Payment";
 import ForgottenPassword from './pages/ForgottenPassword';
 
 function App() {
@@ -54,6 +54,7 @@ function App() {
 
             
             <Route path="/confirm" element={<ProtectedRoute><Confirmation /></ProtectedRoute>} />
+            <Route path="/payment" element={<ProtectedRoute><Payment /></ProtectedRoute>} />
             <Route path="/reset-password" element={<ForgottenPassword />} />
             <Route path="/contact-confirm" element={<ContactConfirm />} />
             <Route path="/user-dashboard" element={<ProtectedRoute><UserDashboard /></ProtectedRoute>} />

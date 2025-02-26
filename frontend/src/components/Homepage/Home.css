@@ -181,8 +181,8 @@
 }
 
 .home-4-image-con-1 {
-  width: 600px;
-  height: 400px;
+  display: none;
+  width: 400px;
   border-radius: 20px;
   margin: 5px;
 }
@@ -285,5 +285,16 @@
 
   .join-us-text-con {
     font-size: 20px;
+  }
+
+  .home-4-image-con-1 {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .home-4-image-con-2 {
+    width: 100%;
+    height: auto;
   }
 }

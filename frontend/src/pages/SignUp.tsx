@@ -123,6 +123,8 @@ const SignUp = () => {
         createdAt: new Date().toISOString(),
         userRole: "user",
         status: "active",
+        access: "",
+        generated: "",
       });
 
       setModalTitle("Success!");

@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import './Home.css';
 import Helping_Mother from '../../assets/images/hp-mother-helping.png';
 import CEO from '../../assets/images/CEO.jpeg';
-import Smiley_Male from '../../assets/images/hp-smiley-male.jpg';
-import Smiley_Female from '../../assets/images/hp-smiley-female.png'
+import Smiley_Male from '../../assets/images/PlatformsOnline.jpg';
+import Smiley_Female from '../../assets/images/OnlineClass.jpg'
 import ArrowDropRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import NumberWork from '../../assets/images/hp-numberwork.png';
 import HomeWork from '../../assets/images/hp-homework.png';
@@ -148,7 +148,7 @@ const Home = () => {
           <div className="home-4-image-con-1">
           <img src={Smiley_Male} alt="Smiley Male" />
           </div>
-          <div className="join-us-text-con">
+          <div className="join-us-text-con" style={{marginLeft: "2 0px"}}>
             <div className="join-us-text">
               Join EarlyStart E-Tutors and earn money by teaching what you love. Share your expertise and help young learners thrive.
             </div>

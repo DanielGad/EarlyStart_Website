@@ -131,6 +131,8 @@ const Login: React.FC = () => {
           username: "user",
           createdAt: new Date(),
           userRole: "user",
+          access: "",
+          generated: "",
         };
         await setDoc(doc(db, "EarlyStartData", googleUser.uid), newUser);
         login(userRole);

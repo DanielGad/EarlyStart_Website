@@ -191,7 +191,8 @@ const GetStarted = () => {
         <div className="start-2">
           Welcome! We're excited to help customize a personalized learning plan
           tailored specifically for your child's unique and educational
-          needs.
+          needs. <br /> <br />
+          <b style={{fontFamily: "quicksand", color: "#443655"}}>Registration Fee - $3</b>
         </div>
         <div className="start-3">Choose Your Schedule</div>
         <div className="start-4">Select Your Preferred Schedule</div>
@@ -253,7 +254,7 @@ const GetStarted = () => {
             <option key={c} value={c}>{c}</option>
           ))}
           </select>
-        <div className="set-location" style={{fontSize: "18px"}}>State:</div>
+        <div className="set-location" style={{fontSize: "18px"}}>City:</div>
           <input type="text" className="set-state" value={state} onChange={(e) => setState(e.target.value)} />
           </div>
 

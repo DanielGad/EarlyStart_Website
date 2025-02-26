@@ -47,7 +47,14 @@ const UserDashboard: React.FC = () => {
         // Check if the 'getstarted' object exists in the user's document
         if (!userDocData.getstarted) {
           setShowModal(true); // Show the modal if 'getstarted' is missing
+          return;
         }
+
+        if (!userDocData.access) {
+          navigate("/payment");
+          return;
+        }
+        
       } else {
         setErrorMessage("No user data found. Please check your profile.");
       }
