@@ -181,15 +181,14 @@ const AdminDashboard: React.FC = () => {
   };
 
   return (
-    <div className="admin-dashboard-container">
+    <><div className="admin-dashboard-container">
       {showModal ? (
         <Modal
           showModal={true}
           title="Access Denied"
           message={modalMessage}
           buttonLabel="Go to Login"
-          onClose={() => navigate("/login")}
-        />
+          onClose={() => navigate("/login")} />
       ) : (
         <div>
           <nav className="admin-navbar">
@@ -225,7 +224,7 @@ const AdminDashboard: React.FC = () => {
                 </Link>
               </div>
               <div>
-                <button className="nav-link" onClick={handleLogout} style={ { border: "none", cursor: "pointer" } }>
+                <button className="nav-link" onClick={handleLogout} style={{ border: "none", cursor: "pointer" }}>
                   Logout
                 </button>
               </div>
@@ -281,11 +280,9 @@ const AdminDashboard: React.FC = () => {
           message="Are you sure you want to delete this blog post?"
           buttonLabel="Cancel"
           onClose={closeDeleteConfirmation}
-          onConfirm={handleDeleteConfirmed}
-        />
+          onConfirm={handleDeleteConfirmed} />
       )}
-        <Footer />
-    </div>
+    </div><Footer /></>
   );
 };
 

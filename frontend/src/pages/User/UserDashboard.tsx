@@ -137,17 +137,16 @@ const UserDashboard: React.FC = () => {
   };
 
   return (
-    <div className="dashboard-container">
+    <><div className="dashboard-container">
       {/* Modal for 'Get Started' */}
       <Modal
         showModal={showModal}
         title={`Welcome ${userData ? userData.username : "User"}!`}
         message="Get Started to Schedule Right Away."
         buttonLabel="Later"
-        onClose={handleLoginRedirect} 
-        onConfirm={handleModalConfirm} 
-      />
-      
+        onClose={handleLoginRedirect}
+        onConfirm={handleModalConfirm} />
+
       {isLoggedIn && (
         <>
           <div className="dashboard-header">
@@ -195,8 +194,7 @@ const UserDashboard: React.FC = () => {
           </div>
         </>
       )}
-      <Footer />
-    </div>
+    </div><Footer /></>
   );
 };
 

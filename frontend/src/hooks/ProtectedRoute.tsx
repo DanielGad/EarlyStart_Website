@@ -29,7 +29,7 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
   const [redirect, setRedirect] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const auth = getAuth();
-  const inactivityLimit = 5 * 60 * 1000;
+  const inactivityLimit = 5 * 60 * 1000; // 1 minute
 
   // Logout function
   const handleLogout = () => {
@@ -60,6 +60,11 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
   };
 
   useEffect(() => {
+    const lastActivity = localStorage.getItem("lastActivity");
+    if (lastActivity && Date.now() - parseInt(lastActivity) > inactivityLimit) {
+      handleLogout();
+    }
+
     if (!loading && user) {
       localStorage.setItem("lastActivity", Date.now().toString());
 

@@ -22,6 +22,14 @@ const Payment = () => {
   const user = auth.currentUser;
   const navigate = useNavigate();
 
+  const handleLogout = () => {
+    auth.signOut().then(() => {
+      navigate('/login');
+    }).catch((error) => {
+      console.error('Error logging out:', error);
+    });
+  };
+
   const handleAccessCodeSubmit = async () => {
     setLoading(true);
     if (!user) {
@@ -89,7 +97,7 @@ const Payment = () => {
       <p>Proceed to pay the registration fee to continue accessing your learning journey through the bank details below:</p>
       <div className='bank-details' style={{fontFamily: 'Paleway'}}>
         <p><strong>Registration Fee:</strong> $3</p>
-        <p><strong>Bank Name:</strong> First Bank Nigeria Plc</p>
+        <p><strong>Bank Name:</strong> First Bank of Nigeria Plc</p>
         <p><strong>Account Number:</strong> 3105288265</p>
         <p><strong>Account Name:</strong> Awe Christianah Yemisi</p>
       </div>
@@ -98,12 +106,16 @@ const Payment = () => {
       <div className='access-code-input'>
         <label htmlFor='accessCode'>Enter Access Code:</label>
         <input
-          type='text'
+          type=''
+          maxLength={8}
           id='accessCode'
           value={accessCode}
           onChange={(e) => setAccessCode(e.target.value)}
         />
+        <br />
         <button onClick={handleAccessCodeSubmit}>{!loading ? "Submit & Continue" : "Validating"}</button>
+        <p style={{marginBottom: "30px"}}></p>
+        <button onClick={handleLogout}>Logout</button>
       </div>
       {message && <p className='message'>{message}</p>}
     </div>

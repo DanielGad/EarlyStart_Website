@@ -16,6 +16,10 @@ import Modal from "../Modal";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const ManageAccount: React.FC = () => {
+  useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
+
   const navigate = useNavigate();
   const db = getFirestore();
   
@@ -64,6 +68,7 @@ const ManageAccount: React.FC = () => {
     const fetchAllDocuments = async () => {
       setLoading(true);
       try {
+        window.scrollTo(0, 0);
         const usersCollectionRef = collection(db, "EarlyStartData");
         const q = query(usersCollectionRef, orderBy("createdAt", "desc")); // Order by createdAt field
         const querySnapshot = await getDocs(q);
@@ -130,6 +135,7 @@ const ManageAccount: React.FC = () => {
         });
         setsearchEmail("");
         setShowList(false);
+        window.scrollTo(0, 0);
       } else {
         setModalData({
           showModal: true,
@@ -297,12 +303,6 @@ const ManageAccount: React.FC = () => {
           </button>
           </div>
         </>
-      )}
-
-      {!showList && (
-        <div>
-
-        </div>
       )}
 
       {/* User Profile Display */}
