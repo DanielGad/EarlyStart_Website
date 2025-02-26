@@ -23,6 +23,7 @@ const pages = [
   { name: "Get Started", path: "/get-started", keywords: ["start", "support", "form", "register"] },
   { name: "Login", path: "/login", keywords: ["login"] },
   { name: "Sign Up", path: "/signup", keywords: ["register", "account", "create"] },
+  { name: "Coding For Children", path: "/coding", keywords: ["coding", "programming", "code"] },
 ];
 
 const Navbar = () => {
