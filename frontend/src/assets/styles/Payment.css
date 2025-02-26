@@ -55,6 +55,7 @@
   outline: none;
   transition: 0.3s;
   margin-bottom: 20px;
+  text-transform: uppercase;
 }
 
 .access-code-input input:focus {
