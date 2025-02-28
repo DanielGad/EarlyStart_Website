@@ -190,8 +190,7 @@ const GetStarted = () => {
         <div className="start-1">Get started with EarlyStart E-Tutors</div>
         <div className="start-2">
           Welcome! We're excited to help customize a personalized learning plan
-          tailored specifically for your child's unique and educational
-          needs. <br /> <br />
+          tailored specifically for your child's unique educational needs. <br /> <br />
           <b style={{fontFamily: "quicksand", color: "#443655"}}>Registration Fee - $3</b>
         </div>
         <div className="start-3">Choose Your Schedule</div>
