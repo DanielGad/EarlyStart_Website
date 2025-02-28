@@ -21,7 +21,7 @@ const CodingService = () => {
           Coding for Children: Unlocking the Future with Fun & Creativity!
           </div>
           <div className="lw-row-1-col-1-text">
-            Give your child a head start in the digital world with EarlyStart E-Tutors. Our coding classes are designed to introduce children to the basics of programming and computer science in a fun and interactive way.
+            Give your child a head start in the digital world with EarlyStart E-Tutors. Our coding classes are designed to introduce children to the basics of programming and computer science with fun and interactive session.
           <br />
             Join us now with a simple click!
           </div>
