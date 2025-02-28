@@ -24,7 +24,7 @@ const HomeworkService = () => {
             Simplifying Homework Help
           </div>
           <div className="homework-col-1-inner-text">
-          Access round-the-clock support from EarlyStart E-Tutors. With EarlyStart E-Tutors, your child gets the help they need for school assignments. Our expert tutors ensure comprehension and success in his/her studies. <br /> <br />
+          Access round-the-clock support from EarlyStart E-Tutors. With EarlyStart E-Tutors, your child gets the help they need for school assignments. <br /> <br />
             Get Started Today with just a Click!
           </div>
           <Link to={"/get-started"}>
